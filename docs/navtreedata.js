@@ -25,7 +25,6 @@ var NAVTREE =
   [ "AccelStepperI2C", "index.html", [
     [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
-      [ "<a href=\"https://github.com/ftjuh/AccelStepperI2C\">AccelStepperI2C</a>", "index.html#autotoc_md0", null ],
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Members", "functions.html", [
