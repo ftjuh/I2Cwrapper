@@ -7,7 +7,7 @@ This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.ai
 ### How does it work?
 
 * One or more Arduino-likes, acting as **I2C-slaves**, run up to eight stepper motors each. The slaves run the AccelStepperI2C firmware (firmware.ino), which exposes the AccelStepper functionality via I2C. Steppers are driven by any method  supported by AccelStepper except AccelStepper::FUNCTION, e.g. AccelStepper::DRIVER with StepStick compatible  A4988, DRV8825 or TMC2100 stepper drivers. An obvious example is the Arduino UNO with a Protoneer CNC shield (recent [V3.51](https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html) or [V3.00 clone](https://forum.protoneer.co.nz/viewforum.php?f=17)).
-* Another device, acting as **I2C-master**, controls the slave(s) via I2C with the help of the AccelStepperI2C library. Its interface  is largely identical to the original AccelStepper library.
+* Another device, acting as **I2C-master**, controls the slave(s) via I2C with the help of the AccelStepperI2C library. [Its interface  is largely identical to the original AccelStepper library](https://ftjuh.github.io/AccelStepperI2C/index.html).
 * Refer to the AccelStepperI2C library's example folder to see how it works in detail.
 
 ### Differences from AccelStepper
