@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map For AccelStepperI2C
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AccelStepperI2C	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setState	KEYWORD2
+stopState	KEYWORD2
+runState	KEYWORD2
+runSpeedState	KEYWORD2
+runSpeedToPositionState	KEYWORD2
+resetAccelStepperSlave	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+state_stopped	LITERAL1
+state_run	LITERAL1
+state_runSpeed	LITERAL1
+state_runSpeedToPosition	LITERAL1

@@ -1,0 +1,42 @@
+#titlearea {
+width: auto;
+padding: var(--spacing-medium) var(--spacing-large);
+background: none;
+color: var(--header-foreground);
+border-bottom: none;
+font-size: 100%;
+}
+
+
+div.title {
+  font-size: 180%;
+} 
+
+h2.memtitle {
+  font-size: 120%; 
+}
+
+
+div.memproto {
+  border-radius: 0 var(--border-radius-small) 0 0;
+  overflow: auto;
+  border-bottom: 1px solid var(--separator-color);
+  margin-bottom: -1px;
+}
+
+
+div.memproto {
+  font-size: 80%; 
+  padding: var(--spacing-small);
+}
+
+div.memdoc {
+  padding: 0 var(--spacing-small);
+}
+
+html {
+--page-font-size: 14.4px;
+--navigation-font-size: 14.4px;
+--code-font-size: 14.4px; /* affects code, fragment */
+--title-font-size: 26px;
+}
