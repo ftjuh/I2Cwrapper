@@ -1,13 +1,13 @@
 Warning: Pre-alpha! Not for production, only for feedback. Expect things to break, until stated otherwise.
 
-## AccelStepperI2C
+## [AccelStepperI2C](https://github.com/ftjuh/AccelStepperI2C)
 
 This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based firmware for one or more I2C-slaves, and a corresponding Arduino library for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.
 
 ### How does it work?
 
 * One or more Arduino-likes, acting as **I2C-slaves**, run up to eight stepper motors each. The slaves run the AccelStepperI2C firmware (firmware.ino), which exposes the AccelStepper functionality via I2C. Steppers are driven by any method  supported by AccelStepper except AccelStepper::FUNCTION, e.g. AccelStepper::DRIVER with StepStick compatible  A4988, DRV8825 or TMC2100 stepper drivers. An obvious example is the Arduino UNO with a Protoneer CNC shield (recent [V3.51](https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html) or [V3.00 clone](https://forum.protoneer.co.nz/viewforum.php?f=17)).
-* Another device, acting as **I2C-master**, controls the slave(s) via I2C with the help of the AccelStepperI2C library. [Its interface  is largely identical to the original AccelStepper library](https://ftjuh.github.io/AccelStepperI2C/index.html).
+* Another device, acting as **I2C-master**, controls the slave(s) via I2C with the help of the AccelStepperI2C library. [Its interface](https://ftjuh.github.io/AccelStepperI2C/)  is largely identical to the original AccelStepper library.
 * Refer to the AccelStepperI2C library's example folder to see how it works in detail.
 
 ### Differences from AccelStepper
@@ -53,7 +53,7 @@ Have a look at the examples for usage of the library. A couple of important thin
 
 ### Documentation
 
-This documentation only deals with differences from running the AccelStepper library locally. If not stated otherwise, expect [functions and parameters](@ref AccelStepperI2C) to work as in the original, keeping the above differences and restrictions in mind.
+[Find the AccelStepperI2C library documentation here](https://ftjuh.github.io/AccelStepperI2C/). It only deals with differences from running the AccelStepper library locally. If not stated otherwise, expect [functions and parameters](@ref AccelStepperI2C) to work as in the original, keeping the above differences and restrictions in mind.
 
 ### Author
 
