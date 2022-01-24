@@ -1,7 +1,10 @@
 Warning: Pre-alpha! Not for production, only for feedback. Expect things to break, until stated otherwise.
 
-<h2> [AccelStepperI2C](https://github.com/ftjuh/AccelStepperI2C) </h2>
+## AccelStepperI2C 
+
 This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based firmware for one or more I2C-slaves, and a corresponding Arduino library for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.
+
+[Download AccelStepperI2C on github.](https://github.com/ftjuh/AccelStepperI2C)
 
 ### How does it work?
 
