@@ -296,6 +296,15 @@ void AccelStepperI2C::setState(uint8_t newState) {
   sendCommand();
 }
 
+uint8_t getState() {
+  prepareCommand(getStateCmd);
+  uint8_t state = -1;
+  if (sendCommand() and readResult(getStateResults)) {
+    buf.read(state);
+  }
+  return res;
+}
+
 void AccelStepperI2C::stopState() {
   setState(state_stopped);
 }

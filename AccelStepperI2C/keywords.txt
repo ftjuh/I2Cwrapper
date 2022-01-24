@@ -7,6 +7,7 @@
 #######################################
 
 AccelStepperI2C	KEYWORD1
+SimpleBuffer	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -18,6 +19,9 @@ runState	KEYWORD2
 runSpeedState	KEYWORD2
 runSpeedToPositionState	KEYWORD2
 resetAccelStepperSlave	KEYWORD2
+setEndstopPin 	KEYWORD2
+enableEndstops 	KEYWORD2
+endstops 	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

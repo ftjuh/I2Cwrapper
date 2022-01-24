@@ -57,8 +57,9 @@ void testDryRun() {
   Serial.print("\n5. set speed (float): setSpeed(23.43)");
   X->setSpeed(23.43);
   printStats(X); delay(2000);
-
 }
+
+
 void setup() {
 
   // Important: initialize Wire before creating AccelStepperI2C objects
@@ -95,16 +96,22 @@ void setup() {
      about that pin and to call enableOutputs(). Before that, we have to tell it that _EN_ is active low
      with setPinsInverted().
   */
-  X->setEnablePin(8); 
-  X->setPinsInverted(false, false, true); // directionInvert, stepInvert, enableInvert
-  X->enableOutputs(); 
-  Y->setEnablePin(8); 
-  Y->setPinsInverted(false, false, true);
-  Y->enableOutputs(); 
-  Z->setEnablePin(8); 
-  Z->setPinsInverted(false, false, true);
-  Z->enableOutputs();
-
+  bool res = true;
+  X->setEnablePin(8); res &= X.sentOK;  
+// directionInvert, stepInvert, enableInvert
+  X->setPinsInverted(false, false, true); res &= X.sentOK;  
+  X->enableOutputs(); res &= X.sentOK;  
+  Y->setEnablePin(8); res &= X.sentOK;  
+  Y->setPinsInverted(false, false, true); res &= X.sentOK;  
+  Y->enableOutputs(); res &= X.sentOK;  
+  Z->setEnablePin(8); res &= X.sentOK;  
+  Z->setPinsInverted(false, false, true); res &= X.sentOK;  
+  Z->enableOutputs(); res &= X.sentOK;  
+  if (!res) {
+    Serial.print("transmission error");
+    /// ####
+  }
+  
   // tailor MaxSpeeds and acceleration to your steppers, here X is a Nema-14, Y and Z are geared 28BYJ-48's
   X->setMaxSpeed(2000); Y->setMaxSpeed(500); Z->setMaxSpeed(500); 
   X->setAcceleration(200); Y->setAcceleration(300); Z->setAcceleration(300);
