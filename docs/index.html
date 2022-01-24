@@ -90,8 +90,10 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Warning: Pre-alpha! Not for production, only for feedback. Expect things to break, until stated otherwise.</p>
-<h2><a href="https://github.com/ftjuh/AccelStepperI2C">AccelStepperI2C</a> </h2>
+<h2><a class="anchor" id="autotoc_md0"></a>
+AccelStepperI2C</h2>
 <p>This is an I2C wrapper for Mike McCauley's <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/index.html">AccelStepper library</a> with additional support for two end stops per stepper. It consists of the <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a> Arduino-based firmware for one or more I2C-slaves, and a corresponding Arduino library for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.</p>
+<p><a href="https://github.com/ftjuh/AccelStepperI2C">Download AccelStepperI2C on github.</a></p>
 <h3>How does it work?</h3>
 <ul>
 <li>One or more Arduino-likes, acting as <b>I2C-slaves</b>, run up to eight stepper motors each. The slaves run the <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a> firmware (<a class="el" href="firmware_8ino.html">firmware.ino</a>), which exposes the AccelStepper functionality via I2C. Steppers are driven by any method supported by AccelStepper except AccelStepper::FUNCTION, e.g. AccelStepper::DRIVER with StepStick compatible A4988, DRV8825 or TMC2100 stepper drivers. An obvious example is the Arduino UNO with a Protoneer CNC shield (recent <a href="https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html">V3.51</a> or <a href="https://forum.protoneer.co.nz/viewforum.php?f=17">V3.00 clone</a>).</li>
