@@ -306,7 +306,7 @@ Variables</h2></td></tr>
 
 <p>Process message receive via I2C. Normal messages consist of at least three bytes: [0] CRC8 checksum [1] Command. Most commands correspond to an AccelStepper function, some are new for I2C reasons (see I2C_commands.h). Unknown commands are ignored. [2] Number of the stepper that is to receive the command. If no stepper with this number exists, the message is ignored, except for general commands like resetCmd, which ignore this parameter. [3 - maxBuffer] Optional parameter bytes. Each command that comes with too many or too few parameter bytes is ignored. </p>
 <dl class="section note"><dt>Note</dt><dd>Blocking functions <a class="el" href="_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754">runToPositionCmd()</a> and <a class="el" href="_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8">runToNewPositionCmd()</a> not implemented here. Blocking at the slave's side seems not too useful, as the master won't wait for us anyway, </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>but maybe do it in the library? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Implement blocking functions <a class="el" href="_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754">runToPositionCmd()</a> and <a class="el" href="_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8">runToNewPositionCmd()</a> on the master's side/in the library? </dd></dl>
 
 </div>
 </div>
@@ -365,8 +365,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer. </p>
-<h3>If nothing to send, it sends a 8 bit summary of all defined stepper's results</h3>
-<p>from manul calls to one of the run commands </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc. /* /* </dd></dl>
 <h3>find sth. meaningful to report if no message is pending</h3>
 
 </div>

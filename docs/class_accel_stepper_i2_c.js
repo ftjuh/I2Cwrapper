@@ -7,6 +7,7 @@ var class_accel_stepper_i2_c =
     [ "enableEndstops", "class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401", null ],
     [ "enableOutputs", "class_accel_stepper_i2_c.html#ab5478613beb1c45de7c8ee35b216a918", null ],
     [ "endstops", "class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c", null ],
+    [ "getState", "class_accel_stepper_i2_c.html#aea0a376b22b0a0065b2257ec74f7e3b3", null ],
     [ "isRunning", "class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d", null ],
     [ "maxSpeed", "class_accel_stepper_i2_c.html#a36a283a6b78480ce5ab8e17329588135", null ],
     [ "move", "class_accel_stepper_i2_c.html#af9c59ca7c83e9e2452cdc6b3a3b50ed9", null ],

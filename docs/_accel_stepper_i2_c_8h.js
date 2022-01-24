@@ -14,6 +14,8 @@ var _accel_stepper_i2_c_8h =
     [ "endstopsCmd", "_accel_stepper_i2_c_8h.html#a74a8b3066bfae0830a9893a0a2121545", null ],
     [ "endstopsResult", "_accel_stepper_i2_c_8h.html#af3fa61da8097f595b5851907508b9198", null ],
     [ "generalCommandsStart", "_accel_stepper_i2_c_8h.html#a4ae87c0c48894979083d7d7d24fbb67d", null ],
+    [ "getStateCmd", "_accel_stepper_i2_c_8h.html#a0b114f5865a1a8fa4461a70a3e76ee07", null ],
+    [ "getStateResult", "_accel_stepper_i2_c_8h.html#a7394a186ca05824e27570a234d52ce2b", null ],
     [ "I2CrequestDelay", "_accel_stepper_i2_c_8h.html#afa8a9ecea67c13947c7b266080228e2b", null ],
     [ "isRunningCmd", "_accel_stepper_i2_c_8h.html#a65d7f026e933ce3930c0f50e07c29236", null ],
     [ "isRunningResult", "_accel_stepper_i2_c_8h.html#a10fff93ed2b28d4eeccff02023f9374e", null ],

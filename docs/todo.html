@@ -91,24 +91,25 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt>File <a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000004"></a>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics. </p>
-<p class="interdd">Implement interrupt mechanism, enabling the slave to inform the master about finished tasks or other events </p>
-<p class="interdd">Make the I2C address programmable and persistend in EEPROM. </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>Implement interrupt mechanism, enabling the slave to inform the master about finished tasks or other events </p>
+<p class="interdd">use interrupts for endstops instead of main loop polling </p>
+<p class="interdd">Make the I2C address programmable and persistent in EEPROM. </p>
 <p class="interdd">Versioning, I2C command to request version (important, as library and firmware always need to match) </p>
 <p class="interdd">make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc. </p>
-<p class="interdd">implement diagnostic functions, e.g. measurements how long messages take to be processed </p>
-<p class="enddd"><del>Implement end stops/reference stops.</del>  </p>
+<p class="interdd">implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency </p>
+<p class="interdd"><del>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics.</del> CRC8 implemented </p>
+<p class="enddd"><del>Implement end stops/reference stops.</del> endstops implemented  </p>
 </dd>
+<dt>Member <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">AccelStepperI2C::enableEndstops</a>  (bool enable=true)</dt>
+<dd><a class="anchor" id="_todo000007"></a>Find solution for moving a stepper out of an endstop's zone.  </dd>
 <dt>Member <a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">processMessage</a>  (uint8_t len)</dt>
-<dd><a class="anchor" id="_todo000003"></a>but maybe do it in the library?  </dd>
+<dd><a class="anchor" id="_todo000003"></a>Implement blocking functions <a class="el" href="_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754">runToPositionCmd()</a> and <a class="el" href="_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8">runToNewPositionCmd()</a> on the master's side/in the library?  </dd>
 <dt>Member <a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a>  (int howMany)</dt>
 <dd><a class="anchor" id="_todo000002"></a><del>Just read the buffer here, move interpretation out of the interrupt.</del>  </dd>
-<dt>Member <a class="el" href="_accel_stepper_i2_c_8h.html#a934384ea02abfd53c06efb8ab35a11b1">resError</a>  </dt>
-<dd><a class="anchor" id="_todo000005"></a>fix (i.e. remove) error reporting  </dd>
+<dt>Member <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a>  ()</dt>
+<dd><a class="anchor" id="_todo000004"></a>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc. /* /*  </dd>
 <dt>Member <a class="el" href="_accel_stepper_i2_c_8h.html#a1a5368a04a51848489ce42d0329eb62a">resetAccelStepperSlave</a>  (uint8_t address)</dt>
-<dd><a class="anchor" id="_todo000007"></a>reset should be entirely done in software.  </dd>
-<dt>Member <a class="el" href="_accel_stepper_i2_c_8h.html#a3bbebd6c8b4bd27f6a93cd6d7d15b296">state_runSpeed</a>  </dt>
-<dd><a class="anchor" id="_todo000006"></a>: or endstop) </dd>
+<dd><a class="anchor" id="_todo000006"></a>reset should be done entirely in software. </dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

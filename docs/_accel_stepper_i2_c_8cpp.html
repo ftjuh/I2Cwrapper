@@ -123,6 +123,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a1a5368a04a51848489ce42d0329eb62a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8cpp.html#a1a5368a04a51848489ce42d0329eb62a">resetAccelStepperSlave</a> (uint8_t address)</td></tr>
 <tr class="memdesc:a1a5368a04a51848489ce42d0329eb62a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the slave to reset. Call this <em>before</em> adding any steppers <em>if</em> master and slave resets are not synchronized by hardware. Else the slave survives the master's reset, will think the master wants another stepper, not a first one, and will run out of steppers, sooner or later.  <a href="_accel_stepper_i2_c_8cpp.html#a1a5368a04a51848489ce42d0329eb62a">More...</a><br /></td></tr>
 <tr class="separator:a1a5368a04a51848489ce42d0329eb62a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab094665ca1f106e7d864a0012ba88e99"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8cpp.html#ab094665ca1f106e7d864a0012ba88e99">getState</a> ()</td></tr>
+<tr class="separator:ab094665ca1f106e7d864a0012ba88e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Part of the <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a> firmware/library. </p>
@@ -166,6 +168,23 @@ License</h1>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ab094665ca1f106e7d864a0012ba88e99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab094665ca1f106e7d864a0012ba88e99">&#9670;&nbsp;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t getState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1a5368a04a51848489ce42d0329eb62a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a5368a04a51848489ce42d0329eb62a">&#9670;&nbsp;</a></span>resetAccelStepperSlave()</h2>
 
@@ -184,7 +203,7 @@ License</h1>
 
 <p>Tells the slave to reset. Call this <em>before</em> adding any steppers <em>if</em> master and slave resets are not synchronized by hardware. Else the slave survives the master's reset, will think the master wants another stepper, not a first one, and will run out of steppers, sooner or later. </p>
 <dl class="section user"><dt>All steppers are stopped by AccelStepper::stop() and disabled by</dt><dd>AccelStepper::disableOutputs(), after that a hardware reset is triggered. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>reset should be entirely done in software. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>reset should be done entirely in software. </dd></dl>
 
 </div>
 </div>

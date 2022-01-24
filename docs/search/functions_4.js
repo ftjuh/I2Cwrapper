@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['init_161',['init',['../class_simple_buffer.html#a4fe86d8150428e236dd5958662da1b94',1,'SimpleBuffer']]],
-  ['isrunning_162',['isRunning',['../class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d',1,'AccelStepperI2C']]]
+  ['getstate_164',['getState',['../class_accel_stepper_i2_c.html#aea0a376b22b0a0065b2257ec74f7e3b3',1,'AccelStepperI2C::getState()'],['../_accel_stepper_i2_c_8cpp.html#ab094665ca1f106e7d864a0012ba88e99',1,'getState():&#160;AccelStepperI2C.cpp']]]
 ];

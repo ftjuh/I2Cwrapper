@@ -272,7 +272,9 @@ void receiveEvent(int howMany)
    many or too few parameter bytes is ignored.
    @note Blocking functions runToPositionCmd() and runToNewPositionCmd() not
       implemented here. Blocking at the slave's side seems not too useful, as
-      the master won't wait for us anyway, @todo but maybe do it in the library?
+      the master won't wait for us anyway, 
+    @todo Implement blocking functions runToPositionCmd() and runToNewPositionCmd() 
+    on the master's side/in the library?
 */
 /**************************************************************************/
 void processMessage(uint8_t len) {
@@ -646,9 +648,9 @@ void processMessage(uint8_t len) {
 /*!
   @brief Handle I2C request event. Will send results or information requested
     by the last command, as defined by the contents of the outputBuffer.
-    ### If nothing to send, it sends a 8 bit summary of all defined stepper's results
-    from manul calls to one of the run commands
-*/
+  @todo Find sth. meaningful to report from requestEvent() if no message is 
+  pending, e.g. current position etc.
+/*
 /**************************************************************************/
 void requestEvent()
 {

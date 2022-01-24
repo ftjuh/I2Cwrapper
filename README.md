@@ -1,10 +1,12 @@
 Warning: Pre-alpha! Not for production, only for feedback. Expect things to break, until stated otherwise.
 
-## AccelStepperI2C 
+## AccelStepperI2C
 
 This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based firmware for one or more I2C-slaves, and a corresponding Arduino library for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.
 
 [Download AccelStepperI2C on github.](https://github.com/ftjuh/AccelStepperI2C)
+
+[AccelStepperI2C library documentation](https://ftjuh.github.io/AccelStepperI2C/)
 
 ### How does it work?
 
@@ -14,7 +16,7 @@ This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.ai
 
 ### Differences from AccelStepper
 
-   - With the exception of two blocking functions (see below), AccelStepper needs the client to constantly 'poll' each stepper by invoking one of the run() commands (run(), runSpeed(), or runSpeedToPosition()) at a frequency which mustn't be lower than the stepping frequency. Over I2C, this would clutter the bus, put limits on stepper speeds, and be unstable if there are other I2C devices on the bus, particularly with multiple steppers.
+   - With the exception of two blocking functions (see below), AccelStepper needs the client to constantly 'poll' each stepper by invoking one of the run() commands (run(), runSpeed(), or runSpeedToPosition()) at a frequency which mustn't be lower than the stepping frequency. Over I2C, this would clutter the bus, put limits on stepper speeds, and be unstable if there are other I2C devices on the bus, particularly with multiple steppers and microstepping.
    - To solve this problem, the AccelStepperI2C firmware implements a __state machine__ for each connected stepper which makes the slave do the polling locally on its own.
    - All the master has to do is making the appropriate settings, e.g. setting a target with AccelStepperI2C::moveTo() or AccelStepperI2C::move(), or choosing a speed with AccelStepperI2C::setSpeed() and then start the slave's state machine with one of 
       + AccelStepperI2C::runState(): will poll run(), i.e. run to the target with acceleration, and stop 
@@ -26,8 +28,8 @@ This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.ai
 
 ### Restrictions
 
-   - The original run(), runSpeed(), or runSpeedToPosition() are implemented, but I discourage using them directly. It's silly to trigger each stepper step over I2C. Use the state machine instead.
-   - Each library function call, its parameters, and return value has to be transmitted back and forth via I2C. This makes things slower, less precise, and prone to errors.
+   - The original run(), runSpeed(), or runSpeedToPosition() are implemented, but I discourage using them directly. Particularly in high load situations with multiple steppers, microstepping, and other important I2C traffic, it's silly to trigger each stepper step over I2C. Use the state machine instead. If you feel you must use them, take it slowly and consider increasing I2C bus frequency.
+   - Each library function call, its parameters, and return value has to be transmitted back and forth via I2C. This makes things slower, less precise, and prone to errors. To be safe from errors, you'll need to do some extra checking (see Error handling).
    - The two blocking functions, runToPosition() and runToNewPositionCmd(), are not implemented at the moment. I never saw their purpose, anyway, as their behavior can easily implemented with the existing functionality. Also, naturally, you cannot declare your own stepping functions with the [constructor [2/2] variant](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd).
    - There is no interrupt mechanism at the moment which tells the master that a state machine job has finished or an endstop has been triggered. So the master still needs to poll the slave with one of AccelStepperI2C::distanceToGo(), AccelStepperI2C::currentPosition, AccelStepperI2C::isRunning(), or AccelStepperI2C::endstops() but can do so at a much more reasonable frequency.
    - No serialization protocol is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Arduinos Uno/Nano and ESP8266 have been tested and work well together, as should any other Arduino supporting platform.

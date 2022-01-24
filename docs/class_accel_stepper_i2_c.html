@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('class_accel_stepper_i2_c.html',''); in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a03973582fb89d6d8af6d26771b12581d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a03973582fb89d6d8af6d26771b12581d">AccelStepperI2C</a> (uint8_t i2c_address=0x8, uint8_t interface=AccelStepper::FULL4WIRE, uint8_t pin1=2, uint8_t pin2=3, uint8_t pin3=4, uint8_t pin4=5, bool enable=true)</td></tr>
-<tr class="memdesc:a03973582fb89d6d8af6d26771b12581d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Like the original, but needs an additional i2c address parameter.  <a href="class_accel_stepper_i2_c.html#a03973582fb89d6d8af6d26771b12581d">More...</a><br /></td></tr>
+<tr class="memdesc:a03973582fb89d6d8af6d26771b12581d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Can be used like the original , but needs an additional i2c address parameter. Will allocate an AccelStepper ocject on the slave's side and make it ready for use.  <a href="class_accel_stepper_i2_c.html#a03973582fb89d6d8af6d26771b12581d">More...</a><br /></td></tr>
 <tr class="separator:a03973582fb89d6d8af6d26771b12581d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06ee86271f675746386c4cb86b6c6182"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182">moveTo</a> (long absolute)</td></tr>
 <tr class="separator:a06ee86271f675746386c4cb86b6c6182"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,7 +152,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0cc31b57b4d082744a94cb712b71a6e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a new endstop pin. Each stepper can have up to two, so don't call this more than twice per stepper.  <a href="class_accel_stepper_i2_c.html#a0cc31b57b4d082744a94cb712b71a6e5">More...</a><br /></td></tr>
 <tr class="separator:a0cc31b57b4d082744a94cb712b71a6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0392ba30b4854704bd08b588db17401"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">enableEndstops</a> (bool enable=true)</td></tr>
-<tr class="memdesc:ab0392ba30b4854704bd08b588db17401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable to tell the state machine to check the endstops after each call to <a class="el" href="class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350" title="Don&#39;t use this, use state machine instead with runState().">run()</a>, <a class="el" href="class_accel_stepper_i2_c.html#a74bcee3589bcc31e911c4b09175474a8" title="Don&#39;t use this, use state machine instead with runSpeedState().">runSpeed()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d" title="Don&#39;t use this, use state machine instead with runSpeedToPositionState().">runSpeedToPosition()</a>. If two switches are used, it does not differentiate them. On a hit, it will simply revert to state_stopped, but do nothing else.  <a href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">More...</a><br /></td></tr>
+<tr class="memdesc:ab0392ba30b4854704bd08b588db17401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tell the state machine to check the endstops regularly. If two switches are used, it does not differentiate them. On a hit, it will simply revert to state_stopped, but do nothing else. The master can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">endstops()</a> to find out what endstop was hit.  <a href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">More...</a><br /></td></tr>
 <tr class="separator:ab0392ba30b4854704bd08b588db17401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af27f8157184e75d824faa9634113c67c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">endstops</a> ()</td></tr>
 <tr class="memdesc:af27f8157184e75d824faa9634113c67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read current state of endstops.  <a href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">More...</a><br /></td></tr>
@@ -160,6 +160,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a213e402f63727c105d9ea2a20b125fe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">setState</a> (uint8_t newState)</td></tr>
 <tr class="memdesc:a213e402f63727c105d9ea2a20b125fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state machine's state manually.  <a href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">More...</a><br /></td></tr>
 <tr class="separator:a213e402f63727c105d9ea2a20b125fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea0a376b22b0a0065b2257ec74f7e3b3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#aea0a376b22b0a0065b2257ec74f7e3b3">getState</a> ()</td></tr>
+<tr class="memdesc:aea0a376b22b0a0065b2257ec74f7e3b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the state machine's state (it may have been changed by endstop or target reached condition).  <a href="class_accel_stepper_i2_c.html#aea0a376b22b0a0065b2257ec74f7e3b3">More...</a><br /></td></tr>
+<tr class="separator:aea0a376b22b0a0065b2257ec74f7e3b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a509c7691efe52e80615e937e693bdbc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a509c7691efe52e80615e937e693bdbc1">stopState</a> ()</td></tr>
 <tr class="memdesc:a509c7691efe52e80615e937e693bdbc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Will stop any of the above states, i.e. stop polling. It does nothing else, so the master is solely in command of target, speed, and other settings.  <a href="class_accel_stepper_i2_c.html#a509c7691efe52e80615e937e693bdbc1">More...</a><br /></td></tr>
 <tr class="separator:a509c7691efe52e80615e937e693bdbc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,11 +178,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a0c74bcb33dca28cd2e23a54a7da395ea">resultOK</a> = true</td></tr>
-<tr class="separator:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c4d58dc9b219725a3d40c8756e5302e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a2c4d58dc9b219725a3d40c8756e5302e">sentOK</a> = true</td></tr>
+<tr class="memdesc:a2c4d58dc9b219725a3d40c8756e5302e"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if previous function call was successfully transferred to slave.  <a href="class_accel_stepper_i2_c.html#a2c4d58dc9b219725a3d40c8756e5302e">More...</a><br /></td></tr>
 <tr class="separator:a2c4d58dc9b219725a3d40c8756e5302e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a0c74bcb33dca28cd2e23a54a7da395ea">resultOK</a> = true</td></tr>
+<tr class="memdesc:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if return value from previous function call was received successfully.  <a href="class_accel_stepper_i2_c.html#a0c74bcb33dca28cd2e23a54a7da395ea">More...</a><br /></td></tr>
+<tr class="separator:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2061a523791b946581b41d97a5e4342"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">myNum</a> = -1</td></tr>
+<tr class="memdesc:ab2061a523791b946581b41d97a5e4342"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_stepper.html">Stepper</a> number with myNum &gt;= 0 for successfully added steppers.  <a href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">More...</a><br /></td></tr>
 <tr class="separator:ab2061a523791b946581b41d97a5e4342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -239,7 +245,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor. Like the original, but needs an additional i2c address parameter. </p>
+<p>Constructor. Can be used like the original , but needs an additional i2c address parameter. Will allocate an AccelStepper ocject on the slave's side and make it ready for use. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i2c_address</td><td>Address of the controller the stepper is connected to. The library should support multiple controllers with different addresses, this is still untested, though. </td></tr>
@@ -247,7 +253,7 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>For the constructor, instead of checking sentOK and resultOK for success, you can just check myNum to see if the slave successfully added the stepper. If not, it's -1. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>For the constructor, instead of checking sentOK and resultOK for success, you can just check if <a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">myNum</a> &gt;= 0 to see if the slave successfully added the stepper. If not, it's -1. </dd></dl>
 
 </div>
 </div>
@@ -319,7 +325,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enable to tell the state machine to check the endstops after each call to <a class="el" href="class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350" title="Don&#39;t use this, use state machine instead with runState().">run()</a>, <a class="el" href="class_accel_stepper_i2_c.html#a74bcee3589bcc31e911c4b09175474a8" title="Don&#39;t use this, use state machine instead with runSpeedState().">runSpeed()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d" title="Don&#39;t use this, use state machine instead with runSpeedToPositionState().">runSpeedToPosition()</a>. If two switches are used, it does not differentiate them. On a hit, it will simply revert to state_stopped, but do nothing else. </p>
+<p>Tell the state machine to check the endstops regularly. If two switches are used, it does not differentiate them. On a hit, it will simply revert to state_stopped, but do nothing else. The master can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">endstops()</a> to find out what endstop was hit. </p>
+<dl class="section note"><dt>Note</dt><dd>Currently there is no function to leave the endstop's zone. So you'll probably need to disable the endstops with enableEndstops(false), move the stepper back until the endstop is not triggered anymore, and <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If two switches are used, it does not differe...">enableEndstops()</a> again. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Find solution for moving a stepper out of an endstop's zone. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td>true (default) to enable, false to disable. </td></tr>
@@ -363,6 +371,26 @@ Public Attributes</h2></td></tr>
 
 <p>Read current state of endstops. </p>
 <dl class="section return"><dt>Returns</dt><dd>One bit for each endstop, LSB is always the last addded endstop. Bits take activeLow setting in account, i.e. 0 for open, 1 for closed switch. </dd></dl>
+
+</div>
+</div>
+<a id="aea0a376b22b0a0065b2257ec74f7e3b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea0a376b22b0a0065b2257ec74f7e3b3">&#9670;&nbsp;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t AccelStepperI2C::getState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read the state machine's state (it may have been changed by endstop or target reached condition). </p>
+<dl class="section return"><dt>Returns</dt><dd>one of state_stopped, state_run, state_runSpeed, or state_runSpeedToPosition. </dd></dl>
 
 </div>
 </div>
@@ -648,7 +676,7 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd>Use <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Enable to tell the state machine to check the endstops after each call to run(), runSpeed() or runSpe...">AccelStepperI2C::enableEndstops()</a> to tell the state machine to actually use the endstop(s). Use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">AccelStepperI2C::endstops()</a> to read their currentl state </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>Use <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If two switches are used, it does not differe...">AccelStepperI2C::enableEndstops()</a> to tell the state machine to actually use the endstop(s). Use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">AccelStepperI2C::endstops()</a> to read their currentl state </dd></dl>
 
 </div>
 </div>
@@ -895,6 +923,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="struct_stepper.html">Stepper</a> number with myNum &gt;= 0 for successfully added steppers. </p>
+
 </div>
 </div>
 <a id="a0c74bcb33dca28cd2e23a54a7da395ea"></a>
@@ -909,6 +939,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>True if return value from previous function call was received successfully. </p>
+
 </div>
 </div>
 <a id="a2c4d58dc9b219725a3d40c8756e5302e"></a>
@@ -922,6 +954,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>True if previous function call was successfully transferred to slave. </p>
 
 </div>
 </div>
