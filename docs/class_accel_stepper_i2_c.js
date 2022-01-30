@@ -2,8 +2,10 @@ var class_accel_stepper_i2_c =
 [
     [ "AccelStepperI2C", "class_accel_stepper_i2_c.html#a03973582fb89d6d8af6d26771b12581d", null ],
     [ "currentPosition", "class_accel_stepper_i2_c.html#ac3a25dd2091e8b7a2aaa415150957b7e", null ],
+    [ "diagnostics", "class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f", null ],
     [ "disableOutputs", "class_accel_stepper_i2_c.html#a6b82da76eca7957814189cd67608aaf0", null ],
     [ "distanceToGo", "class_accel_stepper_i2_c.html#a26e27bf5d72113dc43694c87ed4a75f4", null ],
+    [ "enableDiagnostics", "class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56", null ],
     [ "enableEndstops", "class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401", null ],
     [ "enableOutputs", "class_accel_stepper_i2_c.html#ab5478613beb1c45de7c8ee35b216a918", null ],
     [ "endstops", "class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c", null ],

@@ -2,7 +2,7 @@ Warning: Pre-alpha! Not for production, only for feedback. Expect things to brea
 
 ## AccelStepperI2C
 
-This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based firmware for one or more I2C-slaves, and a corresponding Arduino library for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.
+This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based **firmware** for one or more I2C-slaves, and a corresponding Arduino **library** for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.
 
 [Download AccelStepperI2C on github.](https://github.com/ftjuh/AccelStepperI2C)
 
@@ -54,6 +54,93 @@ Have a look at the examples for usage of the library. A couple of important thin
 
 * The AccelStepperI2C constructor needs the Wire library to be already initialized. So don't invoke the constructor when declaring an object, use **new** during setup().
 * 
+
+### Example
+
+```
+// Example code for I2C master which controls an I2C-slave with firmware.ino
+// Slave hardware setup (just like CNC shield V3.00): A4988 or similar 
+// with STEP on pin 2, DIR on pin 5 and ENABLE on pin 8 with pullup; Endstop 
+// to ground on pin 9 
+// I2C connection: A4<->A4, A5<->A5, GND<->GND
+// Optional: 5V<->5V, Reset<->Reset (see below)
+
+#include <Arduino.h>
+#include <AccelStepperI2C.h>
+#include <Wire.h>
+
+const uint8_t addr = 0x8; // i2c address of slave
+const uint8_t stepXpin = 2; // A4988 STEP pin
+const uint8_t dirXpin = 5; // A4988 DIR pin
+const uint8_t enableXpin = 8; // A4988 _ENABLE_ pin
+const uint8_t endstopXpin = 9; // endswitch to ground
+
+// do not invoke constructor here, we need to establish I2C connection first.
+AccelStepperI2C* X; 
+
+void setup() {
+
+  Serial.begin(115200);
+  // Important: initialize Wire before creating AccelStepperI2C objects
+  Wire.begin();
+  // reset slave (only needed if not reset with master by hardware connection)
+  resetAccelStepperSlave(addr);
+  delay(1887); // give slave time to reboot
+
+  X = new AccelStepperI2C(addr, AccelStepper::DRIVER, stepXpin, dirXpin);
+  if (X->myNum < 0) { // allocating stepper failed
+    Serial.print("Error: Could not add stepper. Halting\n\n");
+    while (true) {}
+  }
+
+  // We're trusting the system to transmit reliably. If you're more paranoid
+  // you could check X.sentOK after each function call.
+  X->setEnablePin(8);
+  X->setPinsInverted(false, false, true); // directionInvert, stepInvert, enableInvert
+  X->enableOutputs();
+  X->setMaxSpeed(2000);
+  X->setAcceleration(200);
+  // install endstop switch; activeLow works nicely together with internal pullup
+  X->setEndstopPin(endstopXpin, true, true); // pin, activeLow, internalPullup
+  X->enableEndstops();
+  X->moveTo(5000);
+  X->runState();
+  
+}
+
+void loop() {
+  
+  if (!X->isRunning()) {
+    X->moveTo(- X->currentPosition()); 
+    // On reaching the target, the state machine stopped. So let's start it again.
+    X->runState(); 
+  }
+  delay(100); // let's limit target polling to some sensible frequency
+  
+}
+```
+
+### State machine performance
+
+The performance graphs below show the number of cycles per second for 1 to 8 attached steppers. In each of these cycles, the state machine calls one of the run...() methods once for each currently not-stopped stepper, so it is the upper theoretical limit for steps/second for the attached/used number of steppers. The three groups of graphs are:
+
+* (1/n): only one of n attached steppers uses the state machine in one its three possible modes, the other attached steppers/state machines are inactive.
+* (n/8): n of 8 attached steppers use the state machine in one its three possible modes, the other attached steppers/state machines are inactive.
+* (n/n): all attached steppers use the state machine in one its three possible modes. No attached stepper is inactive.
+
+What you can learn from the graphs is:
+
+* ESP32 is about 10 times faster than Arduino.
+* run() is a more expensive than runSpeed() and runSpeedToPosition() since the latter two don't need to calculate acceleration, and it is particularly more expensive for the Arduino.
+* If you use and run all 8 steppers at the same time (n/n) , the max. steps/second are at least 1784 for the Arduino and 118994 for the ESP32. Divide that by steps per revolution times your microstepping factor to get the theoretical(!) maximum revolutions per second.
+
+![Cycles per second Arduino Uno 16MHz](./Cycles%20per%20second%20Arduino%20Uno%2016MHz.png)
+
+
+
+![Cycles per second ESP32 240MHz](./Cycles%20per%20second%20ESP32%20240MHz.png)
+
+
 
 ### Documentation
 

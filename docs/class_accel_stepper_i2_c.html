@@ -157,6 +157,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af27f8157184e75d824faa9634113c67c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">endstops</a> ()</td></tr>
 <tr class="memdesc:af27f8157184e75d824faa9634113c67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read current state of endstops.  <a href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">More...</a><br /></td></tr>
 <tr class="separator:af27f8157184e75d824faa9634113c67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47b83b79e49a0b9f7ceb4745425aad56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56">enableDiagnostics</a> (bool enable=true)</td></tr>
+<tr class="memdesc:a47b83b79e49a0b9f7ceb4745425aad56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn on/off diagnostic speed logging.  <a href="class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56">More...</a><br /></td></tr>
+<tr class="separator:a47b83b79e49a0b9f7ceb4745425aad56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67423203e72c69f1fae869c63d3e545f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f">diagnostics</a> (<a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *<a class="el" href="_speed__diagnostics_8ino.html#a4257c698bf504c2a908f9af14af9d07e">report</a>)</td></tr>
+<tr class="memdesc:a67423203e72c69f1fae869c63d3e545f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get most recent diagnostics data.  <a href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f">More...</a><br /></td></tr>
+<tr class="separator:a67423203e72c69f1fae869c63d3e545f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a213e402f63727c105d9ea2a20b125fe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">setState</a> (uint8_t newState)</td></tr>
 <tr class="memdesc:a213e402f63727c105d9ea2a20b125fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state machine's state manually.  <a href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">More...</a><br /></td></tr>
 <tr class="separator:a213e402f63727c105d9ea2a20b125fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,6 +281,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a67423203e72c69f1fae869c63d3e545f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67423203e72c69f1fae869c63d3e545f">&#9670;&nbsp;</a></span>diagnostics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AccelStepperI2C::diagnostics </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *&#160;</td>
+          <td class="paramname"><em>report</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get most recent diagnostics data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">report</td><td>where to put the data, preallocated struct of type AccelStepper::diagnosticsReport. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56" title="Turn on/off diagnostic speed logging.">enableDiagnostics()</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Diagnostics are not specific to a single stepper but refer to the slave as a whole. So it doesn't matter which stepper's diagnostics methods you use. </dd></dl>
+
+</div>
+</div>
 <a id="a6b82da76eca7957814189cd67608aaf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b82da76eca7957814189cd67608aaf0">&#9670;&nbsp;</a></span>disableOutputs()</h2>
 
@@ -306,6 +340,34 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a47b83b79e49a0b9f7ceb4745425aad56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47b83b79e49a0b9f7ceb4745425aad56">&#9670;&nbsp;</a></span>enableDiagnostics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AccelStepperI2C::enableDiagnostics </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Turn on/off diagnostic speed logging. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>true for enable, false for disable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data.">diagnostics()</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Diagnostics are not specific to a single stepper but refer to the slave as a whole. So it doesn't matter which stepper's diagnostics methods you use. </dd></dl>
 
 </div>
 </div>

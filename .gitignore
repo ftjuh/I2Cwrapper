@@ -1,4 +1,6 @@
+.gitignore
 *.orig
+*.kate-swp
 *.[oa]
 *~
 

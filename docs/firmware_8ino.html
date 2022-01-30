@@ -122,13 +122,19 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a89333e2eef9e4e7e839ad76c3abd1aa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a89333e2eef9e4e7e839ad76c3abd1aa8">DEBUG_AccelStepperI2C</a></td></tr>
-<tr class="separator:a89333e2eef9e4e7e839ad76c3abd1aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)&#160;&#160;&#160;Serial.print(__VA_ARGS__)</td></tr>
+<tr class="memitem:ae19f7f44c494f571f8860c91f2fdba22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ae19f7f44c494f571f8860c91f2fdba22">DIAGNOSTICS_AccelStepperI2C</a></td></tr>
+<tr class="separator:ae19f7f44c494f571f8860c91f2fdba22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)</td></tr>
 <tr class="separator:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cad4e2514f451585f15da3b8ee3cd2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a1cad4e2514f451585f15da3b8ee3cd2f">EEPROM_OFFSET_I2C_ADDRESS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a1cad4e2514f451585f15da3b8ee3cd2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7">retrieveI2C_address</a> ()</td></tr>
+<tr class="separator:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04dab60aa1102ee6bfabfc6a039849ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee">storeI2C_address</a> (uint8_t newAddress)</td></tr>
+<tr class="separator:a04dab60aa1102ee6bfabfc6a039849ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
 <tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup system  <a href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">More...</a><br /></td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,12 +144,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a99e3313868c67fbcdc7a267c53ad4339"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a99e3313868c67fbcdc7a267c53ad4339">readEndstops</a> (uint8_t s)</td></tr>
 <tr class="separator:a99e3313868c67fbcdc7a267c53ad4339"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
+<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop, implements the state machine (everything else is done in the I2C-interrupts). Will check for each stepper's state and do the appropriate polling (run() etc.) as needed.  <a href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">More...</a><br /></td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a52aa0319b0d3bea95eff4528baee98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a> (int howMany)</td></tr>
 <tr class="memdesc:a9a52aa0319b0d3bea95eff4528baee98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle I2C receive event. Just read the message and inform main loop.  <a href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">More...</a><br /></td></tr>
 <tr class="separator:a9a52aa0319b0d3bea95eff4528baee98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4906408a38ad9d4f1bca763aa75422ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">processMessage</a> (uint8_t len)</td></tr>
-<tr class="memdesc:a4906408a38ad9d4f1bca763aa75422ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process message receive via I2C. Normal messages consist of at least three bytes: [0] CRC8 checksum [1] Command. Most commands correspond to an AccelStepper function, some are new for I2C reasons (see I2C_commands.h). Unknown commands are ignored. [2] Number of the stepper that is to receive the command. If no stepper with this number exists, the message is ignored, except for general commands like resetCmd, which ignore this parameter. [3 - maxBuffer] Optional parameter bytes. Each command that comes with too many or too few parameter bytes is ignored.  <a href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">More...</a><br /></td></tr>
+<tr class="memdesc:a4906408a38ad9d4f1bca763aa75422ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process message received via I2C. Normal messages consist of at least three bytes: [0] CRC8 checksum [1] Command. Most commands correspond to an AccelStepper function, some are new for I2C reasons (see I2C_commands.h). Unknown commands are ignored. [2] Number of the stepper that is to receive the command. If no stepper with this number exists, the message is ignored, except for general commands like resetCmd, which ignore this parameter. [3 - maxBuffer] Optional parameter bytes. Each command that comes with too many or too few parameter bytes is ignored.  <a href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">More...</a><br /></td></tr>
 <tr class="separator:a4906408a38ad9d4f1bca763aa75422ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a> ()</td></tr>
 <tr class="memdesc:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer.  <a href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">More...</a><br /></td></tr>
@@ -151,10 +158,18 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a8530ad8ad18d1759d6e12100e31723e5"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8530ad8ad18d1759d6e12100e31723e5">I2C_address</a> = 0x8</td></tr>
-<tr class="separator:a8530ad8ad18d1759d6e12100e31723e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a225b90ea852718642d5e87758dbd045b"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a225b90ea852718642d5e87758dbd045b">maxBuffer</a> = 16</td></tr>
-<tr class="separator:a225b90ea852718642d5e87758dbd045b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31bf94b26fef450b158d5840aa419886"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a31bf94b26fef450b158d5840aa419886">diagnosticsEnabled</a> = false</td></tr>
+<tr class="separator:a31bf94b26fef450b158d5840aa419886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0733c667851852a49c093ba87c7d77a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ab0733c667851852a49c093ba87c7d77a">thenMicros</a></td></tr>
+<tr class="separator:ab0733c667851852a49c093ba87c7d77a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e30077c912bea300765cce6e5348b2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a7e30077c912bea300765cce6e5348b2d">currentDiagnostics</a></td></tr>
+<tr class="separator:a7e30077c912bea300765cce6e5348b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9405df89f8c78a1f50085b10911ca37"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af9405df89f8c78a1f50085b10911ca37">cycles</a> = 0</td></tr>
+<tr class="separator:af9405df89f8c78a1f50085b10911ca37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404cd08737b3728198d3e42c828ece79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a404cd08737b3728198d3e42c828ece79">eepromI2CaddressMarker</a> = 0x12C0ACCF</td></tr>
+<tr class="separator:a404cd08737b3728198d3e42c828ece79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af15a5efb5c2c5ce3714d8a2f6c309033"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af15a5efb5c2c5ce3714d8a2f6c309033">I2C_defaultAddress</a> = 0x8</td></tr>
+<tr class="separator:af15a5efb5c2c5ce3714d8a2f6c309033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eca28b463b5850006c7d00aa43a2498"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9eca28b463b5850006c7d00aa43a2498">bufferIn</a></td></tr>
 <tr class="separator:a9eca28b463b5850006c7d00aa43a2498"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d39df1bc00243ef2abb1ad3cc1acf8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4d39df1bc00243ef2abb1ad3cc1acf8e">bufferOut</a></td></tr>
@@ -165,31 +180,36 @@ Variables</h2></td></tr>
 <tr class="separator:aa84ea5f47409c6c60bc911ba4bc06fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b5902c36f57eccdc4e911f63edcd14b"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b">maxSteppers</a> = 8</td></tr>
 <tr class="separator:a4b5902c36f57eccdc4e911f63edcd14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a934d4bb4e78577919e2263a73d4e330e"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a934d4bb4e78577919e2263a73d4e330e">numSteppers</a> = 0</td></tr>
-<tr class="separator:a934d4bb4e78577919e2263a73d4e330e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2bb33438b8fee4c8efcfb717ed4fcbf"><td class="memItemLeft" align="right" valign="top">volatile <a class="el" href="struct_stepper.html">Stepper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#aa2bb33438b8fee4c8efcfb717ed4fcbf">steppers</a> [<a class="el" href="firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b">maxSteppers</a>]</td></tr>
-<tr class="separator:aa2bb33438b8fee4c8efcfb717ed4fcbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ffc376a015a72bacc0fa343e6fd7dd5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9ffc376a015a72bacc0fa343e6fd7dd5">numSteppers</a> = 0</td></tr>
+<tr class="separator:a9ffc376a015a72bacc0fa343e6fd7dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7658032e03469b7a54542145f6d59bc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_stepper.html">Stepper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a7658032e03469b7a54542145f6d59bc6">steppers</a> [<a class="el" href="_speed__diagnostics_8ino.html#ab21cefe8676da0e84f405d867c7e0cac">maxSteppers</a>]</td></tr>
+<tr class="separator:a7658032e03469b7a54542145f6d59bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af470ac2a95380c26878282f7ddf529de"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af470ac2a95380c26878282f7ddf529de">resetFunc</a> )(void)=0</td></tr>
 <tr class="separator:af470ac2a95380c26878282f7ddf529de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2a5acb9b13b943cac9ef0b8c8370100"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ad2a5acb9b13b943cac9ef0b8c8370100">now</a></td></tr>
-<tr class="memdesc:ad2a5acb9b13b943cac9ef0b8c8370100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop, implements the state machine (everything else is done in the I2C-interrupts). Will check for each stepper's state and do the appropriate polling (run() etc.) as needed.  <a href="firmware_8ino.html#ad2a5acb9b13b943cac9ef0b8c8370100">More...</a><br /></td></tr>
-<tr class="separator:ad2a5acb9b13b943cac9ef0b8c8370100"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a570420b17131e93d2c3ff7665f121800"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a570420b17131e93d2c3ff7665f121800">then</a> = millis()</td></tr>
-<tr class="separator:a570420b17131e93d2c3ff7665f121800"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9405df89f8c78a1f50085b10911ca37"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af9405df89f8c78a1f50085b10911ca37">cycles</a> = 0</td></tr>
-<tr class="separator:af9405df89f8c78a1f50085b10911ca37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e882aeffdf111848ef1647b42fe1dde"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4e882aeffdf111848ef1647b42fe1dde">reportNow</a> = true</td></tr>
-<tr class="separator:a4e882aeffdf111848ef1647b42fe1dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a89333e2eef9e4e7e839ad76c3abd1aa8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89333e2eef9e4e7e839ad76c3abd1aa8">&#9670;&nbsp;</a></span>DEBUG_AccelStepperI2C</h2>
+<a id="ae19f7f44c494f571f8860c91f2fdba22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae19f7f44c494f571f8860c91f2fdba22">&#9670;&nbsp;</a></span>DIAGNOSTICS_AccelStepperI2C</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG_AccelStepperI2C</td>
+          <td class="memname">#define DIAGNOSTICS_AccelStepperI2C</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1cad4e2514f451585f15da3b8ee3cd2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cad4e2514f451585f15da3b8ee3cd2f">&#9670;&nbsp;</a></span>EEPROM_OFFSET_I2C_ADDRESS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EEPROM_OFFSET_I2C_ADDRESS&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -207,7 +227,7 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;Serial.print(__VA_ARGS__)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -286,6 +306,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Main loop, implements the state machine (everything else is done in the I2C-interrupts). Will check for each stepper's state and do the appropriate polling (run() etc.) as needed. </p>
+
 </div>
 </div>
 <a id="a4906408a38ad9d4f1bca763aa75422ad"></a>
@@ -304,7 +326,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Process message receive via I2C. Normal messages consist of at least three bytes: [0] CRC8 checksum [1] Command. Most commands correspond to an AccelStepper function, some are new for I2C reasons (see I2C_commands.h). Unknown commands are ignored. [2] Number of the stepper that is to receive the command. If no stepper with this number exists, the message is ignored, except for general commands like resetCmd, which ignore this parameter. [3 - maxBuffer] Optional parameter bytes. Each command that comes with too many or too few parameter bytes is ignored. </p>
+<p>Process message received via I2C. Normal messages consist of at least three bytes: [0] CRC8 checksum [1] Command. Most commands correspond to an AccelStepper function, some are new for I2C reasons (see I2C_commands.h). Unknown commands are ignored. [2] Number of the stepper that is to receive the command. If no stepper with this number exists, the message is ignored, except for general commands like resetCmd, which ignore this parameter. [3 - maxBuffer] Optional parameter bytes. Each command that comes with too many or too few parameter bytes is ignored. </p>
 <dl class="section note"><dt>Note</dt><dd>Blocking functions <a class="el" href="_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754">runToPositionCmd()</a> and <a class="el" href="_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8">runToNewPositionCmd()</a> not implemented here. Blocking at the slave's side seems not too useful, as the master won't wait for us anyway, </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Implement blocking functions <a class="el" href="_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754">runToPositionCmd()</a> and <a class="el" href="_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8">runToNewPositionCmd()</a> on the master's side/in the library? </dd></dl>
 
@@ -365,8 +387,24 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc. /* /* </dd></dl>
-<h3>find sth. meaningful to report if no message is pending</h3>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc. </dd></dl>
+
+</div>
+</div>
+<a id="a9d641c48e9eaae758eb0ea69cdbfa9c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d641c48e9eaae758eb0ea69cdbfa9c7">&#9670;&nbsp;</a></span>retrieveI2C_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t retrieveI2C_address </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -386,6 +424,24 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>setup system </p>
+
+</div>
+</div>
+<a id="a04dab60aa1102ee6bfabfc6a039849ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04dab60aa1102ee6bfabfc6a039849ee">&#9670;&nbsp;</a></span>storeI2C_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void storeI2C_address </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>newAddress</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -418,6 +474,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a7e30077c912bea300765cce6e5348b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e30077c912bea300765cce6e5348b2d">&#9670;&nbsp;</a></span>currentDiagnostics</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> currentDiagnostics</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af9405df89f8c78a1f50085b10911ca37"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9405df89f8c78a1f50085b10911ca37">&#9670;&nbsp;</a></span>cycles</h2>
 
@@ -432,28 +502,42 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a8530ad8ad18d1759d6e12100e31723e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8530ad8ad18d1759d6e12100e31723e5">&#9670;&nbsp;</a></span>I2C_address</h2>
+<a id="a31bf94b26fef450b158d5840aa419886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31bf94b26fef450b158d5840aa419886">&#9670;&nbsp;</a></span>diagnosticsEnabled</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t I2C_address = 0x8</td>
+          <td class="memname">bool diagnosticsEnabled = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a225b90ea852718642d5e87758dbd045b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a225b90ea852718642d5e87758dbd045b">&#9670;&nbsp;</a></span>maxBuffer</h2>
+<a id="a404cd08737b3728198d3e42c828ece79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404cd08737b3728198d3e42c828ece79">&#9670;&nbsp;</a></span>eepromI2CaddressMarker</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t maxBuffer = 16</td>
+          <td class="memname">uint32_t eepromI2CaddressMarker = 0x12C0ACCF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af15a5efb5c2c5ce3714d8a2f6c309033"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af15a5efb5c2c5ce3714d8a2f6c309033">&#9670;&nbsp;</a></span>I2C_defaultAddress</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t I2C_defaultAddress = 0x8</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -502,44 +586,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad2a5acb9b13b943cac9ef0b8c8370100"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2a5acb9b13b943cac9ef0b8c8370100">&#9670;&nbsp;</a></span>now</h2>
+<a id="a9ffc376a015a72bacc0fa343e6fd7dd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ffc376a015a72bacc0fa343e6fd7dd5">&#9670;&nbsp;</a></span>numSteppers</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t now</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Main loop, implements the state machine (everything else is done in the I2C-interrupts). Will check for each stepper's state and do the appropriate polling (run() etc.) as needed. </p>
-
-</div>
-</div>
-<a id="a934d4bb4e78577919e2263a73d4e330e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a934d4bb4e78577919e2263a73d4e330e">&#9670;&nbsp;</a></span>numSteppers</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">volatile uint8_t numSteppers = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4e882aeffdf111848ef1647b42fe1dde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e882aeffdf111848ef1647b42fe1dde">&#9670;&nbsp;</a></span>reportNow</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool reportNow = true</td>
+          <td class="memname">uint8_t numSteppers = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -560,28 +614,28 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aa2bb33438b8fee4c8efcfb717ed4fcbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2bb33438b8fee4c8efcfb717ed4fcbf">&#9670;&nbsp;</a></span>steppers</h2>
+<a id="a7658032e03469b7a54542145f6d59bc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7658032e03469b7a54542145f6d59bc6">&#9670;&nbsp;</a></span>steppers</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">volatile <a class="el" href="struct_stepper.html">Stepper</a> steppers[<a class="el" href="firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b">maxSteppers</a>]</td>
+          <td class="memname"><a class="el" href="struct_stepper.html">Stepper</a> steppers[<a class="el" href="_speed__diagnostics_8ino.html#ab21cefe8676da0e84f405d867c7e0cac">maxSteppers</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a570420b17131e93d2c3ff7665f121800"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a570420b17131e93d2c3ff7665f121800">&#9670;&nbsp;</a></span>then</h2>
+<a id="ab0733c667851852a49c093ba87c7d77a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0733c667851852a49c093ba87c7d77a">&#9670;&nbsp;</a></span>thenMicros</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t then = millis()</td>
+          <td class="memname">uint32_t thenMicros</td>
         </tr>
       </table>
 </div><div class="memdoc">

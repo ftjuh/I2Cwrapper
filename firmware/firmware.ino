@@ -21,27 +21,103 @@
 #include <AccelStepper.h>
 #include <AccelStepperI2C.h>
 #include <SimpleBuffer.h>
+#include <EEPROM.h>
+//#include <avr/eeprom.h>
 
 
-#define DEBUG_AccelStepperI2C
+// Uncomment to enable debug output on Serial
+//#define DEBUG_AccelStepperI2C
+
+// Uncomment to enable time keeping diagnostics. You probably should disable
+// debugging, as Serial output will distort measurements. Diagnostics take a little extra time,
+// so you best disable it in production environments.
+#define DIAGNOSTICS_AccelStepperI2C
+
+
+/*
+   Debugging stuff
+*/
 
 #ifdef DEBUG_AccelStepperI2C
 #define log(...)       Serial.print(__VA_ARGS__)
+volatile uint8_t sentOnRequest = 0;
 #else
 #define log(...)
-#endif
+#endif // DEBUG_AccelStepperI2C
 
 
-// I2C stuff
 
-const uint8_t I2C_address = 0x8;  // ### make configurable
-const uint8_t maxBuffer = 16; //
+/*
+   Diagnostics stuff
+*/
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+bool diagnosticsEnabled = false;
+uint32_t thenMicros;
+diagnosticsReport currentDiagnostics;
+uint32_t cycles = 0; // keeps count of main loop iterations
+#endif // DIAGNOSTICS_AccelStepperI2C
+
+#ifdef DEBUG_AccelStepperI2C
+uint32_t now, then = millis();
+bool reportNow = true;
+#endif // DEBUG_AccelStepperI2C
+
+
+/*
+   EEPROM stuff
+*/
+
+#define EEPROM_OFFSET_I2C_ADDRESS 0 // where in eeprom is the I2C address stored, if any? [1 CRC8 + 4 marker + 1 address = 6 bytes]
+uint32_t eepromI2CaddressMarker = 0x12C0ACCF; // arbitrary 32bit marker proving that next byte in EEPROM is in fact an I2C address
+
+
+/*
+   I2C stuff
+*/
+
+const uint8_t I2C_defaultAddress = 0x8;
+//const uint8_t maxBuffer = 16; //
 SimpleBuffer* bufferIn;
 SimpleBuffer* bufferOut;
 volatile uint8_t newMessage = 0; // signals main loop that a receiveEvent with valid new data occurred
 
+// Read a stored I2C address from EEPROM. If there is none, use default.
+uint8_t retrieveI2C_address() {
+  SimpleBuffer b;
+  b.init(8);
+  // read 6 bytes from eeprom
+  for (byte i = 0; i < 6; i++) {
+    b.buffer[i] = EEPROM.read(EEPROM_OFFSET_I2C_ADDRESS + i);
+  }
+  b.idx = 6; // [0]=CRC8; [1-4]=marker; [5]=address
+  uint32_t markerTest; b.read(markerTest);
+  if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
+    uint8_t storedAddress; b.read(storedAddress);
+    return storedAddress;
+  } else {
+    return I2C_defaultAddress;
+  }
+}
 
-// endstop stuff
+// Write I2C address to EEPROM
+void storeI2C_address(uint8_t newAddress) {
+  SimpleBuffer b;
+  b.init(8);
+  b.write(eepromI2CaddressMarker);
+  b.write(newAddress);
+  b.setCRC8();
+  // write 6 bytes to eeprom
+  //  eeprom_write_block((const void*)&b.buffer[0], (void*)EEPROM_OFFSET_I2C_ADDRESS, 6);
+  for (byte i = 0; i < 6; i++) {
+    EEPROM.write(EEPROM_OFFSET_I2C_ADDRESS + i, b.buffer[i]);
+  }
+}
+
+
+/*
+   Endstop stuff
+*/
 
 struct Endstop {
   uint8_t pin;
@@ -51,11 +127,12 @@ struct Endstop {
 const uint8_t maxEndstops = 2; // not sure if there are scenarios where more than two make sense, but why not be prepared?
 
 
-
-// stepper stuff
+/*
+   Stepper stuff
+*/
 
 const uint8_t maxSteppers = 8;
-volatile uint8_t numSteppers = 0; // number of initialised steppers
+uint8_t numSteppers = 0; // number of initialised steppers
 struct Stepper  // holds stepper parameters needed for local slave management
 {
   AccelStepper * stepper;
@@ -65,7 +142,8 @@ struct Stepper  // holds stepper parameters needed for local slave management
   uint8_t numEndstops = 0;
   bool endstopsEnabled = false;
 };
-volatile Stepper steppers[maxSteppers];
+Stepper steppers[maxSteppers];
+
 
 
 // ugly but easy way to reset
@@ -79,18 +157,26 @@ void(* resetFunc) (void) = 0;//declare reset function at address 0
     @brief setup system
 */
 /**************************************************************************/
-void setup()
-{
+void setup() {
+
 #ifdef DEBUG_AccelStepperI2C
   Serial.begin(115200);
 #endif
-  Wire.begin(I2C_address);
+  log("\n\n\n=== AccelStepperI2C v0.1 ===\n\n");
+
+  uint8_t i2c_address = retrieveI2C_address();
+  Wire.begin(i2c_address);
+  log("I2C started with address "); log(i2c_address); log("\n\n");
+  while (Wire.available()) {
+    uint8_t discard = Wire.read(); log(discard); log(" ");
+  }
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
+
   bufferIn = new SimpleBuffer; bufferOut = new SimpleBuffer;
-  bufferIn->init(maxBuffer);
-  bufferOut->init(maxBuffer);
-  log("\n\n\n=== AccelStepperI2C v0.1 ===\n\n");
+  bufferIn->init(maxBuf);
+  bufferOut->init(maxBuf);
+
 }
 
 /**************************************************************************/
@@ -114,8 +200,7 @@ int8_t addStepper(uint8_t interface = AccelStepper::FULL4WIRE,
   {
     steppers[numSteppers].stepper = new AccelStepper(interface, pin1, pin2, pin3, pin4, enable);
     steppers[numSteppers].state = state_stopped;
-    log("Add stepper with internal myNum = ");
-    log(numSteppers);
+    log("Add stepper with internal myNum = "); log(numSteppers);
     return numSteppers++;
   }
   else
@@ -153,18 +238,12 @@ uint8_t readEndstops(uint8_t s) {
 */
 /**************************************************************************/
 
-#ifdef DEBUG_AccelStepperI2C
-uint32_t now, then = millis();
-uint32_t cycles = 0;
-bool reportNow = true;
-#endif
-
 void loop()
 {
 
 #ifdef DEBUG_AccelStepperI2C
   now = millis();
-  if (now > then + 2000) {
+  if (now > then + 1000) {
     reportNow = true;
     log("Cycles = "); log(cycles); log("  | Stepper states = ");
     then = now;
@@ -180,7 +259,7 @@ void loop()
     }
 #endif
 
-    bool timeToCheckTheEndstops = false; // @todo: change polling to pinchange interrupt
+    bool timeToCheckTheEndstops = false; // ###todo: change polling to pinchange interrupt
     switch (steppers[i].state)
     {
 
@@ -225,13 +304,28 @@ void loop()
   }
 
 #ifdef DEBUG_AccelStepperI2C
+  if (sentOnRequest > 0) {
+    log("Output buffer sent ("); log(sentOnRequest); log(" bytes): ");
+    for (uint8_t j = 0; j < sentOnRequest; j++)
+    {
+      log(bufferOut->buffer[j], HEX);  log(" ");
+    }
+    log("\n");
+    sentOnRequest = 0;
+  }
+#endif
+
+#ifdef DEBUG_AccelStepperI2C
   if (reportNow) {
     log("\n");
-    cycles = 0; reportNow = false;
+    reportNow = false;
   }
-  cycles++;
 #endif
+
+  cycles++;
 }
+
+
 
 /**************************************************************************/
 /*!
@@ -241,6 +335,11 @@ void loop()
 /**************************************************************************/
 void receiveEvent(int howMany)
 {
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+  thenMicros = micros();
+#endif // DIAGNOSTICS_AccelStepperI2C
+
   if (newMessage == 0) { // Only accept message if an earlier one is fully processed.
     bufferIn->reset();
     for (uint8_t i = 0; i < howMany; i++) {
@@ -250,17 +349,23 @@ void receiveEvent(int howMany)
     }
     bufferIn->idx = howMany;
     newMessage = howMany; // tell main loop that new data has arrived
+
   } else { // discard message ### how can we warn the master??? Interrutp line would be good, here.
     while (Wire.available()) {
       Wire.read();
     }
   }
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+  currentDiagnostics.lastReceiveTime = micros() - thenMicros;
+#endif // DIAGNOSTICS_AccelStepperI2C
+
 }
 
 
 /**************************************************************************/
 /*!
-  @brief Process message receive via I2C.
+  @brief Process message received via I2C.
   Normal messages consist of at least three bytes:
   [0] CRC8 checksum
   [1] Command. Most commands correspond to an AccelStepper function, some
@@ -272,14 +377,20 @@ void receiveEvent(int howMany)
    many or too few parameter bytes is ignored.
    @note Blocking functions runToPositionCmd() and runToNewPositionCmd() not
       implemented here. Blocking at the slave's side seems not too useful, as
-      the master won't wait for us anyway, 
-    @todo Implement blocking functions runToPositionCmd() and runToNewPositionCmd() 
+      the master won't wait for us anyway,
+    @todo Implement blocking functions runToPositionCmd() and runToNewPositionCmd()
     on the master's side/in the library?
 */
 /**************************************************************************/
 void processMessage(uint8_t len) {
-  log("New message with "); log(len); log(" bytes. ");
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+  uint32_t thenMicrosP = micros();
+#endif // DIAGNOSTICS_AccelStepperI2C
+
+
 #ifdef DEBUG_AccelStepperI2C
+  log("New message with "); log(len); log(" bytes. ");
   for (int j = 0; j < len; j++)  {
     log (bufferIn->buffer[j]); log(" ");
   }
@@ -289,7 +400,7 @@ void processMessage(uint8_t len) {
 
     bufferIn->reset(); // set reader to start
     uint8_t cmd; bufferIn->read(cmd);
-    int8_t s; bufferIn->read(s); // stepper adressed (if any, will not be used for general commands > 200)
+    int8_t s; bufferIn->read(s); // stepper addressed (if any, will not be used for general commands > 200)
     log("CRC8 ok. Command = "); log(cmd); log(" for stepper "); log(s);
     log(" with "); log(len - 3); log(" parameter bytes --> ");
 
@@ -601,24 +712,9 @@ void processMessage(uint8_t len) {
           }
           break;
 
-        // @todo reset should be done smarter and completely in software w/o hard reset.
-        case resetCmd:
-          {
-            log("\n\n---------------> Resetting\n\n");
-            for (uint8_t i = 0; i < numSteppers; i++) {
-              steppers[i].stepper->stop();
-              steppers[i].stepper->disableOutputs();
-            }
-#ifdef DEBUG_AccelStepperI2C
-            Serial.flush();
-#endif
-            resetFunc();
-          }
-          break;
-
         case addStepperCmd: //
           {
-            log("addStepperCmd: ");
+            //log("addStepperCmd\n");
             if (i == 6)
             {
               // 5 uint8_t + 1 bool
@@ -634,46 +730,150 @@ void processMessage(uint8_t len) {
           }
           break;
 
+        // @todo reset should be done smarter and completely in software w/o hard reset.
+        case resetCmd:
+          {
+            if (i == 0) // no parameters
+            {
+              log("\n\n---> Resetting\n\n");
+              for (uint8_t i = 0; i < numSteppers; i++) {
+                steppers[i].stepper->stop();
+                steppers[i].stepper->disableOutputs();
+              }
+            }
+#ifdef DEBUG_AccelStepperI2C
+            Serial.flush();
+#endif
+            resetFunc();
+          }
+          break;
+
+        case changeI2CaddressCmd: //
+          {
+            // log("changeI2CaddressCmd\n");
+            if (i == 1)  // 1 uint8_t
+            {
+              uint8_t newAddress; bufferIn->read(newAddress);
+              storeI2C_address(newAddress);
+            }
+          }
+          break;
+
+        case enableDiagnosticsCmd: //
+          {
+            if (i == 1)  // 1 bool
+            {
+              bufferIn->read(diagnosticsEnabled);
+            }
+          }
+          break;
+
+        case diagnosticsCmd:
+          {
+            if (i == 0) // no parameters
+            {
+              currentDiagnostics.cycles = cycles;
+              cycles = 0;
+              bufferOut->write(currentDiagnostics);
+              //              bufferOut->write(currentDiagnostics.cycles);
+              //              bufferOut->write(currentDiagnostics.lastProcessTime);
+              //              bufferOut->write(currentDiagnostics.lastRequestTime);
+              //              bufferOut->write(currentDiagnostics.lastReceiveTime);
+            }
+          }
+          break;
+
         default:
           log("No matching command found");
 
       } // switch
+
+#ifdef DEBUG_AccelStepperI2C
+      log("Output buffer after processing ("); log(bufferOut->idx); log(" bytes): ");
+      for (uint8_t i = 0; i < bufferOut->idx; i++)
+      {
+        log(bufferOut->buffer[i], HEX);  log(" ");
+      }
+      log("\n");
+#endif
+
+#ifdef ESP32
+      // ESP32 slave implementation needs the I2C-reply buffer prefilled. I.e. onRequest() will, without our own doing,
+      // just send what's in the I2C buffer at the time of the request, and anything that's written during the request
+      // will only be sent in the next request cycle. So let's prefill the buffer here.
+      // ### what exactly is the role of slaveWrite() vs. Write(), here?
+      // ### slaveWrite() is only for ESP32, not for it's poorer cousins ESP32-S2 and ESP32-C3. Need to fine tune the compiler directive, here?
+      bufferOut->setCRC8();
+      Wire.slaveWrite(bufferOut->buffer, bufferOut->idx);
+#ifdef DEBUG_AccelStepperI2C
+      log("sent "); log(bufferOut->idx); log(" bytes: "); // ### good boys don't use Serial in interrupts, it's said they don't work here
+      for (uint8_t i = 0; i < bufferOut->idx; i++)
+      {
+        log(bufferOut->buffer[i], HEX);  log(" ");
+      }
+      log("\n");
+#endif // DEBUG
+#endif  // ESP32
+
     } // if valid s
 
   } // if (bufferIn->checkCRC8())
   log("\n");
+
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+  currentDiagnostics.lastProcessTime = micros() - thenMicrosP;
+#endif // DIAGNOSTICS_AccelStepperI2C
+
 }
 
 /**************************************************************************/
 /*!
   @brief Handle I2C request event. Will send results or information requested
     by the last command, as defined by the contents of the outputBuffer.
-  @todo Find sth. meaningful to report from requestEvent() if no message is 
+  @todo Find sth. meaningful to report from requestEvent() if no message is
   pending, e.g. current position etc.
-/*
+*/
 /**************************************************************************/
 void requestEvent()
 {
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+  thenMicros = micros();
+#endif // DIAGNOSTICS_AccelStepperI2C
+
   if (bufferOut->idx > 1)
   {
+
+#ifndef ESP32
+    // ESP32 I2C buffer has already been prefilled in processMessage(), so nothing to do here for ESP32's
     bufferOut->setCRC8();
-    log("sending "); log(bufferOut->idx); log(" bytes: "); // ### good boys don't use Serial in interrupts, supposedly they don't work here
     Wire.write(bufferOut->buffer, bufferOut->idx);
+
+#ifdef DEBUG_AccelStepperI2C
+    log("sent "); log(bufferOut->idx); log(" bytes: "); // ### good boys don't use Serial in interrupts
     for (uint8_t i = 0; i < bufferOut->idx; i++)
     {
       log(bufferOut->buffer[i], HEX);  log(" ");
     }
     log("\n");
+#endif // DEBUG
+
+#endif // not ESP32
+
+#ifdef DEBUG_AccelStepperI2C
+    sentOnRequest = bufferOut->idx; // signal main loop that we sent buffer
+#endif
+
     bufferOut->reset();  // never send anything twice
-  } else { /// ### find sth. meaningful to report if no message is pending
-    //    uint8_t res = 0;
-    //    if (numSteppers > 0)
-    //    {
-    //      for (uint8_t i = 0; i < numSteppers; i++)
-    //      {
-    //        // send some diagnostics
-    //      }
-    //    }
-    //    Wire.write(res);
+
+  } else {
+    // ### find sth. meaningful to report if no message is pending
+    // ### however it seems this won't work for ESP32 as they need the buffer prefilled before the requestEvent
   }
+
+#ifdef DIAGNOSTICS_AccelStepperI2C
+  currentDiagnostics.lastRequestTime = micros() - thenMicros;
+#endif // DIAGNOSTICS_AccelStepperI2C
+
 }

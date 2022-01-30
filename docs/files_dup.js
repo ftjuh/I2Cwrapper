@@ -7,5 +7,6 @@ var files_dup =
     [ "SimpleBuffer.cpp", "_simple_buffer_8cpp.html", "_simple_buffer_8cpp" ],
     [ "SimpleBuffer.h", "_simple_buffer_8h.html", [
       [ "SimpleBuffer", "class_simple_buffer.html", "class_simple_buffer" ]
-    ] ]
+    ] ],
+    [ "Speed_diagnostics.ino", "_speed__diagnostics_8ino.html", "_speed__diagnostics_8ino" ]
 ];

@@ -12,7 +12,7 @@
 #include <Wire.h>
 #include <AccelStepperI2C.h>
 
-#define DEBUG_AccelStepperI2C
+//#define DEBUG_AccelStepperI2C
 
 #ifdef DEBUG_AccelStepperI2C
 #define log(...)       Serial.print(__VA_ARGS__)
@@ -20,24 +20,43 @@
 #define log(...)
 #endif
 
+
 /*
  *
- * Helper functions and methods start here
+ * Classless helper functions start here
+ * ### use a common function for sending, ideally as method of an object 
+ * representing the slave as a whole
  *
  */
 
 // Tell slave to reset.
 // Not a method, it needs to work even before any steppers have been constructed.
 void resetAccelStepperSlave(uint8_t address) {
-  SimpleBuffer b;
-  b.init(4);
-  b.write(resetCmd);
-  b.write((uint8_t)-1); // placeholder for stepper address, not used here
+  SimpleBuffer b; b.init(4);
+  b.write(resetCmd); b.write((uint8_t)-1); // placeholder for stepper address, not used here
   b.setCRC8();
   Wire.beginTransmission(address);
   Wire.write(b.buffer, b.idx);
   Wire.endTransmission();
 }
+
+// Tell slave at address to permanently change address to newAddress
+void changeI2Caddress(uint8_t address, uint8_t newAddress) {
+  SimpleBuffer b; b.init(5);
+  b.write(changeI2CaddressCmd); b.write((uint8_t)-1); // placeholder for stepper address, not used here
+  b.write(newAddress);
+  b.setCRC8();
+  Wire.beginTransmission(address);
+  Wire.write(b.buffer, b.idx);
+  Wire.endTransmission();
+}
+
+
+/*
+ * 
+ * Helper methods start here
+ *
+ */
 
 // reset stepper's buffer and write header bytes...
 void AccelStepperI2C::prepareCommand(uint8_t cmd) {
@@ -59,12 +78,15 @@ bool AccelStepperI2C::sendCommand() {
   return sentOK; // internal: true on success;
 }
 
+
 // read slave's reply, numBytes is *without* CRC8 byte
 // returns true if received data was correct regarding expected lenght and checksum
 bool AccelStepperI2C::readResult(uint8_t numBytes) {
+
   delay(I2CrequestDelay); // give slave time to answer ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
   buf.reset();
-  if (Wire.requestFrom(address, numBytes + 1) > 0) { // +1 for CRC8
+
+  if (Wire.requestFrom(address, uint8_t(numBytes + 1)) > 0) { // +1 for CRC8
     log("Requesting result ("); log(numBytes + 1); log(" bytes incl. CRC8): ");
     uint8_t i = 0;
     while ((i <= numBytes) and (i < buf.maxLen)) {
@@ -72,17 +94,20 @@ bool AccelStepperI2C::readResult(uint8_t numBytes) {
       log(buf.buffer[i-1], HEX); log(" ");
     }
     buf.idx = i;
-    log((i<=numBytes) ? " -- buffer out of space!  " : "");  log(" total bytes = "); log(buf.idx);log("\n");
     resultOK = buf.checkCRC8();
+    log((i<=numBytes) ? " -- buffer out of space!  " : "");  log(" total bytes = "); log(buf.idx);log(resultOK ? "  CRC8 ok\n" : "  CRC8 wrong!\n");
+
+    
   } else { // some transmission error
     log("-- Failed to transmit\n");
     resultOK = false;
   }
+
   buf.reset(); // reset for reading
   return resultOK;
+  
 }
 
-// delay(I2CrequestDelay); 
 
 
 /*
@@ -110,17 +135,20 @@ AccelStepperI2C::AccelStepperI2C(uint8_t i2c_address,
   } // else leave myNum at -1 (= failed)
 }
 
+
 void AccelStepperI2C::moveTo(long absolute) {
   prepareCommand(moveToCmd);
   buf.write(absolute);
   sendCommand();
 }
 
+
 void AccelStepperI2C::move(long relative) {
   prepareCommand(moveCmd);
   buf.write(relative);
   sendCommand();
 }
+
 
 // don't use this, use state machine instead
 // If you use it, be sure to also check sentOK and, if using the result, resultOK.
@@ -133,6 +161,7 @@ boolean AccelStepperI2C::run() {
   return res;
 }
 
+
 // don't use this, use state machine instead
 // If you use it, be sure to also check sentOK and, if using the result, resultOK.
 boolean AccelStepperI2C::runSpeed() {
@@ -143,6 +172,7 @@ boolean AccelStepperI2C::runSpeed() {
   } 
   return res;
 }
+
 
 // don't use this, use state machine instead
 // If you use it, be sure to also check sentOK and, if using the result, resultOK.
@@ -165,6 +195,7 @@ long AccelStepperI2C::distanceToGo() {
   return res;
 }
 
+
 long AccelStepperI2C::targetPosition() {
   prepareCommand(targetPositionCmd);
   long res = resError; // funny value returned on error
@@ -173,6 +204,7 @@ long AccelStepperI2C::targetPosition() {
   }
   return res;
 }
+
 
 long AccelStepperI2C::currentPosition() {
   prepareCommand(currentPositionCmd);
@@ -183,17 +215,20 @@ long AccelStepperI2C::currentPosition() {
   return res;
 }
 
+
 void AccelStepperI2C::setCurrentPosition(long position) {
   prepareCommand(setCurrentPositionCmd);
   buf.write(position);
   sendCommand();
 }
 
+
 void AccelStepperI2C::setMaxSpeed(float speed) {
   prepareCommand(setMaxSpeedCmd);
   buf.write(speed);
   sendCommand();
 }
+
 
 float AccelStepperI2C::maxSpeed() {
   prepareCommand(maxSpeedCmd);
@@ -204,17 +239,20 @@ float AccelStepperI2C::maxSpeed() {
   return res;
 }
 
+
 void AccelStepperI2C::setAcceleration(float acceleration) {
   prepareCommand(setAccelerationCmd);
   buf.write(acceleration);
   sendCommand();
 }
 
+
 void AccelStepperI2C::setSpeed(float speed) {
   prepareCommand(setSpeedCmd);
   buf.write(speed);
   sendCommand();
 }
+
 
 float AccelStepperI2C::speed() {
   prepareCommand(speedCmd);
@@ -225,15 +263,18 @@ float AccelStepperI2C::speed() {
   return res;
 }
 
+
 void    AccelStepperI2C::disableOutputs() {
   prepareCommand(disableOutputsCmd);
   sendCommand();
 }
 
+
 void    AccelStepperI2C::enableOutputs() {
   prepareCommand(enableOutputsCmd);
   sendCommand();
 }
+
 
 void AccelStepperI2C::setMinPulseWidth(unsigned int minWidth) {
   prepareCommand(setMinPulseWidthCmd);
@@ -241,11 +282,13 @@ void AccelStepperI2C::setMinPulseWidth(unsigned int minWidth) {
   sendCommand();
 }
 
+
 void AccelStepperI2C::setEnablePin(uint8_t enablePin) {
   prepareCommand(setEnablePinCmd);
   buf.write(enablePin);
   sendCommand();
 }
+
 
 void AccelStepperI2C::setPinsInverted(bool directionInvert, bool stepInvert, bool enableInvert) {
   prepareCommand(setPinsInverted1Cmd);
@@ -253,6 +296,7 @@ void AccelStepperI2C::setPinsInverted(bool directionInvert, bool stepInvert, boo
   buf.write(bits);
   sendCommand();
 }
+
 
 void AccelStepperI2C::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3Invert, bool pin4Invert, bool enableInvert) {
   prepareCommand(setPinsInverted2Cmd);
@@ -275,6 +319,7 @@ void AccelStepperI2C::stop() {
   sendCommand();
 }
 
+
 bool AccelStepperI2C::isRunning() {
   prepareCommand(isRunningCmd);
   bool res = false;
@@ -283,6 +328,8 @@ bool AccelStepperI2C::isRunning() {
   }
   return res;
 }
+
+
 
 /*
  *
@@ -296,30 +343,36 @@ void AccelStepperI2C::setState(uint8_t newState) {
   sendCommand();
 }
 
-uint8_t getState() {
+
+uint8_t AccelStepperI2C::getState() {
   prepareCommand(getStateCmd);
   uint8_t state = -1;
-  if (sendCommand() and readResult(getStateResults)) {
+  if (sendCommand() and readResult(getStateResult)) {
     buf.read(state);
   }
-  return res;
+  return state;
 }
+
 
 void AccelStepperI2C::stopState() {
   setState(state_stopped);
 }
 
+
 void AccelStepperI2C::runState() {
   setState(state_run);
 }
+
 
 void AccelStepperI2C::runSpeedState() {
   setState(state_runSpeed);
 }
 
+
 void AccelStepperI2C::runSpeedToPositionState() {
   setState(state_runSpeedToPosition);
 }
+
 
 void AccelStepperI2C::setEndstopPin(int8_t pin,
                                     bool activeLow,
@@ -338,6 +391,7 @@ void AccelStepperI2C::enableEndstops(bool enable) {
   sendCommand();
 }
 
+
 uint8_t AccelStepperI2C::endstops() { // returns endstop(s) states in bits 0 and 1
   prepareCommand(endstopsCmd);
   uint8_t res = 0xff; // send "all endstops hit" on transmission error
@@ -348,12 +402,17 @@ uint8_t AccelStepperI2C::endstops() { // returns endstop(s) states in bits 0 and
 }
 
 
+void AccelStepperI2C::enableDiagnostics(bool enable) {
+  prepareCommand(enableDiagnosticsCmd);
+  buf.write(enable);
+  sendCommand();
+}
 
 
-
-
-
-
-
-
+void AccelStepperI2C::diagnostics(diagnosticsReport* report) {
+  prepareCommand(diagnosticsCmd);
+  if (sendCommand() and readResult(diagnosticsResult)) {
+    buf.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
+  }
+}
 

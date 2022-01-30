@@ -1,6 +1,7 @@
 <map id="AccelStepperI2C.h" name="AccelStepperI2C.h">
-<area shape="rect" id="node1" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="118,5,250,32"/>
+<area shape="rect" id="node1" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="199,5,331,32"/>
 <area shape="rect" id="node2" href="$firmware_8ino.html" title=" " alt="" coords="5,80,99,107"/>
 <area shape="rect" id="node3" href="$_c_n_c_shieldv3_8ino.html" title=" " alt="" coords="123,80,245,107"/>
-<area shape="rect" id="node4" href="$_accel_stepper_i2_c_8cpp.html" title="Part of the AccelStepperI2C firmware/library." alt="" coords="269,80,416,107"/>
+<area shape="rect" id="node4" href="$_speed__diagnostics_8ino.html" title=" " alt="" coords="270,80,423,107"/>
+<area shape="rect" id="node5" href="$_accel_stepper_i2_c_8cpp.html" title="Part of the AccelStepperI2C firmware/library." alt="" coords="448,80,595,107"/>
 </map>

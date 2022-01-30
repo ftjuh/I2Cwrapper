@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['endstop_144',['Endstop',['../struct_endstop.html',1,'']]]
+  ['diagnosticsreport_167',['diagnosticsReport',['../structdiagnostics_report.html',1,'']]]
 ];

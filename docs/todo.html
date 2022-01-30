@@ -91,14 +91,20 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt>File <a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>Implement interrupt mechanism, enabling the slave to inform the master about finished tasks or other events </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events </p>
 <p class="interdd">use interrupts for endstops instead of main loop polling </p>
-<p class="interdd">Make the I2C address programmable and persistent in EEPROM. </p>
 <p class="interdd">Versioning, I2C command to request version (important, as library and firmware always need to match) </p>
+<p class="interdd">add emergency stop/break pin for slave </p>
 <p class="interdd">make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc. </p>
-<p class="interdd">implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency </p>
-<p class="interdd"><del>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics.</del> CRC8 implemented </p>
-<p class="enddd"><del>Implement end stops/reference stops.</del> endstops implemented  </p>
+<p class="interdd">checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc. </p>
+<p class="interdd">test (and adapt) for ESP8266 </p>
+<p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check, if this could be a problem in our case. </p>
+<p class="interdd">clean up example sketches </p>
+<p class="interdd"><del>implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency</del> - done, performance graphs included in documentation </p>
+<p class="interdd"><del>add ESP32 compatibility for slave</del> - done, but needs further testing </p>
+<p class="interdd"><del>Make the I2C address programmable and persistent in EEPROM.</del> - done </p>
+<p class="interdd"><del>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics.</del> - CRC8 implemented </p>
+<p class="enddd"><del>Implement end stops/reference stops.</del> - endstop polling implemented, interrupt would be better  </p>
 </dd>
 <dt>Member <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">AccelStepperI2C::enableEndstops</a>  (bool enable=true)</dt>
 <dd><a class="anchor" id="_todo000007"></a>Find solution for moving a stepper out of an endstop's zone.  </dd>
@@ -107,7 +113,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <dt>Member <a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a>  (int howMany)</dt>
 <dd><a class="anchor" id="_todo000002"></a><del>Just read the buffer here, move interpretation out of the interrupt.</del>  </dd>
 <dt>Member <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a>  ()</dt>
-<dd><a class="anchor" id="_todo000004"></a>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc. /* /*  </dd>
+<dd><a class="anchor" id="_todo000004"></a>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.  </dd>
 <dt>Member <a class="el" href="_accel_stepper_i2_c_8h.html#a1a5368a04a51848489ce42d0329eb62a">resetAccelStepperSlave</a>  (uint8_t address)</dt>
 <dd><a class="anchor" id="_todo000006"></a>reset should be done entirely in software. </dd>
 </dl>

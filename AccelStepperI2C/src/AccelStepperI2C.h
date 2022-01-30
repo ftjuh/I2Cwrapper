@@ -11,22 +11,34 @@
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
-  @todo Implement interrupt mechanism, enabling the slave to inform the master
+  @todo Implement interrupt mechanism, so that the slave can inform the master
   about finished tasks or other events
   @todo use interrupts for endstops instead of main loop polling
-  @todo Make the I2C address programmable and persistent in EEPROM.
   @todo Versioning, I2C command to request version (important, as library and firmware
   always need to match)
+  @todo add emergency stop/break pin for slave
   @todo make time the slave has to answer I2C requests (I2CrequestDelay)
   configurable, as it will depend on µC and bus frequency etc.
-  @todo implement diagnostic functions, e.g. measurements how long messages take 
-  to be processed or current stepper pulse frequency
+  @todo checking each transmission with sentOK and resultOK is tedious. We could
+  use some counter to accumulate errors and check them summarily, e.g. at
+  the end of setup etc.
+  @todo test (and adapt) for ESP8266
+  @todo ATM data is not protected against updates from ISRs while it is being
+  used in the main program (see http://gammon.com.au/interrupts). Check, if this
+  could be a problem in our case.
+  @todo clean up example sketches
+  @todo <del>implement diagnostic functions, e.g. measurements how long messages take 
+  to be processed or current stepper pulse frequency</del> - done, performance graphs
+  included in documentation
+  @todo <del>add ESP32 compatibility for slave</del> - done, but needs further testing
+  @todo <del>Make the I2C address programmable and persistent in EEPROM.</del> - done
   @todo <del>Error handling and sanity checks are rudimentary. Currently the
   system is not stable against transmission errors, partly due to the limitations
   of Wire.requestFrom() and Wire.available(). A better protocol would be
   needed, which would mean more overhead. Need testing to see how important
-  this is in practics.</del> CRC8 implemented
-  @todo <del>Implement end stops/reference stops.</del> endstops implemented
+  this is in practics.</del> - CRC8 implemented
+  @todo <del>Implement end stops/reference stops.</del> - endstop polling 
+  implemented, interrupt would be better
   @par Revision History
   @version 0.1 initial release
 */
@@ -40,14 +52,24 @@
 
 
 // upper limit of send and receive buffer(s)
-const uint8_t maxBuf = 16; // includes 1 crc8 byte
+const uint8_t maxBuf = 20; // includes 1 crc8 byte
 
 // ms to wait between I2C communication, this needs to be improved, a fixed constant is much too arbitrary
-const uint16_t I2CrequestDelay = 30;
+const uint16_t I2CrequestDelay = 50;
 
-// used as error code for calls with long/float result that got no correct reply from slave
-// errors now signaled with resultOK, so no need for a special value here, just take 0
+// used as return valuefor calls with long/float result that got no correct reply from slave
+// However, errors are now signaled with resultOK, so no need for a special value here, just take 0
 const long resError = 0;
+
+/*!
+ * @brief Used to transmit diagnostic info with AccelStepperI2C::diagnostics(). 
+ */
+struct diagnosticsReport {
+  uint32_t cycles;          ///< Number of main loop executions since last reboot
+  uint32_t lastProcessTime; ///< microseconds needed to process (interpret) most recently sent command
+  uint32_t lastRequestTime; ///< microseconds spent in most recent onRequest() interrupt
+  uint32_t lastReceiveTime; ///< microseconds spent in most recent onReceive() interrupt
+};
 
 // I2C commands and, if non void, returned bytes, for AccelStepper functions, starting at 10
 // note: not all of those are necessarily implemented yet
@@ -79,25 +101,29 @@ const uint8_t isRunningCmd          = 33; const uint8_t isRunningResult         
 
 // new commands for AccelStepperI2C start here
 
-// new commands and for specific steppers, starting at 100
+// commands for specific steppers, starting at 100
 const uint8_t setStateCmd           = 100;
-const uint8_t getStateCmd           = 100; const uint8_t getStateResult           = 1; // 1 uint8_t
-const uint8_t setInterruptCmd       = 102; // not implemented yet
-const uint8_t setEndstopPinCmd      = 103;
-const uint8_t enableEndstopsCmd     = 104;
-const uint8_t endstopsCmd           = 105; const uint8_t endstopsResult           = 1; // 1 uint8_t
+const uint8_t getStateCmd           = 101; const uint8_t getStateResult           = 1; // 1 uint8_t
+const uint8_t setEndstopPinCmd      = 102;
+const uint8_t enableEndstopsCmd     = 103;
+const uint8_t endstopsCmd           = 104; const uint8_t endstopsResult           = 1; // 1 uint8_t
 
-// new general commands that don't address a specific stepper (= have a 1 byte header), starting at 200
-const uint8_t generalCommandsStart  = 200; // to check for general commands
+const uint8_t generalCommandsStart = 200; //not a command, just to define the 200 threshold needed to check if a valid stepper address is to be expected
+// general commands that don't address a specific stepper (= don't use second header byte), starting at 200
 const uint8_t addStepperCmd         = 200; const uint8_t addStepperResult         = 1; // 1 uint8_t
 const uint8_t resetCmd              = 201;
+const uint8_t changeI2CaddressCmd   = 202;
+const uint8_t enableDiagnosticsCmd  = 203;
+const uint8_t diagnosticsCmd        = 204; const uint8_t diagnosticsResult        = sizeof(diagnosticsReport);
+//const uint8_t setInterruptCmd       = xxx; // not implemented yet
 
 
 /// @brief stepper state machine states
-const uint8_t state_stopped = 0; ///< state machine is inactive, stepper can still be controlled directly
-const uint8_t state_run = 1; ///< corresponds to AccelStepper::run(), will fall back to state_stopped if target reached
-const uint8_t state_runSpeed = 2; ///< corresponds to AccelStepper::runSpeed(), will remain active until stopped by user or endstop
-const uint8_t state_runSpeedToPosition = 3; ///< corresponds to AccelStepper::state_runSpeedToPosition(), will fall back to state_stopped if target position reached
+const uint8_t state_stopped             = 0; ///< state machine is inactive, stepper can still be controlled directly
+const uint8_t state_run                 = 1; ///< corresponds to AccelStepper::run(), will fall back to state_stopped if target reached
+const uint8_t state_runSpeed            = 2; ///< corresponds to AccelStepper::runSpeed(), will remain active until stopped by user or endstop
+const uint8_t state_runSpeedToPosition  = 3; ///< corresponds to AccelStepper::state_runSpeedToPosition(), will fall back to state_stopped if target position reached
+
 
 
 /*!
@@ -110,6 +136,12 @@ const uint8_t state_runSpeedToPosition = 3; ///< corresponds to AccelStepper::st
  * @todo reset should be done entirely in software.
 */
 void resetAccelStepperSlave(uint8_t address);
+
+/*!
+ * @brief Permanently change the I2C address of the device. New address is
+ * stored in EEPROM and will be active after the next reset/reboot.
+ */
+void changeI2Caddress(uint8_t address, uint8_t newAddress);
 
 
 
@@ -214,6 +246,29 @@ class AccelStepperI2C {
    */
   uint8_t endstops(); // returns endstop(s) states in bits 0 and 1
 
+  
+  /*!
+   * @brief Turn on/off diagnostic speed logging.
+   * @param enable true for enable, false for disable
+   * @sa diagnostics()
+   * @note Diagnostics are not specific to a single stepper but refer to the
+   * slave as a whole. So it doesn't matter which stepper's diagnostics methods 
+   * you use.
+   */
+  void enableDiagnostics(bool enable = true);
+  
+  /*!
+   * @brief Get most recent diagnostics data
+   * @param report where to put the data, preallocated struct of type 
+   * AccelStepper::diagnosticsReport.
+   * @sa enableDiagnostics()
+   * @note Diagnostics are not specific to a single stepper but refer to the
+   * slave as a whole. So it doesn't matter which stepper's diagnostics methods 
+   * you use.
+   */
+  void diagnostics(diagnosticsReport* report);
+  
+ 
   /*!
    * @brief Set the state machine's state manually.
    * @param newState one of state_stopped, state_run, state_runSpeed, or state_runSpeedToPosition.

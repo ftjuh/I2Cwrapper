@@ -64,20 +64,31 @@ void setup() {
 
   // Important: initialize Wire before creating AccelStepperI2C objects
   Wire.begin();
+  Serial.begin(115200);
+  delay(200);
 
   // If the slave's and master's reset is not synchronized by hardware, after a master's reset the slave might
   // think the master wants another stepper, not a first one, and will run out of steppers, sooner or later.
+  Serial.print("\n\nresetting slave");
   resetAccelStepperSlave(addr);
+  delay(5000);
 
-  Serial.begin(115200);
-  delay(200);
   Serial.print("\n\nAccelStepperI2C demo - CNC Shield V3.00\n\n\n");
   Serial.flush();
-  delay(1000);
+  delay(5000);
 
-  X = new AccelStepperI2C(addr, AccelStepper::DRIVER, /* step pin */ 2, /* dir pin */ 5);
-  Y = new AccelStepperI2C(addr, AccelStepper::DRIVER, 3, 6, 0, 0, true);
-  Z = new AccelStepperI2C(addr, AccelStepper::DRIVER, 4, 7, 0, 0, true);
+//  X = new AccelStepperI2C(addr, AccelStepper::DRIVER, /* step pin */ 2, /* dir pin */ 5);
+  X = new AccelStepperI2C(addr, AccelStepper::DRIVER, /* step pin */ 4, /* dir pin */ 2);
+  Serial.println(X->myNum);
+  delay(5000);
+//  Y = new AccelStepperI2C(addr, AccelStepper::DRIVER, 3, 6, 0, 0, true);
+  Y = new AccelStepperI2C(addr, AccelStepper::DRIVER, 15, 0, 0, 0, true);
+  Serial.println(Y->myNum);
+  delay(5000);
+//  Z = new AccelStepperI2C(addr, AccelStepper::DRIVER, 4, 7, 0, 0, true);
+  Z = new AccelStepperI2C(addr, AccelStepper::DRIVER, 32, 33, 0, 0, true);
+  Serial.println(Z->myNum);
+  delay(5000);
   // you could add stepper A on pins 12 (step) and 13 (dir) after installing 
   // the two jumpers directly above the power terminal
   
@@ -97,16 +108,20 @@ void setup() {
      with setPinsInverted().
   */
   bool res = true;
-  X->setEnablePin(8); res &= X.sentOK;  
+  
+  X->setEnablePin(8); res &= X->sentOK;  
 // directionInvert, stepInvert, enableInvert
-  X->setPinsInverted(false, false, true); res &= X.sentOK;  
-  X->enableOutputs(); res &= X.sentOK;  
-  Y->setEnablePin(8); res &= X.sentOK;  
-  Y->setPinsInverted(false, false, true); res &= X.sentOK;  
-  Y->enableOutputs(); res &= X.sentOK;  
-  Z->setEnablePin(8); res &= X.sentOK;  
-  Z->setPinsInverted(false, false, true); res &= X.sentOK;  
-  Z->enableOutputs(); res &= X.sentOK;  
+  X->setPinsInverted(false, false, true); res &= X->sentOK;  
+  X->enableOutputs(); res &= X->sentOK;  
+  
+  Y->setEnablePin(8); res &= Y->sentOK;  
+  Y->setPinsInverted(false, false, true); res &= Y->sentOK;  
+  Y->enableOutputs(); res &= Y->sentOK;  
+  
+  Z->setEnablePin(8); res &= Z->sentOK;  
+  Z->setPinsInverted(false, false, true); res &= Z->sentOK;  
+  Z->enableOutputs(); res &= Z->sentOK;  
+  
   if (!res) {
     Serial.print("transmission error");
     /// ####
@@ -118,7 +133,6 @@ void setup() {
 
   // install endstop switch 
   X->setEndstopPin(endstopXpin, true, true);  // activeLow works nicely together with internal pullup
-  X->setEndstopPin(10, true, true);  // activeLow works nicely together with internal pullup
   X->enableEndstops(); // true by default
   
   X->moveTo(5000); Y->moveTo(8000); Z->moveTo(12000); // set targets
