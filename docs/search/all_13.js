@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['z_165',['Z',['../_c_n_c_shieldv3_8ino.html#a1877986fcd0d34bf7421a203d0cd7621',1,'CNCShieldv3.ino']]]
+  ['x_188',['X',['../_c_n_c_shieldv3_8ino.html#a8889bd1c89483bbe233bfc3dc4d59098',1,'X():&#160;CNCShieldv3.ino'],['../_interrupt___endstop_8ino.html#a8889bd1c89483bbe233bfc3dc4d59098',1,'X():&#160;Interrupt_Endstop.ino']]]
 ];

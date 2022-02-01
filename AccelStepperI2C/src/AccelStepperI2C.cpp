@@ -416,3 +416,18 @@ void AccelStepperI2C::diagnostics(diagnosticsReport* report) {
   }
 }
 
+
+void AccelStepperI2C::setInterruptPin(int8_t pin, 
+                     bool activeHigh) {
+  prepareCommand(setInterruptPinCmd);
+  buf.write(pin);
+  buf.write(activeHigh);
+  sendCommand();
+  
+}
+
+void AccelStepperI2C::enableInterrupts(bool enable) {
+  prepareCommand(enableInterruptsCmd);
+  buf.write(enable);
+  sendCommand();
+}

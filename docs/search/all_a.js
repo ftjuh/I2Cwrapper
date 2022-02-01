@@ -1,15 +1,9 @@
 var searchData=
 [
-  ['maxbuf_64',['maxBuf',['../_accel_stepper_i2_c_8h.html#a4c77998fb4d678f218f9d1a1d2736741',1,'AccelStepperI2C.h']]],
-  ['maxendstops_65',['maxEndstops',['../firmware_8ino.html#aa84ea5f47409c6c60bc911ba4bc06fb0',1,'firmware.ino']]],
-  ['maxlen_66',['maxLen',['../class_simple_buffer.html#aa2da43b97247f120799a49c2099849cd',1,'SimpleBuffer']]],
-  ['maxspeed_67',['maxSpeed',['../class_accel_stepper_i2_c.html#a36a283a6b78480ce5ab8e17329588135',1,'AccelStepperI2C']]],
-  ['maxspeedcmd_68',['maxSpeedCmd',['../_accel_stepper_i2_c_8h.html#adb260163a19a3ecc78a1d8bd022ee4b7',1,'AccelStepperI2C.h']]],
-  ['maxspeedresult_69',['maxSpeedResult',['../_accel_stepper_i2_c_8h.html#aedb02f04789bd7839fea5b7551a0b1e8',1,'AccelStepperI2C.h']]],
-  ['maxsteppers_70',['maxSteppers',['../firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b',1,'maxSteppers():&#160;firmware.ino'],['../_speed__diagnostics_8ino.html#ab21cefe8676da0e84f405d867c7e0cac',1,'maxSteppers():&#160;Speed_diagnostics.ino']]],
-  ['move_71',['move',['../class_accel_stepper_i2_c.html#af9c59ca7c83e9e2452cdc6b3a3b50ed9',1,'AccelStepperI2C']]],
-  ['movecmd_72',['moveCmd',['../_accel_stepper_i2_c_8h.html#a5bc0135fc6c2b403837faaef6ab7c638',1,'AccelStepperI2C.h']]],
-  ['moveto_73',['moveTo',['../class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182',1,'AccelStepperI2C']]],
-  ['movetocmd_74',['moveToCmd',['../_accel_stepper_i2_c_8h.html#a84c7d8262a16efd1f7619fd8978bc89f',1,'AccelStepperI2C.h']]],
-  ['mynum_75',['myNum',['../class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342',1,'AccelStepperI2C']]]
+  ['lastprocesstime_75',['lastProcessTime',['../structdiagnostics_report.html#aee89c72d2fa790c9ef24bace75ddd6cd',1,'diagnosticsReport']]],
+  ['lastreceivetime_76',['lastReceiveTime',['../structdiagnostics_report.html#abe4d6e336a35b1d68d0c75cc31dbd6b6',1,'diagnosticsReport']]],
+  ['lastrequesttime_77',['lastRequestTime',['../structdiagnostics_report.html#afc4cf15067df14b3b61d30db85cc1adf',1,'diagnosticsReport']]],
+  ['log_78',['log',['../firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;firmware.ino'],['../_accel_stepper_i2_c_8cpp.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;AccelStepperI2C.cpp'],['../_simple_buffer_8cpp.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;SimpleBuffer.cpp']]],
+  ['loop_79',['loop',['../firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;firmware.ino'],['../_c_n_c_shieldv3_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;CNCShieldv3.ino'],['../_interrupt___endstop_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;Interrupt_Endstop.ino'],['../_speed__diagnostics_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;Speed_diagnostics.ino']]],
+  ['lowerendstop_80',['lowerEndStop',['../_interrupt___endstop_8ino.html#a54b75f36f5de988353e2c494dced255b',1,'Interrupt_Endstop.ino']]]
 ];

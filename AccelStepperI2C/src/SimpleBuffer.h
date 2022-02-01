@@ -3,7 +3,8 @@
    @brief Simple and ugly serialization buffer for any data type. Just a buffer,
    a current position pointer used for reading from *and* writing to the buffer,
    and template functions for reading and writing any data type. The template
-   technique is adapted from Nick Gammon's I2C_Anything library.
+   technique is adapted from Nick Gammon's I2C_Anything library, the CRC8 is
+   from him also.
    @section author Author
    Copyright (c) 2022 juh
    @section license License
@@ -28,19 +29,23 @@ class SimpleBuffer {
    * @param buflen Maximum length of buffer in bytes.
   */
   void init(uint8_t buflen);
+
   /*!
    * @brief Write any basic data type to the buffer at the current position and
    * increment the position pointer according to the type's size.
    * @param value Data to write.
   */
   template <typename T> void write(const T& value);
+  
   /*!
    * @brief Read any basic data type from the buffer from the current position and
    * increment the position pointer according to the type's size.
    * @param value Variable to read to. Amount of data read depends on size of this
-   * type.
+   * type. As reading could fail, you best initiate the variable with some 
+   * default value.
   */
   template <typename T> void read(T& value);
+  
   /*!
    * @brief Reset the position pointer to the start of the buffer (0) without
    * changing the buffer contents. Usually, this will be called before writing new
@@ -63,16 +68,20 @@ class SimpleBuffer {
   bool checkCRC8();
 
 
-  // the next three should be private, let's keep 'em public for quick'n'dirty direct access
+  // I guess a proper class would make the next three be private.
+  // Let's keep 'em public for quick'n'dirty direct access
 
   /*!
    * @brief The allocated buffer.
   */
   uint8_t * buffer;
+  
   /*!
-   * @brief The position pointer.
+   * @brief The position pointer. Remember, [0] holds the CRC8 checksum, so for
+   * an empty buffer, idx is 1.
   */
   uint8_t idx; // next position to write to / read from
+  
   /*!
   * @brief Maximum length of buffer in bytes. Read and write operations use this
   * to check for sufficient space (no error handling, though).

@@ -1,10 +1,10 @@
 /*
   AccelStepperI2C speed tests
   (c) juh 2022
-  
+
   Generate the data for the performance graphs included in the documentation.
   Copy and paste the output to a spreadsheet for further analysis.
-  
+
   1. install library to Arduino environment
   2. in firmware.ino, enable (uncomment) DIAGNOSTICS_AccelStepperI2C and disable (comment)
      DEBUG_AccelStepperI2C. Upload firmware.ino to testing platform.
@@ -22,6 +22,7 @@
 //#define DEBUG_AccelStepperI2C
 
 const uint8_t addr = 0x8; // i2c address of slave
+const uint32_t msp = 30000000;
 
 const byte maxSteppers = 8;
 AccelStepperI2C* S[maxSteppers];
@@ -62,7 +63,7 @@ void setup() {
     if (i == 0) {
       S[0]->enableDiagnostics(); // call only once
     }
-    testThem(1000);
+    testThem(100);
   }
 
 }
@@ -70,9 +71,15 @@ void setup() {
 uint32_t countCycles(int millis) {
   S[0]->diagnostics(report0); // make cycles reset, so we don't risk an overrun
   S[0]->diagnostics(report0);
+  //  uint32_t then = millis() + millis;
+  //  while (millis() < then) {
+  //    if (!S[i].isRunning()) {
+  //      S[i].
+  //    }
+  //  }
   delay(millis);
   S[0]->diagnostics(report1);
-  return ((report1->cycles) - (report0->cycles));
+  return ((report1->cycles) - (report0->cycles)) * (1000 / millis);
 }
 
 void resetStepper(uint8_t stp) {
@@ -87,7 +94,7 @@ void resetSteppers() {
   for (byte i = 0; i < numSteppers; i++) {
     resetStepper(i);
   }
-  delay(100);
+  delay(20);
 }
 
 void testThem(uint32_t ms) {
@@ -96,9 +103,9 @@ void testThem(uint32_t ms) {
   Serial.print("runSpeed: ");
   for (byte i = 0; i < maxSteppers; i++) {
     if (i < numSteppers) {
-      S[i]->setMaxSpeed(1000); S[i]->setSpeed(1000);
+      S[i]->setMaxSpeed(msp * 2); S[i]->setSpeed(msp);
       S[i]->runSpeedState();
-      Serial.print(countCycles(ms)); Serial.print(" ");
+      Serial.print(countCycles(ms)); Serial.print((S[i]->getState() != 0) ? " " : "_");
     } else {
       Serial.print(0); Serial.print(" ");
     }
@@ -109,10 +116,10 @@ void testThem(uint32_t ms) {
   Serial.print("runSpeedToPosition: ");
   for (byte i = 0; i < maxSteppers; i++) {
     if (i < numSteppers) {
-      S[i]->setMaxSpeed(1000); S[i]->setSpeed(1000);
-      S[i]->moveTo(1000000);
+      S[i]->setMaxSpeed(msp * 2); S[i]->setSpeed(msp);
+      S[i]->moveTo(0x7fffffff);
       S[i]->runSpeedToPositionState();
-      Serial.print(countCycles(ms)); Serial.print(" ");
+      Serial.print(countCycles(ms)); Serial.print((S[i]->getState() != 0) ? " " : "_");
     } else {
       Serial.print(0); Serial.print(" ");
     }
@@ -123,9 +130,10 @@ void testThem(uint32_t ms) {
   Serial.print("run: ");
   for (byte i = 0; i < maxSteppers; i++) {
     if (i < numSteppers) {
-      S[i]->setAcceleration(100.0); S[i]->moveTo(1000000);
-      S[i]->runState();
-      Serial.print(countCycles(ms)); Serial.print(" ");
+      S[i]->setAcceleration(10000000.0); S[i]->moveTo(0x7fffffff);
+      S[i]->setMaxSpeed(msp * 2); S[i]->runState();
+      Serial.print(countCycles(ms)); Serial.print((S[i]->getState() != 0) ? " " : "_");
+      Serial.print("["); Serial.print(S[i]->distanceToGo()); Serial.print("] ");
     } else {
       Serial.print(0); Serial.print(" ");
     }

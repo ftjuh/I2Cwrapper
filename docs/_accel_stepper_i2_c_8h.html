@@ -115,11 +115,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="_accel_stepper_i2_c_8h__dep__incl.png" border="0" usemap="#_accel_stepper_i2_c_8hdep" alt=""/></div>
 <map name="_accel_stepper_i2_c_8hdep" id="_accel_stepper_i2_c_8hdep">
-<area shape="rect" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="199,5,331,32"/>
+<area shape="rect" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="277,5,409,32"/>
 <area shape="rect" href="firmware_8ino.html" title=" " alt="" coords="5,80,99,107"/>
 <area shape="rect" href="_c_n_c_shieldv3_8ino.html" title=" " alt="" coords="123,80,245,107"/>
-<area shape="rect" href="_speed__diagnostics_8ino.html" title=" " alt="" coords="270,80,423,107"/>
-<area shape="rect" href="_accel_stepper_i2_c_8cpp.html" title="Part of the AccelStepperI2C firmware/library." alt="" coords="448,80,595,107"/>
+<area shape="rect" href="_interrupt___endstop_8ino.html" title=" " alt="" coords="269,80,416,107"/>
+<area shape="rect" href="_speed__diagnostics_8ino.html" title=" " alt="" coords="441,80,594,107"/>
+<area shape="rect" href="_accel_stepper_i2_c_8cpp.html" title="Part of the AccelStepperI2C firmware/library." alt="" coords="619,80,765,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -244,6 +245,10 @@ Variables</h2></td></tr>
 <tr class="separator:ac40bdeccbbd41e5714c84a8fb682e376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b607d8b9107f3a41ac7f92347b8a7d1"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a6b607d8b9107f3a41ac7f92347b8a7d1">diagnosticsResult</a> = sizeof(<a class="el" href="structdiagnostics_report.html">diagnosticsReport</a>)</td></tr>
 <tr class="separator:a6b607d8b9107f3a41ac7f92347b8a7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4be191ea24212a9d3b4bcbc37ad3fdad"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a4be191ea24212a9d3b4bcbc37ad3fdad">setInterruptPinCmd</a> = 205</td></tr>
+<tr class="separator:a4be191ea24212a9d3b4bcbc37ad3fdad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaac41c0c9f194788cd88d129fb950fde"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#aaac41c0c9f194788cd88d129fb950fde">enableInterruptsCmd</a> = 206</td></tr>
+<tr class="separator:aaac41c0c9f194788cd88d129fb950fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73b31c4c5b4a3d32085fa1570594ac64"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a73b31c4c5b4a3d32085fa1570594ac64">state_stopped</a> = 0</td></tr>
 <tr class="memdesc:a73b31c4c5b4a3d32085fa1570594ac64"><td class="mdescLeft">&#160;</td><td class="mdescRight">stepper state machine states  <a href="_accel_stepper_i2_c_8h.html#a73b31c4c5b4a3d32085fa1570594ac64">More...</a><br /></td></tr>
 <tr class="separator:a73b31c4c5b4a3d32085fa1570594ac64"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -265,15 +270,16 @@ Author</h1>
 <p>Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd><p class="startdd">Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events </p>
-<p class="interdd">use interrupts for endstops instead of main loop polling </p>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd><p class="startdd">use interrupts for endstops instead of main loop polling </p>
 <p class="interdd">Versioning, I2C command to request version (important, as library and firmware always need to match) </p>
 <p class="interdd">add emergency stop/break pin for slave </p>
 <p class="interdd">make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc. </p>
 <p class="interdd">checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc. </p>
-<p class="interdd">test (and adapt) for ESP8266 </p>
-<p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check, if this could be a problem in our case. </p>
+<p class="interdd">test (and adapt) slave firmware for ESP8266 </p>
+<p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
 <p class="interdd">clean up example sketches </p>
+<p class="interdd">ESP32: make use of dual cores? </p>
+<p class="interdd">&lt;done&gt;Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events&lt;/done&gt; - done </p>
 <p class="interdd"><del>implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency</del> - done, performance graphs included in documentation </p>
 <p class="interdd"><del>add ESP32 compatibility for slave</del> - done, but needs further testing </p>
 <p class="interdd"><del>Make the I2C address programmable and persistent in EEPROM.</del> - done </p>
@@ -498,6 +504,20 @@ License</h1>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t enableEndstopsCmd = 103</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaac41c0c9f194788cd88d129fb950fde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaac41c0c9f194788cd88d129fb950fde">&#9670;&nbsp;</a></span>enableInterruptsCmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t enableInterruptsCmd = 206</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -890,6 +910,20 @@ License</h1>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t setEndstopPinCmd = 102</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4be191ea24212a9d3b4bcbc37ad3fdad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be191ea24212a9d3b4bcbc37ad3fdad">&#9670;&nbsp;</a></span>setInterruptPinCmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t setInterruptPinCmd = 205</td>
         </tr>
       </table>
 </div><div class="memdoc">

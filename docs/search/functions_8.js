@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['printstats_200',['printStats',['../_c_n_c_shieldv3_8ino.html#ad207dc9b88fb8f1b2b0cd05d7006a8a7',1,'CNCShieldv3.ino']]],
-  ['processingtimes_201',['processingTimes',['../_speed__diagnostics_8ino.html#ac39654b5dc98d13c726db726751b2c5d',1,'Speed_diagnostics.ino']]],
-  ['processmessage_202',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
+  ['maxspeed_227',['maxSpeed',['../class_accel_stepper_i2_c.html#a36a283a6b78480ce5ab8e17329588135',1,'AccelStepperI2C']]],
+  ['move_228',['move',['../class_accel_stepper_i2_c.html#af9c59ca7c83e9e2452cdc6b3a3b50ed9',1,'AccelStepperI2C']]],
+  ['moveto_229',['moveTo',['../class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182',1,'AccelStepperI2C']]]
 ];

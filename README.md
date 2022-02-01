@@ -2,7 +2,7 @@ Warning: Pre-alpha! Not for production, only for feedback. Expect things to brea
 
 ## AccelStepperI2C
 
-This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based **firmware** for one or more I2C-slaves, and a corresponding Arduino **library** for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223.
+This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with additional support for two end stops per stepper. It consists of the AccelStepperI2C  Arduino-based **firmware** for one or more I2C-slaves, and a corresponding Arduino **library** for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223. The firmware has been tested on  classic Arduinos (Uno, Nano etc.) and ESP32s, it might work on other Arduino supported platforms.
 
 [Download AccelStepperI2C on github.](https://github.com/ftjuh/AccelStepperI2C)
 
@@ -30,10 +30,12 @@ This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.ai
 
    - The original run(), runSpeed(), or runSpeedToPosition() are implemented, but I discourage using them directly. Particularly in high load situations with multiple steppers, microstepping, and other important I2C traffic, it's silly to trigger each stepper step over I2C. Use the state machine instead. If you feel you must use them, take it slowly and consider increasing I2C bus frequency.
    - Each library function call, its parameters, and return value has to be transmitted back and forth via I2C. This makes things slower, less precise, and prone to errors. To be safe from errors, you'll need to do some extra checking (see Error handling).
-   - The two blocking functions, runToPosition() and runToNewPositionCmd(), are not implemented at the moment. I never saw their purpose, anyway, as their behavior can easily implemented with the existing functionality. Also, naturally, you cannot declare your own stepping functions with the [constructor [2/2] variant](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd).
-   - There is no interrupt mechanism at the moment which tells the master that a state machine job has finished or an endstop has been triggered. So the master still needs to poll the slave with one of AccelStepperI2C::distanceToGo(), AccelStepperI2C::currentPosition, AccelStepperI2C::isRunning(), or AccelStepperI2C::endstops() but can do so at a much more reasonable frequency.
+   - The two blocking functions, runToPosition() and runToNewPosition(), are not implemented at the moment. I never saw their purpose, anyway, as their behavior can easily implemented with the existing functionality. Also, naturally, you cannot declare your own stepping functions with the [constructor [2/2] variant](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd).
    - No serialization protocol is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Arduinos Uno/Nano and ESP8266 have been tested and work well together, as should any other Arduino supporting platform.
+   - ~~There is no interrupt mechanism at the moment which tells the master that a state machine job has finished or an endstop has been triggered. So the master still needs to poll the slave with one of AccelStepperI2C::distanceToGo(), AccelStepperI2C::currentPosition, AccelStepperI2C::isRunning(), or AccelStepperI2C::endstops() but can do so at a much more reasonable frequency.~~
    - ~~Currently, there is no error checking of the master-slave communication, which uses a very basic (i.e. non existing) protocol. The master will have to deal with any transmission errors should they occur.~~
+
+Have a look at the [todo list](https://ftjuh.github.io/AccelStepperI2C/todo.html) to see what improvements are still planned.
 
 ### Error handling
 
@@ -50,10 +52,13 @@ If I2C transmission problems occur, any call to the library could fail and, poss
    4. Connect the I2C bus of both devices (usually A4<->A4, A5<->A5, GND<->GND). Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V<->+5V to power one board from the other, if needed.
    7. Now (not earlier) provide external power to the steppers and power to the Arduinos.
 
-Have a look at the examples for usage of the library. A couple of important things: 
+Have a look at the examples for usage of the library. Important: 
 
 * The AccelStepperI2C constructor needs the Wire library to be already initialized. So don't invoke the constructor when declaring an object, use **new** during setup().
-* 
+
+### Performance
+
+On a normal ATmega328 @ 16MHz, AccelStepper can run [about 4000 steps per second](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#details) at max. The AccelStepperI2C state machine only takes a tiny bite from that away. However, if you are using a lot of steppers, need really high speeds, and/or if you are using a large microstepping factor, a normal Arduino can quickly become too slow. So choose your platform wisely, the ESP32 will be 10-20 times faster.
 
 ### Example
 
@@ -119,28 +124,6 @@ void loop() {
   
 }
 ```
-
-### State machine performance
-
-The performance graphs below show the number of cycles per second for 1 to 8 attached steppers. In each of these cycles, the state machine calls one of the run...() methods once for each currently not-stopped stepper, so it is the upper theoretical limit for steps/second for the attached/used number of steppers. The three groups of graphs are:
-
-* (1/n): only one of n attached steppers uses the state machine in one its three possible modes, the other attached steppers/state machines are inactive.
-* (n/8): n of 8 attached steppers use the state machine in one its three possible modes, the other attached steppers/state machines are inactive.
-* (n/n): all attached steppers use the state machine in one its three possible modes. No attached stepper is inactive.
-
-What you can learn from the graphs is:
-
-* ESP32 is about 10 times faster than Arduino.
-* run() is a more expensive than runSpeed() and runSpeedToPosition() since the latter two don't need to calculate acceleration, and it is particularly more expensive for the Arduino.
-* If you use and run all 8 steppers at the same time (n/n) , the max. steps/second are at least 1784 for the Arduino and 118994 for the ESP32. Divide that by steps per revolution times your microstepping factor to get the theoretical(!) maximum revolutions per second.
-
-![Cycles per second Arduino Uno 16MHz](./Cycles%20per%20second%20Arduino%20Uno%2016MHz.png)
-
-
-
-![Cycles per second ESP32 240MHz](./Cycles%20per%20second%20ESP32%20240MHz.png)
-
-
 
 ### Documentation
 

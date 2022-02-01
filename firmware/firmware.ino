@@ -22,7 +22,6 @@
 #include <AccelStepperI2C.h>
 #include <SimpleBuffer.h>
 #include <EEPROM.h>
-//#include <avr/eeprom.h>
 
 
 // Uncomment to enable debug output on Serial
@@ -116,6 +115,15 @@ void storeI2C_address(uint8_t newAddress) {
 
 
 /*
+   Interrupt (to master) stuff
+   note: The interrupt pin is global, as there is only one for all steppers together.
+   However, interrupts can be enabled for each stepper seperately.
+*/
+
+int8_t interruptPin = -1;
+bool interruptActiveHigh = true;
+
+/*
    Endstop stuff
 */
 
@@ -137,10 +145,10 @@ struct Stepper  // holds stepper parameters needed for local slave management
 {
   AccelStepper * stepper;
   uint8_t state = state_stopped;
-  // bool runResult; // holds most recent result of calls to runSpeed() or runSpeedToPosition()
   Endstop endstops[maxEndstops];
   uint8_t numEndstops = 0;
   bool endstopsEnabled = false;
+  bool interruptsEnabled = false;
 };
 Stepper steppers[maxSteppers];
 
@@ -168,7 +176,8 @@ void setup() {
   Wire.begin(i2c_address);
   log("I2C started with address "); log(i2c_address); log("\n\n");
   while (Wire.available()) {
-    uint8_t discard = Wire.read(); log(discard); log(" ");
+    uint8_t discard = Wire.read(); log(discard); log(" "); 
+    discard++; // just to suppress compiler warning if logging is off...
   }
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
@@ -227,14 +236,25 @@ uint8_t readEndstops(uint8_t s) {
   return res;
 }
 
-// void sendInterrupt(uint8_t cause) {
-// }
+
+// interrupt master if interrupts enabled for source stepper
+void triggerInterrupt(uint8_t source) {
+  if (steppers[source].interruptsEnabled and interruptPin >= 0) {
+    digitalWrite(interruptPin, interruptActiveHigh ? HIGH : LOW);
+  }
+}
+
+void clearInterrupt() {
+  if (interruptPin >= 0) {
+    digitalWrite(interruptPin, interruptActiveHigh ? LOW : HIGH);
+  }
+}
 
 /**************************************************************************/
 /*!
-    @brief Main loop, implements the state machine (everything else is done
-    in the I2C-interrupts). Will check for each stepper's state and do the
-    appropriate polling (run() etc.) as needed.
+    @brief Main loop, implements the state machine. Will check for each
+    stepper's state and do the appropriate polling (run() etc.) as needed.
+    Also checks for incoming commands and passes them on for processing.
 */
 /**************************************************************************/
 
@@ -267,6 +287,7 @@ void loop()
         if (not steppers[i].stepper->run()) // target reached?
         {
           steppers[i].state = state_stopped;
+          triggerInterrupt(i);
         }
         timeToCheckTheEndstops = true; // we cannot tell if there was a step, so we'll have to check every time. (one more reason to do it with interrupts)
         break;
@@ -281,6 +302,7 @@ void loop()
         {
           // target reached, stop polling
           steppers[i].state = state_stopped;
+          triggerInterrupt(i);
         }
         break;
 
@@ -291,6 +313,7 @@ void loop()
     if (timeToCheckTheEndstops and steppers[i].endstopsEnabled) {
       if (readEndstops(i) != 0) {
         steppers[i].state = state_stopped; // endstop reached, stop polling
+        triggerInterrupt(i);
       }
     }
 
@@ -677,6 +700,17 @@ void processMessage(uint8_t len) {
           }
           break;
 
+
+        case getStateCmd: //
+          {
+            if (i == 0) // no parameters
+            {
+              bufferOut->write(steppers[s].state);
+            }
+          }
+          break;
+
+
         case setEndstopPinCmd: //
           {
             if ((i == 3) and (steppers[s].numEndstops < maxEndstops))
@@ -773,15 +807,33 @@ void processMessage(uint8_t len) {
             if (i == 0) // no parameters
             {
               currentDiagnostics.cycles = cycles;
-              cycles = 0;
               bufferOut->write(currentDiagnostics);
-              //              bufferOut->write(currentDiagnostics.cycles);
-              //              bufferOut->write(currentDiagnostics.lastProcessTime);
-              //              bufferOut->write(currentDiagnostics.lastRequestTime);
-              //              bufferOut->write(currentDiagnostics.lastReceiveTime);
+              cycles = 0;
             }
           }
           break;
+
+        case setInterruptPinCmd: //
+          {
+            if (i == 2)
+            {
+              bufferIn->read(interruptPin);
+              bufferIn->read(interruptActiveHigh);
+              pinMode(interruptPin, OUTPUT);
+              clearInterrupt();
+            }
+          }
+          break;
+
+        case enableInterruptsCmd: //
+          {
+            if (i == 1)  // 1 bool
+            {
+              bufferIn->read(steppers[i].interruptsEnabled);
+            }
+          }
+          break;
+
 
         default:
           log("No matching command found");

@@ -22,6 +22,12 @@ resetAccelStepperSlave	KEYWORD2
 setEndstopPin 	KEYWORD2
 enableEndstops 	KEYWORD2
 endstops 	KEYWORD2
+setInterruptPin	KEYWORD2
+enableInterrupts	KEYWORD2
+changeI2Caddress	KEYWORD2
+enableDiagnostics	KEYWORD2
+diagnostics	KEYWORD2
+
 
 #######################################
 # Constants (LITERAL1)

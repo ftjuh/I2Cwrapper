@@ -148,6 +148,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5f233077007853c4c25e7d6d9aee0118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d61e5c0ac971764de463e1d958a517d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d">isRunning</a> ()</td></tr>
 <tr class="separator:a5d61e5c0ac971764de463e1d958a517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a063b7466043d06eacf426c0927f5b80e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e">setInterruptPin</a> (int8_t pin, bool activeHigh=true)</td></tr>
+<tr class="memdesc:a063b7466043d06eacf426c0927f5b80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define global interrupt pin which can be enabled for each stepper seperately to inform the master that a state machine change occured.  <a href="class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e">More...</a><br /></td></tr>
+<tr class="separator:a063b7466043d06eacf426c0927f5b80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0015e762b6a5ab8a545574e1642358ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">enableInterrupts</a> (bool enable=true)</td></tr>
+<tr class="memdesc:a0015e762b6a5ab8a545574e1642358ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a state machine change occured which was not triggered by the master. At the moment, this could either be a target reached condition in <a class="el" href="class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6" title="Will poll run(), i.e. run to the target with acceleration and stop the state machine upon reaching it...">runState()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f" title="Will poll runSpeedToPosition(), i.e. run at constant speed until target has been reached.">runSpeedToPositionState()</a>, or an endstop reached condition.  <a href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">More...</a><br /></td></tr>
+<tr class="separator:a0015e762b6a5ab8a545574e1642358ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cc31b57b4d082744a94cb712b71a6e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a0cc31b57b4d082744a94cb712b71a6e5">setEndstopPin</a> (int8_t pin, bool activeLow, bool internalPullup)</td></tr>
 <tr class="memdesc:a0cc31b57b4d082744a94cb712b71a6e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a new endstop pin. Each stepper can have up to two, so don't call this more than twice per stepper.  <a href="class_accel_stepper_i2_c.html#a0cc31b57b4d082744a94cb712b71a6e5">More...</a><br /></td></tr>
 <tr class="separator:a0cc31b57b4d082744a94cb712b71a6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -396,6 +402,33 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a0015e762b6a5ab8a545574e1642358ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0015e762b6a5ab8a545574e1642358ef">&#9670;&nbsp;</a></span>enableInterrupts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AccelStepperI2C::enableInterrupts </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a state machine change occured which was not triggered by the master. At the moment, this could either be a target reached condition in <a class="el" href="class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6" title="Will poll run(), i.e. run to the target with acceleration and stop the state machine upon reaching it...">runState()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f" title="Will poll runSpeedToPosition(), i.e. run at constant speed until target has been reached.">runSpeedToPositionState()</a>, or an endstop reached condition. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>true (default) to enable, false to disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e" title="Define global interrupt pin which can be enabled for each stepper seperately to inform the master tha...">setInterruptPin()</a> </dd></dl>
 
 </div>
 </div>
@@ -739,6 +772,44 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd>Use <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If two switches are used, it does not differe...">AccelStepperI2C::enableEndstops()</a> to tell the state machine to actually use the endstop(s). Use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">AccelStepperI2C::endstops()</a> to read their currentl state </dd></dl>
+
+</div>
+</div>
+<a id="a063b7466043d06eacf426c0927f5b80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a063b7466043d06eacf426c0927f5b80e">&#9670;&nbsp;</a></span>setInterruptPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AccelStepperI2C::setInterruptPin </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>activeHigh</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define global interrupt pin which can be enabled for each stepper seperately to inform the master that a state machine change occured. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Pin the slave will use to send out interrupts. </td></tr>
+    <tr><td class="paramname">activeHigh</td><td>If true, HIGH will signal an interrupt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef" title="Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a sta...">enableInterrupts()</a> </dd></dl>
 
 </div>
 </div>

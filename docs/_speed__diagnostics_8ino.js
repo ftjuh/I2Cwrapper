@@ -9,6 +9,7 @@ var _speed__diagnostics_8ino =
     [ "testThem", "_speed__diagnostics_8ino.html#a0a7b0c26473a0561f6e5f915805429ec", null ],
     [ "addr", "_speed__diagnostics_8ino.html#aeb1a84b9c867787974b3fcd93c9ef89b", null ],
     [ "maxSteppers", "_speed__diagnostics_8ino.html#ab21cefe8676da0e84f405d867c7e0cac", null ],
+    [ "msp", "_speed__diagnostics_8ino.html#a1be398c7a5faab399398eb9176d907ad", null ],
     [ "numSteppers", "_speed__diagnostics_8ino.html#aed32919b8861f8d78987ef8840d25710", null ],
     [ "report", "_speed__diagnostics_8ino.html#a4257c698bf504c2a908f9af14af9d07e", null ],
     [ "report0", "_speed__diagnostics_8ino.html#a11993124a8f5f701b33fa40b22f11e6f", null ],

@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['setacceleration_218',['setAcceleration',['../class_accel_stepper_i2_c.html#ade720eb58be99807c3c76da25fdf4ead',1,'AccelStepperI2C']]],
-  ['setcrc8_219',['setCRC8',['../class_simple_buffer.html#a4df34a56ad455801e52c7524ec48d8d3',1,'SimpleBuffer']]],
-  ['setcurrentposition_220',['setCurrentPosition',['../class_accel_stepper_i2_c.html#a9e465aa9799d16a2d2b7ef8a4425d2bc',1,'AccelStepperI2C']]],
-  ['setenablepin_221',['setEnablePin',['../class_accel_stepper_i2_c.html#a4a1bc28f55159b1d320c66055b0388d3',1,'AccelStepperI2C']]],
-  ['setendstoppin_222',['setEndstopPin',['../class_accel_stepper_i2_c.html#a0cc31b57b4d082744a94cb712b71a6e5',1,'AccelStepperI2C']]],
-  ['setmaxspeed_223',['setMaxSpeed',['../class_accel_stepper_i2_c.html#a66b733b7031401a7b74da8936d1869e8',1,'AccelStepperI2C']]],
-  ['setminpulsewidth_224',['setMinPulseWidth',['../class_accel_stepper_i2_c.html#a6a9dfec85ceacfef6efedfbd83711bb6',1,'AccelStepperI2C']]],
-  ['setpinsinverted_225',['setPinsInverted',['../class_accel_stepper_i2_c.html#ae4454d2eea39627485c8ebc496edd1f8',1,'AccelStepperI2C::setPinsInverted(bool directionInvert=false, bool stepInvert=false, bool enableInvert=false)'],['../class_accel_stepper_i2_c.html#a5f233077007853c4c25e7d6d9aee0118',1,'AccelStepperI2C::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3Invert, bool pin4Invert, bool enableInvert)']]],
-  ['setspeed_226',['setSpeed',['../class_accel_stepper_i2_c.html#a2a8c92150ae055c7ff696ff98ddb7a38',1,'AccelStepperI2C']]],
-  ['setstate_227',['setState',['../class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8',1,'AccelStepperI2C']]],
-  ['setup_228',['setup',['../firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;firmware.ino'],['../_c_n_c_shieldv3_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;CNCShieldv3.ino'],['../_speed__diagnostics_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Speed_diagnostics.ino']]],
-  ['speed_229',['speed',['../class_accel_stepper_i2_c.html#aef1d5eb59f60121d04fa2667393de392',1,'AccelStepperI2C']]],
-  ['stop_230',['stop',['../class_accel_stepper_i2_c.html#abe7bea04839f7658728ad0e3fcfead68',1,'AccelStepperI2C']]],
-  ['stopstate_231',['stopState',['../class_accel_stepper_i2_c.html#a509c7691efe52e80615e937e693bdbc1',1,'AccelStepperI2C']]],
-  ['storei2c_5faddress_232',['storeI2C_address',['../firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee',1,'firmware.ino']]]
+  ['read_233',['read',['../class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4',1,'SimpleBuffer']]],
+  ['readendstops_234',['readEndstops',['../firmware_8ino.html#a99e3313868c67fbcdc7a267c53ad4339',1,'firmware.ino']]],
+  ['receiveevent_235',['receiveEvent',['../firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98',1,'firmware.ino']]],
+  ['requestevent_236',['requestEvent',['../firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33',1,'firmware.ino']]],
+  ['reset_237',['reset',['../class_simple_buffer.html#a0408a7143a40a819685a2de0ae16bcb3',1,'SimpleBuffer']]],
+  ['resetaccelstepperslave_238',['resetAccelStepperSlave',['../_accel_stepper_i2_c_8cpp.html#a1a5368a04a51848489ce42d0329eb62a',1,'resetAccelStepperSlave(uint8_t address):&#160;AccelStepperI2C.cpp'],['../_accel_stepper_i2_c_8h.html#a1a5368a04a51848489ce42d0329eb62a',1,'resetAccelStepperSlave(uint8_t address):&#160;AccelStepperI2C.cpp']]],
+  ['resetstepper_239',['resetStepper',['../_speed__diagnostics_8ino.html#a8c5cfda51c79b82b03ce437c067797ed',1,'Speed_diagnostics.ino']]],
+  ['resetsteppers_240',['resetSteppers',['../_speed__diagnostics_8ino.html#a6da47bc46272454f8885ee252bc468cb',1,'Speed_diagnostics.ino']]],
+  ['retrievei2c_5faddress_241',['retrieveI2C_address',['../firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7',1,'firmware.ino']]],
+  ['run_242',['run',['../class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350',1,'AccelStepperI2C']]],
+  ['runspeed_243',['runSpeed',['../class_accel_stepper_i2_c.html#a74bcee3589bcc31e911c4b09175474a8',1,'AccelStepperI2C']]],
+  ['runspeedstate_244',['runSpeedState',['../class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7',1,'AccelStepperI2C']]],
+  ['runspeedtoposition_245',['runSpeedToPosition',['../class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d',1,'AccelStepperI2C']]],
+  ['runspeedtopositionstate_246',['runSpeedToPositionState',['../class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f',1,'AccelStepperI2C']]],
+  ['runstate_247',['runState',['../class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6',1,'AccelStepperI2C']]]
 ];

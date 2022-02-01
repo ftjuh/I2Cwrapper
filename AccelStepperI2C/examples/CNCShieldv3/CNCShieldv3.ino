@@ -65,17 +65,16 @@ void setup() {
   // Important: initialize Wire before creating AccelStepperI2C objects
   Wire.begin();
   Serial.begin(115200);
-  delay(200);
+  while (!Serial) {
+  }
 
+  Serial.println("\n\nAccelStepperI2C demo - CNC Shield V3.00\n\n");
+  
   // If the slave's and master's reset is not synchronized by hardware, after a master's reset the slave might
   // think the master wants another stepper, not a first one, and will run out of steppers, sooner or later.
-  Serial.print("\n\nresetting slave");
+  Serial.println("\n\nresetting slave\n");
   resetAccelStepperSlave(addr);
-  delay(5000);
-
-  Serial.print("\n\nAccelStepperI2C demo - CNC Shield V3.00\n\n\n");
-  Serial.flush();
-  delay(5000);
+  delay(500);
 
 //  X = new AccelStepperI2C(addr, AccelStepper::DRIVER, /* step pin */ 2, /* dir pin */ 5);
   X = new AccelStepperI2C(addr, AccelStepper::DRIVER, /* step pin */ 4, /* dir pin */ 2);

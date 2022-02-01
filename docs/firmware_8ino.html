@@ -145,8 +145,12 @@ Functions</h2></td></tr>
 <tr class="separator:ae2a8610cdcfb2697510a8ee83499558e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99e3313868c67fbcdc7a267c53ad4339"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a99e3313868c67fbcdc7a267c53ad4339">readEndstops</a> (uint8_t s)</td></tr>
 <tr class="separator:a99e3313868c67fbcdc7a267c53ad4339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50179c999500e0f9408006422deae52f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a50179c999500e0f9408006422deae52f">triggerInterrupt</a> (uint8_t source)</td></tr>
+<tr class="separator:a50179c999500e0f9408006422deae52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adebb2a389a701d95bb721df60053bf6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#adebb2a389a701d95bb721df60053bf6c">clearInterrupt</a> ()</td></tr>
+<tr class="separator:adebb2a389a701d95bb721df60053bf6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
-<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop, implements the state machine (everything else is done in the I2C-interrupts). Will check for each stepper's state and do the appropriate polling (run() etc.) as needed.  <a href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">More...</a><br /></td></tr>
+<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop, implements the state machine. Will check for each stepper's state and do the appropriate polling (run() etc.) as needed. Also checks for incoming commands and passes them on for processing.  <a href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">More...</a><br /></td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a52aa0319b0d3bea95eff4528baee98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a> (int howMany)</td></tr>
 <tr class="memdesc:a9a52aa0319b0d3bea95eff4528baee98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle I2C receive event. Just read the message and inform main loop.  <a href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">More...</a><br /></td></tr>
@@ -178,6 +182,10 @@ Variables</h2></td></tr>
 <tr class="separator:a4d39df1bc00243ef2abb1ad3cc1acf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd9824af02dde7126d00d43a74c0081"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#affd9824af02dde7126d00d43a74c0081">newMessage</a> = 0</td></tr>
 <tr class="separator:affd9824af02dde7126d00d43a74c0081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89786b8678479bcf2338a522d43b9381"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a89786b8678479bcf2338a522d43b9381">interruptPin</a> = -1</td></tr>
+<tr class="separator:a89786b8678479bcf2338a522d43b9381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1764b48f3cc3657deeb69208ad55cb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ab1764b48f3cc3657deeb69208ad55cb1">interruptActiveHigh</a> = true</td></tr>
+<tr class="separator:ab1764b48f3cc3657deeb69208ad55cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa84ea5f47409c6c60bc911ba4bc06fb0"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#aa84ea5f47409c6c60bc911ba4bc06fb0">maxEndstops</a> = 2</td></tr>
 <tr class="separator:aa84ea5f47409c6c60bc911ba4bc06fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b5902c36f57eccdc4e911f63edcd14b"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b">maxSteppers</a> = 8</td></tr>
@@ -293,6 +301,23 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="adebb2a389a701d95bb721df60053bf6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adebb2a389a701d95bb721df60053bf6c">&#9670;&nbsp;</a></span>clearInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clearInterrupt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afe461d27b9c48d5921c00d521181f12f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&nbsp;</a></span>loop()</h2>
 
@@ -308,7 +333,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Main loop, implements the state machine (everything else is done in the I2C-interrupts). Will check for each stepper's state and do the appropriate polling (run() etc.) as needed. </p>
+<p>Main loop, implements the state machine. Will check for each stepper's state and do the appropriate polling (run() etc.) as needed. Also checks for incoming commands and passes them on for processing. </p>
 
 </div>
 </div>
@@ -447,6 +472,24 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a50179c999500e0f9408006422deae52f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50179c999500e0f9408006422deae52f">&#9670;&nbsp;</a></span>triggerInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void triggerInterrupt </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a9eca28b463b5850006c7d00aa43a2498"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9eca28b463b5850006c7d00aa43a2498">&#9670;&nbsp;</a></span>bufferIn</h2>
@@ -540,6 +583,34 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t I2C_defaultAddress = 0x8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1764b48f3cc3657deeb69208ad55cb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1764b48f3cc3657deeb69208ad55cb1">&#9670;&nbsp;</a></span>interruptActiveHigh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool interruptActiveHigh = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a89786b8678479bcf2338a522d43b9381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89786b8678479bcf2338a522d43b9381">&#9670;&nbsp;</a></span>interruptPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t interruptPin = -1</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -11,8 +11,6 @@
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
-  @todo Implement interrupt mechanism, so that the slave can inform the master
-  about finished tasks or other events
   @todo use interrupts for endstops instead of main loop polling
   @todo Versioning, I2C command to request version (important, as library and firmware
   always need to match)
@@ -22,11 +20,14 @@
   @todo checking each transmission with sentOK and resultOK is tedious. We could
   use some counter to accumulate errors and check them summarily, e.g. at
   the end of setup etc.
-  @todo test (and adapt) for ESP8266
+  @todo test (and adapt) slave firmware for ESP8266
   @todo ATM data is not protected against updates from ISRs while it is being
-  used in the main program (see http://gammon.com.au/interrupts). Check, if this
+  used in the main program (see http://gammon.com.au/interrupts). Check if this
   could be a problem in our case.
   @todo clean up example sketches
+  @todo ESP32: make use of dual cores?
+  @todo <done>Implement interrupt mechanism, so that the slave can inform the master
+  about finished tasks or other events</done> - done
   @todo <del>implement diagnostic functions, e.g. measurements how long messages take 
   to be processed or current stepper pulse frequency</del> - done, performance graphs
   included in documentation
@@ -115,8 +116,8 @@ const uint8_t resetCmd              = 201;
 const uint8_t changeI2CaddressCmd   = 202;
 const uint8_t enableDiagnosticsCmd  = 203;
 const uint8_t diagnosticsCmd        = 204; const uint8_t diagnosticsResult        = sizeof(diagnosticsReport);
-//const uint8_t setInterruptCmd       = xxx; // not implemented yet
-
+const uint8_t setInterruptPinCmd    = 205;
+const uint8_t enableInterruptsCmd   = 206;
 
 /// @brief stepper state machine states
 const uint8_t state_stopped             = 0; ///< state machine is inactive, stepper can still be controlled directly
@@ -209,8 +210,26 @@ class AccelStepperI2C {
   void    setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3Invert, bool pin4Invert, bool enableInvert);
   bool    isRunning();
 
-  //void setInterruptPin(int8_t interruptPin, bool activeLow = true);
+  /*!
+   * @brief Define global interrupt pin which can be enabled for each stepper 
+   * seperately to inform the master that a state machine change occured.
+   * @param pin Pin the slave will use to send out interrupts.
+   * @param activeHigh If true, HIGH will signal an interrupt.
+   * @sa enableInterrupts()
+   */
+  void setInterruptPin(int8_t pin, bool activeHigh = true);
 
+  /*!
+   * @brief Start or stop sending interrupts to master for this stepper. An 
+   * interrupt will be sent
+   * whenever a state machine change occured which was not triggered by the master.
+   * At the moment, this could either be a target reached condition in runState()
+   * or runSpeedToPositionState(), or an endstop reached condition.
+   * @param enable true (default) to enable, false to disable.
+   * @sa setInterruptPin()
+   */
+  void enableInterrupts(bool enable = true);
+  
   /*!
    * @brief Define a new endstop pin. Each stepper can have up to two, so don't
    * call this more than twice per stepper.

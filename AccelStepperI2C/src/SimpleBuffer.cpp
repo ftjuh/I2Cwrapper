@@ -1,7 +1,7 @@
 /*!
-   @file simpleBuffer.h
+   @file SimpleBuffer.h
    @brief simple and ugly serialization buffer for any types.
-   Template technique adapted from Nick Gammon's I2C_Anything library, thanks, Nick!
+   Template technique adapted from Nick Gammon's I2C_Anything library. Thanks, Nick!
    @section author Author
    Copyright (c) 2022 juh
    @section license License
@@ -11,8 +11,6 @@
 */
 
 #include <SimpleBuffer.h>
-//#include <cstring>
-//#include <stdint.h>
 
 #ifdef DEBUG_AccelStepperI2C
 #define log(...)       Serial.print(__VA_ARGS__)
