@@ -1,20 +1,20 @@
 /*!
-   @file AccelStepperI2Cfirmware.ino
+   @file firmware.ino
    @brief Firmware for an I2C slave controlling up to 8 stepper motors via AccelStepper library
-   @note serialization of numbers is machine dependent and only tested
-    for ATmega Arduinos ATM, might break with different devices due to different
-      endiands and bytes used for different data types.
+   @details This documentation is probably only relevant for you if you want to change the firmware.
+   Otherwise, the library documentation should suffice.
    @section author Author
    Copyright (c) 2022 juh
    @section license License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.
-   @todo make i2c address configurable with pins or via i2c/EEPROM
-   @todo implement endstops/reference positions
-   @todo volatile variables???
    @todo debugging
-   @todo return messages (results) should come with an id, too, so that master can be sure it's the correct result. Currently only msg. length is checked.
+   @todo return messages (results) should ideally come with an id, too, so that master can be sure 
+      it's the correct result. Currently only msg. length is checked.
+   @todo volatile variables???
+   @todo <del>make i2c address configurable with pins or via i2c/EEPROM</del>
+   @todo <del>implement endstops/reference positions</del>
 */
 #include <Arduino.h>
 #include <Wire.h>
@@ -81,7 +81,9 @@ SimpleBuffer* bufferIn;
 SimpleBuffer* bufferOut;
 volatile uint8_t newMessage = 0; // signals main loop that a receiveEvent with valid new data occurred
 
-// Read a stored I2C address from EEPROM. If there is none, use default.
+/*!
+  @brief Read a stored I2C address from EEPROM. If there is none, use default.
+*/
 uint8_t retrieveI2C_address() {
   SimpleBuffer b;
   b.init(8);
@@ -99,7 +101,9 @@ uint8_t retrieveI2C_address() {
   }
 }
 
-// Write I2C address to EEPROM
+/*!
+  @brief Write I2C address to EEPROM
+*/
 void storeI2C_address(uint8_t newAddress) {
   SimpleBuffer b;
   b.init(8);
@@ -132,7 +136,7 @@ struct Endstop {
   bool activeLow;
   //bool internalPullup; // we don't need to store this, we can directly use it when adding the pin
 };
-const uint8_t maxEndstops = 2; // not sure if there are scenarios where more than two make sense, but why not be prepared?
+const uint8_t maxEndstops = 2; // not sure if there are scenarios where more than two make sense, but why not be prepared and make this a constant?
 
 
 /*
@@ -141,7 +145,10 @@ const uint8_t maxEndstops = 2; // not sure if there are scenarios where more tha
 
 const uint8_t maxSteppers = 8;
 uint8_t numSteppers = 0; // number of initialised steppers
-struct Stepper  // holds stepper parameters needed for local slave management
+/*!
+  @brief holds stepper parameters needed for local slave management
+*/
+struct Stepper
 {
   AccelStepper * stepper;
   uint8_t state = state_stopped;
@@ -194,8 +201,8 @@ void setup() {
      <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#a3bc75bd6571b98a6177838ca81ac39ab">
       AccelStepper's[1/2] constructor</a>
     @returns number of stepper assigned to new stepper, -1 for error
-    @note < a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd">
-    AccelStepper()[2/2] constructor</a > currently unsupported
+    @note <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd">
+    AccelStepper()[2/2] constructor</a> currently unsupported
 */
 /**************************************************************************/
 int8_t addStepper(uint8_t interface = AccelStepper::FULL4WIRE,
@@ -830,6 +837,16 @@ void processMessage(uint8_t len) {
             if (i == 1)  // 1 bool
             {
               bufferIn->read(steppers[i].interruptsEnabled);
+            }
+          }
+          break;
+
+        case getVersionCmd:
+          {
+            if (i == 0) // no parameters
+            {
+              bufferOut->write(AccelStepperI2C_VersionMajor);
+              bufferOut->write(AccelStepperI2C_VersionMinor);
             }
           }
           break;

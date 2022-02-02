@@ -94,8 +94,12 @@ $(document).ready(function(){initNavTree('class_accel_stepper_i2_c.html',''); in
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;AccelStepperI2C.h&gt;</code></p>
-<table class="memberdecls">
+<p>An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>.  
+ <a href="class_accel_stepper_i2_c.html#details">More...</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>. </p>
+<p>This class mimicks the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">original AccelStepper interface</a>. It replicates most of its methods and transmits each method call via I2C to a slave running the <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p><dl class="section see"><dt>See also</dt><dd>Functions that address not a single stepper but the slave as a whole are documented <a class="el" href="_accel_stepper_i2_c_8h.html">here</a>. </dd></dl>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a03973582fb89d6d8af6d26771b12581d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a03973582fb89d6d8af6d26771b12581d">AccelStepperI2C</a> (uint8_t i2c_address=0x8, uint8_t interface=AccelStepper::FULL4WIRE, uint8_t pin1=2, uint8_t pin2=3, uint8_t pin3=4, uint8_t pin4=5, bool enable=true)</td></tr>
@@ -148,9 +152,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5f233077007853c4c25e7d6d9aee0118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d61e5c0ac971764de463e1d958a517d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d">isRunning</a> ()</td></tr>
 <tr class="separator:a5d61e5c0ac971764de463e1d958a517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a063b7466043d06eacf426c0927f5b80e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e">setInterruptPin</a> (int8_t pin, bool activeHigh=true)</td></tr>
-<tr class="memdesc:a063b7466043d06eacf426c0927f5b80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define global interrupt pin which can be enabled for each stepper seperately to inform the master that a state machine change occured.  <a href="class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e">More...</a><br /></td></tr>
-<tr class="separator:a063b7466043d06eacf426c0927f5b80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0015e762b6a5ab8a545574e1642358ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">enableInterrupts</a> (bool enable=true)</td></tr>
 <tr class="memdesc:a0015e762b6a5ab8a545574e1642358ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a state machine change occured which was not triggered by the master. At the moment, this could either be a target reached condition in <a class="el" href="class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6" title="Will poll run(), i.e. run to the target with acceleration and stop the state machine upon reaching it...">runState()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f" title="Will poll runSpeedToPosition(), i.e. run at constant speed until target has been reached.">runSpeedToPositionState()</a>, or an endstop reached condition.  <a href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">More...</a><br /></td></tr>
 <tr class="separator:a0015e762b6a5ab8a545574e1642358ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,7 +198,7 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if return value from previous function call was received successfully.  <a href="class_accel_stepper_i2_c.html#a0c74bcb33dca28cd2e23a54a7da395ea">More...</a><br /></td></tr>
 <tr class="separator:a0c74bcb33dca28cd2e23a54a7da395ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2061a523791b946581b41d97a5e4342"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">myNum</a> = -1</td></tr>
-<tr class="memdesc:ab2061a523791b946581b41d97a5e4342"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_stepper.html">Stepper</a> number with myNum &gt;= 0 for successfully added steppers.  <a href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">More...</a><br /></td></tr>
+<tr class="memdesc:ab2061a523791b946581b41d97a5e4342"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_stepper.html" title="holds stepper parameters needed for local slave management">Stepper</a> number with myNum &gt;= 0 for successfully added steppers.  <a href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">More...</a><br /></td></tr>
 <tr class="separator:ab2061a523791b946581b41d97a5e4342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -428,7 +429,7 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e" title="Define global interrupt pin which can be enabled for each stepper seperately to inform the master tha...">setInterruptPin()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_accel_stepper_i2_c_8cpp.html#add8a5dd1979d45b12bded4ba947a4622" title="Define global interrupt pin which can be enabled for each stepper seperately to inform the master tha...">setInterruptPin()</a> </dd></dl>
 
 </div>
 </div>
@@ -775,44 +776,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a063b7466043d06eacf426c0927f5b80e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a063b7466043d06eacf426c0927f5b80e">&#9670;&nbsp;</a></span>setInterruptPin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AccelStepperI2C::setInterruptPin </td>
-          <td>(</td>
-          <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>pin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>activeHigh</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Define global interrupt pin which can be enabled for each stepper seperately to inform the master that a state machine change occured. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pin</td><td>Pin the slave will use to send out interrupts. </td></tr>
-    <tr><td class="paramname">activeHigh</td><td>If true, HIGH will signal an interrupt. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef" title="Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a sta...">enableInterrupts()</a> </dd></dl>
-
-</div>
-</div>
 <a id="a66b733b7031401a7b74da8936d1869e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66b733b7031401a7b74da8936d1869e8">&#9670;&nbsp;</a></span>setMaxSpeed()</h2>
 
@@ -1056,7 +1019,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="struct_stepper.html">Stepper</a> number with myNum &gt;= 0 for successfully added steppers. </p>
+<p><a class="el" href="struct_stepper.html" title="holds stepper parameters needed for local slave management">Stepper</a> number with myNum &gt;= 0 for successfully added steppers. </p>
 
 </div>
 </div>
@@ -1102,7 +1065,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

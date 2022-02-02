@@ -20,92 +20,153 @@
 #define log(...)
 #endif
 
+// ms to wait between I2C communication, can be changed by setI2Cdelay()
+uint16_t I2Cdelay = 5;
 
 /*
- *
  * Classless helper functions start here
- * ### use a common function for sending, ideally as method of an object 
- * representing the slave as a whole
- *
+ */
+
+// reset buffer and write header bytes...
+void prepareCommand(SimpleBuffer& buf, uint8_t cmd, uint8_t stepper = -1) {
+  buf.reset();
+  buf.write(cmd);     // [1]: command
+  buf.write(stepper); // [2]: number of stepper to address, defaults to -1 (for general commands)
+}
+
+// ... compute checksum and send it.
+// returns true if sending was successful. Also sets sentOK for client to check
+bool sendCommand(SimpleBuffer& buf, uint8_t address) {
+  delay(I2Cdelay); // give slave time in between commands ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
+  buf.setCRC8();  // [0]: CRC8
+  Wire.beginTransmission(address);
+  Wire.write(buf.buffer, buf.idx);
+  log("Command '");
+  log(buf.buffer[1]);
+  log("' sent to stepper #");
+  log(buf.buffer[2]);
+  log(" with CRC=");
+  log(buf.buffer[0]);
+  log(" and ");
+  log(buf.idx-3);
+  log(" paramter bytes\n");
+  return (Wire.endTransmission() == 0);
+}
+
+// read slave's reply, numBytes is *without* CRC8 byte
+// returns true if received data was correct regarding expected lenght and checksum
+bool readResult(SimpleBuffer& buf, uint8_t numBytes, uint8_t address) {
+
+  delay(I2Cdelay); // give slave time to answer ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
+  buf.reset();
+  bool res;
+
+  if (Wire.requestFrom(address, uint8_t(numBytes + 1)) > 0) { // +1 for CRC8
+    log("Requesting result (");
+    log(numBytes + 1);
+    log(" bytes incl. CRC8): ");
+    uint8_t i = 0;
+    while ((i <= numBytes) and (i < buf.maxLen)) {
+      buf.buffer[i++] = Wire.read(); // accessing buffer directly to put CRC8 where it belongs, ### improve
+      log(buf.buffer[i-1], HEX);
+      log(" ");
+    }
+    buf.idx = i;
+    res = buf.checkCRC8();
+    log((i<=numBytes) ? " -- buffer out of space!  " : "");
+    log(" total bytes = ");
+    log(buf.idx);
+    log(resultOK ? "  CRC8 ok\n" : "  CRC8 wrong!\n");
+  } else { // some transmission error
+    log("-- Failed to transmit\n");
+    res = false;
+  }
+
+  buf.reset(); // reset for reading
+  return res;
+
+}
+
+
+/*
+ * Classless general command functions start here
  */
 
 // Tell slave to reset.
 // Not a method, it needs to work even before any steppers have been constructed.
 void resetAccelStepperSlave(uint8_t address) {
-  SimpleBuffer b; b.init(4);
-  b.write(resetCmd); b.write((uint8_t)-1); // placeholder for stepper address, not used here
-  b.setCRC8();
-  Wire.beginTransmission(address);
-  Wire.write(b.buffer, b.idx);
-  Wire.endTransmission();
+  SimpleBuffer b;
+  b.init(4);
+  prepareCommand(b, resetCmd);
+  sendCommand(b, address);
 }
 
 // Tell slave at address to permanently change address to newAddress
 void changeI2Caddress(uint8_t address, uint8_t newAddress) {
-  SimpleBuffer b; b.init(5);
-  b.write(changeI2CaddressCmd); b.write((uint8_t)-1); // placeholder for stepper address, not used here
+  SimpleBuffer b;
+  b.init(5);
+  prepareCommand(b, changeI2CaddressCmd);
   b.write(newAddress);
-  b.setCRC8();
-  Wire.beginTransmission(address);
-  Wire.write(b.buffer, b.idx);
-  Wire.endTransmission();
+  sendCommand(b, address);
 }
 
+uint16_t setI2Cdelay(uint16_t delay) {
+  uint16_t d = I2Cdelay;
+  I2Cdelay = delay;
+  return d;
+}
+
+void setInterruptPin(uint8_t address,
+                     int8_t pin,
+                     bool activeHigh) {
+  SimpleBuffer b;
+  b.init(6);
+  prepareCommand(b, setInterruptPinCmd);
+  b.write(pin);
+  b.write(activeHigh);
+  sendCommand(b, address);
+}
+
+uint16_t getVersion(uint8_t address) {
+  SimpleBuffer b;
+  b.init(4);
+  prepareCommand(b, getVersionCmd);
+  uint16_t res = 0xffff;
+  if (sendCommand(b, address) and readResult(b, getVersionResult, address)) {
+    b.read(res);
+  }
+  return res;
+}
+
+bool checkVersion(uint8_t address) {
+  uint16_t slaveVersion = getVersion(address);
+  uint16_t libraryVersion = AccelStepperI2C_VersionMinor | AccelStepperI2C_VersionMajor << 8;
+  return slaveVersion == libraryVersion;
+}
 
 /*
- * 
+ *
  * Helper methods start here
  *
  */
 
 // reset stepper's buffer and write header bytes...
 void AccelStepperI2C::prepareCommand(uint8_t cmd) {
-  buf.reset();
-  buf.write(cmd);     // [1]: command
-  buf.write(myNum);   // [2]: number of stepper to address
+  ::prepareCommand(buf, cmd, myNum); // :: -> look for function in global namespace
 }
 
 // ... compute checksum and send it.
 // returns true if sending was successful. Also sets sentOK for client to check
 bool AccelStepperI2C::sendCommand() {
-  delay(I2CrequestDelay); // give slave time in between commands ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
-  buf.setCRC8();  // [0]: CRC8
-  Wire.beginTransmission(address);
-  Wire.write(buf.buffer, buf.idx);
-  sentOK = (Wire.endTransmission() == 0);  // for client to check if command was transmitted successfully
-  log("Command '"); log(buf.buffer[1]); log("' sent to stepper #"); log(buf.buffer[2]); 
-  log(" with CRC="); log(buf.buffer[0]); log(" and "); log(buf.idx-3); log(" paramter bytes\n");
-  return sentOK; // internal: true on success;
+  sentOK = ::sendCommand(buf, address);
+  return sentOK;
 }
-
 
 // read slave's reply, numBytes is *without* CRC8 byte
 // returns true if received data was correct regarding expected lenght and checksum
 bool AccelStepperI2C::readResult(uint8_t numBytes) {
-
-  delay(I2CrequestDelay); // give slave time to answer ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
-  buf.reset();
-
-  if (Wire.requestFrom(address, uint8_t(numBytes + 1)) > 0) { // +1 for CRC8
-    log("Requesting result ("); log(numBytes + 1); log(" bytes incl. CRC8): ");
-    uint8_t i = 0;
-    while ((i <= numBytes) and (i < buf.maxLen)) {
-      buf.buffer[i++] = Wire.read(); // accessing buffer directly to put CRC8 where it belongs, ### improve
-      log(buf.buffer[i-1], HEX); log(" ");
-    }
-    buf.idx = i;
-    resultOK = buf.checkCRC8();
-    log((i<=numBytes) ? " -- buffer out of space!  " : "");  log(" total bytes = "); log(buf.idx);log(resultOK ? "  CRC8 ok\n" : "  CRC8 wrong!\n");
-
-    
-  } else { // some transmission error
-    log("-- Failed to transmit\n");
-    resultOK = false;
-  }
-
-  buf.reset(); // reset for reading
+  resultOK = ::readResult(buf, numBytes, address);
   return resultOK;
-  
 }
 
 
@@ -157,7 +218,7 @@ boolean AccelStepperI2C::run() {
   boolean res = false; // will be returned on transmission error
   if (sendCommand() and readResult(runResult)) {
     buf.read(res); // else return result of function call
-  } 
+  }
   return res;
 }
 
@@ -169,7 +230,7 @@ boolean AccelStepperI2C::runSpeed() {
   boolean res = false; // will be returned on transmission error
   if (sendCommand() and readResult(runSpeedResult)) {
     buf.read(res); // else return result of function call
-  } 
+  }
   return res;
 }
 
@@ -181,7 +242,7 @@ bool AccelStepperI2C::runSpeedToPosition() {
   boolean res = false; // will be returned on transmission error
   if (sendCommand() and readResult(runSpeedToPositionResult)) {
     buf.read(res); // else return result of function call
-  } 
+  }
   return res;
 }
 
@@ -232,7 +293,7 @@ void AccelStepperI2C::setMaxSpeed(float speed) {
 
 float AccelStepperI2C::maxSpeed() {
   prepareCommand(maxSpeedCmd);
-  float res = resError; // funny value returned on error 
+  float res = resError; // funny value returned on error
   if (sendCommand() and readResult(maxSpeedResult)) {
     buf.read(res);
   }
@@ -256,7 +317,7 @@ void AccelStepperI2C::setSpeed(float speed) {
 
 float AccelStepperI2C::speed() {
   prepareCommand(speedCmd);
-  float res = resError; // funny value returned on error 
+  float res = resError; // funny value returned on error
   if (sendCommand() and readResult(speedResult)) {
     buf.read(res);
   }
@@ -308,7 +369,7 @@ void AccelStepperI2C::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin
 // // blocking, not implemented (yet?)
 // void AccelStepperI2C::runToPosition() {
 // }
-// 
+//
 // // blocking, not implemented (yet?)
 // void AccelStepperI2C::runToNewPosition(long position) {
 //   //position++; // just to stop the compiler from complaining
@@ -417,17 +478,9 @@ void AccelStepperI2C::diagnostics(diagnosticsReport* report) {
 }
 
 
-void AccelStepperI2C::setInterruptPin(int8_t pin, 
-                     bool activeHigh) {
-  prepareCommand(setInterruptPinCmd);
-  buf.write(pin);
-  buf.write(activeHigh);
-  sendCommand();
-  
-}
-
 void AccelStepperI2C::enableInterrupts(bool enable) {
   prepareCommand(enableInterruptsCmd);
   buf.write(enable);
   sendCommand();
 }
+

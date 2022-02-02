@@ -45,7 +45,9 @@ uint8_t SimpleBuffer::calculateCRC8 () {
       inbyte >>= 1;
     }  // end of for
   }  // end of while
-  log("--CRC8 = "); log(crc, HEX); log(" --");
+  log("--CRC8 = ");
+  log(crc, HEX);
+  log(" --");
   return crc;
 }  // end of crc8
 

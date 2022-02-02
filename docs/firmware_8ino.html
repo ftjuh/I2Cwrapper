@@ -94,32 +94,30 @@ $(document).ready(function(){initNavTree('firmware_8ino.html',''); initResizable
 <div class="title">firmware.ino File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;Wire.h&gt;</code><br />
-<code>#include &lt;AccelStepper.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="_simple_buffer_8h.html">SimpleBuffer.h</a>&gt;</code><br />
-<code>#include &lt;EEPROM.h&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for firmware.ino:</div>
-<div class="dyncontent">
-<div class="center"><img src="firmware_8ino__incl.png" border="0" usemap="#firmware_8ino" alt=""/></div>
-<map name="firmware_8ino" id="firmware_8ino">
-<area shape="rect" title=" " alt="" coords="126,5,219,32"/>
-<area shape="rect" title=" " alt="" coords="183,229,260,256"/>
-<area shape="rect" title=" " alt="" coords="22,80,82,107"/>
-<area shape="rect" title=" " alt="" coords="68,155,178,181"/>
-<area shape="rect" href="_accel_stepper_i2_c_8h.html" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="158,80,290,107"/>
-<area shape="rect" href="_simple_buffer_8h.html" title="simple and ugly serialization buffer for any types. Template technique adapted from Nick Gammon&#39;s I2C..." alt="" coords="259,155,366,181"/>
-<area shape="rect" title=" " alt="" coords="366,80,456,107"/>
-</map>
-</div>
+
+<p>Firmware for an I2C slave controlling up to 8 stepper motors via AccelStepper library.  
+<a href="#details">More...</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Firmware for an I2C slave controlling up to 8 stepper motors via AccelStepper library. </p>
+<p>This documentation is probably only relevant for you if you want to change the firmware. Otherwise, the library documentation should suffice. </p>
+<h1><a class="anchor" id="author"></a>
+Author</h1>
+<p>Copyright (c) 2022 juh </p>
+<h1><a class="anchor" id="license"></a>
+License</h1>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd><p class="startdd">debugging </p>
+<p class="interdd">return messages (results) should ideally come with an id, too, so that master can be sure it's the correct result. Currently only msg. length is checked. </p>
+<p class="interdd">volatile variables??? </p>
+<p class="interdd"><del>make i2c address configurable with pins or via i2c/EEPROM</del> </p>
+<p class="enddd"><del>implement endstops/reference positions</del> </p>
+</dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_endstop.html">Endstop</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html">Stepper</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">holds stepper parameters needed for local slave management  <a href="struct_stepper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -134,8 +132,10 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7">retrieveI2C_address</a> ()</td></tr>
+<tr class="memdesc:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a stored I2C address from EEPROM. If there is none, use default.  <a href="firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7">More...</a><br /></td></tr>
 <tr class="separator:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04dab60aa1102ee6bfabfc6a039849ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee">storeI2C_address</a> (uint8_t newAddress)</td></tr>
+<tr class="memdesc:a04dab60aa1102ee6bfabfc6a039849ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write I2C address to EEPROM.  <a href="firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee">More...</a><br /></td></tr>
 <tr class="separator:a04dab60aa1102ee6bfabfc6a039849ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
 <tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup system  <a href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">More...</a><br /></td></tr>
@@ -297,7 +297,7 @@ Variables</h2></td></tr>
 
 <p>Assign and initialize new stepper. Calls the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#a3bc75bd6571b98a6177838ca81ac39ab">AccelStepper's[1/2] constructor</a> </p>
 <dl class="section return"><dt>Returns</dt><dd>number of stepper assigned to new stepper, -1 for error </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>&lt; a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd"&gt; AccelStepper()[2/2] constructor currently unsupported </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd">AccelStepper()[2/2] constructor</a> currently unsupported </dd></dl>
 
 </div>
 </div>
@@ -433,6 +433,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read a stored I2C address from EEPROM. If there is none, use default. </p>
+
 </div>
 </div>
 <a id="a4fc01d736fe50cf5b977f755b675f11d"></a>
@@ -469,6 +471,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write I2C address to EEPROM. </p>
 
 </div>
 </div>
@@ -721,7 +725,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="firmware_8ino.html">firmware.ino</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

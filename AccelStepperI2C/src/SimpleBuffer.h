@@ -36,16 +36,16 @@ class SimpleBuffer {
    * @param value Data to write.
   */
   template <typename T> void write(const T& value);
-  
+
   /*!
    * @brief Read any basic data type from the buffer from the current position and
    * increment the position pointer according to the type's size.
    * @param value Variable to read to. Amount of data read depends on size of this
-   * type. As reading could fail, you best initiate the variable with some 
+   * type. As reading could fail, you best initiate the variable with some
    * default value.
   */
   template <typename T> void read(T& value);
-  
+
   /*!
    * @brief Reset the position pointer to the start of the buffer (0) without
    * changing the buffer contents. Usually, this will be called before writing new
@@ -75,13 +75,13 @@ class SimpleBuffer {
    * @brief The allocated buffer.
   */
   uint8_t * buffer;
-  
+
   /*!
    * @brief The position pointer. Remember, [0] holds the CRC8 checksum, so for
    * an empty buffer, idx is 1.
   */
   uint8_t idx; // next position to write to / read from
-  
+
   /*!
   * @brief Maximum length of buffer in bytes. Read and write operations use this
   * to check for sufficient space (no error handling, though).

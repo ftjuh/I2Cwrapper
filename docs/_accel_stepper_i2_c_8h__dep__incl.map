@@ -1,5 +1,5 @@
 <map id="AccelStepperI2C.h" name="AccelStepperI2C.h">
-<area shape="rect" id="node1" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="277,5,409,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="277,5,409,32"/>
 <area shape="rect" id="node2" href="$firmware_8ino.html" title=" " alt="" coords="5,80,99,107"/>
 <area shape="rect" id="node3" href="$_c_n_c_shieldv3_8ino.html" title=" " alt="" coords="123,80,245,107"/>
 <area shape="rect" id="node4" href="$_interrupt___endstop_8ino.html" title=" " alt="" coords="269,80,416,107"/>

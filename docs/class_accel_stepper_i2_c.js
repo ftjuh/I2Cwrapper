@@ -25,7 +25,6 @@ var class_accel_stepper_i2_c =
     [ "setCurrentPosition", "class_accel_stepper_i2_c.html#a9e465aa9799d16a2d2b7ef8a4425d2bc", null ],
     [ "setEnablePin", "class_accel_stepper_i2_c.html#a4a1bc28f55159b1d320c66055b0388d3", null ],
     [ "setEndstopPin", "class_accel_stepper_i2_c.html#a0cc31b57b4d082744a94cb712b71a6e5", null ],
-    [ "setInterruptPin", "class_accel_stepper_i2_c.html#a063b7466043d06eacf426c0927f5b80e", null ],
     [ "setMaxSpeed", "class_accel_stepper_i2_c.html#a66b733b7031401a7b74da8936d1869e8", null ],
     [ "setMinPulseWidth", "class_accel_stepper_i2_c.html#a6a9dfec85ceacfef6efedfbd83711bb6", null ],
     [ "setPinsInverted", "class_accel_stepper_i2_c.html#ae4454d2eea39627485c8ebc496edd1f8", null ],

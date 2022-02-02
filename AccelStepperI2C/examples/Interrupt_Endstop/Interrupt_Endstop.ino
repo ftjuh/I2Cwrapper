@@ -51,6 +51,16 @@ void setup() {
   resetAccelStepperSlave(addr);
   delay(500);
 
+  if (!checkVersion(addr)) {
+    Serial.println("Warning: Master and slave are not using the same library version.");
+    Serial.print("Master version is "); Serial.print(AccelStepperI2C_VersionMajor);
+    Serial.print("."); Serial.println(AccelStepperI2C_VersionMinor);
+    uint16_t v = getVersion(addr);
+    Serial.print("Slave version is"); Serial.print(v >> 8);
+    Serial.print("."); Serial.println(v & 0xFF);
+    while (true) {}
+  }
+
   // add and init stepper
 
   Serial.println("\nAdding stepper(s)");
@@ -75,10 +85,11 @@ void setup() {
 
   // configure interrupt
 
-  X->setInterruptPin(interruptPinSlave,  // <-- interrupt pin
-                     true // activeHigh = master will have to look out for a RISING flank
-                    );
-  X->enableInterrupts(); // make slave send out interrupts
+  setInterruptPin(addr,
+                  interruptPinSlave,  // <-- interrupt pin
+                  true // activeHigh = master will have to look out for a RISING flank
+                  );
+  X->enableInterrupts(); // make slave send out interrupts for this stepper
   attachInterrupt(digitalPinToInterrupt(interruptPinMaster), interruptFromSlave, RISING); // make master notice them
 
 

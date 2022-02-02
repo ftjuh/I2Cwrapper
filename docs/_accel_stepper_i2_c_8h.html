@@ -93,43 +93,14 @@ $(document).ready(function(){initNavTree('_accel_stepper_i2_c_8h.html',''); init
 <div class="title">AccelStepperI2C.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Arduino library for I2C-control of stepper motors connected to another Arduino which runs the associated <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a> firmware.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;AccelStepper.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="_simple_buffer_8h.html">SimpleBuffer.h</a>&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for AccelStepperI2C.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="_accel_stepper_i2_c_8h__incl.png" border="0" usemap="#_accel_stepper_i2_c_8h" alt=""/></div>
-<map name="_accel_stepper_i2_c_8h" id="_accel_stepper_i2_c_8h">
-<area shape="rect" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="11,5,143,32"/>
-<area shape="rect" title=" " alt="" coords="59,155,136,181"/>
-<area shape="rect" title=" " alt="" coords="22,80,133,107"/>
-<area shape="rect" href="_simple_buffer_8h.html" title="simple and ugly serialization buffer for any types. Template technique adapted from Nick Gammon&#39;s I2C..." alt="" coords="157,80,264,107"/>
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="_accel_stepper_i2_c_8h__dep__incl.png" border="0" usemap="#_accel_stepper_i2_c_8hdep" alt=""/></div>
-<map name="_accel_stepper_i2_c_8hdep" id="_accel_stepper_i2_c_8hdep">
-<area shape="rect" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="277,5,409,32"/>
-<area shape="rect" href="firmware_8ino.html" title=" " alt="" coords="5,80,99,107"/>
-<area shape="rect" href="_c_n_c_shieldv3_8ino.html" title=" " alt="" coords="123,80,245,107"/>
-<area shape="rect" href="_interrupt___endstop_8ino.html" title=" " alt="" coords="269,80,416,107"/>
-<area shape="rect" href="_speed__diagnostics_8ino.html" title=" " alt="" coords="441,80,594,107"/>
-<area shape="rect" href="_accel_stepper_i2_c_8cpp.html" title="Part of the AccelStepperI2C firmware/library." alt="" coords="619,80,765,107"/>
-</map>
-</div>
-</div><table class="memberdecls">
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to transmit diagnostic info with <a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data.">AccelStepperI2C::diagnostics()</a>.  <a href="structdiagnostics_report.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>.  <a href="class_accel_stepper_i2_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -140,13 +111,27 @@ Functions</h2></td></tr>
 <tr class="memitem:aaf3220824c0b20160b8fbdb581dd23b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#aaf3220824c0b20160b8fbdb581dd23b4">changeI2Caddress</a> (uint8_t address, uint8_t newAddress)</td></tr>
 <tr class="memdesc:aaf3220824c0b20160b8fbdb581dd23b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permanently change the I2C address of the device. New address is stored in EEPROM and will be active after the next reset/reboot.  <a href="_accel_stepper_i2_c_8h.html#aaf3220824c0b20160b8fbdb581dd23b4">More...</a><br /></td></tr>
 <tr class="separator:aaf3220824c0b20160b8fbdb581dd23b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bca6bdc6fc5a264933ac2c609f38101"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a1bca6bdc6fc5a264933ac2c609f38101">setI2Cdelay</a> (uint16_t delay)</td></tr>
+<tr class="memdesc:a1bca6bdc6fc5a264933ac2c609f38101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a delay that the master waits each time before sending a command to the slave and before requesting a reply from it. This is to make sure that the slave has finished its earlier task or has its answer to the master's previous command ready. Particularly for the ESP32 this is critical, as due to its implementation of I2C slave mode, it could theoretically send incomplete data if a request is sent too early.  <a href="_accel_stepper_i2_c_8h.html#a1bca6bdc6fc5a264933ac2c609f38101">More...</a><br /></td></tr>
+<tr class="separator:a1bca6bdc6fc5a264933ac2c609f38101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aeca848bcd87c850b8d31640c08c19d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a3aeca848bcd87c850b8d31640c08c19d">setInterruptPin</a> (uint8_t address, int8_t pin, bool activeHigh=true)</td></tr>
+<tr class="memdesc:a3aeca848bcd87c850b8d31640c08c19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define global interrupt pin which can be enabled for each stepper seperately to inform the master that a state machine change occured.  <a href="_accel_stepper_i2_c_8h.html#a3aeca848bcd87c850b8d31640c08c19d">More...</a><br /></td></tr>
+<tr class="separator:a3aeca848bcd87c850b8d31640c08c19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c158fe6e7f01a83b4c954ac7f443337"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a2c158fe6e7f01a83b4c954ac7f443337">getVersion</a> (uint8_t address)</td></tr>
+<tr class="memdesc:a2c158fe6e7f01a83b4c954ac7f443337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version of slave firmware.  <a href="_accel_stepper_i2_c_8h.html#a2c158fe6e7f01a83b4c954ac7f443337">More...</a><br /></td></tr>
+<tr class="separator:a2c158fe6e7f01a83b4c954ac7f443337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a740e271c085f389261e5ff455ca348c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a740e271c085f389261e5ff455ca348c4">checkVersion</a> (uint8_t address)</td></tr>
+<tr class="memdesc:a740e271c085f389261e5ff455ca348c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version of slave firmware and compare it with library version.  <a href="_accel_stepper_i2_c_8h.html#a740e271c085f389261e5ff455ca348c4">More...</a><br /></td></tr>
+<tr class="separator:a740e271c085f389261e5ff455ca348c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:afa9ce8c4b9e803110786927e847acc74"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#afa9ce8c4b9e803110786927e847acc74">AccelStepperI2C_VersionMajor</a> = 0</td></tr>
+<tr class="separator:afa9ce8c4b9e803110786927e847acc74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896028720f29b716e8256ab9a325309c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a896028720f29b716e8256ab9a325309c">AccelStepperI2C_VersionMinor</a> = 1</td></tr>
+<tr class="separator:a896028720f29b716e8256ab9a325309c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c77998fb4d678f218f9d1a1d2736741"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a4c77998fb4d678f218f9d1a1d2736741">maxBuf</a> = 20</td></tr>
 <tr class="separator:a4c77998fb4d678f218f9d1a1d2736741"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa8a9ecea67c13947c7b266080228e2b"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#afa8a9ecea67c13947c7b266080228e2b">I2CrequestDelay</a> = 50</td></tr>
-<tr class="separator:afa8a9ecea67c13947c7b266080228e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a934384ea02abfd53c06efb8ab35a11b1"><td class="memItemLeft" align="right" valign="top">const long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a934384ea02abfd53c06efb8ab35a11b1">resError</a> = 0</td></tr>
 <tr class="separator:a934384ea02abfd53c06efb8ab35a11b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84c7d8262a16efd1f7619fd8978bc89f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a84c7d8262a16efd1f7619fd8978bc89f">moveToCmd</a> = 10</td></tr>
@@ -249,6 +234,10 @@ Variables</h2></td></tr>
 <tr class="separator:a4be191ea24212a9d3b4bcbc37ad3fdad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac41c0c9f194788cd88d129fb950fde"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#aaac41c0c9f194788cd88d129fb950fde">enableInterruptsCmd</a> = 206</td></tr>
 <tr class="separator:aaac41c0c9f194788cd88d129fb950fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0a79634b5f528ad35ef71e14b7a515"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a9f0a79634b5f528ad35ef71e14b7a515">getVersionCmd</a> = 207</td></tr>
+<tr class="separator:a9f0a79634b5f528ad35ef71e14b7a515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb98f245f43ac678f05b9749990473e1"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#afb98f245f43ac678f05b9749990473e1">getVersionResult</a> = 2</td></tr>
+<tr class="separator:afb98f245f43ac678f05b9749990473e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73b31c4c5b4a3d32085fa1570594ac64"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a73b31c4c5b4a3d32085fa1570594ac64">state_stopped</a> = 0</td></tr>
 <tr class="memdesc:a73b31c4c5b4a3d32085fa1570594ac64"><td class="mdescLeft">&#160;</td><td class="mdescRight">stepper state machine states  <a href="_accel_stepper_i2_c_8h.html#a73b31c4c5b4a3d32085fa1570594ac64">More...</a><br /></td></tr>
 <tr class="separator:a73b31c4c5b4a3d32085fa1570594ac64"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -262,33 +251,7 @@ Variables</h2></td></tr>
 <tr class="memdesc:a33b3a368a4769f3e1ef4c7b7e5e4ec32"><td class="mdescLeft">&#160;</td><td class="mdescRight">corresponds to AccelStepper::state_runSpeedToPosition(), will fall back to state_stopped if target position reached  <a href="_accel_stepper_i2_c_8h.html#a33b3a368a4769f3e1ef4c7b7e5e4ec32">More...</a><br /></td></tr>
 <tr class="separator:a33b3a368a4769f3e1ef4c7b7e5e4ec32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arduino library for I2C-control of stepper motors connected to another Arduino which runs the associated <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a> firmware. </p>
-<dl class="section user"><dt>Functions with an empty documentation will work just as their original, but </dt><dd>you need to take the general restrictions into account (e.g. don't take a return value for valid unless checking for resultOK) </dd></dl>
-<h1><a class="anchor" id="author"></a>
-Author</h1>
-<p>Copyright (c) 2022 juh </p>
-<h1><a class="anchor" id="license"></a>
-License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd><p class="startdd">use interrupts for endstops instead of main loop polling </p>
-<p class="interdd">Versioning, I2C command to request version (important, as library and firmware always need to match) </p>
-<p class="interdd">add emergency stop/break pin for slave </p>
-<p class="interdd">make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc. </p>
-<p class="interdd">checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc. </p>
-<p class="interdd">test (and adapt) slave firmware for ESP8266 </p>
-<p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
-<p class="interdd">clean up example sketches </p>
-<p class="interdd">ESP32: make use of dual cores? </p>
-<p class="interdd">&lt;done&gt;Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events&lt;/done&gt; - done </p>
-<p class="interdd"><del>implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency</del> - done, performance graphs included in documentation </p>
-<p class="interdd"><del>add ESP32 compatibility for slave</del> - done, but needs further testing </p>
-<p class="interdd"><del>Make the I2C address programmable and persistent in EEPROM.</del> - done </p>
-<p class="interdd"><del>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics.</del> - CRC8 implemented </p>
-<p class="enddd"><del>Implement end stops/reference stops.</del> - endstop polling implemented, interrupt would be better </p>
-</dd></dl>
-<dl class="section user"><dt>Revision History</dt><dd></dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.1 initial release </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="aaf3220824c0b20160b8fbdb581dd23b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaf3220824c0b20160b8fbdb581dd23b4">&#9670;&nbsp;</a></span>changeI2Caddress()</h2>
 
@@ -319,6 +282,48 @@ License</h1>
 
 </div>
 </div>
+<a id="a740e271c085f389261e5ff455ca348c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a740e271c085f389261e5ff455ca348c4">&#9670;&nbsp;</a></span>checkVersion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool checkVersion </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get version of slave firmware and compare it with library version. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if both versions match, i.a. are compatible. </dd></dl>
+
+</div>
+</div>
+<a id="a2c158fe6e7f01a83b4c954ac7f443337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c158fe6e7f01a83b4c954ac7f443337">&#9670;&nbsp;</a></span>getVersion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t getVersion </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get version of slave firmware. </p>
+<dl class="section return"><dt>Returns</dt><dd>minor version in bits 0-7, major version in bits 8-15; 0xFFFF on error. </dd></dl>
+
+</div>
+</div>
 <a id="a1a5368a04a51848489ce42d0329eb62a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a5368a04a51848489ce42d0329eb62a">&#9670;&nbsp;</a></span>resetAccelStepperSlave()</h2>
 
@@ -336,12 +341,111 @@ License</h1>
 </div><div class="memdoc">
 
 <p>Tells the slave to reset. Call this <em>before</em> adding any steppers <em>if</em> master and slave resets are not synchronized by hardware. Else the slave survives the master's reset, will think the master wants another stepper, not a first one, and will run out of steppers, sooner or later. </p>
-<dl class="section user"><dt>All steppers are stopped by AccelStepper::stop() and disabled by</dt><dd>AccelStepper::disableOutputs(), after that a hardware reset is triggered. </dd></dl>
+<dl class="section user"><dt></dt><dd>All steppers are stopped by AccelStepper::stop() and disabled by AccelStepper::disableOutputs(), after that a hardware reset is triggered. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>reset should be done entirely in software. </dd></dl>
 
 </div>
 </div>
+<a id="a1bca6bdc6fc5a264933ac2c609f38101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bca6bdc6fc5a264933ac2c609f38101">&#9670;&nbsp;</a></span>setI2Cdelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t setI2Cdelay </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>delay</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define a delay that the master waits each time before sending a command to the slave and before requesting a reply from it. This is to make sure that the slave has finished its earlier task or has its answer to the master's previous command ready. Particularly for the ESP32 this is critical, as due to its implementation of I2C slave mode, it could theoretically send incomplete data if a request is sent too early. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay</td><td>Time to wait in milliseconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the previously set delay. </dd></dl>
+
+</div>
+</div>
+<a id="a3aeca848bcd87c850b8d31640c08c19d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aeca848bcd87c850b8d31640c08c19d">&#9670;&nbsp;</a></span>setInterruptPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setInterruptPin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>activeHigh</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define global interrupt pin which can be enabled for each stepper seperately to inform the master that a state machine change occured. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Pin the slave will use to send out interrupts. </td></tr>
+    <tr><td class="paramname">activeHigh</td><td>If true, HIGH will signal an interrupt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef" title="Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a sta...">AccelStepperI2C::enableInterrupts()</a> </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="afa9ce8c4b9e803110786927e847acc74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa9ce8c4b9e803110786927e847acc74">&#9670;&nbsp;</a></span>AccelStepperI2C_VersionMajor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t AccelStepperI2C_VersionMajor = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a896028720f29b716e8256ab9a325309c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896028720f29b716e8256ab9a325309c">&#9670;&nbsp;</a></span>AccelStepperI2C_VersionMinor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t AccelStepperI2C_VersionMinor = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae8351ae4d976acc6b813fb5acff5ec0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8351ae4d976acc6b813fb5acff5ec0a">&#9670;&nbsp;</a></span>addStepperCmd</h2>
 
@@ -608,14 +712,28 @@ License</h1>
 
 </div>
 </div>
-<a id="afa8a9ecea67c13947c7b266080228e2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa8a9ecea67c13947c7b266080228e2b">&#9670;&nbsp;</a></span>I2CrequestDelay</h2>
+<a id="a9f0a79634b5f528ad35ef71e14b7a515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f0a79634b5f528ad35ef71e14b7a515">&#9670;&nbsp;</a></span>getVersionCmd</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint16_t I2CrequestDelay = 50</td>
+          <td class="memname">const uint8_t getVersionCmd = 207</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb98f245f43ac678f05b9749990473e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb98f245f43ac678f05b9749990473e1">&#9670;&nbsp;</a></span>getVersionResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t getVersionResult = 2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1155,7 +1273,7 @@ License</h1>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_2c564d900600b9be19be1c51915eefcd.html">AccelStepperI2C</a></li><li class="navelem"><a class="el" href="dir_aedce182ba26a070e27f99c20ccbc843.html">src</a></li><li class="navelem"><a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

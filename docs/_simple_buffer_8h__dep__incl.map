@@ -1,7 +1,7 @@
 <map id="SimpleBuffer.h" name="SimpleBuffer.h">
 <area shape="rect" id="node1" title="simple and ugly serialization buffer for any types. Template technique adapted from Nick Gammon&#39;s I2C..." alt="" coords="209,5,316,32"/>
 <area shape="rect" id="node2" href="$firmware_8ino.html" title=" " alt="" coords="5,155,99,181"/>
-<area shape="rect" id="node3" href="$_accel_stepper_i2_c_8h.html" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="197,80,329,107"/>
+<area shape="rect" id="node3" href="$_accel_stepper_i2_c_8h.html" title=" " alt="" coords="197,80,329,107"/>
 <area shape="rect" id="node8" href="$_simple_buffer_8cpp.html" title=" " alt="" coords="353,80,474,107"/>
 <area shape="rect" id="node4" href="$_c_n_c_shieldv3_8ino.html" title=" " alt="" coords="123,155,245,181"/>
 <area shape="rect" id="node5" href="$_interrupt___endstop_8ino.html" title=" " alt="" coords="269,155,416,181"/>

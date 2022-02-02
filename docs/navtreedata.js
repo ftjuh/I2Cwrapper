@@ -23,11 +23,11 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "AccelStepperI2C", "index.html", [
+    [ "AccelStepperI2C library", "index.html", null ],
+    [ "README", "md__r_e_a_d_m_e.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
-      [ "AccelStepperI2C", "index.html#autotoc_md0", null ],
       [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],

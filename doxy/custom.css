@@ -40,3 +40,13 @@ html {
 --code-font-size: 14.4px; /* affects code, fragment */
 --title-font-size: 26px;
 }
+
+h1 {
+  font-size: 150%;
+}
+
+dl.todo dt {
+  font-size: 150%;
+  margin-top: 0.2em;
+  margin-bottom: 0.6em;
+}

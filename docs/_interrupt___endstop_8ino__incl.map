@@ -1,7 +1,7 @@
 <map id="Interrupt_Endstop.ino" name="Interrupt_Endstop.ino">
 <area shape="rect" id="node1" title=" " alt="" coords="44,5,191,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,229,83,256"/>
-<area shape="rect" id="node3" href="$_accel_stepper_i2_c_8h.html" title="Arduino library for I2C&#45;control of stepper motors connected to another Arduino which runs the associa..." alt="" coords="51,80,183,107"/>
+<area shape="rect" id="node3" href="$_accel_stepper_i2_c_8h.html" title=" " alt="" coords="51,80,183,107"/>
 <area shape="rect" id="node6" title=" " alt="" coords="207,80,267,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="82,155,193,181"/>
 <area shape="rect" id="node5" href="$_simple_buffer_8h.html" title="simple and ugly serialization buffer for any types. Template technique adapted from Nick Gammon&#39;s I2C..." alt="" coords="217,155,324,181"/>
