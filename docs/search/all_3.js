@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['diagnostics_26',['diagnostics',['../class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f',1,'AccelStepperI2C']]],
+  ['diagnostics_26',['diagnostics',['../_accel_stepper_i2_c_8cpp.html#a87520fe47b6444ff58585f1cca1ebd06',1,'diagnostics(uint8_t address, diagnosticsReport *report):&#160;AccelStepperI2C.cpp'],['../_accel_stepper_i2_c_8h.html#a87520fe47b6444ff58585f1cca1ebd06',1,'diagnostics(uint8_t address, diagnosticsReport *report):&#160;AccelStepperI2C.cpp']]],
   ['diagnostics_5faccelstepperi2c_27',['DIAGNOSTICS_AccelStepperI2C',['../firmware_8ino.html#ae19f7f44c494f571f8860c91f2fdba22',1,'firmware.ino']]],
   ['diagnosticscmd_28',['diagnosticsCmd',['../_accel_stepper_i2_c_8h.html#ac40bdeccbbd41e5714c84a8fb682e376',1,'AccelStepperI2C.h']]],
   ['diagnosticsenabled_29',['diagnosticsEnabled',['../firmware_8ino.html#a31bf94b26fef450b158d5840aa419886',1,'firmware.ino']]],

@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <dt>page <a class="el" href="index.html">%AccelStepperI2C library</a>  </dt>
 <dd><p class="startdd"><a class="anchor" id="_todo000005"></a>use interrupts for endstops instead of main loop polling </p>
 <p class="interdd">add emergency stop/break pin for slave </p>
-<p class="interdd">checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc. </p>
 <p class="interdd">test (and adapt) slave firmware for ESP8266 </p>
 <p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
 <p class="interdd">clean up example sketches </p>
 <p class="interdd">ESP32: make use of dual cores? </p>
+<p class="interdd"><del>checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc.</del> - <a class="el" href="class_accel_stepper_i2_c.html#a45250f325c2d95647fb11c6cb3f1bafa" title="Return and reset the number of failed commands sent since the last time this method was used....">AccelStepperI2C::sentErrors()</a>, <a class="el" href="class_accel_stepper_i2_c.html#a5b2c647f86b8bbe15dd57cd4494b2bb0" title="Return and reset the number of failed receive events since the last time this method was used....">AccelStepperI2C::resultErrors()</a> and <a class="el" href="class_accel_stepper_i2_c.html#acd0593433947161edb9ef502b751662b" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">AccelStepperI2C::transmissionErrors()</a> added </p>
 <p class="interdd"><del>make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc.</del> - <a class="el" href="_accel_stepper_i2_c_8cpp.html#a1bca6bdc6fc5a264933ac2c609f38101" title="Define a delay that the master waits each time before sending a command to the slave and before reque...">setI2Cdelay()</a> implemented </p>
 <p class="interdd"><del>Versioning, I2C command to request version (important, as library and firmware always need to match)</del> - <a class="el" href="_accel_stepper_i2_c_8cpp.html#a2c158fe6e7f01a83b4c954ac7f443337" title="Get version of slave firmware.">getVersion()</a> and <a class="el" href="_accel_stepper_i2_c_8cpp.html#a740e271c085f389261e5ff455ca348c4" title="Get version of slave firmware and compare it with library version.">checkVersion()</a> implemented </p>
 <p class="interdd"><del>Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events</del> - <a class="el" href="_accel_stepper_i2_c_8cpp.html#add8a5dd1979d45b12bded4ba947a4622" title="Define global interrupt pin which can be enabled for each stepper seperately to inform the master tha...">setInterruptPin()</a> and enableInterrupts() implemented </p>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
+    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

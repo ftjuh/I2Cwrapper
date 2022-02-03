@@ -21,7 +21,7 @@
 #endif
 
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
-uint16_t I2Cdelay = 5;
+uint16_t I2Cdelay = I2CdefaultDelay;
 
 /*
  * Classless helper functions start here
@@ -35,21 +35,16 @@ void prepareCommand(SimpleBuffer& buf, uint8_t cmd, uint8_t stepper = -1) {
 }
 
 // ... compute checksum and send it.
-// returns true if sending was successful. Also sets sentOK for client to check
+// returns true if sending was successful.
 bool sendCommand(SimpleBuffer& buf, uint8_t address) {
-  delay(I2Cdelay); // give slave time in between commands ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
+  delay(I2Cdelay); // give slave time in between commands
   buf.setCRC8();  // [0]: CRC8
   Wire.beginTransmission(address);
   Wire.write(buf.buffer, buf.idx);
-  log("Command '");
-  log(buf.buffer[1]);
-  log("' sent to stepper #");
-  log(buf.buffer[2]);
-  log(" with CRC=");
-  log(buf.buffer[0]);
-  log(" and ");
-  log(buf.idx-3);
-  log(" paramter bytes\n");
+  log("Command '"); log(buf.buffer[1]);
+  log("' sent to stepper #"); log(buf.buffer[2]);
+  log(" with CRC="); log(buf.buffer[0]); log(" and "); 
+  log(buf.idx-3); log(" paramter bytes\n");
   return (Wire.endTransmission() == 0);
 }
 
@@ -57,7 +52,7 @@ bool sendCommand(SimpleBuffer& buf, uint8_t address) {
 // returns true if received data was correct regarding expected lenght and checksum
 bool readResult(SimpleBuffer& buf, uint8_t numBytes, uint8_t address) {
 
-  delay(I2Cdelay); // give slave time to answer ### needs tuning or better make it configurable, as it will depend on µC and bus frequency etc.
+  delay(I2Cdelay); // give slave time to answer
   buf.reset();
   bool res;
 
@@ -101,7 +96,7 @@ void resetAccelStepperSlave(uint8_t address) {
   sendCommand(b, address);
 }
 
-// Tell slave at address to permanently change address to newAddress
+// Tell slave to permanently change address to newAddress
 void changeI2Caddress(uint8_t address, uint8_t newAddress) {
   SimpleBuffer b;
   b.init(5);
@@ -110,6 +105,7 @@ void changeI2Caddress(uint8_t address, uint8_t newAddress) {
   sendCommand(b, address);
 }
 
+// needs no address, is used on master's side only
 uint16_t setI2Cdelay(uint16_t delay) {
   uint16_t d = I2Cdelay;
   I2Cdelay = delay;
@@ -144,28 +140,53 @@ bool checkVersion(uint8_t address) {
   return slaveVersion == libraryVersion;
 }
 
+void enableDiagnostics(uint8_t address, bool enable) {
+  SimpleBuffer b;
+  b.init(5);
+  prepareCommand(b, enableDiagnosticsCmd);
+  b.write(enable);
+  sendCommand(b, address);
+}
+
+
+void diagnostics(uint8_t address, 
+                 diagnosticsReport* report) {
+  SimpleBuffer b;
+  b.init(diagnosticsResult + 1); // +1 for CRC8
+  prepareCommand(b, diagnosticsCmd);
+  if (sendCommand(b, address) and readResult(b, diagnosticsResult, address)) {
+    b.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
+  }
+}
+
+
+
 /*
  *
- * Helper methods start here
+ * Helper methods for AccelStepperI2C start here
  *
  */
 
 // reset stepper's buffer and write header bytes...
 void AccelStepperI2C::prepareCommand(uint8_t cmd) {
-  ::prepareCommand(buf, cmd, myNum); // :: -> look for function in global namespace
+  ::prepareCommand(buf, cmd, myNum); // '::' -> use function in global namespace
 }
 
 // ... compute checksum and send it.
-// returns true if sending was successful. Also sets sentOK for client to check
+// returns true if sending was successful.
+// Also updates sentOK and sentErrors for client to check
 bool AccelStepperI2C::sendCommand() {
-  sentOK = ::sendCommand(buf, address);
+  sentOK = ::sendCommand(buf, address); // '::' -> use function in global namespace
+  sentErrorsCount += sentOK ? 0 : 1;
   return sentOK;
 }
 
 // read slave's reply, numBytes is *without* CRC8 byte
 // returns true if received data was correct regarding expected lenght and checksum
+// Also updates resultOK and resultErrors for client to check
 bool AccelStepperI2C::readResult(uint8_t numBytes) {
-  resultOK = ::readResult(buf, numBytes, address);
+  resultOK = ::readResult(buf, numBytes, address); // '::' -> use function in global namespace
+  resultErrorsCount += resultOK ? 0 : 1;
   return resultOK;
 }
 
@@ -212,7 +233,6 @@ void AccelStepperI2C::move(long relative) {
 
 
 // don't use this, use state machine instead
-// If you use it, be sure to also check sentOK and, if using the result, resultOK.
 boolean AccelStepperI2C::run() {
   prepareCommand(runCmd);
   boolean res = false; // will be returned on transmission error
@@ -224,7 +244,6 @@ boolean AccelStepperI2C::run() {
 
 
 // don't use this, use state machine instead
-// If you use it, be sure to also check sentOK and, if using the result, resultOK.
 boolean AccelStepperI2C::runSpeed() {
   prepareCommand(runSpeedCmd);
   boolean res = false; // will be returned on transmission error
@@ -236,7 +255,6 @@ boolean AccelStepperI2C::runSpeed() {
 
 
 // don't use this, use state machine instead
-// If you use it, be sure to also check sentOK and, if using the result, resultOK.
 bool AccelStepperI2C::runSpeedToPosition() {
   prepareCommand(runSpeedToPositionCmd);
   boolean res = false; // will be returned on transmission error
@@ -463,24 +481,25 @@ uint8_t AccelStepperI2C::endstops() { // returns endstop(s) states in bits 0 and
 }
 
 
-void AccelStepperI2C::enableDiagnostics(bool enable) {
-  prepareCommand(enableDiagnosticsCmd);
-  buf.write(enable);
-  sendCommand();
-}
-
-
-void AccelStepperI2C::diagnostics(diagnosticsReport* report) {
-  prepareCommand(diagnosticsCmd);
-  if (sendCommand() and readResult(diagnosticsResult)) {
-    buf.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
-  }
-}
-
-
 void AccelStepperI2C::enableInterrupts(bool enable) {
   prepareCommand(enableInterruptsCmd);
   buf.write(enable);
   sendCommand();
 }
 
+
+uint16_t AccelStepperI2C::sentErrors() {
+  uint16_t se = sentErrorsCount;
+  sentErrorsCount = 0;
+  return se;
+}
+
+uint16_t AccelStepperI2C::resultErrors() {
+  uint16_t re = resultErrorsCount;
+  resultErrorsCount = 0;
+  return re;
+}
+
+uint16_t AccelStepperI2C::transmissionErrors() {
+  return sentErrors() + resultErrors();
+}

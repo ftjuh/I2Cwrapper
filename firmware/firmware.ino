@@ -24,12 +24,18 @@
 #include <EEPROM.h>
 
 
-// Uncomment to enable debug output on Serial
+
+/*!
+ @brief Uncomment this to enable debugging output on Serial
+*/
 //#define DEBUG_AccelStepperI2C
 
-// Uncomment to enable time keeping diagnostics. You probably should disable
-// debugging, as Serial output will distort measurements. Diagnostics take a little extra time,
-// so you best disable it in production environments.
+/*!
+ @brief Uncomment this to enable time keeping diagnostics. You probably should disable
+ debugging, as Serial output will distort the measurements severely. Diagnostics 
+ take a little extra time and ressources, so you best disable it in production 
+ environments.
+*/
 #define DIAGNOSTICS_AccelStepperI2C
 
 
@@ -55,6 +61,7 @@ bool diagnosticsEnabled = false;
 uint32_t thenMicros;
 diagnosticsReport currentDiagnostics;
 uint32_t cycles = 0; // keeps count of main loop iterations
+uint32_t previousLastReceiveTime; // used to delay receive times by one receive event
 #endif // DIAGNOSTICS_AccelStepperI2C
 
 #ifdef DEBUG_AccelStepperI2C
@@ -387,7 +394,10 @@ void receiveEvent(int howMany)
   }
 
 #ifdef DIAGNOSTICS_AccelStepperI2C
-  currentDiagnostics.lastReceiveTime = micros() - thenMicros;
+  // delay storing the executing time for one cycle, else diagnostics() would always return 
+  // its own receive time, not the one of the previous command
+  previousLastReceiveTime = micros() - thenMicros;
+  currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
 #endif // DIAGNOSTICS_AccelStepperI2C
 
 }

@@ -29,6 +29,7 @@ var firmware_8ino =
     [ "maxSteppers", "firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b", null ],
     [ "newMessage", "firmware_8ino.html#affd9824af02dde7126d00d43a74c0081", null ],
     [ "numSteppers", "firmware_8ino.html#a9ffc376a015a72bacc0fa343e6fd7dd5", null ],
+    [ "previousLastReceiveTime", "firmware_8ino.html#ac02bc2dd2ab8a3e0488422e363f19398", null ],
     [ "resetFunc", "firmware_8ino.html#af470ac2a95380c26878282f7ddf529de", null ],
     [ "steppers", "firmware_8ino.html#a7658032e03469b7a54542145f6d59bc6", null ],
     [ "thenMicros", "firmware_8ino.html#ab0733c667851852a49c093ba87c7d77a", null ]

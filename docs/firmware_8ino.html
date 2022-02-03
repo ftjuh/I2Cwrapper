@@ -123,6 +123,7 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ae19f7f44c494f571f8860c91f2fdba22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ae19f7f44c494f571f8860c91f2fdba22">DIAGNOSTICS_AccelStepperI2C</a></td></tr>
+<tr class="memdesc:ae19f7f44c494f571f8860c91f2fdba22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable debugging output on Serial.  <a href="firmware_8ino.html#ae19f7f44c494f571f8860c91f2fdba22">More...</a><br /></td></tr>
 <tr class="separator:ae19f7f44c494f571f8860c91f2fdba22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)</td></tr>
 <tr class="separator:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +173,8 @@ Variables</h2></td></tr>
 <tr class="separator:a7e30077c912bea300765cce6e5348b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9405df89f8c78a1f50085b10911ca37"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af9405df89f8c78a1f50085b10911ca37">cycles</a> = 0</td></tr>
 <tr class="separator:af9405df89f8c78a1f50085b10911ca37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02bc2dd2ab8a3e0488422e363f19398"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ac02bc2dd2ab8a3e0488422e363f19398">previousLastReceiveTime</a></td></tr>
+<tr class="separator:ac02bc2dd2ab8a3e0488422e363f19398"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a404cd08737b3728198d3e42c828ece79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a404cd08737b3728198d3e42c828ece79">eepromI2CaddressMarker</a> = 0x12C0ACCF</td></tr>
 <tr class="separator:a404cd08737b3728198d3e42c828ece79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af15a5efb5c2c5ce3714d8a2f6c309033"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af15a5efb5c2c5ce3714d8a2f6c309033">I2C_defaultAddress</a> = 0x8</td></tr>
@@ -209,6 +212,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Uncomment this to enable debugging output on Serial. </p>
+<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
 
 </div>
 </div>
@@ -677,6 +683,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ac02bc2dd2ab8a3e0488422e363f19398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02bc2dd2ab8a3e0488422e363f19398">&#9670;&nbsp;</a></span>previousLastReceiveTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t previousLastReceiveTime</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af470ac2a95380c26878282f7ddf529de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af470ac2a95380c26878282f7ddf529de">&#9670;&nbsp;</a></span>resetFunc</h2>
 
@@ -725,7 +745,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="firmware_8ino.html">firmware.ino</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
+    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('_accel_stepper_i2_c_8h.html',''); init
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to transmit diagnostic info with <a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data.">AccelStepperI2C::diagnostics()</a>.  <a href="structdiagnostics_report.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to transmit diagnostic info with AccelStepperI2C::diagnostics().  <a href="structdiagnostics_report.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>.  <a href="class_accel_stepper_i2_c.html#details">More...</a><br /></td></tr>
@@ -123,6 +123,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a740e271c085f389261e5ff455ca348c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a740e271c085f389261e5ff455ca348c4">checkVersion</a> (uint8_t address)</td></tr>
 <tr class="memdesc:a740e271c085f389261e5ff455ca348c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version of slave firmware and compare it with library version.  <a href="_accel_stepper_i2_c_8h.html#a740e271c085f389261e5ff455ca348c4">More...</a><br /></td></tr>
 <tr class="separator:a740e271c085f389261e5ff455ca348c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20df67a6fa908f0dba0e90f6cbd37704"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a20df67a6fa908f0dba0e90f6cbd37704">enableDiagnostics</a> (uint8_t address, bool enable)</td></tr>
+<tr class="memdesc:a20df67a6fa908f0dba0e90f6cbd37704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn on/off diagnostic speed logging.  <a href="_accel_stepper_i2_c_8h.html#a20df67a6fa908f0dba0e90f6cbd37704">More...</a><br /></td></tr>
+<tr class="separator:a20df67a6fa908f0dba0e90f6cbd37704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87520fe47b6444ff58585f1cca1ebd06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a87520fe47b6444ff58585f1cca1ebd06">diagnostics</a> (uint8_t address, <a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *<a class="el" href="_speed__diagnostics_8ino.html#a4257c698bf504c2a908f9af14af9d07e">report</a>)</td></tr>
+<tr class="memdesc:a87520fe47b6444ff58585f1cca1ebd06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get most recent diagnostics data. Needs diagnostics enabled and a slave which was compiled with the <a class="el" href="firmware_8ino.html#ae19f7f44c494f571f8860c91f2fdba22">DIAGNOSTICS_AccelStepperI2C</a> compiler directive enabled.  <a href="_accel_stepper_i2_c_8h.html#a87520fe47b6444ff58585f1cca1ebd06">More...</a><br /></td></tr>
+<tr class="separator:a87520fe47b6444ff58585f1cca1ebd06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -132,6 +138,8 @@ Variables</h2></td></tr>
 <tr class="separator:a896028720f29b716e8256ab9a325309c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c77998fb4d678f218f9d1a1d2736741"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a4c77998fb4d678f218f9d1a1d2736741">maxBuf</a> = 20</td></tr>
 <tr class="separator:a4c77998fb4d678f218f9d1a1d2736741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc65f4761bb8aa3c0e22327413df44db"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#adc65f4761bb8aa3c0e22327413df44db">I2CdefaultDelay</a> = 5</td></tr>
+<tr class="separator:adc65f4761bb8aa3c0e22327413df44db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a934384ea02abfd53c06efb8ab35a11b1"><td class="memItemLeft" align="right" valign="top">const long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a934384ea02abfd53c06efb8ab35a11b1">resError</a> = 0</td></tr>
 <tr class="separator:a934384ea02abfd53c06efb8ab35a11b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84c7d8262a16efd1f7619fd8978bc89f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a84c7d8262a16efd1f7619fd8978bc89f">moveToCmd</a> = 10</td></tr>
@@ -300,6 +308,80 @@ Variables</h2></td></tr>
 
 <p>Get version of slave firmware and compare it with library version. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if both versions match, i.a. are compatible. </dd></dl>
+
+</div>
+</div>
+<a id="a87520fe47b6444ff58585f1cca1ebd06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87520fe47b6444ff58585f1cca1ebd06">&#9670;&nbsp;</a></span>diagnostics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void diagnostics </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *&#160;</td>
+          <td class="paramname"><em>report</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get most recent diagnostics data. Needs diagnostics enabled and a slave which was compiled with the <a class="el" href="firmware_8ino.html#ae19f7f44c494f571f8860c91f2fdba22">DIAGNOSTICS_AccelStepperI2C</a> compiler directive enabled. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">report</td><td>where to put the data, preallocated struct of type <a class="el" href="structdiagnostics_report.html" title="Used to transmit diagnostic info with AccelStepperI2C::diagnostics().">diagnosticsReport</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_accel_stepper_i2_c_8h.html#a20df67a6fa908f0dba0e90f6cbd37704" title="Turn on/off diagnostic speed logging.">enableDiagnostics()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a20df67a6fa908f0dba0e90f6cbd37704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20df67a6fa908f0dba0e90f6cbd37704">&#9670;&nbsp;</a></span>enableDiagnostics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void enableDiagnostics </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Turn on/off diagnostic speed logging. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>true for enable, false for disable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="_accel_stepper_i2_c_8h.html#a87520fe47b6444ff58585f1cca1ebd06" title="Get most recent diagnostics data. Needs diagnostics enabled and a slave which was compiled with the D...">diagnostics()</a> </dd></dl>
 
 </div>
 </div>
@@ -734,6 +816,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t getVersionResult = 2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc65f4761bb8aa3c0e22327413df44db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc65f4761bb8aa3c0e22327413df44db">&#9670;&nbsp;</a></span>I2CdefaultDelay</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t I2CdefaultDelay = 5</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1273,7 +1369,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_2c564d900600b9be19be1c51915eefcd.html">AccelStepperI2C</a></li><li class="navelem"><a class="el" href="dir_aedce182ba26a070e27f99c20ccbc843.html">src</a></li><li class="navelem"><a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
+    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -16,18 +16,19 @@
   published by the Free Software Foundation, version 2.
   @todo use interrupts for endstops instead of main loop polling
   @todo add emergency stop/break pin for slave
-  @todo checking each transmission with sentOK and resultOK is tedious. We could
-  use some counter to accumulate errors and check them summarily, e.g. at
-  the end of setup etc.
   @todo test (and adapt) slave firmware for ESP8266
   @todo ATM data is not protected against updates from ISRs while it is being
   used in the main program (see http://gammon.com.au/interrupts). Check if this
   could be a problem in our case.
   @todo clean up example sketches
   @todo ESP32: make use of dual cores?
+  @todo <del>checking each transmission with sentOK and resultOK is tedious. We could
+  use some counter to accumulate errors and check them summarily, e.g. at
+  the end of setup etc.</del> - AccelStepperI2C::sentErrors(), 
+  AccelStepperI2C::resultErrors() and AccelStepperI2C::transmissionErrors() added
   @todo <del>make time the slave has to answer I2C requests (I2CrequestDelay)
   configurable, as it will depend on µC and bus frequency etc.</del> -
-  setI2Cdelay() implemented 
+  setI2Cdelay() implemented
   @todo <del>Versioning, I2C command to request version (important, as library
   and firmware always need to match)</del> - getVersion() and checkVersion() implemented
   @todo <del>Implement interrupt mechanism, so that the slave can inform the master
@@ -63,6 +64,8 @@ const uint8_t AccelStepperI2C_VersionMinor = 1;
 // upper limit of send and receive buffer(s)
 const uint8_t maxBuf = 20; // includes 1 crc8 byte
 
+// ms to wait between I2C communication, can be changed by setI2Cdelay()
+const uint16_t I2CdefaultDelay = 5;
 
 // used as return valuefor calls with long/float result that got no correct reply from slave
 // However, errors are now signaled with resultOK, so no need for a special value here, just take 0
@@ -72,10 +75,10 @@ const long resError = 0;
  * @brief Used to transmit diagnostic info with AccelStepperI2C::diagnostics().
  */
 struct diagnosticsReport {
-  uint32_t cycles;          ///< Number of main loop executions since last reboot
-  uint32_t lastProcessTime; ///< microseconds needed to process (interpret) most recently sent command
-  uint32_t lastRequestTime; ///< microseconds spent in most recent onRequest() interrupt
-  uint32_t lastReceiveTime; ///< microseconds spent in most recent onReceive() interrupt
+  uint32_t cycles;          ///< Number of slave's main loop executions since the last reboot
+  uint32_t lastProcessTime; ///< microseconds the slave needed to process (interpret) most recently received command
+  uint32_t lastRequestTime; ///< microseconds the slave spent in the most recent onRequest() interrupt
+  uint32_t lastReceiveTime; ///< microseconds the slave spent in the most recent onReceive() interrupt
 };
 
 // I2C commands and, if non void, returned bytes, for AccelStepper functions, starting at 10
@@ -204,6 +207,24 @@ uint16_t getVersion(uint8_t address);
 bool checkVersion(uint8_t address);
 
 
+/*!
+ * @brief Turn on/off diagnostic speed logging.
+ * @param enable true for enable, false for disable
+ * @sa diagnostics()
+ */
+void enableDiagnostics(uint8_t address, bool enable);
+
+/*!
+ * @brief Get most recent diagnostics data. Needs diagnostics enabled and a slave
+ * which was compiled with the @ref DIAGNOSTICS_AccelStepperI2C compiler
+ * directive enabled.
+ * @param report where to put the data, preallocated struct of type
+ * diagnosticsReport.
+ * @sa enableDiagnostics()
+ */
+void diagnostics(uint8_t address, 
+                 diagnosticsReport* report);
+
 
 /*****************************************************************************/
 /*****************************************************************************/
@@ -331,27 +352,32 @@ class AccelStepperI2C {
   uint8_t endstops(); // returns endstop(s) states in bits 0 and 1
 
 
-  /*!
-   * @brief Turn on/off diagnostic speed logging.
-   * @param enable true for enable, false for disable
-   * @sa diagnostics()
-   * @note Diagnostics are not specific to a single stepper but refer to the
-   * slave as a whole. So it doesn't matter which stepper's diagnostics methods
-   * you use.
+/*!
+   * @brief Return and reset the number of failed commands sent since the last 
+   * time this method was used. A command is sent each time a function call
+   * is transmitted to the slave.
+   * @sa resultErrors(), transmissionErrors()
    */
-  void enableDiagnostics(bool enable = true);
-
+  uint16_t sentErrors();
+  
   /*!
-   * @brief Get most recent diagnostics data
-   * @param report where to put the data, preallocated struct of type
-   * AccelStepper::diagnosticsReport.
-   * @sa enableDiagnostics()
-   * @note Diagnostics are not specific to a single stepper but refer to the
-   * slave as a whole. So it doesn't matter which stepper's diagnostics methods
-   * you use.
+   * @brief Return and reset the number of failed receive events since the last 
+   * time this method was used. A receive event happens each time a function
+   * returns a value from the slave.
+   * @sa sentErrors(), transmissionErrors()
    */
-  void diagnostics(diagnosticsReport* report);
-
+  uint16_t resultErrors();
+  
+  /*!
+   * @brief Return and reset the sum of failed commands sent *and* failed receive 
+   * events since the last time this method was used. Use this if you are only
+   * interested in the sum of all transmission errors, not in what direction
+   * the errors occurred.
+   * @result Sum of sentErrors() and resultErrors()
+   * @sa sentErrors(), resultErrors()
+   */
+  uint16_t transmissionErrors();
+  
   /*!
    * @brief Set the state machine's state manually.
    * @param newState one of state_stopped, state_run, state_runSpeed, or state_runSpeedToPosition.
@@ -397,7 +423,9 @@ class AccelStepperI2C {
   bool readResult(uint8_t numBytes);
   uint8_t address;
   SimpleBuffer buf;
-
+  uint16_t sentErrorsCount = 0;   ///< Number of transmission errors. Will be reset to 0 by sentErrors().
+  uint16_t resultErrorsCount = 0; ///< Number of receiving errors. Will be reset to 0 by resultErrors().
+  
 };
 
 

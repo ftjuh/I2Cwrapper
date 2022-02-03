@@ -164,12 +164,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af27f8157184e75d824faa9634113c67c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">endstops</a> ()</td></tr>
 <tr class="memdesc:af27f8157184e75d824faa9634113c67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read current state of endstops.  <a href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">More...</a><br /></td></tr>
 <tr class="separator:af27f8157184e75d824faa9634113c67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47b83b79e49a0b9f7ceb4745425aad56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56">enableDiagnostics</a> (bool enable=true)</td></tr>
-<tr class="memdesc:a47b83b79e49a0b9f7ceb4745425aad56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn on/off diagnostic speed logging.  <a href="class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56">More...</a><br /></td></tr>
-<tr class="separator:a47b83b79e49a0b9f7ceb4745425aad56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67423203e72c69f1fae869c63d3e545f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f">diagnostics</a> (<a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *<a class="el" href="_speed__diagnostics_8ino.html#a4257c698bf504c2a908f9af14af9d07e">report</a>)</td></tr>
-<tr class="memdesc:a67423203e72c69f1fae869c63d3e545f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get most recent diagnostics data.  <a href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f">More...</a><br /></td></tr>
-<tr class="separator:a67423203e72c69f1fae869c63d3e545f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45250f325c2d95647fb11c6cb3f1bafa"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a45250f325c2d95647fb11c6cb3f1bafa">sentErrors</a> ()</td></tr>
+<tr class="memdesc:a45250f325c2d95647fb11c6cb3f1bafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the slave.  <a href="class_accel_stepper_i2_c.html#a45250f325c2d95647fb11c6cb3f1bafa">More...</a><br /></td></tr>
+<tr class="separator:a45250f325c2d95647fb11c6cb3f1bafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b2c647f86b8bbe15dd57cd4494b2bb0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a5b2c647f86b8bbe15dd57cd4494b2bb0">resultErrors</a> ()</td></tr>
+<tr class="memdesc:a5b2c647f86b8bbe15dd57cd4494b2bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the slave.  <a href="class_accel_stepper_i2_c.html#a5b2c647f86b8bbe15dd57cd4494b2bb0">More...</a><br /></td></tr>
+<tr class="separator:a5b2c647f86b8bbe15dd57cd4494b2bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0593433947161edb9ef502b751662b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#acd0593433947161edb9ef502b751662b">transmissionErrors</a> ()</td></tr>
+<tr class="memdesc:acd0593433947161edb9ef502b751662b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the sum of failed commands sent <em>and</em> failed receive events since the last time this method was used. Use this if you are only interested in the sum of all transmission errors, not in what direction the errors occurred.  <a href="class_accel_stepper_i2_c.html#acd0593433947161edb9ef502b751662b">More...</a><br /></td></tr>
+<tr class="separator:acd0593433947161edb9ef502b751662b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a213e402f63727c105d9ea2a20b125fe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">setState</a> (uint8_t newState)</td></tr>
 <tr class="memdesc:a213e402f63727c105d9ea2a20b125fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state machine's state manually.  <a href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">More...</a><br /></td></tr>
 <tr class="separator:a213e402f63727c105d9ea2a20b125fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -288,34 +291,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a67423203e72c69f1fae869c63d3e545f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67423203e72c69f1fae869c63d3e545f">&#9670;&nbsp;</a></span>diagnostics()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AccelStepperI2C::diagnostics </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *&#160;</td>
-          <td class="paramname"><em>report</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get most recent diagnostics data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">report</td><td>where to put the data, preallocated struct of type AccelStepper::diagnosticsReport. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a47b83b79e49a0b9f7ceb4745425aad56" title="Turn on/off diagnostic speed logging.">enableDiagnostics()</a> </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Diagnostics are not specific to a single stepper but refer to the slave as a whole. So it doesn't matter which stepper's diagnostics methods you use. </dd></dl>
-
-</div>
-</div>
 <a id="a6b82da76eca7957814189cd67608aaf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b82da76eca7957814189cd67608aaf0">&#9670;&nbsp;</a></span>disableOutputs()</h2>
 
@@ -347,34 +322,6 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a47b83b79e49a0b9f7ceb4745425aad56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47b83b79e49a0b9f7ceb4745425aad56">&#9670;&nbsp;</a></span>enableDiagnostics()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AccelStepperI2C::enableDiagnostics </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>enable</em> = <code>true</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Turn on/off diagnostic speed logging. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">enable</td><td>true for enable, false for disable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data.">diagnostics()</a> </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Diagnostics are not specific to a single stepper but refer to the slave as a whole. So it doesn't matter which stepper's diagnostics methods you use. </dd></dl>
 
 </div>
 </div>
@@ -560,6 +507,26 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5b2c647f86b8bbe15dd57cd4494b2bb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b2c647f86b8bbe15dd57cd4494b2bb0">&#9670;&nbsp;</a></span>resultErrors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t AccelStepperI2C::resultErrors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the slave. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a45250f325c2d95647fb11c6cb3f1bafa" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a>, <a class="el" href="class_accel_stepper_i2_c.html#acd0593433947161edb9ef502b751662b" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">transmissionErrors()</a> </dd></dl>
+
+</div>
+</div>
 <a id="a83e1cd6db8b24c4ef1ee1f5ea2b73350"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83e1cd6db8b24c4ef1ee1f5ea2b73350">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -674,6 +641,26 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Will poll <a class="el" href="class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350" title="Don&#39;t use this, use state machine instead with runState().">run()</a>, i.e. run to the target with acceleration and stop the state machine upon reaching it. </p>
+
+</div>
+</div>
+<a id="a45250f325c2d95647fb11c6cb3f1bafa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45250f325c2d95647fb11c6cb3f1bafa">&#9670;&nbsp;</a></span>sentErrors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t AccelStepperI2C::sentErrors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the slave. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a5b2c647f86b8bbe15dd57cd4494b2bb0" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a>, <a class="el" href="class_accel_stepper_i2_c.html#acd0593433947161edb9ef502b751662b" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">transmissionErrors()</a> </dd></dl>
 
 </div>
 </div>
@@ -1006,6 +993,27 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="acd0593433947161edb9ef502b751662b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd0593433947161edb9ef502b751662b">&#9670;&nbsp;</a></span>transmissionErrors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t AccelStepperI2C::transmissionErrors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return and reset the sum of failed commands sent <em>and</em> failed receive events since the last time this method was used. Use this if you are only interested in the sum of all transmission errors, not in what direction the errors occurred. </p>
+<dl class="section return"><dt>Returns</dt><dd>Sum of <a class="el" href="class_accel_stepper_i2_c.html#a45250f325c2d95647fb11c6cb3f1bafa" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a> and <a class="el" href="class_accel_stepper_i2_c.html#a5b2c647f86b8bbe15dd57cd4494b2bb0" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a45250f325c2d95647fb11c6cb3f1bafa" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a>, <a class="el" href="class_accel_stepper_i2_c.html#a5b2c647f86b8bbe15dd57cd4494b2bb0" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a> </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ab2061a523791b946581b41d97a5e4342"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2061a523791b946581b41d97a5e4342">&#9670;&nbsp;</a></span>myNum</h2>
@@ -1065,7 +1073,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 00:34:29 for AccelStepperI2C by
+    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
