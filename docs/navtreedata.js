@@ -32,18 +32,18 @@ var NAVTREE =
         [ "Restrictions", "md__r_e_a_d_m_e.html#autotoc_md5", null ]
       ] ],
       [ "Usage", "md__r_e_a_d_m_e.html#autotoc_md6", [
-        [ "Error handling", "md__r_e_a_d_m_e.html#Error-handling", null ],
-        [ "Safety precautions", "md__r_e_a_d_m_e.html#Safety-precautions", null ],
-        [ "Troubleshooting", "md__r_e_a_d_m_e.html#autotoc_md7", null ]
+        [ "Error handling", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
+        [ "Safety precautions", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+        [ "Troubleshooting", "md__r_e_a_d_m_e.html#autotoc_md9", null ]
       ] ],
-      [ "Performance and diagnostics", "md__r_e_a_d_m_e.html#Performance-and-diagnostics", null ],
-      [ "Supported platforms", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Example", "md__r_e_a_d_m_e.html#Example", null ],
-      [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "Author", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "Copyright", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-      [ "History", "md__r_e_a_d_m_e.html#autotoc_md13", null ]
+      [ "Performance and diagnostics", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "Supported platforms", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "Example", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
+      [ "Author", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+      [ "Copyright", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+      [ "License", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
+      [ "History", "md__r_e_a_d_m_e.html#autotoc_md17", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Reference", "modules.html", "modules" ],

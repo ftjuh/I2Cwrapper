@@ -36,11 +36,12 @@ AccelStepperI2C::stopState() will stop any of the above states, i.e. stop pollin
 ## Additional features
 
    - Up to two **end stop switches** can be defined for each stepper. If enabled and the stepper runs into one of them, it will make the state machine (and the stepper motor) stop. Of course, this is most useful in combination with AccelStepperI2C::runSpeedState() for homing and calibration tasks at startup. See [Interrupt_Endstop.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
-   - An **interrupt pin** can be defined which informs the master that the state machine's state has changed. Currently, this will happen when a set target has been reached or when an endstop switch was triggered.
+   - An **interrupt pin** can be defined which informs the master that the state machine's state has changed. Currently, this will happen when a set target has been reached or when an endstop switch was triggered. See [Interrupt_Endstop.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
    - The **slave's I2C address** (default: 0x8) can be permanently changed without recompiling the firmware.
    - I2C transmission **error checking** is available and recommended in critical situations (see [Error handling](#error-handling)).
-   - **Speed diagnostics** are available (see [Performance and diagnostics](performance-and-diagnostics)).
-   - **Servo support** is available (see above). Can be disabled at compile time.
+   - **Speed diagnostics** are available (see [Performance and diagnostics](#performance-and-diagnostics)).
+   - **Servo support** is available (see above and the [Servo_sweep.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Servo_Sweep/Servo_Sweep.ino) and [Stepper_and_Servo_together.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Stepper_and_Servo_together/Stepper_and_Servo_together.ino) examples). Can be disabled at compile time.
+   - The project has grown into a **framework** which could easily be extended to provide other additional slave capabilities like driving DC motors or using remote pins (I/O extender like) in the future.
 
 ## Restrictions
 
@@ -58,13 +59,13 @@ Have a look at the [todo list](https://ftjuh.github.io/AccelStepperI2C/todo.html
 
 A warning up front: Uncontrollably moving stepper motors can break things. So take care of **[error handling](#error-handling)** and **[safety precautions](#safety-precautions)** in critical environments e.g. if your steppers gone wild might damage something.
 
-   1. Install the folder with the libraries AccelStepperI2C, SimpleBuffer, I2Cwrapper (if used,  ServoI2C) and of course the original AccelStepper [to the Arduino environment](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation).
-      2. Upload [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino) to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.
-      3. Upload an example sketch or your own master sketch to another Arduino-like (master).
-      4. Connect the I2C bus of both devices, usually it's A4<->A4 (SDA), A5<->A5 (SCL) and GND<->GND. Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V<->+5V to power one board from the other, if needed.
-      5. Now (not earlier) provide external power to the steppers and power to the Arduinos.
+      1. Install the folder with the libraries AccelStepperI2C, SimpleBuffer, I2Cwrapper (if used,  ServoI2C) and of course the original AccelStepper [to the Arduino environment](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation).
+   2. Upload [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino) to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.
+   3. Upload an example sketch or your own master sketch to another Arduino-like (master).
+   4. Connect the I2C bus of both devices, usually it's A4<->A4 (SDA), A5<->A5 (SCL) and GND<->GND. Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V<->+5V to power one board from the other, if needed.
+   5. Now (not earlier) provide external power to the steppers and power to the Arduinos.
 
-Have a look at the [examples](https://github.com/ftjuh/AccelStepperI2C/tree/master/examples) for details. 
+Have a look at the [examples](https://github.com/ftjuh/AccelStepperI2C/tree/master/AccelStepperI2C/examples) for details. 
 
 ## Error handling
 
@@ -81,7 +82,7 @@ The library keeps an internal count of the **number of failed transmissions**, i
 
 The respective counter(s) will be reset to 0 with each invocation of these methods.
 
-See the `Error_checking.ino` example for further illustration.
+See the [Error_checking.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Error_checking/Error_checking.ino) example for further illustration.
 
 ## Safety precautions
 
@@ -102,7 +103,7 @@ If things don't work as expected, here's a couple of things that helped me durin
 * Have you powered your **level shifters**? They won't work with SCL, SDA and GND alone.
 * If master and slave run on different hardware platforms, **pin names** like "D3" might refer to completely different hardware pins or not be defined at all.  For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin.  So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the `pins_arduino.h` file for your slave device or run a simple sketch with `Serial.print(D3);` etc. on your slave board.
 * ESPs can crash if you unintentionally use certain pin numbers (e.g. flash memory pins) that are available on plain Unos/Nanos. Remember that when you **move between platforms**.
-* Enable **debug output** on slave *and* master. Uncomment the `#define DEBUG` at the top of all `.h` files you want info from. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.
+* Enable **debug output** on slave *and* master. It's a bit cluttered at the moment, yet informative. Uncomment the `#define DEBUG` at the top of all `.h` files you want info from. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.
 
 # Performance and diagnostics
 
