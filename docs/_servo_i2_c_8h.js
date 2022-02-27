@@ -1,7 +1,6 @@
 var _servo_i2_c_8h =
 [
     [ "ServoI2C", "class_servo_i2_c.html", "class_servo_i2_c" ],
-    [ "DEBUG", "_servo_i2_c_8h.html#ad72dbcf6d0153db1b8d8a58001feed83", null ],
     [ "log", "_servo_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "servoAttach1Cmd", "_servo_i2_c_8h.html#aec2445532cf01327e2361b2e8d1f8e39", null ],
     [ "servoAttach2Cmd", "_servo_i2_c_8h.html#ad184b5d78fd4f16b77fd4e600225d4c2", null ],

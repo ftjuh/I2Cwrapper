@@ -32,9 +32,9 @@ var NAVTREE =
         [ "Restrictions", "md__r_e_a_d_m_e.html#autotoc_md5", null ]
       ] ],
       [ "Usage", "md__r_e_a_d_m_e.html#autotoc_md6", [
-        [ "General things to watch out for", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
         [ "Error handling", "md__r_e_a_d_m_e.html#Error-handling", null ],
-        [ "Safety precautions", "md__r_e_a_d_m_e.html#Safety-precautions", null ]
+        [ "Safety precautions", "md__r_e_a_d_m_e.html#Safety-precautions", null ],
+        [ "Troubleshooting", "md__r_e_a_d_m_e.html#autotoc_md7", null ]
       ] ],
       [ "Performance and diagnostics", "md__r_e_a_d_m_e.html#Performance-and-diagnostics", null ],
       [ "Supported platforms", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
@@ -58,7 +58,7 @@ var NAVTREE =
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
         [ "Macros", "globals_defs.html", null ]
@@ -70,7 +70,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_accel_stepper_i2_c_8cpp.html",
-"firmware_8ino.html#a2451a9b021bbbd6931ff9832f662af13"
+"firmware_8ino.html#a1cad4e2514f451585f15da3b8ee3cd2f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

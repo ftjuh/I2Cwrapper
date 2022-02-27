@@ -10,12 +10,12 @@ The firmware has been tested on ATmega328 Arduino (Uno, Nano etc.), ESP8266 and 
 
 # How does it work?
 
-* One or more Arduino-likes, acting as **I2C-slaves**, drive up to eight stepper motors each. The slaves run the AccelStepperI2C firmware ([firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino)), which exposes the AccelStepper functionality via I2C, and additionally supports up to two end stop switches per stepper.
+* One or more Arduino-likes, acting as **I2C-slaves**, drive up to eight stepper motors each. The slaves run the AccelStepperI2C firmware ([firmware.ino](https://ftjuh.github.io/AccelStepperI2C/firmware_8ino.html)), which exposes the AccelStepper functionality via I2C, and additionally supports up to two end stop switches per stepper.
 * Another device, acting as **I2C-master**, controls the slave(s) via I2C with the help of the AccelStepperI2C library. [Its interface](https://ftjuh.github.io/AccelStepperI2C/)  is largely identical to the original AccelStepper library.
 * If **servo support** is enabled at compile time, unused slave pins can be used to attach servos which the master controls with help of the ServoI2C library. Its interface is largely identical to the original Servo library.
 * Internally, the slave is represented by an object of class **I2Cwrapper**. AccelStepperI2C and ServoI2C objects use an I2Cwrapper object for communication with the slave. All general communication with the slave (e.g. reset or error handling) is managed by the I2Cwrapper object, while all communication with a device unit (stepper or servo) is managed by an AccelStepperI2C or ServoI2C object.
 
-Refer to the [example below](#Example) and the [examples folder](https://github.com/ftjuh/AccelStepperI2C/tree/master/AccelStepperI2C/examples) to see how it works in detail.
+Refer to the [example below](#example) and the [examples folder](https://github.com/ftjuh/AccelStepperI2C/tree/master/AccelStepperI2C/examples) to see how it works in detail.
 
 # Differences from AccelStepper
 
@@ -38,14 +38,14 @@ AccelStepperI2C::stopState() will stop any of the above states, i.e. stop pollin
    - Up to two **end stop switches** can be defined for each stepper. If enabled and the stepper runs into one of them, it will make the state machine (and the stepper motor) stop. Of course, this is most useful in combination with AccelStepperI2C::runSpeedState() for homing and calibration tasks at startup. See [Interrupt_Endstop.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
    - An **interrupt pin** can be defined which informs the master that the state machine's state has changed. Currently, this will happen when a set target has been reached or when an endstop switch was triggered.
    - The **slave's I2C address** (default: 0x8) can be permanently changed without recompiling the firmware.
-   - I2C transmission **error checking** is available and recommended in critical situations (see [Error handling](#Error-handling)).
-   - **Speed diagnostics** are available (see [Performance and diagnostics](#Performance-and-diagnostics)).
+   - I2C transmission **error checking** is available and recommended in critical situations (see [Error handling](#error-handling)).
+   - **Speed diagnostics** are available (see [Performance and diagnostics](performance-and-diagnostics)).
    - **Servo support** is available (see above). Can be disabled at compile time.
 
 ## Restrictions
 
    - The original run(), runSpeed(), or runSpeedToPosition() functions are implemented, but it is **discouraged to use them directly**. The idea of these functions is that they are called as often as possible which would cause constant I2C traffic. The I2C protocol was not designed for this kind of traffic, so use the state machine instead. If you feel you *must* use the original ones, take it slowly and see if your setup, taking other I2C devices into consideration, allows you to [increase the I2C bus frequency](https://www.arduino.cc/en/Reference/WireSetClock). Even then you shouldn't poll as often as possible (as AccelStepper usually wants you to), but adjust the polling frequency to you max. stepping frequency, to allow the I2C bus some room to breathe.
-   - Each library function call, its parameters, and possibly a return value has to be transmitted back and forth via I2C. This makes things **slower, less precise, and prone to errors**. To be safe from errors, you'll need to do some extra checking (see [Error handling](#Error-handling)).
+   - Each library function call, its parameters, and possibly a return value has to be transmitted back and forth via I2C. This makes things **slower, less precise, and prone to errors**. To be safe from errors, you'll need to do some extra checking (see [Error handling](#error-handling)).
    - No **serialization protocol** is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Arduinos Uno/Nano, ESP8266 and ESP32 have been tested and work well together, as should  other Arduino supporting platforms.
    - Naturally, you cannot declare your own stepping functions with the [constructor [2/2] variant](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd).
    - ~~The two blocking functions, **runToPosition() and runToNewPosition()**, are not implemented at the moment. I never saw their purpose, anyway, as their behavior can easily implemented with the existing functionality.~~ 
@@ -56,7 +56,7 @@ Have a look at the [todo list](https://ftjuh.github.io/AccelStepperI2C/todo.html
 
 # Usage
 
-A warning up front: Uncontrollably moving stepper motors can break things. So take care of **[error handling](#Error-handling)** and **[safety precautions](#Safety-precautions)** in critical environments e.g. if your steppers gone wild might damage something.
+A warning up front: Uncontrollably moving stepper motors can break things. So take care of **[error handling](#error-handling)** and **[safety precautions](#safety-precautions)** in critical environments e.g. if your steppers gone wild might damage something.
 
    1. Install the folder with the libraries AccelStepperI2C, SimpleBuffer, I2Cwrapper (if used,  ServoI2C) and of course the original AccelStepper [to the Arduino environment](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation).
       2. Upload [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino) to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.
@@ -66,7 +66,7 @@ A warning up front: Uncontrollably moving stepper motors can break things. So ta
 
 Have a look at the [examples](https://github.com/ftjuh/AccelStepperI2C/tree/master/examples) for details. 
 
-## Error handling {#Error-handling}
+## Error handling
 
 If I2C transmission problems occur, any call to the library could fail and, possibly worse, every return value could be corrupted. Uncontrolled or unexpected stepper movements could lead to serious problems (see below). That's why each command and response is sent with a CRC8 checksum. To find out if a master's command or a slave's response was **transmitted correctly**, the master can check the following: 
 
@@ -83,14 +83,14 @@ The respective counter(s) will be reset to 0 with each invocation of these metho
 
 See the `Error_checking.ino` example for further illustration.
 
-## Safety precautions {#Safety-precautions}
+## Safety precautions
 
 Steppers can exert damaging forces, particularly(!) if they are moving slow. If in doubt, set up your system in a way that errors will not break things, particularly during testing:
 
 * Place your end stops in a **non-blocking position** so that they are activated in a by-passing way but do not block the way themselves.
 * To be really safe, put **emergency stops** which shut down the slave in a final end position. Currently there is no dedicated pin mechanism for that, so just use the slave's reset pin instead.
 * Always keep a **manual emergency stop** at hand or make it easy to cut the power quickly.
-* And again, do check for transmission errors in critical situations (see **[error handling](#Error-handling)**).
+* And again, do check for transmission errors in critical situations (see **[error handling](#error-handling)**).
 
 ## Troubleshooting
 
@@ -104,7 +104,7 @@ If things don't work as expected, here's a couple of things that helped me durin
 * ESPs can crash if you unintentionally use certain pin numbers (e.g. flash memory pins) that are available on plain Unos/Nanos. Remember that when you **move between platforms**.
 * Enable **debug output** on slave *and* master. Uncomment the `#define DEBUG` at the top of all `.h` files you want info from. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.
 
-# Performance and diagnostics {#Performance-and-diagnostics}
+# Performance and diagnostics
 
 On a normal ATmega328 @ 16MHz, the original AccelStepper reportedly can run [about 4000 steps per second](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#details). The AccelStepperI2C state machine only takes a tiny bite away from that. However, if you are using a lot of steppers, need high speeds, and/or if you are using a big microstepping factor, a normal Arduino can quickly become too slow. So choose your platform wisely, the ESP32 will be 10-20 times faster.
 
@@ -125,7 +125,7 @@ The following platforms will run the slave firmware and have been (more or less)
 * **ESP8266**: Has no I2C  hardware. The software I2C will not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to decrease the bus speed below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 * **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the slave implementation is awkward. It might be more susceptible for I2C transmission errors, so timing is critical (see AccelStepperI2C::setI2Cdelay()). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 
-# Example {#Example}
+# Example
 
 ```c++
 /*

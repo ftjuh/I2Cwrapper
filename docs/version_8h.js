@@ -1,6 +1,7 @@
 var version_8h =
 [
-    [ "VersionMajor", "version_8h.html#a18005e714d083d578e7471e9a3dc5355", null ],
-    [ "VersionMinor", "version_8h.html#af4071954c3e1aa6709a2ffff0ce9bc05", null ],
-    [ "VersionPatch", "version_8h.html#ae9175e671a844995c3b1474ff2341a03", null ]
+    [ "I2Cw_Version", "version_8h.html#acb815e31216c436b7c46a8cca26d10f7", null ],
+    [ "I2Cw_VersionMajor", "version_8h.html#a4f21a759ba660e85969faff1484bfa34", null ],
+    [ "I2Cw_VersionMinor", "version_8h.html#a5e237ace720e816f71a9f4bd580b625b", null ],
+    [ "I2Cw_VersionPatch", "version_8h.html#a4b121b3821e53151afc26d2442108212", null ]
 ];

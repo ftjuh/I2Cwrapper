@@ -1,7 +1,6 @@
 var _i2_cwrapper_8h =
 [
     [ "I2Cwrapper", "class_i2_cwrapper.html", "class_i2_cwrapper" ],
-    [ "DEBUG", "_i2_cwrapper_8h.html#ad72dbcf6d0153db1b8d8a58001feed83", null ],
     [ "log", "_i2_cwrapper_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "changeI2CaddressCmd", "_i2_cwrapper_8h.html#af646fa595f938094f40752157facec6f", null ],
     [ "clearInterruptCmd", "_i2_cwrapper_8h.html#a0b6e031fe549779b080ca6e6cd18728a", null ],

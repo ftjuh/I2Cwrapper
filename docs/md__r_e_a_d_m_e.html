@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v 0.1</span>
+   &#160;<span id="projectnumber">v0.1.0</span>
    </div>
    <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
   </td>
@@ -89,14 +89,14 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
 <div class="title">Introduction </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This is an I2C wrapper for Mike McCauley's <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/index.html">AccelStepper library</a> with support for two end stops per stepper and optional servo support. It consists of an Arduino-based <b>firmware</b> for one or more I2C-slaves, and corresponding Arduino <b>libraries</b> for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223 with some extra bells and whistles. It's most easy to use with a plain stepper driver shield like the Protoneer CNC GRBL shield (recent <a href="https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html">V3.51</a> or <a href="https://forum.protoneer.co.nz/viewforum.php?f=17">V3.00 clone</a>) to turn it into an I2C controlled stepper (and servo) driver.</p>
+<div class="textblock"><p>This is an I2C wrapper for Mike McCauley's <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/index.html">AccelStepper library</a> with support for two end stops per stepper and optional servo support. It consists of an Arduino-based <b>firmware</b> for one or more I2C-slaves, and corresponding Arduino <b>libraries</b> for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223 with some extra bells and whistles. Use it with your own hardware or with a plain stepper driver shield like the Protoneer CNC GRBL shield (recent <a href="https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html">V3.51</a> or <a href="https://forum.protoneer.co.nz/viewforum.php?f=17">V3.00 clone</a>).</p>
 <p>The firmware has been tested on ATmega328 Arduino (Uno, Nano etc.), ESP8266 and ESP32 platforms. I expect it should work on other Arduino supported platforms.</p>
 <p><a href="https://github.com/ftjuh/AccelStepperI2C">Download AccelStepperI2C on github.</a></p>
 <p><a href="https://ftjuh.github.io/AccelStepperI2C/">AccelStepperI2C library documentation</a></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 How does it work?</h1>
 <ul>
-<li>One or more Arduino-likes, acting as <b>I2C-slaves</b>, drive up to eight stepper motors each. The slaves run the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> firmware (<a class="el" href="firmware_8ino.html" title="Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library,...">firmware.ino</a>), which exposes the AccelStepper functionality via I2C, and additionally supports up to two end stop switches per stepper.</li>
+<li>One or more Arduino-likes, acting as <b>I2C-slaves</b>, drive up to eight stepper motors each. The slaves run the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> firmware (<a href="https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino">firmware.ino</a>), which exposes the AccelStepper functionality via I2C, and additionally supports up to two end stop switches per stepper.</li>
 <li>Another device, acting as <b>I2C-master</b>, controls the slave(s) via I2C with the help of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library. <a href="https://ftjuh.github.io/AccelStepperI2C/">Its interface</a> is largely identical to the original AccelStepper library.</li>
 <li>If <b>servo support</b> is enabled at compile time, unused slave pins can be used to attach servos which the master controls with help of the <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> library. Its interface is largely identical to the original Servo library.</li>
 <li>Internally, the slave is represented by an object of class <b><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a></b>. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> objects use an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> object for communication with the slave. All general communication with the slave (e.g. reset or error handling) is managed by the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> object, while all communication with a device unit (stepper or servo) is managed by an <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> or <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> object.</li>
@@ -117,7 +117,7 @@ State machine vs. polling</h2>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Additional features</h2>
 <ul>
-<li>Up to two <b>end stop switches</b> can be defined for each stepper. If enabled and the stepper runs into one of them, it will make the state machine stop. Of course, this is most useful in combination with <a class="el" href="class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7" title="Will poll runSpeed(), i.e. run at constant speed until told otherwise (see AccelStepperI2C::stopState...">AccelStepperI2C::runSpeedState()</a> for homing and calibration tasks at startup.</li>
+<li>Up to two <b>end stop switches</b> can be defined for each stepper. If enabled and the stepper runs into one of them, it will make the state machine (and the stepper motor) stop. Of course, this is most useful in combination with <a class="el" href="class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7" title="Will poll runSpeed(), i.e. run at constant speed until told otherwise (see AccelStepperI2C::stopState...">AccelStepperI2C::runSpeedState()</a> for homing and calibration tasks at startup. See <a href="https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Interrupt_Endstop/Interrupt_Endstop.ino">Interrupt_Endstop.ino</a> example for a use case.</li>
 <li>An <b>interrupt pin</b> can be defined which informs the master that the state machine's state has changed. Currently, this will happen when a set target has been reached or when an endstop switch was triggered.</li>
 <li>The <b>slave's I2C address</b> (default: 0x8) can be permanently changed without recompiling the firmware.</li>
 <li>I2C transmission <b>error checking</b> is available and recommended in critical situations (see <a href="#Error-handling">Error handling</a>).</li>
@@ -138,24 +138,20 @@ Restrictions</h2>
 <p>Have a look at the <a href="https://ftjuh.github.io/AccelStepperI2C/todo.html">todo list</a> to see what improvements are still planned.</p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Usage</h1>
+<p>A warning up front: Uncontrollably moving stepper motors can break things. So take care of <b><a href="#Error-handling">error handling</a></b> and <b><a href="#Safety-precautions">safety precautions</a></b> in critical environments e.g. if your steppers gone wild might damage something.</p>
 <ol type="1">
-<li>Install the folder with the libraries <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_simple_buffer.html">SimpleBuffer</a>, <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> (if used, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) and of course the original AccelStepper <a href="https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation">to the Arduino environment</a>.</li>
-<li>Upload <a class="el" href="firmware_8ino.html" title="Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library,...">firmware.ino</a> to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.</li>
+<li>Install the folder with the libraries <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_simple_buffer.html">SimpleBuffer</a>, <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> (if used, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) and of course the original AccelStepper <a href="https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation">to the Arduino environment</a>.<ol type="a">
+<li>Upload <a href="https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino">firmware.ino</a> to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.</li>
 <li>Upload an example sketch or your own master sketch to another Arduino-like (master).</li>
 <li>Connect the I2C bus of both devices, usually it's A4&lt;-&gt;A4 (SDA), A5&lt;-&gt;A5 (SCL) and GND&lt;-&gt;GND. Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V&lt;-&gt;+5V to power one board from the other, if needed.</li>
 <li>Now (not earlier) provide external power to the steppers and power to the Arduinos.</li>
 </ol>
-<p>Have a look at the examples for usage of the library.</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
-General things to watch out for</h2>
-<ul>
-<li>Uncontrollably moving stepper motors can break things. So take care of <b><a href="#Error-handling">error handling</a></b> and <b><a href="#Safety-precautions">safety precautions</a></b> if your steppers gone wild might damage something.</li>
-<li>If master and slave run on different hardware platforms, <b>pin names</b> like "D3" might refer to completely different hardware pins or not be defined at all. For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin. So when addressing slave pins from the master's side, it's best to use the integer equivalents of names like "D3". Look them up in the <code>pins_arduino.h</code> file for your slave device or run a simple sketch with <code>Serial.print(D3);</code> etc. on your slave board.</li>
-<li><strike>The <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> constructor needs the Wire library to be already initialized. So don't invoke the constructor when declaring an object, use <b>new</b> during <a class="el" href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d" title="Setup system. Retrieve I2C address from EEPROM or default and initialize I2C slave.">setup()</a>.</strike></li>
-</ul>
+</li>
+</ol>
+<p>Have a look at the <a href="https://github.com/ftjuh/AccelStepperI2C/tree/master/examples">examples</a> for details.</p>
 <h2><a class="anchor" id="Error-handling"></a>
 Error handling</h2>
-<p>If I2C transmission problems occur, any call to the library could fail and, possibly worse, every return value could be corrupted. Uncontrolled or unexpected stepper movements could lead to serious problems (see ). That's why each command and response is sent with a CRC8 checksum. To find out if a master's command or a slave's response was <b>transmitted correctly</b>, the master can check the following:</p>
+<p>If I2C transmission problems occur, any call to the library could fail and, possibly worse, every return value could be corrupted. Uncontrolled or unexpected stepper movements could lead to serious problems (see below). That's why each command and response is sent with a CRC8 checksum. To find out if a master's command or a slave's response was <b>transmitted correctly</b>, the master can check the following:</p>
 <ul>
 <li>If <a class="el" href="class_i2_cwrapper.html#a51c3023339571c205c161a82576fd4f4" title="True if previous function call was successfully transferred to slave.">I2Cwrapper::sentOK</a> is false, the previous function call was not properly transmitted.</li>
 <li>If <a class="el" href="class_i2_cwrapper.html#abf0d76a351cee8c7ce48f87d13e27dbc" title="True if return value from previous function call was received successfully.">I2Cwrapper::resultOK</a> is false, the data returned from the previous function call is invalid.</li>
@@ -167,7 +163,7 @@ Error handling</h2>
 <li>uint16_t <a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">I2Cwrapper::transmissionErrors()</a> - sum of the above</li>
 </ul>
 <p>The respective counter(s) will be reset to 0 with each invocation of these methods.</p>
-<p>See the <code>Error_checking.ino</code> example for further illustration.</p>
+<p>See the <code><a class="el" href="_error__checking_8ino.html">Error_checking.ino</a></code> example for further illustration.</p>
 <h2><a class="anchor" id="Safety-precautions"></a>
 Safety precautions</h2>
 <p>Steppers can exert damaging forces, particularly(!) if they are moving slow. If in doubt, set up your system in a way that errors will not break things, particularly during testing:</p>
@@ -176,6 +172,18 @@ Safety precautions</h2>
 <li>To be really safe, put <b>emergency stops</b> which shut down the slave in a final end position. Currently there is no dedicated pin mechanism for that, so just use the slave's reset pin instead.</li>
 <li>Always keep a <b>manual emergency stop</b> at hand or make it easy to cut the power quickly.</li>
 <li>And again, do check for transmission errors in critical situations (see <b><a href="#Error-handling">error handling</a></b>).</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Troubleshooting</h2>
+<p>If things don't work as expected, here's a couple of things that helped me during testing:</p>
+<ul>
+<li>Start <b>without I2C</b>. That is, after setting up the hardware, first test the to-be-slave device with a conventional AccelStepper sketch, so that you can be sure your problems are I2C-related.</li>
+<li><b>Simplify</b>. Start with very simple setups, short cables, low bus speeds etc. and work your way up from there.</li>
+<li>Did you think of two <b>I2C-pullups</b>?</li>
+<li>Have you powered your <b>level shifters</b>? They won't work with SCL, SDA and GND alone.</li>
+<li>If master and slave run on different hardware platforms, <b>pin names</b> like "D3" might refer to completely different hardware pins or not be defined at all. For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin. So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the <code>pins_arduino.h</code> file for your slave device or run a simple sketch with <code>Serial.print(D3);</code> etc. on your slave board.</li>
+<li>ESPs can crash if you unintentionally use certain pin numbers (e.g. flash memory pins) that are available on plain Unos/Nanos. Remember that when you <b>move between platforms</b>.</li>
+<li>Enable <b>debug output</b> on slave <em>and</em> master. Uncomment the <code>#define DEBUG</code> at the top of all <code>.h</code> files you want info from. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.</li>
 </ul>
 <h1><a class="anchor" id="Performance-and-diagnostics"></a>
 Performance and diagnostics</h1>
@@ -219,16 +227,18 @@ Example</h1>
 <div class="line">{  </div>
 <div class="line">  Wire.begin();</div>
 <div class="line">  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side</div>
-<div class="line">  </div>
+<div class="line"> </div>
+<div class="line">  if (!wrapper.ping()) {</div>
+<div class="line">    Serial.println(&quot;Slave not found! Check connections and restart.&quot;);</div>
+<div class="line">    while (true) {}</div>
+<div class="line">  }  </div>
 <div class="line">  wrapper.reset(); // reset the slave device</div>
 <div class="line">  delay(500); // and give it time to reboot</div>
 <div class="line">  </div>
-<div class="line">  // begin() replaces the AccelStepper constructor, so it can also be called like this: </div>
-<div class="line">  // stepper.begin(AccelStepper::DRIVER, 13, 12); // wemos d1 mini D7 and D6 </div>
-<div class="line">  // (important: &quot;D7&quot; and &quot;D6&quot; might mean different pins for the master, so </div>
-<div class="line">  // it&#39;s safer to use the integers they replace)</div>
-<div class="line">  stepper.begin(); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5</div>
-<div class="line"> </div>
+<div class="line">  stepper.attach(); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5</div>
+<div class="line">  // attach() replaces the AccelStepper constructor, so it could also be called like this: </div>
+<div class="line">  // stepper.begin(AccelStepper::DRIVER, 5, 6);</div>
+<div class="line">  </div>
 <div class="line">  if (stepper.myNum &lt; 0) { // stepper could not be allocated (should not happen after a reset)</div>
 <div class="line">    while (true) {}</div>
 <div class="line">  }</div>
@@ -244,7 +254,7 @@ Example</h1>
 <div class="line"> * on its own. So even if stepper.distanceToGo() causes some I2C traffic, it will be </div>
 <div class="line"> * substantially less traffic than sending each stepper step seperately (see below).</div>
 <div class="line"> * If you want to cut down I2C polling completely, you can use the interrupt mechanism </div>
-<div class="line"> * (see interrupt example).</div>
+<div class="line"> * (see Interrupt_Endstop.ino example sketch).</div>
 <div class="line"> */</div>
 <div class="line">void loop()</div>
 <div class="line">{</div>
@@ -270,7 +280,7 @@ Documentation</h1>
 <p><a href="https://ftjuh.github.io/AccelStepperI2C/">Find the AccelStepperI2C library documentation here</a>. It only deals with differences from running the AccelStepper library locally. If not stated otherwise, expect <a class="el" href="class_accel_stepper_i2_c.html">functions and parameters</a> to work as in the original, keeping the above differences and restrictions in mind.</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
 Author</h1>
-<p>This is my first "serious" piece of <code>software</code> published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is in 3D printing, you can find me on <a href="https://www.prusaprinters.org/social/202816-juh/about">prusaprinters</a>, <a href="https://www.thingiverse.com/juh/designs">thingiverse</a>, and <a href="https://www.youmagine.com/juh3d/designs">youmagine</a>. This library was developed as part of my <a href="https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll">StepFish project</a> (<a href="https://forum.ftcommunity.de/viewtopic.php?t=5341">also here</a>).</p>
+<p>This is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is in 3D printing, you can find me on <a href="https://www.prusaprinters.org/social/202816-juh/about">prusaprinters</a>, <a href="https://www.thingiverse.com/juh/designs">thingiverse</a>, and <a href="https://www.youmagine.com/juh3d/designs">youmagine</a>. This library was developed as part of my <a href="https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll">StepFish project</a> (<a href="https://forum.ftcommunity.de/viewtopic.php?t=5341">also here</a>).</p>
 <p>Contact me at <a href="#" onclick="location.href='mai'+'lto:'+'ftj'+'uh'+'@po'+'st'+'eo.'+'ne'+'t'; return false;">ftjuh<span style="display: none;">.nosp@m.</span>@pos<span style="display: none;">.nosp@m.</span>teo.n<span style="display: none;">.nosp@m.</span>et</a>.</p>
 <p>Jan (juh)</p>
 <h1><a class="anchor" id="autotoc_md11"></a>
@@ -281,14 +291,14 @@ License</h1>
 <p><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.</p>
 <h1><a class="anchor" id="autotoc_md13"></a>
 History</h1>
-<p>v0.1 Initial release </p>
+<p>v0.1.0 Initial release </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Feb 25 2022 18:36:30 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 11:26:07 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

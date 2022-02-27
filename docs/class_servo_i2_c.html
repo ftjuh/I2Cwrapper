@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v 0.1</span>
+   &#160;<span id="projectnumber">v0.1.0</span>
    </div>
    <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
   </td>
@@ -97,11 +97,8 @@ $(document).ready(function(){initNavTree('class_servo_i2_c.html',''); initResiza
 <p>An I2C wrapper class for the Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo/">Servo library</a>.  
  <a href="class_servo_i2_c.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An I2C wrapper class for the Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo/">Servo library</a>. </p>
-<p>This class mimicks the <a href="https://www.arduino.cc/reference/en/libraries/servo/">original Servo interface</a>. It replicates most of its methods and transmits each method call via I2C to a slave running the <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling).</p>
+<div class="textblock"><p>This class mimicks the <a href="https://www.arduino.cc/reference/en/libraries/servo/">original Servo interface</a>. It replicates most of its methods and transmits each method call via I2C to a slave running the <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling).</p>
 <p>Expect servo methods without dedicated documentation to work just like their non-I2C original. </p><dl class="section note"><dt>Note</dt><dd>Currently, the implementation is quite dumb, as it passes any Servo library call over I2C, regardless of what it does. Write() e.g. uses WriteMicroseconds(), so that in theory it could be implemented wholly on the master's side. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8h_source.html#l00065">65</a> of file <a class="el" href="_servo_i2_c_8h_source.html">ServoI2C.h</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -148,16 +145,12 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">w</td><td>Wrapper object representing the slave the servo is connected to. </td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00018">18</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -177,8 +170,6 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Attach and prepare servo for use. Similar to the original, but see below. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>Hardware pin of the <em>slave</em> the servo is atached to (see note). </td></tr>
@@ -187,8 +178,6 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">myNum</a>, which should be the same as the servo channel returned by the original Servo libraries, except if you reset your master without resetting the slave. Check for <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">myNum</a> != 255 to see if the slave successfully added the servo. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The slave's platform pin names like "D3" or "A1" might not be known to the master's platform, if both platforms are different, or they might be used with a different pin number. So it is safer to use integer equivalents as defined in the respective platform's <code>pins_arduino.h</code>, see <a class="el" href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786" title="Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper obj...">AccelStepperI2C::attach()</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00024">24</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -224,8 +213,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00035">35</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a6adfe3508e31fad9d113942be7e6fd5c"></a>
@@ -242,8 +229,6 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00087">87</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -262,8 +247,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00047">47</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
-
 </div>
 </div>
 <a id="ac76f80be64343ae60ee98559c17df3e1"></a>
@@ -281,8 +264,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00067">67</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a825e27b55d892f21e2575da0770bc987"></a>
@@ -299,8 +280,6 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00077">77</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
 
 </div>
 </div>
@@ -320,8 +299,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00053">53</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
-
 </div>
 </div>
 <a id="ad36f1e3195cd5824bce82d502979f864"></a>
@@ -340,8 +317,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8cpp_source.html#l00060">60</a> of file <a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -357,15 +332,11 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Servo number with myNum &gt;= 0 for successfully added servo. </p>
-
-<p class="definition">Definition at line <a class="el" href="_servo_i2_c_8h_source.html#l00096">96</a> of file <a class="el" href="_servo_i2_c_8h_source.html">ServoI2C.h</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_servo_i2_c_8h_source.html">ServoI2C.h</a></li>
-<li><a class="el" href="_servo_i2_c_8cpp_source.html">ServoI2C.cpp</a></li>
+<li><a class="el" href="_servo_i2_c_8h.html">ServoI2C.h</a></li>
+<li><a class="el" href="_servo_i2_c_8cpp.html">ServoI2C.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -373,7 +344,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_servo_i2_c.html">ServoI2C</a></li>
-    <li class="footer">Generated on Fri Feb 25 2022 18:36:30 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 11:26:07 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

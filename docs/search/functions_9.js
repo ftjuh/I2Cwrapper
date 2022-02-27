@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['ping_317',['ping',['../class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe',1,'I2Cwrapper']]],
-  ['pollendstops_318',['pollEndstops',['../firmware_8ino.html#a377a90b916ad4433650793b43e74f9a4',1,'firmware.ino']]],
-  ['preparecommand_319',['prepareCommand',['../class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d',1,'I2Cwrapper']]],
-  ['processmessage_320',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
+  ['maxspeed_321',['maxSpeed',['../class_accel_stepper_i2_c.html#a36a283a6b78480ce5ab8e17329588135',1,'AccelStepperI2C']]],
+  ['move_322',['move',['../class_accel_stepper_i2_c.html#af9c59ca7c83e9e2452cdc6b3a3b50ed9',1,'AccelStepperI2C']]],
+  ['moveto_323',['moveTo',['../class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182',1,'AccelStepperI2C']]]
 ];

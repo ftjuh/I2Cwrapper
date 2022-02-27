@@ -1,21 +1,8 @@
 var searchData=
 [
-  ['randomwalk_321',['randomWalk',['../_interrupt___endstop_8ino.html#aaa4e6a3a74313cd5ee9dbea8ac271ad1',1,'Interrupt_Endstop.ino']]],
-  ['read_322',['read',['../class_servo_i2_c.html#ac76f80be64343ae60ee98559c17df3e1',1,'ServoI2C::read()'],['../class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4',1,'SimpleBuffer::read()']]],
-  ['readmicroseconds_323',['readMicroseconds',['../class_servo_i2_c.html#a825e27b55d892f21e2575da0770bc987',1,'ServoI2C']]],
-  ['readresult_324',['readResult',['../class_i2_cwrapper.html#adfd966608c453a72646dfe37e061fee7',1,'I2Cwrapper']]],
-  ['receiveevent_325',['receiveEvent',['../firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98',1,'firmware.ino']]],
-  ['requestevent_326',['requestEvent',['../firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33',1,'firmware.ino']]],
-  ['reset_327',['reset',['../class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb',1,'I2Cwrapper::reset()'],['../class_simple_buffer.html#a0408a7143a40a819685a2de0ae16bcb3',1,'SimpleBuffer::reset()']]],
-  ['resetfunc_328',['resetFunc',['../firmware_8ino.html#ab45a881cd27fd11dbc87571c6a9cba34',1,'firmware.ino']]],
-  ['resulterrors_329',['resultErrors',['../class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db',1,'I2Cwrapper']]],
-  ['retrievei2c_5faddress_330',['retrieveI2C_address',['../firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7',1,'firmware.ino']]],
-  ['run_331',['run',['../class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350',1,'AccelStepperI2C']]],
-  ['runspeed_332',['runSpeed',['../class_accel_stepper_i2_c.html#a74bcee3589bcc31e911c4b09175474a8',1,'AccelStepperI2C']]],
-  ['runspeedstate_333',['runSpeedState',['../class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7',1,'AccelStepperI2C']]],
-  ['runspeedtoposition_334',['runSpeedToPosition',['../class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d',1,'AccelStepperI2C']]],
-  ['runspeedtopositionstate_335',['runSpeedToPositionState',['../class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f',1,'AccelStepperI2C']]],
-  ['runstate_336',['runState',['../class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6',1,'AccelStepperI2C']]],
-  ['runtonewposition_337',['runToNewPosition',['../class_accel_stepper_i2_c.html#a6364796eb6b611ce0ffade2e6bd6e78f',1,'AccelStepperI2C']]],
-  ['runtoposition_338',['runToPosition',['../class_accel_stepper_i2_c.html#aed11487d04356f3fd3022914526c3f36',1,'AccelStepperI2C']]]
+  ['ping_324',['ping',['../class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe',1,'I2Cwrapper']]],
+  ['pollendstops_325',['pollEndstops',['../firmware_8ino.html#a377a90b916ad4433650793b43e74f9a4',1,'firmware.ino']]],
+  ['preparecommand_326',['prepareCommand',['../class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d',1,'I2Cwrapper']]],
+  ['printversions_327',['printVersions',['../_error__checking_8ino.html#a4d655f7999db948bc1242bd10b60d482',1,'Error_checking.ino']]],
+  ['processmessage_328',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
 ];
