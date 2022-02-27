@@ -93,25 +93,27 @@ $(document).ready(function(){initNavTree('structdiagnostics_report.html',''); in
 </div><!--header-->
 <div class="contents">
 
-<p>Used to transmit diagnostic info with AccelStepperI2C::diagnostics().  
+<p>Used to transmit diagnostic info with <a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data. Needs diagnostics enabled and a slave which was compiled with the D...">AccelStepperI2C::diagnostics()</a>.  
  <a href="structdiagnostics_report.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Used to transmit diagnostic info with AccelStepperI2C::diagnostics(). </p>
+<div class="textblock"><p>Used to transmit diagnostic info with <a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data. Needs diagnostics enabled and a slave which was compiled with the D...">AccelStepperI2C::diagnostics()</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="_accel_stepper_i2_c_8h_source.html#l00085">85</a> of file <a class="el" href="_accel_stepper_i2_c_8h_source.html">AccelStepperI2C.h</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a14178ad9926d73c00aae6db42daacdd5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#a14178ad9926d73c00aae6db42daacdd5">cycles</a></td></tr>
 <tr class="memdesc:a14178ad9926d73c00aae6db42daacdd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of slave's main loop executions since the last reboot.  <a href="structdiagnostics_report.html#a14178ad9926d73c00aae6db42daacdd5">More...</a><br /></td></tr>
 <tr class="separator:a14178ad9926d73c00aae6db42daacdd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee89c72d2fa790c9ef24bace75ddd6cd"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#aee89c72d2fa790c9ef24bace75ddd6cd">lastProcessTime</a></td></tr>
-<tr class="memdesc:aee89c72d2fa790c9ef24bace75ddd6cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">microseconds the slave needed to process (interpret) most recently received command  <a href="structdiagnostics_report.html#aee89c72d2fa790c9ef24bace75ddd6cd">More...</a><br /></td></tr>
-<tr class="separator:aee89c72d2fa790c9ef24bace75ddd6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc4cf15067df14b3b61d30db85cc1adf"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#afc4cf15067df14b3b61d30db85cc1adf">lastRequestTime</a></td></tr>
-<tr class="memdesc:afc4cf15067df14b3b61d30db85cc1adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">microseconds the slave spent in the most recent onRequest() interrupt  <a href="structdiagnostics_report.html#afc4cf15067df14b3b61d30db85cc1adf">More...</a><br /></td></tr>
-<tr class="separator:afc4cf15067df14b3b61d30db85cc1adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe4d6e336a35b1d68d0c75cc31dbd6b6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#abe4d6e336a35b1d68d0c75cc31dbd6b6">lastReceiveTime</a></td></tr>
-<tr class="memdesc:abe4d6e336a35b1d68d0c75cc31dbd6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">microseconds the slave spent in the most recent onReceive() interrupt  <a href="structdiagnostics_report.html#abe4d6e336a35b1d68d0c75cc31dbd6b6">More...</a><br /></td></tr>
-<tr class="separator:abe4d6e336a35b1d68d0c75cc31dbd6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4f501a700f2cd94c209267c4d99c09"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#a6f4f501a700f2cd94c209267c4d99c09">lastProcessTime</a></td></tr>
+<tr class="memdesc:a6f4f501a700f2cd94c209267c4d99c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">microseconds the slave needed to process (interpret) most recently received command  <a href="structdiagnostics_report.html#a6f4f501a700f2cd94c209267c4d99c09">More...</a><br /></td></tr>
+<tr class="separator:a6f4f501a700f2cd94c209267c4d99c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76febbd4a8a6a8577dd7da70a81febcd"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#a76febbd4a8a6a8577dd7da70a81febcd">lastRequestTime</a></td></tr>
+<tr class="memdesc:a76febbd4a8a6a8577dd7da70a81febcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">microseconds the slave spent in the most recent onRequest() interrupt  <a href="structdiagnostics_report.html#a76febbd4a8a6a8577dd7da70a81febcd">More...</a><br /></td></tr>
+<tr class="separator:a76febbd4a8a6a8577dd7da70a81febcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d270ecf9a6ae1f8e717a879c54fc9bd"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html#a6d270ecf9a6ae1f8e717a879c54fc9bd">lastReceiveTime</a></td></tr>
+<tr class="memdesc:a6d270ecf9a6ae1f8e717a879c54fc9bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">microseconds the slave spent in the most recent onReceive() interrupt  <a href="structdiagnostics_report.html#a6d270ecf9a6ae1f8e717a879c54fc9bd">More...</a><br /></td></tr>
+<tr class="separator:a6d270ecf9a6ae1f8e717a879c54fc9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a14178ad9926d73c00aae6db42daacdd5"></a>
@@ -128,58 +130,66 @@ Public Attributes</h2></td></tr>
 
 <p>Number of slave's main loop executions since the last reboot. </p>
 
+<p class="definition">Definition at line <a class="el" href="_accel_stepper_i2_c_8h_source.html#l00087">87</a> of file <a class="el" href="_accel_stepper_i2_c_8h_source.html">AccelStepperI2C.h</a>.</p>
+
 </div>
 </div>
-<a id="aee89c72d2fa790c9ef24bace75ddd6cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee89c72d2fa790c9ef24bace75ddd6cd">&#9670;&nbsp;</a></span>lastProcessTime</h2>
+<a id="a6f4f501a700f2cd94c209267c4d99c09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4f501a700f2cd94c209267c4d99c09">&#9670;&nbsp;</a></span>lastProcessTime</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t diagnosticsReport::lastProcessTime</td>
+          <td class="memname">uint16_t diagnosticsReport::lastProcessTime</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>microseconds the slave needed to process (interpret) most recently received command </p>
 
+<p class="definition">Definition at line <a class="el" href="_accel_stepper_i2_c_8h_source.html#l00088">88</a> of file <a class="el" href="_accel_stepper_i2_c_8h_source.html">AccelStepperI2C.h</a>.</p>
+
 </div>
 </div>
-<a id="abe4d6e336a35b1d68d0c75cc31dbd6b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe4d6e336a35b1d68d0c75cc31dbd6b6">&#9670;&nbsp;</a></span>lastReceiveTime</h2>
+<a id="a6d270ecf9a6ae1f8e717a879c54fc9bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d270ecf9a6ae1f8e717a879c54fc9bd">&#9670;&nbsp;</a></span>lastReceiveTime</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t diagnosticsReport::lastReceiveTime</td>
+          <td class="memname">uint16_t diagnosticsReport::lastReceiveTime</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>microseconds the slave spent in the most recent onReceive() interrupt </p>
 
+<p class="definition">Definition at line <a class="el" href="_accel_stepper_i2_c_8h_source.html#l00090">90</a> of file <a class="el" href="_accel_stepper_i2_c_8h_source.html">AccelStepperI2C.h</a>.</p>
+
 </div>
 </div>
-<a id="afc4cf15067df14b3b61d30db85cc1adf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc4cf15067df14b3b61d30db85cc1adf">&#9670;&nbsp;</a></span>lastRequestTime</h2>
+<a id="a76febbd4a8a6a8577dd7da70a81febcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76febbd4a8a6a8577dd7da70a81febcd">&#9670;&nbsp;</a></span>lastRequestTime</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t diagnosticsReport::lastRequestTime</td>
+          <td class="memname">uint16_t diagnosticsReport::lastRequestTime</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>microseconds the slave spent in the most recent onRequest() interrupt </p>
 
+<p class="definition">Definition at line <a class="el" href="_accel_stepper_i2_c_8h_source.html#l00089">89</a> of file <a class="el" href="_accel_stepper_i2_c_8h_source.html">AccelStepperI2C.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a></li>
+<li><a class="el" href="_accel_stepper_i2_c_8h_source.html">AccelStepperI2C.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -187,7 +197,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
+    <li class="footer">Generated on Fri Feb 25 2022 18:36:30 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

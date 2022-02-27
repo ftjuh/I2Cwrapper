@@ -93,7 +93,10 @@ $(document).ready(function(){initNavTree('class_simple_buffer.html',''); initRes
 <div class="title">SimpleBuffer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8h_source.html#l00030">30</a> of file <a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a>.</p>
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4fe86d8150428e236dd5958662da1b94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a4fe86d8150428e236dd5958662da1b94">init</a> (uint8_t buflen)</td></tr>
@@ -108,7 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9680ed198edfb3f90bca8896549ab3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read any basic data type from the buffer from the current position and increment the position pointer according to the type's size.  <a href="class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4">More...</a><br /></td></tr>
 <tr class="separator:a9680ed198edfb3f90bca8896549ab3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0408a7143a40a819685a2de0ae16bcb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a0408a7143a40a819685a2de0ae16bcb3">reset</a> ()</td></tr>
-<tr class="memdesc:a0408a7143a40a819685a2de0ae16bcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the position pointer to the start of the buffer (0) without changing the buffer contents. Usually, this will be called before writing new data <em>and</em> before reading it.  <a href="class_simple_buffer.html#a0408a7143a40a819685a2de0ae16bcb3">More...</a><br /></td></tr>
+<tr class="memdesc:a0408a7143a40a819685a2de0ae16bcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the position pointer to the start of the buffer (which is[1] as [0] is the CRC8 chcksum) without changing the buffer contents. Usually, this will be called before writing new data <em>and</em> before reading it.  <a href="class_simple_buffer.html#a0408a7143a40a819685a2de0ae16bcb3">More...</a><br /></td></tr>
 <tr class="separator:a0408a7143a40a819685a2de0ae16bcb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4df34a56ad455801e52c7524ec48d8d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a4df34a56ad455801e52c7524ec48d8d3">setCRC8</a> ()</td></tr>
 <tr class="memdesc:a4df34a56ad455801e52c7524ec48d8d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate CRC8 checksum for the currently used buffer ([1]...[idx-1]) and store it in the first byte [0].  <a href="class_simple_buffer.html#a4df34a56ad455801e52c7524ec48d8d3">More...</a><br /></td></tr>
@@ -146,7 +149,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Check for correct CRC8 checksum. First byte [0] holds the checksum, rest of the currently used buffer is checked. </p>
-<dl class="section return"><dt>Returns</dt><dd>true CRC8 matches rest of buffer. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if CRC8 matches the rest of the used buffer. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8cpp_source.html#l00054">54</a> of file <a class="el" href="_simple_buffer_8cpp_source.html">SimpleBuffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -169,10 +174,12 @@ Public Attributes</h2></td></tr>
 <p>Allocate and reset buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">buflen</td><td>Maximum length of buffer in bytes. </td></tr>
+    <tr><td class="paramname">buflen</td><td>Maximum length of buffer in bytes. Take into account that the first byte [0] is used as CRC8 checksum. </td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8cpp_source.html#l00016">16</a> of file <a class="el" href="_simple_buffer_8cpp_source.html">SimpleBuffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -197,10 +204,12 @@ template&lt;typename T &gt; </div>
 <p>Read any basic data type from the buffer from the current position and increment the position pointer according to the type's size. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>Variable to read to. Amount of data read depends on size of this type. As reading could fail, you best initiate the variable with some default value. </td></tr>
+    <tr><td class="paramname">value</td><td>Variable to read to. Amount of data read depends on size of this type. As reading could fail, you best initialize the variable with some default value. </td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8h_source.html#l00112">112</a> of file <a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +228,9 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Reset the position pointer to the start of the buffer (0) without changing the buffer contents. Usually, this will be called before writing new data <em>and</em> before reading it. </p>
+<p>Reset the position pointer to the start of the buffer (which is[1] as [0] is the CRC8 chcksum) without changing the buffer contents. Usually, this will be called before writing new data <em>and</em> before reading it. </p>
+
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8cpp_source.html#l00023">23</a> of file <a class="el" href="_simple_buffer_8cpp_source.html">SimpleBuffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -239,6 +250,8 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Calculate CRC8 checksum for the currently used buffer ([1]...[idx-1]) and store it in the first byte [0]. </p>
+
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8cpp_source.html#l00049">49</a> of file <a class="el" href="_simple_buffer_8cpp_source.html">SimpleBuffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,6 +281,8 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8h_source.html#l00103">103</a> of file <a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -285,6 +300,8 @@ template&lt;typename T &gt; </div>
 
 <p>The allocated buffer. </p>
 
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8h_source.html#l00084">84</a> of file <a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a>.</p>
+
 </div>
 </div>
 <a id="a7ae740ae99dd4da7bdbe1d7245d85097"></a>
@@ -300,6 +317,8 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>The position pointer. Remember, [0] holds the CRC8 checksum, so for an empty buffer, idx is 1. </p>
+
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8h_source.html#l00090">90</a> of file <a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a>.</p>
 
 </div>
 </div>
@@ -317,11 +336,13 @@ template&lt;typename T &gt; </div>
 
 <p>Maximum length of buffer in bytes. Read and write operations use this to check for sufficient space (no error handling, though). </p>
 
+<p class="definition">Definition at line <a class="el" href="_simple_buffer_8h_source.html#l00096">96</a> of file <a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_simple_buffer_8h.html">SimpleBuffer.h</a></li>
-<li><a class="el" href="_simple_buffer_8cpp.html">SimpleBuffer.cpp</a></li>
+<li><a class="el" href="_simple_buffer_8h_source.html">SimpleBuffer.h</a></li>
+<li><a class="el" href="_simple_buffer_8cpp_source.html">SimpleBuffer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -329,7 +350,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
+    <li class="footer">Generated on Fri Feb 25 2022 18:36:30 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

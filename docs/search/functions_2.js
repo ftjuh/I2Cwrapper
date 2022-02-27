@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['diagnostics_230',['diagnostics',['../_accel_stepper_i2_c_8cpp.html#a87520fe47b6444ff58585f1cca1ebd06',1,'diagnostics(uint8_t address, diagnosticsReport *report):&#160;AccelStepperI2C.cpp'],['../_accel_stepper_i2_c_8h.html#a87520fe47b6444ff58585f1cca1ebd06',1,'diagnostics(uint8_t address, diagnosticsReport *report):&#160;AccelStepperI2C.cpp']]],
-  ['disableoutputs_231',['disableOutputs',['../class_accel_stepper_i2_c.html#a6b82da76eca7957814189cd67608aaf0',1,'AccelStepperI2C']]],
-  ['distancetogo_232',['distanceToGo',['../class_accel_stepper_i2_c.html#a26e27bf5d72113dc43694c87ed4a75f4',1,'AccelStepperI2C']]]
+  ['detach_296',['detach',['../class_servo_i2_c.html#a63a62761eaf9961c9012025b5d011962',1,'ServoI2C']]],
+  ['diagnostics_297',['diagnostics',['../class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f',1,'AccelStepperI2C']]],
+  ['disableoutputs_298',['disableOutputs',['../class_accel_stepper_i2_c.html#a6b82da76eca7957814189cd67608aaf0',1,'AccelStepperI2C']]],
+  ['distancetogo_299',['distanceToGo',['../class_accel_stepper_i2_c.html#a26e27bf5d72113dc43694c87ed4a75f4',1,'AccelStepperI2C']]]
 ];

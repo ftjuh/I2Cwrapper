@@ -1,13 +1,16 @@
 #######################################
 # Syntax Coloring Map For AccelStepperI2C
+# and its associated libraries
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-AccelStepperI2C	KEYWORD1
+I2Cwrapper	KEYWORD1
 SimpleBuffer	KEYWORD1
+AccelStepperI2C	KEYWORD1
+ServoI2C	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -22,12 +25,22 @@ resetAccelStepperSlave	KEYWORD2
 setEndstopPin 	KEYWORD2
 enableEndstops 	KEYWORD2
 endstops 	KEYWORD2
-setInterruptPin	KEYWORD2
 enableInterrupts	KEYWORD2
-changeI2Caddress	KEYWORD2
 enableDiagnostics	KEYWORD2
 diagnostics	KEYWORD2
-
+ping	KEYWORD2
+reset	KEYWORD2
+changeI2Caddress	KEYWORD2
+setInterruptPin	KEYWORD2
+clearInterrupt	KEYWORD2
+setI2Cdelay	KEYWORD2
+getSlaveVersion	KEYWORD2
+checkVersion	KEYWORD2
+sentErrors	KEYWORD2
+resultErrors	KEYWORD2
+transmissionErrors	KEYWORD2
+sentOK
+resultOK
 
 #######################################
 # Constants (LITERAL1)

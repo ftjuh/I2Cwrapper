@@ -93,10 +93,12 @@ $(document).ready(function(){initNavTree('struct_stepper.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 
-<p>holds stepper parameters needed for local slave management  
+<p>This struct comprises all stepper parameters needed for local slave management.  
  <a href="struct_stepper.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>holds stepper parameters needed for local slave management </p>
+<div class="textblock"><p>This struct comprises all stepper parameters needed for local slave management. </p>
+
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00236">236</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -108,12 +110,32 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a2b4137230f8c24b169d447231de2c14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24eae51605c18f17f05833a2061f7ab1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html#a24eae51605c18f17f05833a2061f7ab1">numEndstops</a> = 0</td></tr>
 <tr class="separator:a24eae51605c18f17f05833a2061f7ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5fb2f1b7e77f723afebf5f5a4a378ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html#af5fb2f1b7e77f723afebf5f5a4a378ca">endstopsEnabled</a> = false</td></tr>
-<tr class="separator:af5fb2f1b7e77f723afebf5f5a4a378ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafb876574872c4278bd330a60cdefc4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html#aafb876574872c4278bd330a60cdefc4a">interruptsEnabled</a> = false</td></tr>
 <tr class="separator:aafb876574872c4278bd330a60cdefc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5fb2f1b7e77f723afebf5f5a4a378ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html#af5fb2f1b7e77f723afebf5f5a4a378ca">endstopsEnabled</a> = false</td></tr>
+<tr class="separator:af5fb2f1b7e77f723afebf5f5a4a378ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a178865b71f7ed8c5b63546fb0b82bb28"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html#a178865b71f7ed8c5b63546fb0b82bb28">prevEndstopState</a></td></tr>
+<tr class="separator:a178865b71f7ed8c5b63546fb0b82bb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84037efe9d1722547a3cc36ebdb6b55d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_stepper.html#a84037efe9d1722547a3cc36ebdb6b55d">endstopDebounceEnd</a> = 0</td></tr>
+<tr class="separator:a84037efe9d1722547a3cc36ebdb6b55d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a84037efe9d1722547a3cc36ebdb6b55d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84037efe9d1722547a3cc36ebdb6b55d">&#9670;&nbsp;</a></span>endstopDebounceEnd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Stepper::endstopDebounceEnd = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00245">245</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
+
+</div>
+</div>
 <a id="a2b4137230f8c24b169d447231de2c14c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b4137230f8c24b169d447231de2c14c">&#9670;&nbsp;</a></span>endstops</h2>
 
@@ -125,6 +147,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00240">240</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
 
 </div>
 </div>
@@ -140,6 +164,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00243">243</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
+
 </div>
 </div>
 <a id="aafb876574872c4278bd330a60cdefc4a"></a>
@@ -153,6 +179,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00242">242</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
 
 </div>
 </div>
@@ -168,6 +196,24 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00241">241</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
+
+</div>
+</div>
+<a id="a178865b71f7ed8c5b63546fb0b82bb28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178865b71f7ed8c5b63546fb0b82bb28">&#9670;&nbsp;</a></span>prevEndstopState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t Stepper::prevEndstopState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00244">244</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
+
 </div>
 </div>
 <a id="abc95f0b832f9d5a671f7afa277bf9c91"></a>
@@ -181,6 +227,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00239">239</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
 
 </div>
 </div>
@@ -196,10 +244,12 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="firmware_8ino_source.html#l00238">238</a> of file <a class="el" href="firmware_8ino_source.html">firmware.ino</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="firmware_8ino.html">firmware.ino</a></li>
+<li><a class="el" href="firmware_8ino_source.html">firmware.ino</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -207,7 +257,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_stepper.html">Stepper</a></li>
-    <li class="footer">Generated on Thu Feb 3 2022 21:07:00 for AccelStepperI2C by
+    <li class="footer">Generated on Fri Feb 25 2022 18:36:30 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

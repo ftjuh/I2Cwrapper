@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['lastprocesstime_346',['lastProcessTime',['../structdiagnostics_report.html#aee89c72d2fa790c9ef24bace75ddd6cd',1,'diagnosticsReport']]],
-  ['lastreceivetime_347',['lastReceiveTime',['../structdiagnostics_report.html#abe4d6e336a35b1d68d0c75cc31dbd6b6',1,'diagnosticsReport']]],
-  ['lastrequesttime_348',['lastRequestTime',['../structdiagnostics_report.html#afc4cf15067df14b3b61d30db85cc1adf',1,'diagnosticsReport']]],
-  ['lowerendstop_349',['lowerEndStop',['../_interrupt___endstop_8ino.html#a54b75f36f5de988353e2c494dced255b',1,'Interrupt_Endstop.ino']]]
+  ['lastcycles_425',['lastCycles',['../firmware_8ino.html#acee4f8c66bd06079db7157d155550ede',1,'firmware.ino']]],
+  ['lastprocesstime_426',['lastProcessTime',['../structdiagnostics_report.html#a6f4f501a700f2cd94c209267c4d99c09',1,'diagnosticsReport']]],
+  ['lastreceivetime_427',['lastReceiveTime',['../structdiagnostics_report.html#a6d270ecf9a6ae1f8e717a879c54fc9bd',1,'diagnosticsReport']]],
+  ['lastrequesttime_428',['lastRequestTime',['../structdiagnostics_report.html#a76febbd4a8a6a8577dd7da70a81febcd',1,'diagnosticsReport']]],
+  ['lower_429',['lower',['../_interrupt___endstop_8ino.html#a7e0f2115058e207e60831f84d019f04f',1,'Interrupt_Endstop.ino']]],
+  ['lowerendstoppos_430',['lowerEndStopPos',['../_interrupt___endstop_8ino.html#a070d212f03b20f2c8e498bcc5bf43455',1,'Interrupt_Endstop.ino']]]
 ];

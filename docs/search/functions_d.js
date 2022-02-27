@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['waitforinterrupt_293',['waitForInterrupt',['../_interrupt___endstop_8ino.html#a9609734d63e7e894f5faa64d06c2abc7',1,'Interrupt_Endstop.ino']]],
-  ['write_294',['write',['../class_simple_buffer.html#a6af18ec1c5c082d2a8cefb9468449588',1,'SimpleBuffer']]]
+  ['validservo_362',['validServo',['../firmware_8ino.html#a18927d89764b3c8c70da59bb149524f2',1,'firmware.ino']]],
+  ['validstepper_363',['validStepper',['../firmware_8ino.html#a56ff022c8c9a6539accc3b6fa4f7efb8',1,'firmware.ino']]]
 ];

@@ -24,23 +24,29 @@ var NAVTREE =
 [
   [ "AccelStepperI2C", "index.html", [
     [ "AccelStepperI2C library", "index.html", null ],
-    [ "README", "md__r_e_a_d_m_e.html", [
-      [ "Introduction", "md__r_e_a_d_m_e.html#autotoc_md0", null ],
+    [ "Introduction", "md__r_e_a_d_m_e.html", [
       [ "How does it work?", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
-      [ "Differences from AccelStepper", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "Additional features", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
-      [ "Restrictions", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "Error handling", "md__r_e_a_d_m_e.html#Error-handling", null ],
-      [ "Usage", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
-      [ "Performance and diagnostics", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "Example", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
-      [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Author", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "Copyright", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "History", "md__r_e_a_d_m_e.html#autotoc_md12", null ]
+      [ "Differences from AccelStepper", "md__r_e_a_d_m_e.html#autotoc_md2", [
+        [ "State machine vs. polling", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
+        [ "Additional features", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+        [ "Restrictions", "md__r_e_a_d_m_e.html#autotoc_md5", null ]
+      ] ],
+      [ "Usage", "md__r_e_a_d_m_e.html#autotoc_md6", [
+        [ "General things to watch out for", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
+        [ "Error handling", "md__r_e_a_d_m_e.html#Error-handling", null ],
+        [ "Safety precautions", "md__r_e_a_d_m_e.html#Safety-precautions", null ]
+      ] ],
+      [ "Performance and diagnostics", "md__r_e_a_d_m_e.html#Performance-and-diagnostics", null ],
+      [ "Supported platforms", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+      [ "Example", "md__r_e_a_d_m_e.html#Example", null ],
+      [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+      [ "Author", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "Copyright", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "License", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "History", "md__r_e_a_d_m_e.html#autotoc_md13", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
+    [ "Reference", "modules.html", "modules" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Members", "functions.html", [
@@ -64,7 +70,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_accel_stepper_i2_c_8cpp.html",
-"struct_stepper.html#af5fb2f1b7e77f723afebf5f5a4a378ca"
+"firmware_8ino.html#a2451a9b021bbbd6931ff9832f662af13"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

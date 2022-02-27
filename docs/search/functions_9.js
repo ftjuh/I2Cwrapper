@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['preparecommand_248',['prepareCommand',['../_accel_stepper_i2_c_8cpp.html#ab39e356234456d740f606acf8fe776a0',1,'AccelStepperI2C.cpp']]],
-  ['printstats_249',['printStats',['../_c_n_c_shieldv3_8ino.html#ad207dc9b88fb8f1b2b0cd05d7006a8a7',1,'CNCShieldv3.ino']]],
-  ['processingtimes_250',['processingTimes',['../_speed__diagnostics_8ino.html#ac39654b5dc98d13c726db726751b2c5d',1,'Speed_diagnostics.ino']]],
-  ['processmessage_251',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
+  ['ping_317',['ping',['../class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe',1,'I2Cwrapper']]],
+  ['pollendstops_318',['pollEndstops',['../firmware_8ino.html#a377a90b916ad4433650793b43e74f9a4',1,'firmware.ino']]],
+  ['preparecommand_319',['prepareCommand',['../class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d',1,'I2Cwrapper']]],
+  ['processmessage_320',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
 ];

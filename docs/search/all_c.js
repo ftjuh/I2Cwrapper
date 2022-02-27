@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['newmessage_102',['newMessage',['../firmware_8ino.html#affd9824af02dde7126d00d43a74c0081',1,'firmware.ino']]],
-  ['numendstops_103',['numEndstops',['../struct_stepper.html#a24eae51605c18f17f05833a2061f7ab1',1,'Stepper']]],
-  ['numsteppers_104',['numSteppers',['../firmware_8ino.html#a9ffc376a015a72bacc0fa343e6fd7dd5',1,'numSteppers():&#160;firmware.ino'],['../_speed__diagnostics_8ino.html#aed32919b8861f8d78987ef8840d25710',1,'numSteppers():&#160;Speed_diagnostics.ino']]]
+  ['newaddress_120',['newAddress',['../_change__address_8ino.html#a53811bf61b46bdfb67602aeafbb0b739',1,'Change_address.ino']]],
+  ['newmessage_121',['newMessage',['../firmware_8ino.html#affd9824af02dde7126d00d43a74c0081',1,'firmware.ino']]],
+  ['now_122',['now',['../firmware_8ino.html#ad2a5acb9b13b943cac9ef0b8c8370100',1,'firmware.ino']]],
+  ['numendstops_123',['numEndstops',['../struct_stepper.html#a24eae51605c18f17f05833a2061f7ab1',1,'Stepper']]],
+  ['numservos_124',['numServos',['../firmware_8ino.html#a8270206122d7d60c6447798625bec3c5',1,'firmware.ino']]],
+  ['numsteppers_125',['numSteppers',['../firmware_8ino.html#a9ffc376a015a72bacc0fa343e6fd7dd5',1,'firmware.ino']]]
 ];

@@ -2,17 +2,19 @@
   AccelStepperI2C interrupt & endstop demo
   (c) juh 2022
 
-  1. install library to Arduino environment
-  2. Upload firmware.ino to slave (Arduino Uno or ESP32).
-  3. upload this example to master (Arduino Uno).
-  4. connect the I2C bus of both devices (usually A4<>A4, A5<>A5, GND<>GND),
-     don't fortget two I2C pullups and level-shifters if needed
-  5. also connect +5V<>+5V to power one board from the other, if needed
-  6. connect interrupt pin from slave (default: pin A3, CoolEN on GRBL CNC shields)
-     to master (default: pin 2)
-  7. connect one driver, one stepper, and two endstops to GND (sharing one input) and
-     adapt pin definitions below if needed.
-  8. now (not earlier) provide external power to the steppers and power to the Arduinos
+  Uses two end stops and interrupts to home a stepper, and then run
+  two tests: First, move the stepper to random positions between,
+  and occasionaly beyond, the two endstops. Then, repeatedley homes at
+  different speeds and reports reproducability of end stop positions.
+
+  As it uses interrupts to detect target-reached or endstop-hit
+  conditions, it does not need to poll the slave at all.
+
+  Assumes that master and slave both run on an Arduino Uno/Nano.
+  See config section below for hardware setup.
+
+  Warning: This sketch intentionally moves beyond the endstops, so set up
+  your test scenario according to the safety precautions in README.md.
 
 */
 
@@ -20,152 +22,239 @@
 #include <AccelStepperI2C.h>
 #include <Wire.h>
 
-//#define DEBUG_AccelStepperI2C
 
-const uint8_t addr = 0x8; // i2c address of slave
-const uint8_t stepPin = 2;
-const uint8_t dirPin = 5;
-const uint8_t endstopPin = 9;
-const uint8_t interruptPinSlave = A3;
-const uint8_t interruptPinMaster = 2; // Pins 2 and 3 are hardware interrupt pins on Arduino Uno
+// --- Config. Change as needed for your hardware setup ---
+
+const uint8_t addr = 0x8;                     // i2c address of slave
+const uint8_t stepPin = 8;                    // stepstick driver pin
+const uint8_t dirPin = 7;                     // stepstick driver pin
+const uint8_t enablePin = 2;                  // stepstick driver pin
+const uint8_t endstopPin = 17;                // Arduino Uno/Nano pin A3 (it's safer to use raw pin nr., since "A3" might mean sth. different if the master uses a different hardware platform)
+const uint8_t interruptPinSlave = 9;          // needs to be wired to interruptPinMaster
+const uint8_t interruptPinMaster = 2;         // wired to interruptPinSlave, needs to be a hardware interrupt pin (2 or 3 on Arduino Uno/Nano)
+const float homingSpeed  = 100.0;             // in steps/second. Adapt this for your stepper/gear/microstepping setup
+const float maxRunSpeed  = 600.0;             // in steps/second. Adapt this for your stepper/gear/microstepping setup
+const float acceleration = maxRunSpeed / 4;   // 4 seconds from 0 to max speed. Adapt this for your stepper/gear/microstepping setup
+
+// --- End of config ---
+
+
+I2Cwrapper wrapper(addr); // each slave device is represented by a wrapper...
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the slave
+
 volatile bool interruptFlag = false; // volatile for interrupt
+long lowerEndStopPos, upperEndStopPos, middlePos, range;
+long lower, upper;
 
-const float homingSpeed = 20.0; // in steps/second. Adapt this for your stepper/gear/microstepping setup
-const float maxRunSpeed = 200.0; // in steps/second. Adapt this for your stepper/gear/microstepping setup
 
-AccelStepperI2C* X; // do not invoke the constructors here, we need to establish I2C connection first.
-long lowerEndStop, upperEndStop;
+/***********************************************************************************
 
-void setup() {
+   SETUP
 
-  Wire.begin(); // Important: initialize Wire before creating AccelStepperI2C objects
+ ************************************************************************************/
+void setup()
+{
+
   Serial.begin(115200);
-  while (!Serial) {
-  }
+  Wire.begin();
+  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
 
-  Serial.println("\n\n\nAccelStepperI2C demo - interrupts\n\n");
 
-  // If the slave's and master's reset is not synchronized by hardware, after a master's reset the slave might
-  // think the master wants another stepper, not a first one, and will run out of steppers, sooner or later.
-  Serial.println("\n\nresetting slave\n");
-  resetAccelStepperSlave(addr);
-  delay(500);
+  /*
+     Prepare slave device
+  */
 
-  if (!checkVersion(addr)) {
-    Serial.println("Warning: Master and slave are not using the same library version.");
-    Serial.print("Master version is "); Serial.print(AccelStepperI2C_VersionMajor);
-    Serial.print("."); Serial.println(AccelStepperI2C_VersionMinor);
-    uint16_t v = getVersion(addr);
-    Serial.print("Slave version is"); Serial.print(v >> 8);
-    Serial.print("."); Serial.println(v & 0xFF);
+  if (!wrapper.ping()) {
+    Serial.println("Slave not found! Check connections and restart.");
     while (true) {}
   }
+  wrapper.reset(); // reset the slave device
+  delay(500); // and give it time to reboot
 
-  // add and init stepper
 
-  Serial.println("\nAdding stepper(s)");
-  X = new AccelStepperI2C(addr,
-                          AccelStepper::DRIVER, /* <-- driver type */
-                          stepPin,              /* <-- step pin */
-                          dirPin,               /* <-- dir pin */
-                          0,                    /* <-- pin3 (unused for driver type DRIVER) */
-                          0                     /* <-- pin4 (unused for driver type DRIVER) */
-                         );
-  if (X->myNum < 0 ) {
-    while (1) {} // failed, halting.
+  /*
+     Setup stepper/stepstick driver
+  */
+
+  stepper.attach(AccelStepper::DRIVER, stepPin, dirPin);
+  if (stepper.myNum < 0) { // should not happen after a reset
+    Serial.println("Error: stepper could not be allocated");
+    while (true) {}
   }
+  stepper.setEnablePin(enablePin);
+  stepper.setPinsInverted(false, false, true);  // directionInvert, stepInvert, enableInvert
+  stepper.enableOutputs();
+  stepper.setMaxSpeed(maxRunSpeed);
+  stepper.setAcceleration(acceleration);
 
-  // configure endstop
+  
+  /*
+     Setup endstops. Both are connected to the same pin, so we need to set the pin only once.
+  */
 
-  X->setEndstopPin(endstopPin,   // <-- endstop pin
-                   true,         // internal pullup
-                   true          // activeLow works nicely together with internal pullup
-                  );
-  X->enableEndstops();
-
-  // configure interrupt
-
-  setInterruptPin(addr,
-                  interruptPinSlave,  // <-- interrupt pin
-                  true // activeHigh = master will have to look out for a RISING flank
-                  );
-  X->enableInterrupts(); // make slave send out interrupts for this stepper
-  attachInterrupt(digitalPinToInterrupt(interruptPinMaster), interruptFromSlave, RISING); // make master notice them
-
-
-  X->setMaxSpeed(maxRunSpeed);
-  if (X->endstops() != 0) {
+  stepper.setEndstopPin(endstopPin, /* activeLow */ true, /* internal pullup */ true); // activeLow since endstop switches pull the endstop pin to GND
+  stepper.enableEndstops(); // make the state machine check for the endstops
+  if (stepper.endstops() != 0) { // one of the endstops is currently activated
     Serial.println("\nWarning: Please move stepper away from endstop,\n"
                    "because I don't know in which direction I have to move to get away from it.\n\nHALTING.");
+    stepper.disableOutputs(); // cut power, so that stepper can be moved away manually
     while (true) {}
   }
 
-  findEndstops();
-  Serial.print("Endstops found at positions 0 (lower endstop) and ");
-  Serial.print(upperEndStop); Serial.println(" (upper endstop).\n");
 
-  Serial.println("\n\n\n\n");
-  X->moveTo(upperEndStop / 2); // start with some initial target
-  X->runState(); // go there with acceleration
+  /*
+     Configure interrupts
+  */
 
-}
+  // First, make the slave send interrupts. The interrupt pin is shared by all units (steppers)
+  // which use interrupts, so we need the wrapper to set it up.
+  wrapper.setInterruptPin(interruptPinSlave, /* activeHigh */ true); // activeHigh -> master will have to look out for a RISING flank
+  stepper.enableInterrupts(); // make slave send out interrupts for this stepper at the pin set above
 
-void interruptFromSlave() {
-  interruptFlag = true; // just set a flag, leave interrupt as quickly as possible
-}
+  // And now make the master listen for the interrupt
+  attachInterrupt(digitalPinToInterrupt(interruptPinMaster), interruptFromSlave, RISING);
 
-void waitForInterrupt() {
-  while (!interruptFlag) {}
-  interruptFlag = false;
-}
 
-void findEndstops() {
+  /*
+     All set up and ready to go.
+  */
 
-  X->setSpeed(-homingSpeed);            // start in negative direction, as we're looking for point zero first
-  X->runSpeedState();                   // run at constant speed (= interrupt can only be triggered by endstop, not by target reached)
-  waitForInterrupt();                   // and wait for endstop (state machine will stop there)
-  X->setCurrentPosition(0);             // let's define this endstop as position 0
-  lowerEndStop = 0;
+  findEndstops(homingSpeed);  // find upperEndStopPos and lowerEndStopPos;
+  range = upperEndStopPos - lowerEndStopPos;
+  middlePos = lowerEndStopPos + range / 2;
 
-  X->setSpeed(homingSpeed);             // now let's look in the positive direction
-  X->runSpeedState();                   // run at constant (slow) speed
-  waitForInterrupt();                   // and wait for endstop (state machine will stop there)
-  upperEndStop = X->currentPosition();  // save it
+  stepper.moveTo(middlePos); // start in the middle
+  stepper.runState(); // go there with acceleration
 
-}
+  // First test: 
+  // do some random movements, causing endstop and target-reached interrupt conditions
+  randomWalk(25, 50); // 25 repetitions, 50% offshoot chance
 
-/*
-   For testing purposes, the loop will run the stepper to random targets
-   which might be invalid, i.e. outside of the endstop limits. If it hits
-   an endstop, it runs to the middle position, and starts over. If it
-   arrives at a valid target posistion, it just sets another target.
-*/
-const long chance = 20; // % chance that target will be off limits
-void loop() {
-
+  stepper.moveTo(middlePos); // go back to the middle before entering loop()
+  stepper.runState();
   waitForInterrupt();
 
-  // determine what caused the interrupt, state machine will have stopped in any case
-  if (X->endstops() != 0) {
+  // save endstop positions
+  lower = lowerEndStopPos;
+  upper = upperEndStopPos;
 
-    Serial.println("ran into endstop, returning to middle position.");
-    X->moveTo(upperEndStop / 2);
-    X->runState(); // go there with acceleration
+}
 
-  } else if (!X->isRunning()) {
 
-    Serial.print("target reached, setting new target to ");
-    long offLimits = (upperEndStop * chance / 100) / 2;
-    long newPos = random(-offLimits, upperEndStop + offLimits) ;
-    Serial.println(newPos);
-    X->moveTo(newPos);
-    X->runState(); // go there with acceleration
+/***********************************************************************************
 
-  } else {
+   LOOP: Second test, test reproducability of endstop positions
 
-    Serial.println("\nWarning: Interrupt due to unknown reason\n\nHALTING.");
+ ************************************************************************************/
+long cycles = 0;
+void loop()
+{
+
+  float sp = random(homingSpeed * 0.5, homingSpeed * 1.5); // vary speed a little
+  findEndstops(sp);
+  Serial.print("Deviations after "); Serial.print(cycles);
+  Serial.print(" cycles, measured with a speed of "); Serial.print(sp);
+  Serial.print(" steps/s: lower endstop = "); Serial.print(lowerEndStopPos - lower);
+  Serial.print(", upper endstop = "); Serial.println(upperEndStopPos - upper);
+  cycles++;
+}
+
+
+/***********************************************************************************
+
+   REST OF THE SCHÜTZENFEST
+
+ ************************************************************************************/
+
+void findEndstops(float sp)
+{
+
+  stepper.setSpeed(-sp);  // start in negative direction, as we're looking for point zero first
+  stepper.runSpeedState();  // run at constant speed (= interrupt can only be triggered by endstop, not by target reached)
+  if (waitForInterrupt() != interruptReason_endstopHit) { // wait for endstop and check for correct interrupt cause
+    Serial.print("Error. Interrupt due to unexpected reason #");
     while (true) {}
-
   }
 
+  lowerEndStopPos = stepper.currentPosition();  // save position (usually, it would make sense to simply set this to 0, but we don't for testing purposes)
+
+  // note: we're still at the endstop. But the interrupt will only trigger on the next not-bouncing induced activated-flank, so no problem here
+  stepper.setSpeed(sp);             // now let's look in the positive direction
+  stepper.runSpeedState();                   // run at constant (slow) speed
+  if (waitForInterrupt() != interruptReason_endstopHit) { // and wait for other endstop
+    Serial.print("Error. Interrupt due to unexpected reason.");
+    while (true) {}
+  }
+  upperEndStopPos = stepper.currentPosition();  // save position
+
+  Serial.print("Endstops found at positions 0 (lower endstop) and ");
+  Serial.print(upperEndStopPos); Serial.println(" (upper endstop).\n\n");
+
+}
+
+
+
+/*
+   wait and return reason for interrupt
+*/
+uint8_t waitForInterrupt()
+{
+  while (!interruptFlag) {} // wait until interrupt will set the flag ### will probably need a yield() on ESPs
+  interruptFlag = false; // clear flag
+  uint8_t reasonAndUnit = wrapper.clearInterrupt();
+  if ((reasonAndUnit & 0xf) != stepper.myNum) { // stepper is the only unit in use, so there should be no other unit causing an interrupt
+    Serial.println("Error. Interrupt cause from unknown unit.");
+    while (true) {}
+  }
+  return reasonAndUnit >> 4; // dump unit and return reason in LSBs
+}
+
+
+
+/*
+   This test routine will run the stepper repeatedly to random targets, some of
+   them intentionally invalid, i.e. outside of the endstop limits. If it hits
+   an endstop, it runs to the middle position, and starts over. If it arrives
+   at a valid target posistion, it just sets another target.
+*/
+void randomWalk(int repetitions, long chance) // % chance that target will be off limits
+{
+
+  long offLimits = (range * chance / 100) / 2;
+
+  for (int j = 0; j < repetitions; j++) {
+
+    uint8_t reason = waitForInterrupt();
+
+    switch (reason) {
+    case interruptReason_targetReachedByRun: {
+      Serial.print("Target reached as planned, setting new target to ");
+      long newPos = random(lowerEndStopPos - offLimits, upperEndStopPos + offLimits);
+      Serial.println(newPos);
+      stepper.moveTo(newPos);
+      stepper.runState(); // go there with acceleration
+      break;
+    }
+    case interruptReason_endstopHit: {
+      Serial.println("Ran into endstop, returning to middle position.");
+      stepper.moveTo(middlePos);
+      stepper.runState(); // go there with acceleration
+      break;
+    }
+    default: {
+      Serial.print("Unexpected interrupt reason #");
+      Serial.println(reason);
+      while (true) {}
+    }
+    } // switch
+  }
+} // void randomWalk
+
+
+#if defined(ESP8266)
+ICACHE_RAM_ATTR
+#endif
+void interruptFromSlave()
+{
+  interruptFlag = true; // just set a flag, leave interrupt as quickly as possible
 }

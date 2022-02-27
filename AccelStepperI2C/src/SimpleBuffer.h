@@ -3,8 +3,8 @@
    @brief Simple and ugly serialization buffer for any data type. Just a buffer,
    a current position pointer used for reading from *and* writing to the buffer,
    and template functions for reading and writing any data type. The template
-   technique is adapted from Nick Gammon's I2C_Anything library, the CRC8 is
-   from him also.
+   technique is adapted from Nick Gammon's I2C_Anything library, the CRC8
+   routine is from him also.
    @section author Author
    Copyright (c) 2022 juh
    @section license License
@@ -16,17 +16,24 @@
 #ifndef SimpleBuffer_h
 #define SimpleBuffer_h
 
+// #define DEBUG // uncomment for debug output to Serial (which has to be begun() in the main sketch)
 
 #include <Arduino.h>
-//#include <cstring>
-//#include <stdint.h>
+
+#if defined(DEBUG)
+#define log(...)       Serial.print(__VA_ARGS__)
+#else
+#define log(...)
+#endif // DEBUG
 
 
-class SimpleBuffer {
- public:
+class SimpleBuffer
+{
+public:
   /*!
    * @brief Allocate and reset buffer.
-   * @param buflen Maximum length of buffer in bytes.
+   * @param buflen Maximum length of buffer in bytes. Take into account that
+   * the first byte [0] is used as CRC8 checksum.
   */
   void init(uint8_t buflen);
 
@@ -41,15 +48,15 @@ class SimpleBuffer {
    * @brief Read any basic data type from the buffer from the current position and
    * increment the position pointer according to the type's size.
    * @param value Variable to read to. Amount of data read depends on size of this
-   * type. As reading could fail, you best initiate the variable with some
+   * type. As reading could fail, you best initialize the variable with some
    * default value.
   */
   template <typename T> void read(T& value);
 
   /*!
-   * @brief Reset the position pointer to the start of the buffer (0) without
-   * changing the buffer contents. Usually, this will be called before writing new
-   * data *and* before reading it.
+   * @brief Reset the position pointer to the start of the buffer (which is[1]
+   * as [0] is the CRC8 chcksum) without changing the buffer contents. Usually,
+   * this will be called before writing new data *and* before reading it.
   */
   void reset();
 
@@ -63,18 +70,18 @@ class SimpleBuffer {
   /*!
    * @brief Check for correct CRC8 checksum. First byte [0] holds the checksum,
    * rest of the currently used buffer is checked.
-   * @returns true CRC8 matches rest of buffer.
+   * @returns true if CRC8 matches the rest of the used buffer.
    */
   bool checkCRC8();
 
 
-  // I guess a proper class would make the next three be private.
-  // Let's keep 'em public for quick'n'dirty direct access
+  // I guess a proper class would make the next three private or safeguard them
+  // with access methods. Let's keep 'em public for quick'n'dirty direct access.
 
   /*!
    * @brief The allocated buffer.
   */
-  uint8_t * buffer;
+  uint8_t* buffer;
 
   /*!
    * @brief The position pointer. Remember, [0] holds the CRC8 checksum, so for
@@ -88,12 +95,13 @@ class SimpleBuffer {
   */
   uint8_t maxLen;
 
- private:
+private:
   uint8_t calculateCRC8 ();
 };
 
 
-template <typename T> void SimpleBuffer::write(const T& value) {
+template <typename T> void SimpleBuffer::write(const T& value)
+{
   if (idx + sizeof (value) <= maxLen) { // enough space to write to?
     memcpy(&buffer[idx], &value, sizeof (value));
     idx += sizeof (value);
@@ -101,11 +109,13 @@ template <typename T> void SimpleBuffer::write(const T& value) {
 }
 
 // T should be initiated before calling this, as it might return unchanged due to if() statement
-template <typename T> void SimpleBuffer::read(T& value) {
+template <typename T> void SimpleBuffer::read(T& value)
+{
   if (idx + sizeof (value) <= maxLen) { // enough space to read from?
     memcpy(&value, &buffer[idx], sizeof (value));
     idx += sizeof (value);
   }
 }
+
 
 #endif

@@ -1,0 +1,1 @@
+astyle --recursive -A16 --indent=spaces=2 --keep-one-line-blocks --keep-one-line-statements --indent-col1-comments --pad-oper --pad-comma --pad-header --align-pointer=type --break-one-line-headers --add-one-line-braces --attach-closing-while --keep-one-line-blocks *.cpp *.h *.ino
