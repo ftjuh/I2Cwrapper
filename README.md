@@ -59,11 +59,11 @@ Have a look at the [todo list](https://ftjuh.github.io/AccelStepperI2C/todo.html
 
 A warning up front: Uncontrollably moving stepper motors can break things. So take care of **[error handling](#error-handling)** and **[safety precautions](#safety-precautions)** in critical environments e.g. if your steppers gone wild might damage something.
 
-      1. Install the folder with the libraries AccelStepperI2C, SimpleBuffer, I2Cwrapper (if used,  ServoI2C) and of course the original AccelStepper [to the Arduino environment](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation).
-   2. Upload [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino) to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.
-   3. Upload an example sketch or your own master sketch to another Arduino-like (master).
-   4. Connect the I2C bus of both devices, usually it's A4<->A4 (SDA), A5<->A5 (SCL) and GND<->GND. Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V<->+5V to power one board from the other, if needed.
-   5. Now (not earlier) provide external power to the steppers and power to the Arduinos.
+1. Install the folder with the libraries AccelStepperI2C, SimpleBuffer, I2Cwrapper (if used,  ServoI2C) and of course the original AccelStepper [to the Arduino environment](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation).
+2. Upload [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino) to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.
+3. Upload an example sketch or your own master sketch to another Arduino-like (master).
+4. Connect the I2C bus of both devices, usually it's A4<->A4 (SDA), A5<->A5 (SCL) and GND<->GND. Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V<->+5V to power one board from the other, if needed.
+5. Now (not earlier) provide external power to the steppers and power to the Arduinos.
 
 Have a look at the [examples](https://github.com/ftjuh/AccelStepperI2C/tree/master/AccelStepperI2C/examples) for details. 
 

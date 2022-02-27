@@ -139,8 +139,9 @@ Restrictions</h2>
 <p>Have a look at the <a href="https://ftjuh.github.io/AccelStepperI2C/todo.html">todo list</a> to see what improvements are still planned.</p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Usage</h1>
-<p>A warning up front: Uncontrollably moving stepper motors can break things. So take care of <b><a href="#error-handling">error handling</a></b> and <b><a href="#safety-precautions">safety precautions</a></b> in critical environments e.g. if your steppers gone wild might damage something. </p><pre class="fragment">  1. Install the folder with the libraries AccelStepperI2C, SimpleBuffer, I2Cwrapper (if used,  ServoI2C) and of course the original AccelStepper [to the Arduino environment](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation).
-</pre><ol type="1">
+<p>A warning up front: Uncontrollably moving stepper motors can break things. So take care of <b><a href="#error-handling">error handling</a></b> and <b><a href="#safety-precautions">safety precautions</a></b> in critical environments e.g. if your steppers gone wild might damage something.</p>
+<ol type="1">
+<li>Install the folder with the libraries <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_simple_buffer.html">SimpleBuffer</a>, <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> (if used, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) and of course the original AccelStepper <a href="https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation">to the Arduino environment</a>.</li>
 <li>Upload <a href="https://github.com/ftjuh/AccelStepperI2C/blob/master/firmware/firmware.ino">firmware.ino</a> to one Arduino (slave), there are a couple of configuration options at the top of the file. Connect steppers and stepper drivers to the slave or use a dedicated hardware, e.g. Arduino UNO with CNC V3.00 shield.</li>
 <li>Upload an example sketch or your own master sketch to another Arduino-like (master).</li>
 <li>Connect the I2C bus of both devices, usually it's A4&lt;-&gt;A4 (SDA), A5&lt;-&gt;A5 (SCL) and GND&lt;-&gt;GND. Don't fortget two I2C pullups and, if needed, level-shifters. Also connect +5V&lt;-&gt;+5V to power one board from the other, if needed.</li>
@@ -296,7 +297,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 27 2022 11:52:59 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 12:00:36 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
