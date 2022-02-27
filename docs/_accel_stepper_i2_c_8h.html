@@ -888,6 +888,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>corresponds to AccelStepper::run(), will fall back to state_stopped if target reached or endstop hit </p>
+
 </div>
 </div>
 <a id="a3bbebd6c8b4bd27f6a93cd6d7d15b296"></a>
@@ -901,6 +903,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>corresponds to AccelStepper::runSpeed(), will remain active until stopped by user or endstop </p>
 
 </div>
 </div>
@@ -916,6 +920,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>corresponds to AccelStepper::state_runSpeedToPosition(), will fall back to state_stopped if target position reached or endstop hit </p>
+
 </div>
 </div>
 <a id="a73b31c4c5b4a3d32085fa1570594ac64"></a>
@@ -929,6 +935,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>stepper state machine states </p>
 <p>state machine is inactive, stepper can still be controlled directly </p>
 
 </div>
@@ -981,7 +989,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_2c564d900600b9be19be1c51915eefcd.html">AccelStepperI2C</a></li><li class="navelem"><a class="el" href="dir_aedce182ba26a070e27f99c20ccbc843.html">src</a></li><li class="navelem"><a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 13:08:16 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

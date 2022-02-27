@@ -98,12 +98,13 @@ Steppers can exert damaging forces, particularly(!) if they are moving slow. If 
 If things don't work as expected, here's a couple of things that helped me during testing:
 
 * Start **without I2C**. That is, after setting up the hardware, first test the to-be-slave device with a conventional AccelStepper sketch, so that you can be sure your problems are I2C-related.
+* Start **without steppers**. Use error handling and possibly debug output to test if communication between master and slave is working as it should.
 * **Simplify**. Start with very simple setups, short cables, low bus speeds etc. and work your way up from there.
 * Did you think of two **I2C-pullups**?
 * Have you powered your **level shifters**? They won't work with SCL, SDA and GND alone.
 * If master and slave run on different hardware platforms, **pin names** like "D3" might refer to completely different hardware pins or not be defined at all.  For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin.  So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the `pins_arduino.h` file for your slave device or run a simple sketch with `Serial.print(D3);` etc. on your slave board.
 * ESPs can crash if you unintentionally use certain pin numbers (e.g. flash memory pins) that are available on plain Unos/Nanos. Remember that when you **move between platforms**.
-* Enable **debug output** on slave *and* master. It's a bit cluttered at the moment, yet informative. Uncomment the `#define DEBUG` at the top of all `.h` files you want info from. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.
+* Enable **debug output** on slave *and* master. It's a bit cluttered at the moment, yet informative. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.
 
 # Performance and diagnostics
 

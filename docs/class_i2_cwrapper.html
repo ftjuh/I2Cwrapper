@@ -97,7 +97,8 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 <p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> (and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) library.  
  <a href="class_i2_cwrapper.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>I split it from an earlier version of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library when adding Servo support, to be able to have a clean separation librarywise between the two: The wrapper represents the I2C slave and handles all communication with it. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> use it for communicating with the slave. To do so, an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> object is instantiated with the slave's I2C address and then passed to its clients',i.e. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> or <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> objects, constructor. </p><dl class="section user"><dt>Command codes</dt><dd><ul>
+<div class="textblock"><p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> (and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) library. </p>
+<p>I split it from an earlier version of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library when adding Servo support, to be able to have a clean separation librarywise between the two: The wrapper represents the I2C slave and handles all communication with it. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> use it for communicating with the slave. To do so, an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> object is instantiated with the slave's I2C address and then passed to its clients',i.e. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> or <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> objects, constructor. </p><dl class="section user"><dt>Command codes</dt><dd><ul>
 <li>000 - 009 (reserved)</li>
 <li>010 - 059 <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></li>
 <li>060 - 069 <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></li>
@@ -189,6 +190,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i2c_address</td><td>Address of the slave device </td></tr>
@@ -216,6 +219,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Permanently change the I2C address of the device. New address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot. </p>
+
 </div>
 </div>
 <a id="ac2c348765ec579770db7749e15a05d81"></a>
@@ -233,6 +238,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get version of slave firmware and compare it with library version. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if both versions match, i.a. are compatible. </dd></dl>
 
 </div>
@@ -251,6 +258,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Acknowledge a received interrupt to slave so that it can clear the interupt condition and return the reason for the interrupt. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reason for the interrupt as 8bit BCD with triggering unit in lower 4 bits and trigger reason in the upper 4 bits. 0xff in case of error. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group___interrupt_reasons.html" title="Used by clearInterrup() to inform the master about what caused the previous interrupt.">List of possible reasons an interrupt was triggered.</a> </dd></dl>
 
@@ -270,6 +279,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get semver compliant version of slave firmware. </p>
 <dl class="section return"><dt>Returns</dt><dd>major version in bits 0-7, minor version in bits 8-15; patch version in bits 16-23; 0xFFFFFFFF on error. </dd></dl>
 
 </div>
@@ -288,6 +299,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Test if slave is listening. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if slave could be found under the given address. </dd></dl>
 
 </div>
@@ -353,6 +366,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers/servos) which the master does not know about. </p>
+
 </div>
 </div>
 <a id="a595582aa091af76fc27c472d081db4db"></a>
@@ -369,6 +384,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the slave. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a>, <a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">transmissionErrors()</a> </dd></dl>
 
 </div>
@@ -404,6 +421,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the slave. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a>, <a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">transmissionErrors()</a> </dd></dl>
 
 </div>
@@ -423,6 +442,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Define a minimum time that the master keeps between I2C transmissions. This is to make sure that the slave has finished its earlier task or has its answer to the master's previous command ready. Particularly for ESP32 slaves this is critical, as due to its implementation of I2C slave mode, an ESP32 could theoretically send incomplete data if a request is sent too early. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">delay</td><td>Minimum time in between I2C transmissions in milliseconds. The default I2CdefaultDelay currently is quite conservative (50 ms). </td></tr>
@@ -459,6 +480,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Define a global interrupt pin which can be used by device units (steppers, servos...) to inform the master that something important happend. Currently used by <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> to inform about end stop hits and target reached events. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>Pin the slave will use to send out interrupts. </td></tr>
@@ -484,6 +507,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return and reset the sum of failed commands sent <em>and</em> failed receive events since the last time this method was used. Use this if you are only interested in the sum of all transmission errors, not in what direction the errors occurred. </p>
 <dl class="section return"><dt>Returns</dt><dd>Sum of <a class="el" href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a> and <a class="el" href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a> </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a>, <a class="el" href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a> </dd></dl>
 
@@ -516,6 +541,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>True if return value from previous function call was received successfully. </p>
+
 </div>
 </div>
 <a id="a51c3023339571c205c161a82576fd4f4"></a>
@@ -530,6 +557,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>True if previous function call was successfully transferred to slave. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -542,7 +571,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 13:08:16 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

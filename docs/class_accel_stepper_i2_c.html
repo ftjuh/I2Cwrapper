@@ -97,7 +97,8 @@ $(document).ready(function(){initNavTree('class_accel_stepper_i2_c.html',''); in
 <p>An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>.  
  <a href="class_accel_stepper_i2_c.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class mimicks the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">original AccelStepper interface</a>. It replicates most of its methods and transmits each method call via I2C to a slave running the <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p>
+<div class="textblock"><p>An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>. </p>
+<p>This class mimicks the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">original AccelStepper interface</a>. It replicates most of its methods and transmits each method call via I2C to a slave running the <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -219,6 +220,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">w</td><td>Wrapper object representing the slave the stepper is connected to. </td></tr>
@@ -278,6 +281,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper object on the slave's side and make it ready for use. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">interface</td><td>Only AccelStepper::DRIVER is tested at the moment, but AccelStepper::FULL2WIRE, AccelStepper::FULL3WIRE, AccelStepper::FULL4WIRE, AccelStepper::HALF3WIRE, and AccelStepper::HALF4WIRE should work as well, AccelStepper::FUNCTION of course not </td></tr>
@@ -340,6 +345,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get most recent diagnostics data. Needs diagnostics enabled and a slave which was compiled with the DIAGNOSTICS compiler directive enabled. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">report</td><td>where to put the data, preallocated struct of type <a class="el" href="structdiagnostics_report.html" title="Used to transmit diagnostic info with AccelStepperI2C::diagnostics().">diagnosticsReport</a>. </td></tr>
@@ -399,6 +406,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Turn on/off diagnostic speed logging. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td>true for enable, false for disable </td></tr>
@@ -424,6 +433,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Tell the state machine to check the endstops regularly. If any of the (one or two) stepper's endstops is hit, the state machine will revert to state_stopped. To prevent overshoot, also the stepper's speed is set to 0 and its target to the current position. </p>
 <p>An interrupt will be triggered, if interrupts are enabled, in that case <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge a received interrupt to slave so that it can clear the interupt condition and return the ...">I2Cwrapper::clearInterrupt()</a> will then inform about the interrupt's cause. Independent of an interrupt, the master can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">endstops()</a> to find out if an endstop was hit and which one it was.</p>
 <p>A "hit" condition is defined as an end stop switch becoming active. Nothing happens if it stays active or becomes inactive. A simple debouncing mechanism is in place. After a new flank (switch becoming active <em>or</em> inactive), it will ignore any further flanks for a set interval of 5 milliseconds, which should suffice for most switches to get into a stable state. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -450,6 +461,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a state machine change occured which was not triggered by the master. At the moment, this could either be a target reached condition in <a class="el" href="class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6" title="Will poll run(), i.e. run to the target with acceleration and stop the state machine upon reaching it...">runState()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f" title="Will poll runSpeedToPosition(), i.e. run at constant speed until target has been reached.">runSpeedToPositionState()</a>, or an endstop reached condition. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td>true (default) to enable, false to disable. </td></tr>
@@ -491,6 +504,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read current state of endstops. </p>
 <dl class="section return"><dt>Returns</dt><dd>One bit for each endstop, LSB is always the last addded endstop. Takes activeLow setting in account, i.e. actived will always be 1. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If any of the (one or two) stepper&#39;s endstops...">enableEndstops()</a> </dd></dl>
 
@@ -510,6 +525,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read the state machine's state (it may have been changed by endstop or target reached condition). </p>
 <dl class="section return"><dt>Returns</dt><dd>one of state_stopped, state_run, state_runSpeed, or state_runSpeedToPosition. </dd></dl>
 
 </div>
@@ -598,6 +615,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Don't use this, use state machine instead with <a class="el" href="class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6" title="Will poll run(), i.e. run to the target with acceleration and stop the state machine upon reaching it...">runState()</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>If you use it for whatever reason, check sentOK and resultOK to be sure that things are alright and the return value can be trusted. </dd></dl>
 
 </div>
@@ -616,6 +635,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Don't use this, use state machine instead with <a class="el" href="class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7" title="Will poll runSpeed(), i.e. run at constant speed until told otherwise (see AccelStepperI2C::stopState...">runSpeedState()</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>If you use it for whatever reason, check sentOK and resultOK to be sure that things are alright and the return value can be trusted. </dd></dl>
 
 </div>
@@ -635,6 +656,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Will poll <a class="el" href="class_accel_stepper_i2_c.html#a74bcee3589bcc31e911c4b09175474a8" title="Don&#39;t use this, use state machine instead with runSpeedState().">runSpeed()</a>, i.e. run at constant speed until told otherwise (see <a class="el" href="class_accel_stepper_i2_c.html#a509c7691efe52e80615e937e693bdbc1" title="Will stop any of the above states, i.e. stop polling. It does nothing else, so the master is solely i...">AccelStepperI2C::stopState()</a>. </p>
+
 </div>
 </div>
 <a id="a3ad21077df56b669b3cf115c794c7d1d"></a>
@@ -651,6 +674,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Don't use this, use state machine instead with <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f" title="Will poll runSpeedToPosition(), i.e. run at constant speed until target has been reached.">runSpeedToPositionState()</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>If you use it for whatever reason, check sentOK and resultOK to be sure that things are alright and the return value can be trusted. </dd></dl>
 
 </div>
@@ -670,6 +695,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Will poll <a class="el" href="class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d" title="Don&#39;t use this, use state machine instead with runSpeedToPositionState().">runSpeedToPosition()</a>, i.e. run at constant speed until target has been reached. </p>
+
 </div>
 </div>
 <a id="a934c71dc0f3b534bc859f40e785066b6"></a>
@@ -686,6 +713,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Will poll <a class="el" href="class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350" title="Don&#39;t use this, use state machine instead with runState().">run()</a>, i.e. run to the target with acceleration and stop the state machine upon reaching it. </p>
 
 </div>
 </div>
@@ -704,6 +733,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This is a blocking function in the original, it will only return after the new target has been reached. This I2C implementation mimicks the original, but uses the state machine and checks for a target reached condition with a fixed frequency of 100ms to keep the I2C bus uncluttered. </p>
 <dl class="section note"><dt>Note</dt><dd>Does not check for endstops, implement your own loop if you need them. </dd></dl>
 
 </div>
@@ -722,6 +753,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This is a blocking function in the original, it will only return after the target has been reached. This I2C implementation mimicks the original, but uses the state machine and checks for a target reached condition with a fixed frequency of 100ms to keep the I2C bus uncluttered. </p>
 <dl class="section note"><dt>Note</dt><dd>Does not check for endstops, implement your own loop if you need them. </dd></dl>
 
 </div>
@@ -811,6 +844,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Define a new endstop pin. Each stepper can have up to two, so don't call this more than twice per stepper. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>Pin the endstop switch is connected to. </td></tr>
@@ -972,6 +1007,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the state machine's state manually. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">newState</td><td>one of state_stopped, state_run, state_runSpeed, or state_runSpeedToPosition. </td></tr>
@@ -1030,6 +1067,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Will stop any of the above states, i.e. stop polling. It does nothing else, so the master is solely in command of target, speed, and other settings. </p>
+
 </div>
 </div>
 <a id="a82a20c64e474ca52f92f64cddb8c756b"></a>
@@ -1062,6 +1101,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="struct_stepper.html" title="This struct comprises all stepper parameters needed for local slave management.">Stepper</a> number with myNum &gt;= 0 for successfully added steppers. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -1074,7 +1115,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 13:08:16 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

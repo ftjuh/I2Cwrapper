@@ -144,6 +144,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Check for correct CRC8 checksum. First byte [0] holds the checksum, rest of the currently used buffer is checked. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if CRC8 matches the rest of the used buffer. </dd></dl>
 
 </div>
@@ -163,6 +165,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Allocate and reset buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">buflen</td><td>Maximum length of buffer in bytes. Take into account that the first byte [0] is used as CRC8 checksum. </td></tr>
@@ -189,6 +193,8 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read any basic data type from the buffer from the current position and increment the position pointer according to the type's size. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>Variable to read to. Amount of data read depends on size of this type. As reading could fail, you best initialize the variable with some default value. </td></tr>
@@ -213,6 +219,8 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Reset the position pointer to the start of the buffer (which is[1] as [0] is the CRC8 chcksum) without changing the buffer contents. Usually, this will be called before writing new data <em>and</em> before reading it. </p>
+
 </div>
 </div>
 <a id="a4df34a56ad455801e52c7524ec48d8d3"></a>
@@ -229,6 +237,8 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculate CRC8 checksum for the currently used buffer ([1]...[idx-1]) and store it in the first byte [0]. </p>
 
 </div>
 </div>
@@ -249,6 +259,8 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write any basic data type to the buffer at the current position and increment the position pointer according to the type's size. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>Data to write. </td></tr>
@@ -271,6 +283,8 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>The allocated buffer. </p>
+
 </div>
 </div>
 <a id="a7ae740ae99dd4da7bdbe1d7245d85097"></a>
@@ -284,6 +298,8 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The position pointer. Remember, [0] holds the CRC8 checksum, so for an empty buffer, idx is 1. </p>
 
 </div>
 </div>
@@ -299,6 +315,8 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Maximum length of buffer in bytes. Read and write operations use this to check for sufficient space (no error handling, though). </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -311,7 +329,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 13:08:16 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

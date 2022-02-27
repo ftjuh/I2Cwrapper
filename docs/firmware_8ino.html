@@ -98,7 +98,8 @@ $(document).ready(function(){initNavTree('firmware_8ino.html',''); initResizable
 <p>Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library, comes with the matching <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library.  
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This documentation is probably only relevant for you if you want to change the firmware. Otherwise, the library documentation should suffice. </p>
+<div class="textblock"><p>Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library, comes with the matching <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library. </p>
+<p>This documentation is probably only relevant for you if you want to change the firmware. Otherwise, the library documentation should suffice. </p>
 <h1><a class="anchor" id="author"></a>
 Author</h1>
 <p>Copyright (c) 2022 juh </p>
@@ -238,6 +239,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Uncomment this to enable firmware debugging output on Serial. </p>
+
 </div>
 </div>
 <a id="a1cad4e2514f451585f15da3b8ee3cd2f"></a>
@@ -336,6 +339,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Assign and initialize new stepper. Calls the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#a3bc75bd6571b98a6177838ca81ac39ab">AccelStepper's[1/2] constructor</a> </p>
 <dl class="section return"><dt>Returns</dt><dd>internal number (0-7) of stepper assigned to new stepper, -1 for error </dd></dl>
 
 </div>
@@ -371,6 +376,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Main loop, implements the state machine. Will check for each stepper's state and do the appropriate polling (run() etc.) as needed. Also checks for incoming commands and passes them on for processing. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>endstop polling: overhead to check if polling is needed (timeToCheckTheEndstops) might cost more than it saves, so maybe just check each cycle even if it might be much more often than needed. </dd></dl>
 
 </div>
@@ -428,6 +435,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Handle I2C receive event. Just read the message and inform main loop. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd><del>Just read the buffer here, move interpretation out of the interrupt.</del> </dd></dl>
 
 </div>
@@ -446,6 +455,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>&lt;done&gt;Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.&lt;/done&gt; not implemented, ESP32 can't do that (doh) </dd></dl>
 
 </div>
@@ -482,6 +493,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read a stored I2C address from EEPROM. If there is none, use default. </p>
+
 </div>
 </div>
 <a id="a4fc01d736fe50cf5b977f755b675f11d"></a>
@@ -498,6 +511,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Setup system. Retrieve I2C address from EEPROM or default and initialize I2C slave. </p>
 
 </div>
 </div>
@@ -516,6 +531,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write I2C address to EEPROM. </p>
 <dl class="section note"><dt>Note</dt><dd>ESP eeprom.h works a bit different from AVRs: <a href="https://arduino-esp8266.readthedocs.io/en/3.0.2/libraries.html#eeprom">https://arduino-esp8266.readthedocs.io/en/3.0.2/libraries.html#eeprom</a> </dd></dl>
 
 </div>
@@ -894,6 +911,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
+
 </div>
 </div>
 <a id="a6335b7c0e0151e1f0fca222235cb4ee0"></a>
@@ -958,7 +977,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="firmware_8ino.html">firmware.ino</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 13:08:16 for AccelStepperI2C by
+    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
