@@ -1,14 +1,12 @@
 var _servo_i2_c_8h =
 [
     [ "ServoI2C", "class_servo_i2_c.html", "class_servo_i2_c" ],
-    [ "log", "_servo_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "servoAttach1Cmd", "_servo_i2_c_8h.html#aec2445532cf01327e2361b2e8d1f8e39", null ],
     [ "servoAttach2Cmd", "_servo_i2_c_8h.html#ad184b5d78fd4f16b77fd4e600225d4c2", null ],
     [ "servoAttachedCmd", "_servo_i2_c_8h.html#ad8b62d49f383d27b1ee493d97bf9cc97", null ],
     [ "servoAttachedResult", "_servo_i2_c_8h.html#a9094d4c24f168670ca13b88441b6097a", null ],
     [ "servoAttachResult", "_servo_i2_c_8h.html#a07260e617cfa64951a6db5fd4fa75cdf", null ],
     [ "servoDetachCmd", "_servo_i2_c_8h.html#acdcf8e912dfca4c7b876bda6c91e691f", null ],
-    [ "ServoI2CmaxBuf", "_servo_i2_c_8h.html#a694f81aabb3248f0ee6da4c69a967096", null ],
     [ "servoReadCmd", "_servo_i2_c_8h.html#a06400364c4fd99d2fd97802201e5640e", null ],
     [ "servoReadMicrosecondsCmd", "_servo_i2_c_8h.html#ac57405b05b7fb9d6bb5c876a506bb20e", null ],
     [ "servoReadMicrosecondsResult", "_servo_i2_c_8h.html#a89ba4c06569494fd1b9fcd85af74ce6c", null ],

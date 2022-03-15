@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['eeprom_5foffset_5fi2c_5faddress_535',['EEPROM_OFFSET_I2C_ADDRESS',['../firmware_8ino.html#a1cad4e2514f451585f15da3b8ee3cd2f',1,'firmware.ino']]]
+  ['log_564',['log',['../_accel_stepper_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;AccelStepperI2C.h'],['../_i2_cwrapper_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;I2Cwrapper.h'],['../_simple_buffer_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;SimpleBuffer.h'],['../firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;firmware.ino']]]
 ];

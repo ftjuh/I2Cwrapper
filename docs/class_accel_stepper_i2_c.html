@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.1.0</span>
+   &#160;<span id="projectnumber">v0.1.1</span>
    </div>
    <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
   </td>
@@ -177,7 +177,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab0392ba30b4854704bd08b588db17401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tell the state machine to check the endstops regularly. If any of the (one or two) stepper's endstops is hit, the state machine will revert to state_stopped. To prevent overshoot, also the stepper's speed is set to 0 and its target to the current position.  <a href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">More...</a><br /></td></tr>
 <tr class="separator:ab0392ba30b4854704bd08b588db17401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af27f8157184e75d824faa9634113c67c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">endstops</a> ()</td></tr>
-<tr class="memdesc:af27f8157184e75d824faa9634113c67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read current state of endstops.  <a href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">More...</a><br /></td></tr>
+<tr class="memdesc:af27f8157184e75d824faa9634113c67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read current raw, i.e. not debounced state of endstops. It's basically one or two digitalReads() combined in one result.  <a href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">More...</a><br /></td></tr>
 <tr class="separator:af27f8157184e75d824faa9634113c67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a213e402f63727c105d9ea2a20b125fe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">setState</a> (uint8_t newState)</td></tr>
 <tr class="memdesc:a213e402f63727c105d9ea2a20b125fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state machine's state manually.  <a href="class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8">More...</a><br /></td></tr>
@@ -435,7 +435,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Tell the state machine to check the endstops regularly. If any of the (one or two) stepper's endstops is hit, the state machine will revert to state_stopped. To prevent overshoot, also the stepper's speed is set to 0 and its target to the current position. </p>
-<p>An interrupt will be triggered, if interrupts are enabled, in that case <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge a received interrupt to slave so that it can clear the interupt condition and return the ...">I2Cwrapper::clearInterrupt()</a> will then inform about the interrupt's cause. Independent of an interrupt, the master can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">endstops()</a> to find out if an endstop was hit and which one it was.</p>
+<p>An interrupt will be triggered, if interrupts are enabled, in that case <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge a received interrupt to slave so that it can clear the interupt condition and return the ...">I2Cwrapper::clearInterrupt()</a> will then inform about the interrupt's cause. Independent of an interrupt, the master can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current raw, i.e. not debounced state of endstops. It&#39;s basically one or two digitalReads() comb...">endstops()</a> to find out if an endstop was hit and which one it was.</p>
 <p>A "hit" condition is defined as an end stop switch becoming active. Nothing happens if it stays active or becomes inactive. A simple debouncing mechanism is in place. After a new flank (switch becoming active <em>or</em> inactive), it will ignore any further flanks for a set interval of 5 milliseconds, which should suffice for most switches to get into a stable state. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -505,8 +505,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Read current state of endstops. </p>
-<dl class="section return"><dt>Returns</dt><dd>One bit for each endstop, LSB is always the last addded endstop. Takes activeLow setting in account, i.e. actived will always be 1. </dd></dl>
+<p>Read current raw, i.e. not debounced state of endstops. It's basically one or two digitalReads() combined in one result. </p>
+<dl class="section return"><dt>Returns</dt><dd>One bit for each endstop, LSB is always the last addded endstop. Takes activeLow setting in account, i.e. an activated switch will always return 1. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If any of the (one or two) stepper&#39;s endstops...">enableEndstops()</a> </dd></dl>
 
 </div>
@@ -854,7 +854,7 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd>Use <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If any of the (one or two) stepper&#39;s endstops...">AccelStepperI2C::enableEndstops()</a> to tell the state machine to actually use the endstop(s). Use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">AccelStepperI2C::endstops()</a> to read their currentl state </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>Use <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401" title="Tell the state machine to check the endstops regularly. If any of the (one or two) stepper&#39;s endstops...">AccelStepperI2C::enableEndstops()</a> to tell the state machine to actually use the endstop(s). Use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current raw, i.e. not debounced state of endstops. It&#39;s basically one or two digitalReads() comb...">AccelStepperI2C::endstops()</a> to read their currentl state </dd></dl>
 
 </div>
 </div>
@@ -1115,7 +1115,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
+    <li class="footer">Generated on Tue Mar 15 2022 23:39:55 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -59,17 +59,21 @@
 #ifndef AccelStepperI2C_h
 #define AccelStepperI2C_h
 
-// #define DEBUG // uncomment for debug output to Serial (which has to be begun() in the main sketch)
+// #define DEBUG // uncomment for serial debugging, don't forget Serial.begin() in your setup()
 
 #include <Arduino.h>
 #include <AccelStepper.h>
 #include <I2Cwrapper.h>
 
+#if !defined(log)
 #if defined(DEBUG)
 #define log(...)       Serial.print(__VA_ARGS__)
 #else
 #define log(...)
 #endif // DEBUG
+#endif // log
+
+
 
 const uint8_t AccelStepperI2CmaxBuf = 20; // upper limit of send and receive buffer(s)
 
@@ -337,9 +341,11 @@ public:
   void enableEndstops(bool enable = true);
 
   /*!
-   * @brief Read current state of endstops
+   * @brief Read current raw, i.e. not debounced state of endstops. It's basically 
+   * one or two digitalReads() combined in one result.
    * @returns One bit for each endstop, LSB is always the last addded endstop.
-   * Takes activeLow setting in account, i.e. actived will always be 1.
+   * Takes activeLow setting in account, i.e. an activated switch will always 
+   * return 1.
    * @sa enableEndstops()
    */
   uint8_t endstops(); // returns endstop(s) states in bits 0 and 1

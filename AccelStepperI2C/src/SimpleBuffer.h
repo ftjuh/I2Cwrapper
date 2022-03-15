@@ -16,15 +16,21 @@
 #ifndef SimpleBuffer_h
 #define SimpleBuffer_h
 
-// #define DEBUG // uncomment for debug output to Serial (which has to be begun() in the main sketch)
+// #define DEBUG // uncomment for serial debugging, don't forget Serial.begin() in your setup()
+
 
 #include <Arduino.h>
 
+#if !defined(log)
 #if defined(DEBUG)
 #define log(...)       Serial.print(__VA_ARGS__)
 #else
 #define log(...)
 #endif // DEBUG
+#endif // log
+
+
+
 
 
 class SimpleBuffer

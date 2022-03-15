@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.1.0</span>
+   &#160;<span id="projectnumber">v0.1.1</span>
    </div>
    <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
   </td>
@@ -87,7 +87,6 @@ $(document).ready(function(){initNavTree('_servo_i2_c_8h.html',''); initResizabl
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">ServoI2C.h File Reference</div>  </div>
@@ -103,7 +102,7 @@ Author</h1>
 <p>Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> should be derived from a common base class, atm there's some unhealthy copy and paste </dd></dl>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -111,15 +110,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An I2C wrapper class for the Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo/">Servo library</a>.  <a href="class_servo_i2_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)</td></tr>
-<tr class="separator:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a694f81aabb3248f0ee6da4c69a967096"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a694f81aabb3248f0ee6da4c69a967096">ServoI2CmaxBuf</a> = 20</td></tr>
-<tr class="separator:a694f81aabb3248f0ee6da4c69a967096"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec2445532cf01327e2361b2e8d1f8e39"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#aec2445532cf01327e2361b2e8d1f8e39">servoAttach1Cmd</a> = 60</td></tr>
 <tr class="separator:aec2445532cf01327e2361b2e8d1f8e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07260e617cfa64951a6db5fd4fa75cdf"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a07260e617cfa64951a6db5fd4fa75cdf">servoAttachResult</a> = 1</td></tr>
@@ -145,25 +137,6 @@ Variables</h2></td></tr>
 <tr class="memitem:a9094d4c24f168670ca13b88441b6097a"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a9094d4c24f168670ca13b88441b6097a">servoAttachedResult</a> = 1</td></tr>
 <tr class="separator:a9094d4c24f168670ca13b88441b6097a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a66726e5f1a55e7253ddd5aeec06f19c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66726e5f1a55e7253ddd5aeec06f19c3">&#9670;&nbsp;</a></span>log</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define log</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="aec2445532cf01327e2361b2e8d1f8e39"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec2445532cf01327e2361b2e8d1f8e39">&#9670;&nbsp;</a></span>servoAttach1Cmd</h2>
@@ -243,20 +216,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t servoDetachCmd = 62</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a694f81aabb3248f0ee6da4c69a967096"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a694f81aabb3248f0ee6da4c69a967096">&#9670;&nbsp;</a></span>ServoI2CmaxBuf</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint8_t ServoI2CmaxBuf = 20</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -353,7 +312,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_2c564d900600b9be19be1c51915eefcd.html">AccelStepperI2C</a></li><li class="navelem"><a class="el" href="dir_aedce182ba26a070e27f99c20ccbc843.html">src</a></li><li class="navelem"><a class="el" href="_servo_i2_c_8h.html">ServoI2C.h</a></li>
-    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
+    <li class="footer">Generated on Tue Mar 15 2022 23:39:55 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

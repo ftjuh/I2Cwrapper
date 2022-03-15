@@ -17,22 +17,25 @@
 #ifndef I2Cwrapper_h
 #define I2Cwrapper_h
 
-// #define DEBUG // uncomment for debug output to Serial (which has to be begun() in the main sketch)
+//#define DEBUG // uncomment for serial debugging, don't forget Serial.begin() in your setup()
+
 
 #include <SimpleBuffer.h>
 #include "version.h"
 
+#if !defined(log)
 #if defined(DEBUG)
 #define log(...)       Serial.print(__VA_ARGS__)
 #else
 #define log(...)
 #endif // DEBUG
+#endif // log
 
 
 const uint16_t maxBufDefault = 20; // includes 1 byte for CRC8
 
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
-const uint16_t I2CdefaultDelay = 50;
+const unsigned long I2CdefaultDelay = 10;
 
 // I2C commands used by the wrapper
 const uint8_t resetCmd              = 241;
@@ -69,7 +72,8 @@ const uint8_t interruptReason_none = 0; ///< You should not encounter this, as y
  * * 000 - 009 (reserved)
  * * 010 - 059 AccelStepperI2C
  * * 060 - 069 ServoI2C
- * * 070 - 239 (unused)
+ * * 070 - 079 PinI2C
+ * * 080 - 239 (unused)
  * * 240 - 255 I2Cwrapper commands (reset slave, change address etc.)
  * @par
  * Theoretically, new classes could use I2Cwrapper to add even more capabilities
@@ -130,19 +134,23 @@ public:
 
 
   /*!
-   * @brief Define a minimum time that the master keeps between I2C transmissions.
+   * @brief Define a minimum time that the master waits between I2C transmissions.
    * This is to make sure that the slave has finished its earlier task or has
    * its answer to the master's previous command ready. Particularly for ESP32
    * slaves this is critical, as due to its implementation of I2C slave mode,
    * an ESP32 could theoretically send incomplete data if a request is sent too
-   * early.
+   * early. The actual delay will take the time spent since the last I2C 
+   * transmission into account, so that it won't wait at all if the given time 
+   * has already passed.
    * @param delay Minimum time in between I2C transmissions in milliseconds.
-   * The default I2CdefaultDelay currently is quite conservative (50 ms).
+   * The default I2CdefaultDelay is a bit conservative at 10 ms to allow for 
+   * for serial debugging output to slow things down. You can try to go lower, 
+   * if slave debugging is disabled.
    * @return Returns the previously set delay.
    * @todo <del>I2Cdelay is currently global; make it a per-slave setting.</del>
    * implemented with I2Cwrapper.
    */
-  int16_t setI2Cdelay(int16_t delay);
+  unsigned long setI2Cdelay(unsigned long delay);
 
   /*!
    * @brief Get semver compliant version of slave firmware.
@@ -188,15 +196,15 @@ public:
   bool readResult(uint8_t numBytes);
 
   SimpleBuffer buf;
-  bool sentOK = true;   ///< True if previous function call was successfully transferred to slave.
-  bool resultOK = true; ///< True if return value from previous function call was received successfully
+  bool sentOK = false;   ///< True if previous function call was successfully transferred to slave.
+  bool resultOK = false; ///< True if return value from previous function call was received successfully
 
 private:
   void doDelay();
   uint8_t address;
   // ms to wait between I2C communication, can be changed by setI2Cdelay()
-  int16_t I2Cdelay = I2CdefaultDelay;
-  uint32_t lastI2Ctransmission = 0; // used to adjust I2Cdelay in doDelay()
+  unsigned long I2Cdelay = I2CdefaultDelay;
+  unsigned long lastI2Ctransmission = 0; // used to adjust I2Cdelay in doDelay()
   uint16_t sentErrorsCount = 0;   // Number of transmission errors. Will be reset to 0 by sentErrors().
   uint16_t resultErrorsCount = 0; // Number of receiving errors. Will be reset to 0 by resultErrors().
 };

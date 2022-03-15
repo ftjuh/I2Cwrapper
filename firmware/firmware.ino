@@ -18,6 +18,8 @@
    @todo <del>implement endstops/reference positions</del>
 */
 
+//#define DEBUG // Uncomment this to enable library debugging output on Serial
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <AccelStepper.h>
@@ -49,10 +51,11 @@ const uint8_t slaveDefaultAddress = 0x08; // default
 const uint8_t maxServos = 4;
 
 
-/*!
-  @brief Uncomment this to enable firmware debugging output on Serial
+/*
+   uncomment to enable pin control support
+   Note: needs analogWrite(), which might be tricky on ESPs
 */
-#define DEBUG
+#define PINCONTROL_SUPPORT
 
 
 /*!
@@ -63,6 +66,10 @@ const uint8_t maxServos = 4;
 */
 //#define DIAGNOSTICS
 
+/*!
+  @brief Uncomment this to enable firmware debugging output on Serial.
+*/
+// #define DEBUG
 
 /************************************************************************/
 /******* end of firmware configuration settings **************************/
@@ -87,18 +94,29 @@ uint8_t numServos = 0; // number of initialised servos.
 #endif // defined(SERVO_SUPPORT)
 
 /*
+   Pin control stuff
+*/
+
+#if defined(PINCONTROL_SUPPORT)
+#include "PinI2C.h"
+#endif // defined(PINCONTROL_SUPPORT)
+
+/*
    Debugging stuff
 */
 
+#if !defined(log)
+#undef log
+#endif // log
 #if defined(DEBUG)
 #define log(...)       Serial.print(__VA_ARGS__)
-volatile uint8_t writtenToBuffer = 0;
-volatile uint8_t sentOnRequest = 0;
 #else
 #define log(...)
 #endif // DEBUG
 
 #if defined(DEBUG)
+volatile uint8_t writtenToBuffer = 0;
+volatile uint8_t sentOnRequest = 0;
 uint32_t now, then = millis();
 bool reportNow = true;
 uint32_t lastCycles = 0; // for simple cycles/reportPeriod diagnostics
@@ -210,6 +228,7 @@ bool interruptActiveHigh = true;
 uint8_t interruptSource = 0xF;
 uint8_t interruptReason = interruptReason_none;
 
+
 /*
    Endstop stuff
 */
@@ -222,6 +241,7 @@ struct Endstop
 };
 const uint8_t maxEndstops = 2; // not sure if there are scenarios where more than two make sense, but why not be prepared and make this configurable?
 const uint32_t endstopDebouncePeriod = 5; // millisecends to keep between triggering endstop interrupts; I measured a couple of switches, none bounced longer than 1 ms so this should be more than safe
+
 
 /*
    Stepper stuff
@@ -280,12 +300,21 @@ void setup()
   Serial.begin(115200);
 #endif
   log("\n\n\n=== AccelStepperI2C v");
-  log(I2Cw_VersionMajor); log("."); log(I2Cw_VersionMinor); log("."); log(I2Cw_VersionPatch);
-  log(" ===\n\n");
+  log(I2Cw_VersionMajor); log("."); log(I2Cw_VersionMinor); log("."); log(I2Cw_VersionPatch); log(" ===\n");
+  log("Running on architecture "); 
+  #if defined(ARDUINO_ARCH_AVR)
+  log("ARDUINO_ARCH_AVR\n");
+  #elif defined(ARDUINO_ARCH_ESP8266)
+  log("ARDUINO_ARCH_ESP8266\n");
+  #elif defined(ARDUINO_ARCH_ESP32)
+  log("ARDUINO_ARCH_ESP32\n");
+  #else
+  log("unknown\n");
+  #endif
 
   uint8_t i2c_address = retrieveI2C_address();
   Wire.begin(i2c_address);
-  log("I2C started with address "); log(i2c_address); log("\n\n");
+  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
 
@@ -312,7 +341,7 @@ int8_t addStepper(uint8_t interface = AccelStepper::FULL4WIRE,
   if (numSteppers < maxSteppers) {
     steppers[numSteppers].stepper = new AccelStepper(interface, pin1, pin2, pin3, pin4, enable);
     steppers[numSteppers].state = state_stopped;
-    log("Add stepper with internal myNum = "); log(numSteppers);
+    log("Add stepper with internal myNum = "); log(numSteppers); log("\n");
     return numSteppers++;
   } else {
     log("-- Too many steppers, failed to add new one\n");
@@ -381,7 +410,6 @@ void loop()
   if (now > then) { // report cycles/reportPeriod statistics and state machine states for all defined steppers
     reportNow = true;
     log("\n    > Cycles/s = "); log((cycles - lastCycles) * 1000 / reportPeriod);
-    //log("Cycles = "); log(cycles);
     if (numSteppers > 0) {
       log("  | [Steppers]:states =");
     }
@@ -489,11 +517,10 @@ ICACHE_RAM_ATTR
 #endif
 void receiveEvent(int howMany)
 {
-
+  //log("[Int with "); log(howMany); log(newMessage == 0 ? ", ready]\n" : ", NOT ready]\n");
 #if defined(DIAGNOSTICS)
   thenMicros = micros();
 #endif // DIAGNOSTICS
-  log(howMany); log(" I\n");
   if (newMessage == 0) { // Only accept message if an earlier one is fully processed.
     bufferIn->reset();
     for (uint8_t i = 0; i < howMany; i++) {
@@ -501,11 +528,6 @@ void receiveEvent(int howMany)
     }
     bufferIn->idx = howMany;
     newMessage = howMany; // tell main loop that new data has arrived
-
-  } else { // discard message ### how can we warn the master??? Use interrupt?
-    while (Wire.available()) { // discard data (### needed?)
-      Wire.read();
-    }
   }
 
 #if defined(DIAGNOSTICS)
@@ -1010,6 +1032,72 @@ void processMessage(uint8_t len)
 
 #endif // defined(SERVO_SUPPORT)
 
+
+
+      /*
+
+         Pin control commands
+         
+      */
+
+#if defined(PINCONTROL_SUPPORT)
+
+      case pinPinModeCmd: {
+          if (i == 2) { // 2 uint8_t
+            uint8_t pin; bufferIn->read(pin);
+            uint8_t mode; bufferIn->read(mode);
+            log("pinMode("); log(pin); log(", "); log(mode); log(")\n\n");
+            pinMode(pin, mode);
+          }
+        }
+        break;
+
+      case pinDigitalReadCmd: {
+          if (i == 1) { // 1 uint8_t
+            uint8_t pin; bufferIn->read(pin);            
+            bufferOut->write((int16_t)digitalRead(pin)); // int is not 2 bytes on all Arduinos (sigh)
+          }
+        }
+        break;
+
+      case pinDigitalWriteCmd: {
+          if (i == 2) { // 2 uint8_t
+            uint8_t pin; bufferIn->read(pin);
+            uint8_t value; bufferIn->read(value);
+            digitalWrite(pin, value);
+          }
+        }
+        break;
+
+      case pinAnalogReadCmd: {
+          if (i == 1) { // 1 uint8_t
+            uint8_t pin; bufferIn->read(pin);            
+            bufferOut->write((int16_t)analogRead(pin)); // int is not 2 bytes on all Arduinos (sigh)
+          }
+        }
+        break;
+
+
+      case pinAnalogWriteCmd: {
+          if (i == 3) { // 1 uint8_t, 1 int16_t ("int")
+            uint8_t pin; bufferIn->read(pin);
+            int16_t value; bufferIn->read(value);
+            analogWrite(pin, value);
+          }
+        }
+        break;
+
+      case pinAnalogReferenceCmd: {
+          if (i == 1) { //1 uint8_t
+            uint8_t mode; bufferIn->read(mode);
+            analogReference(mode);
+          }
+        }
+        break;
+
+#endif // defined(PINCONTROL_SUPPORT)
+
+
       default:
         log("No matching command found");
 
@@ -1017,7 +1105,7 @@ void processMessage(uint8_t len)
 
 #if defined(DEBUG)
     if (bufferOut->idx > 1) {
-      log("Output buffer after processing ("); log(bufferOut->idx); log(" bytes): ");
+      log("Output buffer incl. CRC8 after processing ("); log(bufferOut->idx); log(" bytes): ");
       for (uint8_t i = 0; i < bufferOut->idx; i++) {
         log(bufferOut->buffer[i]);  log(" ");
       }
@@ -1031,10 +1119,9 @@ void processMessage(uint8_t len)
     // will only be sent in the next request cycle. So let's prefill the buffer here.
     // ### what exactly is the role of slaveWrite() vs. Write(), here?
     // ### slaveWrite() is only for ESP32, not for it's poorer cousins ESP32-S2 and ESP32-C3. Need to fine tune the compiler directive, here?
+    log("   ESP32 buffer prefill  ");
     writeOutputBuffer();
 #endif  // ESP32
-
-    //    } // if valid s
 
   } // if (bufferIn->checkCRC8())
   log("\n");
@@ -1064,13 +1151,13 @@ void writeOutputBuffer()
 #endif  // ESP32
 
 #if defined(DEBUG)
-    // for AVRs logging to Serial will happen in an interrupt - not recommenended but seems to work
-    log("sent "); log(bufferOut->idx); log(" bytes: ");
-    for (uint8_t i = 0; i < bufferOut->idx; i++) {
-      log(bufferOut->buffer[i]);  log(" ");
-    }
-    log("\n");
-    writtenToBuffer = bufferOut->idx; // remember this (for ESP32) to signal main loop later that we sent buffer
+//    // for AVRs logging to Serial will happen in an interrupt - not recommenended but seems to work
+//    log("sent "); log(bufferOut->idx); log(" bytes: ");
+//    for (uint8_t i = 0; i < bufferOut->idx; i++) {
+//      log(bufferOut->buffer[i]);  log(" ");
+//    }
+//    log("\n");
+    writtenToBuffer = bufferOut->idx; // store this (for ESP32) to signal main loop later that we sent buffer
 #endif
 
     bufferOut->reset();  // never send anything twice
@@ -1097,7 +1184,7 @@ void requestEvent()
   thenMicros = micros();
 #endif // DIAGNOSTICS
 
-#if !defined(ARDUINO_ARCH_ESP32)
+#if !defined(ARDUINO_ARCH_ESP32) // ESP32 has (hopefully) already written the buffer in the main loop
   writeOutputBuffer();
 #endif // not ESP32
 

@@ -7,7 +7,7 @@ var _i2_cwrapper_8h =
     [ "clearInterruptResult", "_i2_cwrapper_8h.html#aba909954b3efed070d818b9ada955399", null ],
     [ "getVersionCmd", "_i2_cwrapper_8h.html#a9f0a79634b5f528ad35ef71e14b7a515", null ],
     [ "getVersionResult", "_i2_cwrapper_8h.html#afb98f245f43ac678f05b9749990473e1", null ],
-    [ "I2CdefaultDelay", "_i2_cwrapper_8h.html#adc65f4761bb8aa3c0e22327413df44db", null ],
+    [ "I2CdefaultDelay", "_i2_cwrapper_8h.html#a8e670dbec664a89d717caad5333aa8a4", null ],
     [ "interruptReason_none", "group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660", null ],
     [ "maxBufDefault", "_i2_cwrapper_8h.html#ac761f6bc28d53219cc5273671e5c0a3a", null ],
     [ "resetCmd", "_i2_cwrapper_8h.html#acec6e1426fd9aeda1f6ac91c1a0c9669", null ],

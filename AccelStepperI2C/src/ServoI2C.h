@@ -12,27 +12,29 @@
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
-  @todo AccelStepperI2C and ServoI2C should be derived from a common base class,
-  atm there's some unhealthy copy and paste
 */
 
 
 #ifndef ServoI2C_h
 #define ServoI2C_h
 
-// #define DEBUG // uncomment for debug output to Serial (which has to be begun() in the main sketch)
+// #define DEBUG // uncomment for serial debugging, don't forget Serial.begin() in your setup()
+
 
 #include <Arduino.h>
 #include <I2Cwrapper.h>
 #include <SimpleBuffer.h>
 
+#if !defined(log)
 #if defined(DEBUG)
 #define log(...)       Serial.print(__VA_ARGS__)
 #else
 #define log(...)
 #endif // DEBUG
+#endif // log
 
-const uint8_t ServoI2CmaxBuf = 20; // upper limit of send and receive buffer(s)
+
+
 
 // Servo commands
 const uint8_t servoAttach1Cmd           = 60; const uint8_t servoAttachResult            = 1; // 1 uint8_t

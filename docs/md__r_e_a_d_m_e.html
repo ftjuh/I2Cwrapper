@@ -28,7 +28,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.1.0</span>
+   &#160;<span id="projectnumber">v0.1.1</span>
    </div>
    <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
   </td>
@@ -124,6 +124,7 @@ Additional features</h2>
 <li><b>Speed diagnostics</b> are available (see <a href="#performance-and-diagnostics">Performance and diagnostics</a>).</li>
 <li><b>Servo support</b> is available (see above and the <a href="https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Servo_Sweep/Servo_Sweep.ino">Servo_sweep.ino</a> and <a href="https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Stepper_and_Servo_together/Stepper_and_Servo_together.ino">Stepper_and_Servo_together.ino</a> examples). Can be disabled at compile time.</li>
 <li>The project has grown into a <b>framework</b> which could easily be extended to provide other additional slave capabilities like driving DC motors or using remote pins (I/O extender like) in the future.</li>
+<li>New in v0.1.1: added optional pin control support, allows you to read and write the slave device's digital and analog/PWM pins. See <a class="el" href="_pin__control_8ino.html">Pin_control.ino</a> example.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Restrictions</h2>
@@ -133,7 +134,7 @@ Restrictions</h2>
 <li>No <b>serialization protocol</b> is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Arduinos Uno/Nano, ESP8266 and ESP32 have been tested and work well together, as should other Arduino supporting platforms.</li>
 <li>Naturally, you cannot declare your own stepping functions with the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd">constructor [2/2] variant</a>.</li>
 <li><strike>The two blocking functions, <b>runToPosition() and runToNewPosition()</b>, are not implemented at the moment. I never saw their purpose, anyway, as their behavior can easily implemented with the existing functionality.</strike></li>
-<li><strike>There is no interrupt mechanism at the moment which tells the master that a state machine job has finished or an endstop has been triggered. So the master still needs to poll the slave with one of <a class="el" href="class_accel_stepper_i2_c.html#a26e27bf5d72113dc43694c87ed4a75f4">AccelStepperI2C::distanceToGo()</a>, <a class="el" href="class_accel_stepper_i2_c.html#ac3a25dd2091e8b7a2aaa415150957b7e">AccelStepperI2C::currentPosition</a>, <a class="el" href="class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d">AccelStepperI2C::isRunning()</a>, or <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current state of endstops.">AccelStepperI2C::endstops()</a> but can do so at a much more reasonable frequency.</strike></li>
+<li><strike>There is no interrupt mechanism at the moment which tells the master that a state machine job has finished or an endstop has been triggered. So the master still needs to poll the slave with one of <a class="el" href="class_accel_stepper_i2_c.html#a26e27bf5d72113dc43694c87ed4a75f4">AccelStepperI2C::distanceToGo()</a>, <a class="el" href="class_accel_stepper_i2_c.html#ac3a25dd2091e8b7a2aaa415150957b7e">AccelStepperI2C::currentPosition</a>, <a class="el" href="class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d">AccelStepperI2C::isRunning()</a>, or <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current raw, i.e. not debounced state of endstops. It&#39;s basically one or two digitalReads() comb...">AccelStepperI2C::endstops()</a> but can do so at a much more reasonable frequency.</strike></li>
 <li><strike>Currently, there is no error checking of the master-slave communication, which uses a very basic (i.e. non existing) protocol. The master will have to deal with any transmission errors should they occur.</strike></li>
 </ul>
 <p>Have a look at the <a href="https://ftjuh.github.io/AccelStepperI2C/todo.html">todo list</a> to see what improvements are still planned.</p>
@@ -178,10 +179,10 @@ Troubleshooting</h2>
 <ul>
 <li>Start <b>without I2C</b>. That is, after setting up the hardware, first test the to-be-slave device with a conventional AccelStepper sketch, so that you can be sure your problems are I2C-related.</li>
 <li>Start <b>without steppers</b>. Use error handling and possibly debug output to test if communication between master and slave is working as it should.</li>
-<li><b>Simplify</b>. Start with very simple setups, short cables, low bus speeds etc. and work your way up from there.</li>
+<li><b>Simplify</b>. Start with very simple setups, short cables, low bus speeds etc. and work your way up from there. Don't mix platforms, start with two Uno/Nanos.</li>
 <li>Did you think of two <b>I2C-pullups</b>?</li>
 <li>Have you powered your <b>level shifters</b>? They won't work with SCL, SDA and GND alone.</li>
-<li>If master and slave run on different hardware platforms, <b>pin names</b> like "D3" might refer to completely different hardware pins or not be defined at all. For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin. So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the <code>pins_arduino.h</code> file for your slave device or run a simple sketch with <code>Serial.print(D3);</code> etc. on your slave board.</li>
+<li>If master and slave run on different hardware platforms, <b>pin names</b> like "LED_BUILTIN" or D3" might refer to completely different hardware pins or not be defined at all.  For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin.  So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the <code>pins_arduino.h</code> file for your slave device or run a simple sketch with <code>Serial.print(D3);</code> etc. on your slave board.</li>
 <li>ESPs can crash if you unintentionally use certain pin numbers (e.g. flash memory pins) that are available on plain Unos/Nanos. Remember that when you <b>move between platforms</b>.</li>
 <li>Enable <b>debug output</b> on slave <em>and</em> master. It's a bit cluttered at the moment, yet informative. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.</li>
 </ul>
@@ -291,14 +292,15 @@ License</h1>
 <p><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.</p>
 <h1><a class="anchor" id="autotoc_md17"></a>
 History</h1>
-<p>v0.1.0 Initial release </p>
+<p>v0.1.0 Initial release</p>
+<p>v0.1.1 Fixed I2Cdelay; added optional pin control support (<a class="el" href="_pin_i2_c_8h.html" title="Arduino library for I2C-control of digital and analog pins connected to another Arduino which runs th...">pinI2C.h</a>|c) with example sketch </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 27 2022 19:57:33 for AccelStepperI2C by
+    <li class="footer">Generated on Tue Mar 15 2022 23:39:55 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -25,9 +25,12 @@ I2Cwrapper::I2Cwrapper(uint8_t i2c_address, uint8_t maxBuf)
 // Jan's little sister: wait I2Cdelay, adjusted by the time already spent
 void I2Cwrapper::doDelay()
 {
-  uint32_t now = millis();
-  delay(max(0, I2Cdelay - int16_t(now - lastI2Ctransmission)));
-  lastI2Ctransmission = now;
+  unsigned long del = I2Cdelay - (millis() - lastI2Ctransmission);
+  if (del <= I2Cdelay) { // don't wait if overflow = delay has already passed
+    delay(del);
+  }
+  lastI2Ctransmission = millis();
+  //delay(I2Cdelay);
 }
 
 // reset buffer and write header bytes...
@@ -71,7 +74,7 @@ bool I2Cwrapper::readResult(uint8_t numBytes)
 {
   doDelay(); // give slave time in between transmissions
   buf.reset();
-  bool resultOK = false;
+  //bool resultOK = false;
 
   if (Wire.requestFrom(address, uint8_t(numBytes + 1)) > 0) { // +1 for CRC8
     log("    Requesting result (");
@@ -118,9 +121,9 @@ void I2Cwrapper::changeI2Caddress(uint8_t newAddress)
   sendCommand();
 }
 
-int16_t I2Cwrapper::setI2Cdelay(int16_t delay)
+unsigned long I2Cwrapper::setI2Cdelay(unsigned long delay)
 {
-  int16_t d = I2Cdelay;
+  unsigned long d = I2Cdelay;
   I2Cdelay = delay;
   return d;
 }

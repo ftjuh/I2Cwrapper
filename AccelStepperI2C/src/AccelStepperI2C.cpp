@@ -11,7 +11,7 @@
 
 #include <Wire.h>
 #include <AccelStepperI2C.h>
-#include "I2Cwrapper.h"
+#include <I2Cwrapper.h>
 
 
 // Constructor
@@ -24,8 +24,8 @@ void AccelStepperI2C::attach(uint8_t interface,
                              uint8_t pin1, uint8_t pin2, uint8_t pin3, uint8_t pin4,
                              bool enable)
 {
-  wrapper->prepareCommand(attachCmd); // myNum not know yet
-  wrapper->buf.write(interface); // parameters
+  wrapper->prepareCommand(attachCmd);
+  wrapper->buf.write(interface);
   wrapper->buf.write(pin1);
   wrapper->buf.write(pin2);
   wrapper->buf.write(pin3);

@@ -42,6 +42,7 @@ AccelStepperI2C::stopState() will stop any of the above states, i.e. stop pollin
    - **Speed diagnostics** are available (see [Performance and diagnostics](#performance-and-diagnostics)).
    - **Servo support** is available (see above and the [Servo_sweep.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Servo_Sweep/Servo_Sweep.ino) and [Stepper_and_Servo_together.ino](https://github.com/ftjuh/AccelStepperI2C/blob/master/AccelStepperI2C/examples/Stepper_and_Servo_together/Stepper_and_Servo_together.ino) examples). Can be disabled at compile time.
    - The project has grown into a **framework** which could easily be extended to provide other additional slave capabilities like driving DC motors or using remote pins (I/O extender like) in the future.
+   - New in v0.1.1: added optional pin control support, allows you to read and write the slave device's digital and analog/PWM pins. See Pin_control.ino example.
 
 ## Restrictions
 
@@ -99,10 +100,10 @@ If things don't work as expected, here's a couple of things that helped me durin
 
 * Start **without I2C**. That is, after setting up the hardware, first test the to-be-slave device with a conventional AccelStepper sketch, so that you can be sure your problems are I2C-related.
 * Start **without steppers**. Use error handling and possibly debug output to test if communication between master and slave is working as it should.
-* **Simplify**. Start with very simple setups, short cables, low bus speeds etc. and work your way up from there.
+* **Simplify**. Start with very simple setups, short cables, low bus speeds etc. and work your way up from there. Don't mix platforms, start with two Uno/Nanos.
 * Did you think of two **I2C-pullups**?
 * Have you powered your **level shifters**? They won't work with SCL, SDA and GND alone.
-* If master and slave run on different hardware platforms, **pin names** like "D3" might refer to completely different hardware pins or not be defined at all.  For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin.  So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the `pins_arduino.h` file for your slave device or run a simple sketch with `Serial.print(D3);` etc. on your slave board.
+* If master and slave run on different hardware platforms, **pin names** like "LED_BUILTIN" or D3" might refer to completely different hardware pins or not be defined at all.  For example, when using a ESP8266 Wemos d1 mini as slave, a master sketch for the Arduino Uno cannot use "D3" as it is undefined, and, even worse, a master sketch compiled for some ESP32 device will translate it to a completely different hardware pin.  So when addressing slave pins from the master's side, it's safest to use the integer equivalents of names like "D3". Look them up in the `pins_arduino.h` file for your slave device or run a simple sketch with `Serial.print(D3);` etc. on your slave board.
 * ESPs can crash if you unintentionally use certain pin numbers (e.g. flash memory pins) that are available on plain Unos/Nanos. Remember that when you **move between platforms**.
 * Enable **debug output** on slave *and* master. It's a bit cluttered at the moment, yet informative. To see both master and slave output simultaneously, you need to open slave and master sketch from two independently started Arduino instances, i.e. don't use the open dialogue from your master's sketch to open the firmware sketch, instead start the program a second time. Only then you can open two separate serial output windows after choosing the two USB ports.
 
@@ -223,4 +224,6 @@ AccelStepperI2C is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.
 # History
 
 v0.1.0 Initial release
+
+v0.1.1 Fixed I2Cdelay; added optional pin control support (pinI2C.h|c) with example sketch
 

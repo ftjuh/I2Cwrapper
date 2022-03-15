@@ -2,14 +2,16 @@
   AccelStepperI2C errror checking demo
   (c) juh 2022
 
-  Demonstrates the available error checking and safeguarding capabilities.
+  A variant of the sweep demo that demonstrates the available error checking 
+  and safeguarding capabilities.
 
-  If and how often you use them will depend on your degree of paranoia and
-  the severity of potential harm done by uncontrolled stepper movements.
+  If and how often you use them in your own sketches will depend on your 
+  degree of paranoia and the severity of potential harm done by uncontrolled 
+  stepper movements.
 
   Note that checking for errors is done at the wrapper's level, as it is
   the wrapper which handles communication for the stepper object.
-  
+
 */
 
 #include <Arduino.h>
@@ -50,7 +52,7 @@ void setup()
   /*
      Use this to see if the slave device is listening.
   */
-  
+
   if (!wrapper.ping()) {
     halt("Slave not found! Check connections and restart.");
   } else {
@@ -59,21 +61,20 @@ void setup()
 
   wrapper.reset(); // reset the slave device
   delay(500); // and give it time to reboot
-
   printVersions();
-  
+
   /*
      Use this to see if master and slave use the same version of the library
   */
 
   if (!wrapper.checkVersion(I2Cw_Version)) {
     /*
-     * Note: according to semver versioning (https://semver.org/), API changes 
-     * are indicated by upping the major verison, so in real world settings is 
-     * should be sufficient to check if the major version numbers match,
-     * granted that future version of this software will implement the semver 
-     * version as intended.
-     */
+       Note: according to semver versioning (https://semver.org/), API changes
+       are indicated by upping the major verison. So in real world settings is
+       should be sufficient to check if the major version numbers match,
+       granted that future version of this software will implement the semver
+       version as intended.
+    */
     halt("Warning: Master and slave are not using the same library version.");
   } else {
     Serial.println("Slave's and master's versions match.\n");
@@ -99,19 +100,15 @@ void setup()
     Serial.print(wrapper.sentErrors()); Serial.print(" errors during sending and ");
     Serial.print(wrapper.resultErrors()); Serial.println(" errors during receiving.");
     halt("");
+  } else {
+    Serial.println("Slave device successfully configured.");
   }
 
 }
 
-void halt(const char* m) {
-  Serial.println(m);
-  Serial.println("\n\nHalting.\n");
-  while (true) { yield();} // prevent ESPs from watchdog reset
-}
-
 void loop()
 {
-  
+
   stepper.moveTo(target);
   if (!wrapper.sentOK ) {
     halt("Couldn't set target.\n");
@@ -121,18 +118,28 @@ void loop()
   if (!wrapper.sentOK ) {
     halt("Couldn't activate state machine.\n");
   }
-  
-   // isRunning() is non void, i.e. it comprises a command sent and a result received, 
-   // so we'll need to check for both of them (or just use transmissionErrors(), again)
+
+  // isRunning() is non void, i.e. it comprises a command sent and a result received,
+  // so we'll need to check for both of them (or just use transmissionErrors(), again)
   while (stepper.isRunning() and wrapper.sentOK and wrapper.resultOK) {
     delay(200);
-  }
+  };
+
   if (wrapper.transmissionErrors() > 0) {
     halt("Error while waiting for state machine to stop.");
   }
-  
+
+  Serial.println("<---> Turning around");
   target = - target;
-  
+
+}
+
+void halt(const char* m) {
+  Serial.println(m);
+  Serial.println("\n\nHalting.\n");
+  while (true) {
+    yield(); // prevent ESPs from watchdog reset
+  }
 }
 
 
@@ -141,12 +148,12 @@ void printVersions() {
   Serial.print("Master's version of I2Cwrapper package is ");
   Serial.print(I2Cw_VersionMajor); Serial.print(".");
   Serial.print(I2Cw_VersionMinor); Serial.print(".");
-  Serial.print(I2Cw_VersionPatch);
+  Serial.println(I2Cw_VersionPatch);
 
   uint32_t v = wrapper.getSlaveVersion();
   Serial.print("Slave's version of I2Cwrapper package is ");
-  Serial.print(v & 0xff); Serial.print(".");
+  Serial.print(v >> 16 & 0xff); Serial.print(".");
   Serial.print(v >> 8 & 0xff); Serial.print(".");
-  Serial.println(v >> 16 & 0xff);
+  Serial.println(v & 0xff);
 
 }

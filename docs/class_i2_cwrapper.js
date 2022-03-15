@@ -12,7 +12,7 @@ var class_i2_cwrapper =
     [ "resultErrors", "class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db", null ],
     [ "sendCommand", "class_i2_cwrapper.html#a64dc95baffdae6e8cfe07ea902fc926b", null ],
     [ "sentErrors", "class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032", null ],
-    [ "setI2Cdelay", "class_i2_cwrapper.html#a68a476a036fa7f5b88a816ae24ea3498", null ],
+    [ "setI2Cdelay", "class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2", null ],
     [ "setInterruptPin", "class_i2_cwrapper.html#a32301b5659f124217e59413192849dde", null ],
     [ "transmissionErrors", "class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5", null ],
     [ "buf", "class_i2_cwrapper.html#af3b285450dd823865580c281c06bded4", null ],
