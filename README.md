@@ -1,5 +1,3 @@
-# Readme
-
 This is an I2C wrapper for Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) with support for two end stops per stepper and optional servo and pin-expander support. It consists of an Arduino-based **firmware** for one or more I2C-slaves, and corresponding Arduino **libraries** for the I2C-master. Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223 with some extra bells and whistles. Use it with your own hardware or with a plain stepper driver shield like the Protoneer CNC GRBL shield (recent [V3.51](https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html) or [V3.00 clone](https://forum.protoneer.co.nz/viewforum.php?f=17)).
 
 The firmware has been tested on ATmega328 Arduino (Uno, Nano etc.), ESP8266 and ESP32 platforms. I expect it should work on other Arduino supported platforms.
