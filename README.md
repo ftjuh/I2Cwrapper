@@ -230,4 +230,6 @@ v0.1.1 Fixed I2Cdelay;
 
 v0.2.0 Added pin control support (PinI2C.h and PinI2C.cpp) for reading and writing unused slave pins;     Restructured folder layout to prepare for submission as third party library to the Arduino library manager.
 
-v0.2.1 updated library.properties
+v0.2.1 minor maintainence
+
+v0.2.2 dummy release, as the library manager for some reason did not pick up v0.2.1

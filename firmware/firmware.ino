@@ -54,7 +54,6 @@ const uint8_t maxServos = 4;
 
 /*
    uncomment to enable pin control support
-   Note: needs analogWrite(), which might be tricky on ESPs (untested)
 */
 #define PINCONTROL_SUPPORT
 
