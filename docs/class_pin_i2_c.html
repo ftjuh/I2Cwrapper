@@ -97,7 +97,10 @@ $(document).ready(function(){initNavTree('class_pin_i2_c.html',''); initResizabl
  <a href="class_pin_i2_c.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An I2C wrapper class for remote analog and digital pin control. </p>
-<p>This class mimicks the original pin read and write commands. It replicates all of the methods and transmits each method call via I2C to a slave running the appropriate <a class="el" href="firmware_8ino.html">firmware.ino</a> firmware, given that pin control support is enabled at compile time. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p>
+<p>This class mimicks the original pin read and write commands. It replicates all of the methods and transmits each method call via I2C to a slave running the appropriate <a class="el" href="firmware_8ino.html">firmware.ino</a> firmware, given that pin control support is enabled at compile time. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p><dl class="section note"><dt>Note</dt><dd>ESP32 needs ESP32 Arduino 2.0.1 (see board manager) or higher for native <a class="el" href="class_pin_i2_c.html#a09b0df0ecd07cbfdeeba6100d33234aa">analogWrite()</a> support. </dd>
+<dd>
+<a class="el" href="class_pin_i2_c.html#aa52a92812b76f09c318090f22df68a55">analogReference()</a> is only implemented for AVRs, ESPs don't have it. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>Only tested on AVRs. </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -293,7 +296,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_pin_i2_c.html">PinI2C</a></li>
-    <li class="footer">Generated on Tue Mar 15 2022 23:39:55 for AccelStepperI2C by
+    <li class="footer">Generated on Sat Mar 19 2022 15:43:09 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

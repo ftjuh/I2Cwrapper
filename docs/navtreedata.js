@@ -24,7 +24,7 @@ var NAVTREE =
 [
   [ "AccelStepperI2C", "index.html", [
     [ "AccelStepperI2C library", "index.html", null ],
-    [ "Introduction", "md__r_e_a_d_m_e.html", [
+    [ "Readme", "md__r_e_a_d_m_e.html", [
       [ "How does it work?", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
       [ "Differences from AccelStepper", "md__r_e_a_d_m_e.html#autotoc_md2", [
         [ "State machine vs. polling", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
@@ -70,7 +70,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_accel_stepper_i2_c_8cpp.html",
-"class_servo_i2_c.html"
+"class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

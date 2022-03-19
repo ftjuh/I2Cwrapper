@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pincontrol_5fsupport_565',['PINCONTROL_SUPPORT',['../firmware_8ino.html#adde1fd8a4e40d6ab989307669781128f',1,'firmware.ino']]]
+  ['log_580',['log',['../firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;firmware.ino'],['../_simple_buffer_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3',1,'log():&#160;SimpleBuffer.h']]]
 ];

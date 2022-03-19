@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['eeprom_5foffset_5fi2c_5faddress_563',['EEPROM_OFFSET_I2C_ADDRESS',['../firmware_8ino.html#a1cad4e2514f451585f15da3b8ee3cd2f',1,'firmware.ino']]]
+  ['debug_578',['DEBUG',['../firmware_8ino.html#ad72dbcf6d0153db1b8d8a58001feed83',1,'firmware.ino']]]
 ];

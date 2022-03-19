@@ -2,6 +2,7 @@ var firmware_8ino =
 [
     [ "Endstop", "struct_endstop.html", "struct_endstop" ],
     [ "Stepper", "struct_stepper.html", "struct_stepper" ],
+    [ "DEBUG", "firmware_8ino.html#ad72dbcf6d0153db1b8d8a58001feed83", null ],
     [ "EEPROM_OFFSET_I2C_ADDRESS", "firmware_8ino.html#a1cad4e2514f451585f15da3b8ee3cd2f", null ],
     [ "log", "firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "PINCONTROL_SUPPORT", "firmware_8ino.html#adde1fd8a4e40d6ab989307669781128f", null ],
@@ -30,13 +31,20 @@ var firmware_8ino =
     [ "interruptPin", "firmware_8ino.html#a89786b8678479bcf2338a522d43b9381", null ],
     [ "interruptReason", "firmware_8ino.html#a2451a9b021bbbd6931ff9832f662af13", null ],
     [ "interruptSource", "firmware_8ino.html#a3dc3b1bfb8fa250b49a70c77e11e87c2", null ],
+    [ "lastCycles", "firmware_8ino.html#acee4f8c66bd06079db7157d155550ede", null ],
     [ "maxEndstops", "firmware_8ino.html#aa84ea5f47409c6c60bc911ba4bc06fb0", null ],
     [ "maxServos", "firmware_8ino.html#a0f9813196df1c36828566b98fb497cd7", null ],
     [ "maxSteppers", "firmware_8ino.html#a4b5902c36f57eccdc4e911f63edcd14b", null ],
     [ "newMessage", "firmware_8ino.html#affd9824af02dde7126d00d43a74c0081", null ],
+    [ "now", "firmware_8ino.html#ad2a5acb9b13b943cac9ef0b8c8370100", null ],
     [ "numServos", "firmware_8ino.html#a8270206122d7d60c6447798625bec3c5", null ],
     [ "numSteppers", "firmware_8ino.html#a9ffc376a015a72bacc0fa343e6fd7dd5", null ],
+    [ "reportNow", "firmware_8ino.html#a4e882aeffdf111848ef1647b42fe1dde", null ],
+    [ "reportPeriod", "firmware_8ino.html#aab25d82c1087f38c24fedd257e192278", null ],
+    [ "sentOnRequest", "firmware_8ino.html#adc3807e20039643a86ced45c531aa952", null ],
     [ "servos", "firmware_8ino.html#a72a38b8d17ee1e47de4099a71e6a13b4", null ],
     [ "slaveDefaultAddress", "firmware_8ino.html#a6335b7c0e0151e1f0fca222235cb4ee0", null ],
-    [ "steppers", "firmware_8ino.html#a7658032e03469b7a54542145f6d59bc6", null ]
+    [ "steppers", "firmware_8ino.html#a7658032e03469b7a54542145f6d59bc6", null ],
+    [ "then", "firmware_8ino.html#a570420b17131e93d2c3ff7665f121800", null ],
+    [ "writtenToBuffer", "firmware_8ino.html#ab2458d18375b44e68abd4672fe965562", null ]
 ];

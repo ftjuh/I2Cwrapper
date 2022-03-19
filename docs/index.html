@@ -96,11 +96,11 @@ Author</h1>
 <p>Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd><p class="startdd">add emergency stop/break pin for slave (just use reset pin for the moment) </p>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd><p class="startdd">add emergency stop/break pin for slave (just use reset pin for the moment) </p>
 <p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
 <p class="interdd">ESP32: make use of dual cores? </p>
 <p class="interdd">use interrupts for endstops instead of main loop polling (not sure how much of a difference this would make in practice, though. The main loop is't doing much else, what really takes time are the computations.) </p>
-<p class="interdd">Master stop/start bit? </p>
+<p class="interdd">Multimaster? Master stop/start bit? </p>
 <p class="interdd"><del>update <a class="el" href="keywords_8txt.html">keywords.txt</a></del> </p>
 <p class="interdd"><del>clean up example sketches</del> </p>
 <p class="interdd"><del>implement runToPosition() and runToNewPosition() in master</del> - implemented </p>
@@ -123,7 +123,7 @@ License</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Mar 15 2022 23:39:55 for AccelStepperI2C by
+    <li class="footer">Generated on Sat Mar 19 2022 15:43:09 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

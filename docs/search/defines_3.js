@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['servo_5fsupport_566',['SERVO_SUPPORT',['../firmware_8ino.html#ae0e9d7a6def6d9fef4d0febcbadbda25',1,'firmware.ino']]]
+  ['pincontrol_5fsupport_581',['PINCONTROL_SUPPORT',['../firmware_8ino.html#adde1fd8a4e40d6ab989307669781128f',1,'firmware.ino']]]
 ];

@@ -10,10 +10,12 @@
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.
-   @todo debugging
    @todo return messages (results) should ideally come with an id, too, so that master can be sure
       it's the correct result. Currently only CRC8, i.e. correct transmission is checked.
    @todo volatile variables / ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {}
+   @todo Module support (Servo, pin control, ...) needs to be outsourced and centralized. Currently
+   there are a number of places that need to be adapted if a new module is added: Init section, startup
+   message in setup(), processMessage().
    @todo <del>make i2c address configurable with pins or via i2c/EEPROM</del>
    @todo <del>implement endstops/reference positions</del>
 */
@@ -22,14 +24,13 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <AccelStepper.h>
 #include <AccelStepperI2C.h>
-#include <SimpleBuffer.h>
 #include <EEPROM.h>
-#if defined(ARDUINO_ARCH_AVR)
-#include <avr/wdt.h>
-#endif
+// note: optional libraries like ServoI2C.h are conditionally included further below
 
+//#if defined(ARDUINO_ARCH_AVR) not needed anymore, reset now without watchdog
+//#include <avr/wdt.h>
+//#endif
 
 
 /************************************************************************/
@@ -53,7 +54,7 @@ const uint8_t maxServos = 4;
 
 /*
    uncomment to enable pin control support
-   Note: needs analogWrite(), which might be tricky on ESPs
+   Note: needs analogWrite(), which might be tricky on ESPs (untested)
 */
 #define PINCONTROL_SUPPORT
 
@@ -69,7 +70,7 @@ const uint8_t maxServos = 4;
 /*!
   @brief Uncomment this to enable firmware debugging output on Serial.
 */
-// #define DEBUG
+#define DEBUG
 
 /************************************************************************/
 /******* end of firmware configuration settings **************************/
@@ -101,14 +102,13 @@ uint8_t numServos = 0; // number of initialised servos.
 #include "PinI2C.h"
 #endif // defined(PINCONTROL_SUPPORT)
 
+
 /*
    Debugging stuff
 */
 
-#if !defined(log)
-#undef log
-#endif // log
 #if defined(DEBUG)
+#undef log
 #define log(...)       Serial.print(__VA_ARGS__)
 #else
 #define log(...)
@@ -310,6 +310,16 @@ void setup()
   log("ARDUINO_ARCH_ESP32\n");
   #else
   log("unknown\n");
+  #endif
+  log("Compiled on " __DATE__ " at " __TIME__ "\n");
+  /* ### not a good solution; these module dependent things need to be outsourced, 
+   *  so that we don't need to make adaptions at many places when a new module is added.   *  
+   */
+  #ifdef SERVO_SUPPORT
+  log("Servo support enabled.\n");
+  #endif
+  #ifdef PINCONTROL_SUPPORT
+  log("Pin control support enabled.\n");
   #endif
 
   uint8_t i2c_address = retrieveI2C_address();
@@ -1087,6 +1097,7 @@ void processMessage(uint8_t len)
         }
         break;
 
+#if defined(ARDUINO_ARCH_AVR) // no analogReference() on ESPs
       case pinAnalogReferenceCmd: {
           if (i == 1) { //1 uint8_t
             uint8_t mode; bufferIn->read(mode);
@@ -1094,6 +1105,7 @@ void processMessage(uint8_t len)
           }
         }
         break;
+#endif // defined(ARDUINO_ARCH_AVR)
 
 #endif // defined(PINCONTROL_SUPPORT)
 

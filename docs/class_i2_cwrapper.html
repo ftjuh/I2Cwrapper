@@ -94,20 +94,20 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
-<p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> (and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) library.  
+<p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and related libraries.  
  <a href="class_i2_cwrapper.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> (and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>) library. </p>
-<p>I split it from an earlier version of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library when adding Servo support, to be able to have a clean separation librarywise between the two: The wrapper represents the I2C slave and handles all communication with it. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> use it for communicating with the slave. To do so, an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> object is instantiated with the slave's I2C address and then passed to its clients',i.e. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> or <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> objects, constructor. </p><dl class="section user"><dt>Command codes</dt><dd><ul>
+<div class="textblock"><p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and related libraries. </p>
+<p>I split it from an earlier version of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library when adding Servo support, to be able to have a clean separation librarywise between the two: The wrapper represents the I2C slave and handles all communication with it. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>, and others use it for communicating with the slave. To do so, an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> object is instantiated with the slave's I2C address and then passed to its client object's (<a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> etc.) constructor. </p><dl class="section user"><dt>Command codes</dt><dd><ul>
 <li>000 - 009 (reserved)</li>
 <li>010 - 059 <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></li>
 <li>060 - 069 <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></li>
 <li>070 - 079 <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></li>
 <li>080 - 239 (unused)</li>
-<li>240 - 255 <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> commands (reset slave, change address etc.) </li>
+<li>240 - 255 <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> commands (reset slave, change address etc.) </li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>Theoretically, new classes could use <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a> to add even more capabilities to the slave, e.g. for driving DC motors, granted that the firmware is extended accordingly and the above list of uint8_t command codes is kept free from duplicates. </dd></dl>
+<dl class="section user"><dt></dt><dd>New classes could use <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> to easily add even more capabilities to the slave, e.g. for driving DC motors, granted that the firmware is extended accordingly and the above list of uint8_t command codes is kept free from duplicates. </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -118,10 +118,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if slave is listening.  <a href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">More...</a><br /></td></tr>
 <tr class="separator:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c634bb576b76b11a591fdf74bafcfdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">reset</a> ()</td></tr>
-<tr class="memdesc:a1c634bb576b76b11a591fdf74bafcfdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers/servos) which the master does not know about.  <a href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">More...</a><br /></td></tr>
+<tr class="memdesc:a1c634bb576b76b11a591fdf74bafcfdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers, etc.) which the master does not know about.  <a href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">More...</a><br /></td></tr>
 <tr class="separator:a1c634bb576b76b11a591fdf74bafcfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8084b9fc49113a5a6d2214e1878457e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">changeI2Caddress</a> (uint8_t <a class="el" href="_change__address_8ino.html#a53811bf61b46bdfb67602aeafbb0b739">newAddress</a>)</td></tr>
-<tr class="memdesc:ab8084b9fc49113a5a6d2214e1878457e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permanently change the I2C address of the device. New address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot.  <a href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">More...</a><br /></td></tr>
+<tr class="memdesc:ab8084b9fc49113a5a6d2214e1878457e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permanently change the I2C address of the device. The new address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot.  <a href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">More...</a><br /></td></tr>
 <tr class="separator:ab8084b9fc49113a5a6d2214e1878457e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32301b5659f124217e59413192849dde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde">setInterruptPin</a> (int8_t pin, bool activeHigh=true)</td></tr>
 <tr class="memdesc:a32301b5659f124217e59413192849dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a global interrupt pin which can be used by device units (steppers, servos...) to inform the master that something important happend. Currently used by <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> to inform about end stop hits and target reached events.  <a href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde">More...</a><br /></td></tr>
@@ -196,7 +196,7 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i2c_address</td><td>Address of the slave device </td></tr>
-    <tr><td class="paramname">maxBuf</td><td>Upper limit of send and receive buffer including 1 crc8 byte * </td></tr>
+    <tr><td class="paramname">maxBuf</td><td>Upper limit of send and receive buffer including 1 crc8 byte </td></tr>
   </table>
   </dd>
 </dl>
@@ -220,7 +220,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Permanently change the I2C address of the device. New address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot. </p>
+<p>Permanently change the I2C address of the device. The new address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot. </p>
 
 </div>
 </div>
@@ -367,7 +367,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers/servos) which the master does not know about. </p>
+<p>Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers, etc.) which the master does not know about. </p>
 
 </div>
 </div>
@@ -452,7 +452,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns the previously set delay. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd><del>I2Cdelay is currently global; make it a per-slave setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C (and ServoI2C) library.">I2Cwrapper</a>. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd><del>I2Cdelay is currently global; make it a per-slave setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>. </dd></dl>
 
 </div>
 </div>
@@ -572,7 +572,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Tue Mar 15 2022 23:39:55 for AccelStepperI2C by
+    <li class="footer">Generated on Sat Mar 19 2022 15:43:09 for AccelStepperI2C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
