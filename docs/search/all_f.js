@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['readme_163',['README',['../md__r_e_a_d_m_e.html',1,'']]],
   ['randomwalk_164',['randomWalk',['../_interrupt___endstop_8ino.html#aaa4e6a3a74313cd5ee9dbea8ac271ad1',1,'Interrupt_Endstop.ino']]],
   ['range_165',['range',['../_interrupt___endstop_8ino.html#a0d7425a2c591319b9651b14bab4fea8e',1,'Interrupt_Endstop.ino']]],
   ['read_166',['read',['../class_servo_i2_c.html#ac76f80be64343ae60ee98559c17df3e1',1,'ServoI2C::read()'],['../class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4',1,'SimpleBuffer::read()']]],
