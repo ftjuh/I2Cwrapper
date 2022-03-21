@@ -1,4 +1,4 @@
-/*!
+#/*!
    @file firmware.ino
    @brief Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library,
    comes with the matching AccelStepperI2C library.
@@ -86,7 +86,7 @@ const uint8_t maxServos = 4;
 #elif defined(ARDUINO_ARCH_ESP32)
 #include <ESP32Servo.h> // ESP32 doesn't come with a native Servo.h
 #endif // defined(ARDUINO_ARCH_AVR)
-#include "ServoI2C.h"
+#include <ServoI2C.h>
 
 Servo servos[maxServos]; // ### really allocate all of them now?
 uint8_t numServos = 0; // number of initialised servos.
@@ -98,7 +98,7 @@ uint8_t numServos = 0; // number of initialised servos.
 */
 
 #if defined(PINCONTROL_SUPPORT)
-#include "PinI2C.h"
+#include <PinI2C.h>
 #endif // defined(PINCONTROL_SUPPORT)
 
 
