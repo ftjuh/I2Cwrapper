@@ -54,7 +54,7 @@ void setup()
   wrapper.reset(); // reset the slave device
   delay(500); // and give it time to reboot
 
-  wrapper.setI2Cdelay(20);
+  wrapper.setI2Cdelay(20); // Set small delay for I2C bus communication
 
   // attach() replaces the AccelStepper constructor, so it could also be called like this: 
   // stepper.attach(AccelStepper::DRIVER, 5, 6);
