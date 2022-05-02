@@ -3,6 +3,7 @@ var files_dup =
     [ "AccelStepperI2C.cpp", "_accel_stepper_i2_c_8cpp.html", null ],
     [ "AccelStepperI2C.h", "_accel_stepper_i2_c_8h.html", "_accel_stepper_i2_c_8h" ],
     [ "Change_address.ino", "_change__address_8ino.html", "_change__address_8ino" ],
+    [ "CNCv4_Board_3_Steppers.ino", "_c_n_cv4___board__3___steppers_8ino.html", "_c_n_cv4___board__3___steppers_8ino" ],
     [ "Error_checking.ino", "_error__checking_8ino.html", "_error__checking_8ino" ],
     [ "firmware.ino", "firmware_8ino.html", "firmware_8ino" ],
     [ "I2Cwrapper.cpp", "_i2_cwrapper_8cpp.html", null ],

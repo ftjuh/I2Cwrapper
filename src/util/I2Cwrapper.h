@@ -35,7 +35,9 @@
 const uint16_t maxBufDefault = 20; // includes 1 byte for CRC8
 
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
-const unsigned long I2CdefaultDelay = 10;
+// 20 is *very* conservative under normal circumstances, but safer if slave does
+// a lot of serial debugging
+const unsigned long I2CdefaultDelay = 20;
 
 // I2C commands used by the wrapper
 const uint8_t resetCmd              = 241;

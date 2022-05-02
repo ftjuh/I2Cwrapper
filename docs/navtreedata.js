@@ -70,7 +70,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_accel_stepper_i2_c_8cpp.html",
-"class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb"
+"class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

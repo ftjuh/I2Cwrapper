@@ -1,4 +1,4 @@
-#/*!
+/*!
    @file firmware.ino
    @brief Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library,
    comes with the matching AccelStepperI2C library.
