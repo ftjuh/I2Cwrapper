@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: ServoI2C.h File Reference</title>
+<title>I2Cwrapper: ServoI2C.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -93,10 +93,11 @@ $(document).ready(function(){initNavTree('_servo_i2_c_8h.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 
-<p>Arduino library for I2C-control of servo motors connected to another Arduino which runs the associated <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. This is more or less a byproduct of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> project, but could be used as a (slightly bloated) standalone solution for I2C control of servo motors. Just as <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> mimicks the interface of the original Arduino Servo libraries, so that it can be used with only minor adaptations.  
+<p>Arduino library for I2C-control of servo motors connected to another Arduino which runs the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a class="el" href="firmware_8ino.html">firmware.ino</a> with the <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> module enabled.  
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arduino library for I2C-control of servo motors connected to another Arduino which runs the associated <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. This is more or less a byproduct of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> project, but could be used as a (slightly bloated) standalone solution for I2C control of servo motors. Just as <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> mimicks the interface of the original Arduino Servo libraries, so that it can be used with only minor adaptations. </p>
+<div class="textblock"><p>Arduino library for I2C-control of servo motors connected to another Arduino which runs the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a class="el" href="firmware_8ino.html">firmware.ino</a> with the <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> module enabled. </p>
+<p>Just as <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> mimicks the interface of the original Arduino Servo libraries, so that it can be used with only minor adaptations to non-I2C code. </p>
 <h1><a class="anchor" id="author"></a>
 Author</h1>
 <p>Copyright (c) 2022 juh </p>
@@ -112,27 +113,29 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aec2445532cf01327e2361b2e8d1f8e39"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#aec2445532cf01327e2361b2e8d1f8e39">servoAttach1Cmd</a> = 60</td></tr>
+<tr class="memitem:ab7271093f4080db7f8e42277bc580448"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> = 50</td></tr>
+<tr class="separator:ab7271093f4080db7f8e42277bc580448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec2445532cf01327e2361b2e8d1f8e39"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#aec2445532cf01327e2361b2e8d1f8e39">servoAttach1Cmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 0</td></tr>
 <tr class="separator:aec2445532cf01327e2361b2e8d1f8e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07260e617cfa64951a6db5fd4fa75cdf"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a07260e617cfa64951a6db5fd4fa75cdf">servoAttachResult</a> = 1</td></tr>
 <tr class="separator:a07260e617cfa64951a6db5fd4fa75cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad184b5d78fd4f16b77fd4e600225d4c2"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ad184b5d78fd4f16b77fd4e600225d4c2">servoAttach2Cmd</a> = 61</td></tr>
+<tr class="memitem:ad184b5d78fd4f16b77fd4e600225d4c2"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ad184b5d78fd4f16b77fd4e600225d4c2">servoAttach2Cmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 1</td></tr>
 <tr class="separator:ad184b5d78fd4f16b77fd4e600225d4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdcf8e912dfca4c7b876bda6c91e691f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#acdcf8e912dfca4c7b876bda6c91e691f">servoDetachCmd</a> = 62</td></tr>
+<tr class="memitem:acdcf8e912dfca4c7b876bda6c91e691f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#acdcf8e912dfca4c7b876bda6c91e691f">servoDetachCmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 2</td></tr>
 <tr class="separator:acdcf8e912dfca4c7b876bda6c91e691f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6ec5d5c7cec42dab211c442066ced31"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ad6ec5d5c7cec42dab211c442066ced31">servoWriteCmd</a> = 63</td></tr>
+<tr class="memitem:ad6ec5d5c7cec42dab211c442066ced31"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ad6ec5d5c7cec42dab211c442066ced31">servoWriteCmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 3</td></tr>
 <tr class="separator:ad6ec5d5c7cec42dab211c442066ced31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a640ecab1a6502f0435e993a0b68b0619"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a640ecab1a6502f0435e993a0b68b0619">servoWriteMicrosecondsCmd</a> = 64</td></tr>
+<tr class="memitem:a640ecab1a6502f0435e993a0b68b0619"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a640ecab1a6502f0435e993a0b68b0619">servoWriteMicrosecondsCmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 4</td></tr>
 <tr class="separator:a640ecab1a6502f0435e993a0b68b0619"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06400364c4fd99d2fd97802201e5640e"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a06400364c4fd99d2fd97802201e5640e">servoReadCmd</a> = 65</td></tr>
+<tr class="memitem:a06400364c4fd99d2fd97802201e5640e"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a06400364c4fd99d2fd97802201e5640e">servoReadCmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 5</td></tr>
 <tr class="separator:a06400364c4fd99d2fd97802201e5640e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d37be42973ef4e74906c133c4690f14"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a5d37be42973ef4e74906c133c4690f14">servoReadResult</a> = 2</td></tr>
 <tr class="separator:a5d37be42973ef4e74906c133c4690f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac57405b05b7fb9d6bb5c876a506bb20e"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ac57405b05b7fb9d6bb5c876a506bb20e">servoReadMicrosecondsCmd</a> = 66</td></tr>
+<tr class="memitem:ac57405b05b7fb9d6bb5c876a506bb20e"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ac57405b05b7fb9d6bb5c876a506bb20e">servoReadMicrosecondsCmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 6</td></tr>
 <tr class="separator:ac57405b05b7fb9d6bb5c876a506bb20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89ba4c06569494fd1b9fcd85af74ce6c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a89ba4c06569494fd1b9fcd85af74ce6c">servoReadMicrosecondsResult</a> = 2</td></tr>
 <tr class="separator:a89ba4c06569494fd1b9fcd85af74ce6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8b62d49f383d27b1ee493d97bf9cc97"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ad8b62d49f383d27b1ee493d97bf9cc97">servoAttachedCmd</a> = 67</td></tr>
+<tr class="memitem:ad8b62d49f383d27b1ee493d97bf9cc97"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#ad8b62d49f383d27b1ee493d97bf9cc97">servoAttachedCmd</a> = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 7</td></tr>
 <tr class="separator:ad8b62d49f383d27b1ee493d97bf9cc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9094d4c24f168670ca13b88441b6097a"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c_8h.html#a9094d4c24f168670ca13b88441b6097a">servoAttachedResult</a> = 1</td></tr>
 <tr class="separator:a9094d4c24f168670ca13b88441b6097a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,7 +148,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoAttach1Cmd = 60</td>
+          <td class="memname">const uint8_t servoAttach1Cmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -159,7 +162,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoAttach2Cmd = 61</td>
+          <td class="memname">const uint8_t servoAttach2Cmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -173,7 +176,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoAttachedCmd = 67</td>
+          <td class="memname">const uint8_t servoAttachedCmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 7</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -208,6 +211,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ab7271093f4080db7f8e42277bc580448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7271093f4080db7f8e42277bc580448">&#9670;&nbsp;</a></span>servoCmdOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t servoCmdOffset = 50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acdcf8e912dfca4c7b876bda6c91e691f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acdcf8e912dfca4c7b876bda6c91e691f">&#9670;&nbsp;</a></span>servoDetachCmd</h2>
 
@@ -215,7 +232,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoDetachCmd = 62</td>
+          <td class="memname">const uint8_t servoDetachCmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -229,7 +246,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoReadCmd = 65</td>
+          <td class="memname">const uint8_t servoReadCmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 5</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -243,7 +260,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoReadMicrosecondsCmd = 66</td>
+          <td class="memname">const uint8_t servoReadMicrosecondsCmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 6</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -285,7 +302,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoWriteCmd = 63</td>
+          <td class="memname">const uint8_t servoWriteCmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 3</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -299,7 +316,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t servoWriteMicrosecondsCmd = 64</td>
+          <td class="memname">const uint8_t servoWriteMicrosecondsCmd = <a class="el" href="_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448">servoCmdOffset</a> + 4</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -312,7 +329,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_servo_i2_c_8h.html">ServoI2C.h</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

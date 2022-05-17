@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: File Members</title>
+<title>I2Cwrapper: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -88,8 +88,11 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 &#160;
 
 <h3><a id="index_a"></a>- a -</h3><ul>
-<li>addStepper()
-: <a class="el" href="firmware_8ino.html#ae2a8610cdcfb2697510a8ee83499558e">firmware.ino</a>
+<li>analogWrite()
+: <a class="el" href="_pin_i2_c__firmware_8h.html#a69e0c3ae83f2d0c45e822abd668e43f7">PinI2C_firmware.h</a>
+</li>
+<li>attach()
+: <a class="el" href="_servo_i2_c__firmware_8h.html#a4b239704a8a9df727d8219b97763fcea">ServoI2C_firmware.h</a>
 </li>
 </ul>
 
@@ -97,6 +100,13 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>clearInterrupt()
 : <a class="el" href="firmware_8ino.html#adebb2a389a701d95bb721df60053bf6c">firmware.ino</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>digitalWrite()
+: <a class="el" href="_pin_i2_c__firmware_8h.html#ae4237867798c215750e46405a9065e3e">PinI2C_firmware.h</a>
 </li>
 </ul>
 
@@ -112,28 +122,44 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <li>halt()
 : <a class="el" href="_error__checking_8ino.html#a799d63040f9850d133b3c65efe6211b5">Error_checking.ino</a>
 , <a class="el" href="_pin__control_8ino.html#a799d63040f9850d133b3c65efe6211b5">Pin_control.ino</a>
+, <a class="el" href="_e_s_p32sensors_8ino.html#a799d63040f9850d133b3c65efe6211b5">ESP32sensors.ino</a>
 </li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
-<li>interruptFromSlave()
-: <a class="el" href="_interrupt___endstop_8ino.html#a84c31199c04849787cdd324631a4ef12">Interrupt_Endstop.ino</a>
+<li>interruptFromTarget()
+: <a class="el" href="_e_s_p32sensors_8ino.html#a346c03367244248ea9d41973c6a8cb6d">ESP32sensors.ino</a>
+, <a class="el" href="_interrupt___endstop_8ino.html#a346c03367244248ea9d41973c6a8cb6d">Interrupt_Endstop.ino</a>
 </li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
+<li>log()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#ace855f5c83defcaa5f3edf4d000534b8">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#abf7381619785cb31be6236b06f5a0e15">PinI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a1662c22de4fd5eb360f85c944e7fe15b">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a7835785b11e381f9edf8fb799d39a2d8">PinI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a55a24f45a7c75619a74fd7598e2d3b0a">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a1f9a0a9cf516f3f5ee6eadd6daabd3ca">PinI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#afa13fc1fbc97962c490c6139169149e5">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a087f733f498d5214f3592be4977c4758">PinI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a561a9c9b082673b004d5ddd22b247321">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a1662c22de4fd5eb360f85c944e7fe15b">PinI2C_firmware.h</a>
+, <a class="el" href="_servo_i2_c__firmware_8h.html#a6030a400067fe970c95a0a5717176c90">ServoI2C_firmware.h</a>
+</li>
 <li>loop()
-: <a class="el" href="_change__address_8ino.html#afe461d27b9c48d5921c00d521181f12f">Change_address.ino</a>
-, <a class="el" href="_c_n_cv4___board__3___steppers_8ino.html#afe461d27b9c48d5921c00d521181f12f">CNCv4_Board_3_Steppers.ino</a>
+: <a class="el" href="_stepper__and___servo__together_8ino.html#afe461d27b9c48d5921c00d521181f12f">Stepper_and_Servo_together.ino</a>
+, <a class="el" href="_change__address_8ino.html#afe461d27b9c48d5921c00d521181f12f">Change_address.ino</a>
 , <a class="el" href="_stepper___bounce_8ino.html#afe461d27b9c48d5921c00d521181f12f">Stepper_Bounce.ino</a>
-, <a class="el" href="_pin__control_8ino.html#afe461d27b9c48d5921c00d521181f12f">Pin_control.ino</a>
+, <a class="el" href="_c_n_cv4___board__3___steppers_8ino.html#afe461d27b9c48d5921c00d521181f12f">CNCv4_Board_3_Steppers.ino</a>
 , <a class="el" href="_error__checking_8ino.html#afe461d27b9c48d5921c00d521181f12f">Error_checking.ino</a>
-, <a class="el" href="_servo___sweep_8ino.html#afe461d27b9c48d5921c00d521181f12f">Servo_Sweep.ino</a>
-, <a class="el" href="_stepper__and___servo__together_8ino.html#afe461d27b9c48d5921c00d521181f12f">Stepper_and_Servo_together.ino</a>
-, <a class="el" href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">firmware.ino</a>
+, <a class="el" href="_e_s_p32sensors_8ino.html#afe461d27b9c48d5921c00d521181f12f">ESP32sensors.ino</a>
 , <a class="el" href="_interrupt___endstop_8ino.html#afe461d27b9c48d5921c00d521181f12f">Interrupt_Endstop.ino</a>
+, <a class="el" href="_servo___sweep_8ino.html#afe461d27b9c48d5921c00d521181f12f">Servo_Sweep.ino</a>
+, <a class="el" href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">firmware.ino</a>
+, <a class="el" href="_pin__control_8ino.html#afe461d27b9c48d5921c00d521181f12f">Pin_control.ino</a>
 </li>
 <li>loopClassic()
 : <a class="el" href="_c_n_cv4___board__3___steppers_8ino.html#a43f4820c5a43b8e2db9537a404f2bb94">CNCv4_Board_3_Steppers.ino</a>
@@ -143,8 +169,8 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
-<li>pollEndstops()
-: <a class="el" href="firmware_8ino.html#a377a90b916ad4433650793b43e74f9a4">firmware.ino</a>
+<li>pinMode()
+: <a class="el" href="_pin_i2_c__firmware_8h.html#ac7f5b7d2759eda4979330dd102b8976c">PinI2C_firmware.h</a>
 </li>
 <li>printVersions()
 : <a class="el" href="_error__checking_8ino.html#a4d655f7999db948bc1242bd10b60d482">Error_checking.ino</a>
@@ -158,6 +184,16 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>randomWalk()
 : <a class="el" href="_interrupt___endstop_8ino.html#aaa4e6a3a74313cd5ee9dbea8ac271ad1">Interrupt_Endstop.ino</a>
+</li>
+<li>read()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a27e870e73c2f1123b742e404e0f62a84">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#ab5f1bb2fd2f0e96940702c9c872b2213">PinI2C_firmware.h</a>
+, <a class="el" href="_servo_i2_c__firmware_8h.html#aaeac2a44f04fb12816a33ed664d7d844">ServoI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#ae778b3ef237889b896261aa785e7d07d">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_servo_i2_c__firmware_8h.html#a16e5518be4db439d4df88b8db1d128ed">ServoI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a578d3054e1fe9a5fd0e0b31bfde1843f">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a5f8ac786354c30a4051f38e799fbbe35">PinI2C_firmware.h</a>
+, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a0de188a79256d9682f095c5be7bb057d">ESP32sensorsI2C_firmware.h</a>
 </li>
 <li>receiveEvent()
 : <a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">firmware.ino</a>
@@ -178,21 +214,58 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <li>setup()
 : <a class="el" href="_change__address_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Change_address.ino</a>
 , <a class="el" href="_c_n_cv4___board__3___steppers_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">CNCv4_Board_3_Steppers.ino</a>
-, <a class="el" href="_error__checking_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Error_checking.ino</a>
-, <a class="el" href="_interrupt___endstop_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Interrupt_Endstop.ino</a>
-, <a class="el" href="_pin__control_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Pin_control.ino</a>
-, <a class="el" href="_servo___sweep_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Servo_Sweep.ino</a>
+, <a class="el" href="_e_s_p32sensors_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">ESP32sensors.ino</a>
+, <a class="el" href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">firmware.ino</a>
 , <a class="el" href="_stepper__and___servo__together_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Stepper_and_Servo_together.ino</a>
 , <a class="el" href="_stepper___bounce_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Stepper_Bounce.ino</a>
-, <a class="el" href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">firmware.ino</a>
+, <a class="el" href="_servo___sweep_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Servo_Sweep.ino</a>
+, <a class="el" href="_pin__control_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Pin_control.ino</a>
+, <a class="el" href="_interrupt___endstop_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Interrupt_Endstop.ino</a>
+, <a class="el" href="_error__checking_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">Error_checking.ino</a>
 </li>
 <li>storeI2C_address()
 : <a class="el" href="firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee">firmware.ino</a>
+</li>
+<li>switch()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aff221285a694d3fdadf4dd7e70741050">ESP32sensorsI2C_firmware.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
+<li>touchDetected0()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aab45af7e4d7b02c5c5fee35d140d1ecb">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected1()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a42a8fd7d93ebc9fe47e8f01288056517">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected2()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a602659ebeb72524b91e5876f96b13e0f">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected3()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a09d8508bf62cad305f8d64b1a95cc5ad">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected4()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a10e771dfedd49390ee27d89061ed3100">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected5()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a3c8895421a0d41017dea505dd2f505c0">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected6()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aa223ef060513c34eb5aafda0c949a6da">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected7()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#ad47577755d7dfa4d4726d6a0d36380fb">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected8()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#adead0215358cfb605a562a968341e902">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchDetected9()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a82836a2636ef27c4cb9275a2d53f5940">ESP32sensorsI2C_firmware.h</a>
+</li>
+<li>touchSetCycles()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aa638802b43f4263872ae413c21b6d447">ESP32sensorsI2C_firmware.h</a>
+</li>
 <li>triggerInterrupt()
 : <a class="el" href="firmware_8ino.html#a4f3ec17f4d90ce7c4b1714e8e5931452">firmware.ino</a>
 </li>
@@ -201,10 +274,7 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 
 <h3><a id="index_v"></a>- v -</h3><ul>
 <li>validServo()
-: <a class="el" href="firmware_8ino.html#a18927d89764b3c8c70da59bb149524f2">firmware.ino</a>
-</li>
-<li>validStepper()
-: <a class="el" href="firmware_8ino.html#a56ff022c8c9a6539accc3b6fa4f7efb8">firmware.ino</a>
+: <a class="el" href="_servo_i2_c__firmware_8h.html#a18927d89764b3c8c70da59bb149524f2">ServoI2C_firmware.h</a>
 </li>
 </ul>
 
@@ -212,6 +282,15 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <h3><a id="index_w"></a>- w -</h3><ul>
 <li>waitForInterrupt()
 : <a class="el" href="_interrupt___endstop_8ino.html#a19ca9011ba29b9bacc57c6cd08a0bd55">Interrupt_Endstop.ino</a>
+</li>
+<li>write()
+: <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a82e8e24795f9bfae29606fa0e56a6d46">ESP32sensorsI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a137d0a9bbda7ad51f76732ee42a696b1">PinI2C_firmware.h</a>
+, <a class="el" href="_servo_i2_c__firmware_8h.html#a147775ee8907690d1d256ed75836543e">ServoI2C_firmware.h</a>
+, <a class="el" href="_pin_i2_c__firmware_8h.html#a1e90497966d9d859b7f097b8aca582eb">PinI2C_firmware.h</a>
+</li>
+<li>writeMicroseconds()
+: <a class="el" href="_servo_i2_c__firmware_8h.html#a75e9a433ea8652659ac91ff7ef91c311">ServoI2C_firmware.h</a>
 </li>
 <li>writeOutputBuffer()
 : <a class="el" href="firmware_8ino.html#a0a7a32f4b61eba1d8e3a7b402abf733b">firmware.ino</a>
@@ -222,7 +301,7 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

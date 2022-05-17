@@ -1,6 +1,6 @@
 /*!
   @file ServoI2C.cpp
-  @brief Part of the AccelStepperI2C firmware/library
+  @brief Part of the I2Cwrapper firmware/library
   @section author Author
   Copyright (c) 2022 juh
   @section license License

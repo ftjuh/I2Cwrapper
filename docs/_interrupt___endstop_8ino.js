@@ -1,7 +1,7 @@
 var _interrupt___endstop_8ino =
 [
     [ "findEndstops", "_interrupt___endstop_8ino.html#af0c26f4d73cccd6b550219b3fc1978cd", null ],
-    [ "interruptFromSlave", "_interrupt___endstop_8ino.html#a84c31199c04849787cdd324631a4ef12", null ],
+    [ "interruptFromTarget", "_interrupt___endstop_8ino.html#a346c03367244248ea9d41973c6a8cb6d", null ],
     [ "loop", "_interrupt___endstop_8ino.html#afe461d27b9c48d5921c00d521181f12f", null ],
     [ "randomWalk", "_interrupt___endstop_8ino.html#aaa4e6a3a74313cd5ee9dbea8ac271ad1", null ],
     [ "setup", "_interrupt___endstop_8ino.html#a4fc01d736fe50cf5b977f755b675f11d", null ],
@@ -14,8 +14,8 @@ var _interrupt___endstop_8ino =
     [ "endstopPin", "_interrupt___endstop_8ino.html#a4ff3a1b3ac827ebbe4560eb7e34d0862", null ],
     [ "homingSpeed", "_interrupt___endstop_8ino.html#ac112495277aeb22acb5ce37941e266e2", null ],
     [ "interruptFlag", "_interrupt___endstop_8ino.html#a8401524759ad65a7d2cf99141ae1c5c3", null ],
-    [ "interruptPinMaster", "_interrupt___endstop_8ino.html#a6181144dbfec3ea75c08601f4b7d2962", null ],
-    [ "interruptPinSlave", "_interrupt___endstop_8ino.html#a41abb2f5b9a1a1d12f801e5717b232e6", null ],
+    [ "interruptPinController", "_interrupt___endstop_8ino.html#aad318ca4e8f026192c05b983937c0114", null ],
+    [ "interruptPinTarget", "_interrupt___endstop_8ino.html#ab0522d6dabebc55df6dac553c2dfd10f", null ],
     [ "lower", "_interrupt___endstop_8ino.html#a7e0f2115058e207e60831f84d019f04f", null ],
     [ "lowerEndStopPos", "_interrupt___endstop_8ino.html#a070d212f03b20f2c8e498bcc5bf43455", null ],
     [ "maxRunSpeed", "_interrupt___endstop_8ino.html#ab3db5699e5f1e5673ad51f3705aa772b", null ],

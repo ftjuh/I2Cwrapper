@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: List of possible reasons an interrupt was triggered.</title>
+<title>I2Cwrapper: List of possible reasons an interrupt was triggered.</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -92,13 +92,13 @@ $(document).ready(function(){initNavTree('group___interrupt_reasons.html',''); i
 </div><!--header-->
 <div class="contents">
 
-<p>Used by clearInterrup() to inform the master about what caused the previous interrupt.  
+<p>Used by clearInterrup() to inform the controller about what caused the previous interrupt.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ga1f90e0f512487244a9afb99cac141660"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">interruptReason_none</a> = 0</td></tr>
-<tr class="memdesc:ga1f90e0f512487244a9afb99cac141660"><td class="mdescLeft">&#160;</td><td class="mdescRight">You should not encounter this, as you don't want to be interrupted without a reason...  <a href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">More...</a><br /></td></tr>
+<tr class="memdesc:ga1f90e0f512487244a9afb99cac141660"><td class="mdescLeft">&#160;</td><td class="mdescRight">You should not encounter this in practice, as you don't want to be interrupted without a reason...  <a href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">More...</a><br /></td></tr>
 <tr class="separator:ga1f90e0f512487244a9afb99cac141660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga73e92a247880625865cb90183f956875"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___interrupt_reasons.html#ga73e92a247880625865cb90183f956875">interruptReason_targetReachedByRun</a> = 1</td></tr>
 <tr class="separator:ga73e92a247880625865cb90183f956875"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,9 +106,11 @@ Variables</h2></td></tr>
 <tr class="separator:ga69a3d7d4ea76a6171ea62f657aa6aa90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga95cdb0448ea51cc3ea41bc96e96f59dc"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___interrupt_reasons.html#ga95cdb0448ea51cc3ea41bc96e96f59dc">interruptReason_endstopHit</a> = 3</td></tr>
 <tr class="separator:ga95cdb0448ea51cc3ea41bc96e96f59dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0c6a15e2cb8bbdae1177dded384ce36"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___interrupt_reasons.html#gac0c6a15e2cb8bbdae1177dded384ce36">interruptReason_ESP32sensorsTouch</a> = 4</td></tr>
+<tr class="separator:gac0c6a15e2cb8bbdae1177dded384ce36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Used by clearInterrup() to inform the master about what caused the previous interrupt. </p>
+<p>Used by clearInterrup() to inform the controller about what caused the previous interrupt. </p>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="ga95cdb0448ea51cc3ea41bc96e96f59dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga95cdb0448ea51cc3ea41bc96e96f59dc">&#9670;&nbsp;</a></span>interruptReason_endstopHit</h2>
@@ -118,6 +120,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t interruptReason_endstopHit = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gac0c6a15e2cb8bbdae1177dded384ce36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac0c6a15e2cb8bbdae1177dded384ce36">&#9670;&nbsp;</a></span>interruptReason_ESP32sensorsTouch</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t interruptReason_ESP32sensorsTouch = 4</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -136,7 +152,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>You should not encounter this, as you don't want to be interrupted without a reason... </p>
+<p>You should not encounter this in practice, as you don't want to be interrupted without a reason... </p>
 
 </div>
 </div>
@@ -173,7 +189,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

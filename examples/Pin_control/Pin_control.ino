@@ -4,7 +4,7 @@
 
    Reads a digital and an analog input pin and mirrors their values on a
    digital and a PWM-capable output pin.
-   Needs PINCONTROL_SUPPORT enabled in the slave's firmware.
+   Needs PinI2C.h module enabled in the target's firmware_modules.h.
 
 */
 
@@ -14,8 +14,8 @@
 
 uint8_t i2cAddress = 0x08;
 
-I2Cwrapper wrapper(i2cAddress); // each slave device is represented by a wrapper...
-PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the slave
+I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
+PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the target
 
 const uint8_t dPinIn  = 12; // any pin; connect switch against GND and +V (or use only GND and INPUT_PULLUP below)
 const uint8_t dPinOut = 13; // any pin; connect LED with resistor or just use 13 = LED_BUILTIN on Uno/Nano 
@@ -27,15 +27,15 @@ void setup()
 {
   Wire.begin();
   Serial.begin(115200);
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
   
   if (!wrapper.ping()) {
-    halt("Slave not found! Check connections and restart.");
+    halt("Target not found! Check connections and restart.");
   } else {
-    Serial.println("Slave found as expected. Proceeding.\n");
+    Serial.println("Target found as expected. Proceeding.\n");
   }
   
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
   pins.pinMode(dPinIn, INPUT); // INPUT_PULLUP will also work

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: Todo List</title>
+<title>I2Cwrapper: Todo List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -90,51 +90,47 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>page <a class="el" href="index.html">%AccelStepperI2C library</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000006"></a>add emergency stop/break pin for slave (just use reset pin for the moment) </p>
+<dt>File <a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a>  </dt>
+<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>add emergency stop/break pin for target (just use reset pin for the moment) </p>
 <p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
 <p class="interdd">ESP32: make use of dual cores? </p>
-<p class="interdd">use interrupts for endstops instead of main loop polling (not sure how much of a difference this would make in practice, though. The main loop is't doing much else, what really takes time are the computations.) </p>
-<p class="interdd">Multimaster? Master stop/start bit? </p>
+<p class="interdd">use interrupts for endstops instead of main loop polling (not sure how much of a difference this would make in practice, though. The main loop isn't doing much else, what really takes time are the computations.) </p>
 <p class="interdd"><del>update <a class="el" href="keywords_8txt.html">keywords.txt</a></del> </p>
 <p class="interdd"><del>clean up example sketches</del> </p>
-<p class="interdd"><del>implement runToPosition() and runToNewPosition() in master</del> - implemented </p>
-<p class="interdd"><del>test (and adapt) slave firmware for ESP8266</del> - implemented. However, I2C slave mode on ESP8266s is no fun. Run only with 160MHz CPU and start testing with 10kHz (that's right: ten kHz) I2C clock speed. </p>
+<p class="interdd"><del>implement runToPosition() and runToNewPosition() in controller</del> - implemented </p>
+<p class="interdd"><del>test (and adapt) target firmware for ESP8266</del> - implemented. However, I2C target mode on ESP8266s is no fun. Run only with 160MHz CPU and start testing with 10kHz (that's right: ten kHz) I2C clock speed. </p>
 <p class="interdd"><del>checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc.</del> - AccelStepperI2C::sentErrors(), AccelStepperI2C::resultErrors() and AccelStepperI2C::transmissionErrors() added </p>
-<p class="interdd"><del>make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc.</del> - setI2Cdelay() implemented </p>
+<p class="interdd"><del>make time the target has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc.</del> - setI2Cdelay() implemented </p>
 <p class="interdd"><del>Versioning, I2C command to request version (important, as library and firmware always need to match)</del> - getVersion() and checkVersion() implemented </p>
-<p class="interdd"><del>Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events</del> - setInterruptPin() and enableInterrupts() implemented </p>
+<p class="interdd"><del>Implement interrupt mechanism, so that the target can inform the controller about finished tasks or other events</del> - setInterruptPin() and enableInterrupts() implemented </p>
 <p class="interdd"><del>implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency</del> - done, performance graphs included in documentation </p>
-<p class="interdd"><del>add ESP32 compatibility for slave</del> - done, but needs further testing </p>
+<p class="interdd"><del>add ESP32 compatibility for target</del> - done, but needs further testing </p>
 <p class="interdd"><del>Make the I2C address programmable and persistent in EEPROM.</del> - done </p>
 <p class="interdd"><del>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics.</del> - CRC8 implemented </p>
 <p class="enddd"><del>Implement end stops/reference stops.</del> - endstop polling implemented, interrupt would be better  </p>
 </dd>
 <dt>Member <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">AccelStepperI2C::enableEndstops</a>  (bool enable=true)</dt>
-<dd><a class="anchor" id="_todo000007"></a><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone.  </dd>
+<dd><a class="anchor" id="_todo000006"></a><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone.  </dd>
 <dt>File <a class="el" href="firmware_8ino.html">firmware.ino</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000001"></a>return messages (results) should ideally come with an id, too, so that master can be sure it's the correct result. Currently only CRC8, i.e. correct transmission is checked. </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000001"></a>make I2C address configurable by hardware (with module?) </p>
+<p class="interdd">return messages (results) should ideally come with an id, too, so that controller can be sure it's the correct result. Currently only CRC8, i.e. correct transmission is checked. </p>
 <p class="interdd">volatile variables / ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {} </p>
-<p class="interdd">Module support (Servo, pin control, ...) needs to be outsourced and centralized. Currently there are a number of places that need to be adapted if a new module is added: Init section, startup message in <a class="el" href="_change__address_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a>, <a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">processMessage()</a>. </p>
-<p class="interdd"><del>make i2c address configurable with pins or via i2c/EEPROM</del> </p>
-<p class="enddd"><del>implement endstops/reference positions</del>  </p>
+<p class="enddd">Reduce memory use to make it fit into an 8k Attiny  </p>
 </dd>
 <dt>File <a class="el" href="_i2_cwrapper_8h.html">I2Cwrapper.h</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000009"></a>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given master-slave setup. </p>
-<p class="enddd"><del><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> should be derived from a common base class, atm there's some unhealthy copy and paste</del>implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>, but with client instead of inheritance relation.  </p>
-</dd>
+<dd><a class="anchor" id="_todo000007"></a>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given controller-target setup.  </dd>
 <dt>Member <a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">I2Cwrapper::setI2Cdelay</a>  (unsigned long delay)</dt>
-<dd><a class="anchor" id="_todo000010"></a><del>I2Cdelay is currently global; make it a per-slave setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>.  </dd>
-<dt>Member <a class="el" href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a>  ()</dt>
-<dd><a class="anchor" id="_todo000002"></a>endstop polling: overhead to check if polling is needed (timeToCheckTheEndstops) might cost more than it saves, so maybe just check each cycle even if it might be much more often than needed.  </dd>
+<dd><a class="anchor" id="_todo000008"></a><del>I2Cdelay is currently global; make it a per-target setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>.  </dd>
+<dt>Member <a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>  </dt>
+<dd><a class="anchor" id="_todo000002"></a>make diagnostics another module?  </dd>
 <dt>Class <a class="el" href="class_pin_i2_c.html">PinI2C</a>  </dt>
-<dd><a class="anchor" id="_todo000008"></a>Only tested on AVRs.  </dd>
-<dt>Member <a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">processMessage</a>  (uint8_t len)</dt>
-<dd><a class="anchor" id="_todo000004"></a>Implement blocking functions <a class="el" href="_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754">runToPositionCmd()</a> and <a class="el" href="_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8">runToNewPositionCmd()</a> on the master's side/in the library?  </dd>
-<dt>Member <a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a>  (int howMany)</dt>
-<dd><a class="anchor" id="_todo000003"></a><del>Just read the buffer here, move interpretation out of the interrupt.</del>  </dd>
+<dd><a class="anchor" id="_todo000010"></a>Only tested on AVRs.  </dd>
+<dt>File <a class="el" href="_pin_i2_c_8h.html">PinI2C.h</a>  </dt>
+<dd><a class="anchor" id="_todo000009"></a>implement interrupts?  </dd>
 <dt>Member <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a>  ()</dt>
-<dd><a class="anchor" id="_todo000005"></a>&lt;done&gt;Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.&lt;/done&gt; not implemented, ESP32 can't do that (doh) </dd>
+<dd><a class="anchor" id="_todo000003"></a><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)  </dd>
+<dt>File <a class="el" href="_servo_i2_c__firmware_8h.html">ServoI2C_firmware.h</a>  </dt>
+<dd><a class="anchor" id="_todo000004"></a>Need to typecast the transmission of int values to int16_t. </dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
@@ -142,7 +138,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

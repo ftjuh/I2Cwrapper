@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: I2Cwrapper Class Reference</title>
+<title>I2Cwrapper: I2Cwrapper Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -98,51 +98,52 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
  <a href="class_i2_cwrapper.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and related libraries. </p>
-<p>I split it from an earlier version of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library when adding Servo support, to be able to have a clean separation librarywise between the two: The wrapper represents the I2C slave and handles all communication with it. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>, and others use it for communicating with the slave. To do so, an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> object is instantiated with the slave's I2C address and then passed to its client object's (<a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> etc.) constructor. </p><dl class="section user"><dt>Command codes</dt><dd><ul>
+<p>I split it from an earlier version of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library when adding Servo support, to be able to have a clean separation librarywise between the two: The wrapper represents the I2C target and handles all communication with it. <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a>, and others use it for communicating with the target. To do so, an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> object is instantiated with the target's I2C address and then passed to its client object's (<a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> etc.) constructor. </p><dl class="section user"><dt>Command codes</dt><dd><ul>
 <li>000 - 009 (reserved)</li>
-<li>010 - 059 <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></li>
-<li>060 - 069 <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></li>
-<li>070 - 079 <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></li>
-<li>080 - 239 (unused)</li>
-<li>240 - 255 <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> commands (reset slave, change address etc.) </li>
+<li>010 - 049 <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></li>
+<li>050 - 059 <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></li>
+<li>060 - 069 <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></li>
+<li>070 - 074 <a class="el" href="class_e_s_p32sensors_i2_c.html" title="An I2C wrapper class for ESP32 sensors (touch, temp, hall).">ESP32sensorsI2C</a></li>
+<li>075 - 239 (unused)</li>
+<li>240 - 255 <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> commands (reset target, change address etc.) </li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>New classes could use <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> to easily add even more capabilities to the slave, e.g. for driving DC motors, granted that the firmware is extended accordingly and the above list of uint8_t command codes is kept free from duplicates. </dd></dl>
+<dl class="section user"><dt></dt><dd>New classes could use <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> to easily add even more capabilities to the target, e.g. for driving DC motors, granted that the firmware is extended accordingly and the above list of uint8_t command codes is kept free from duplicates. </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa3f8a3a94950331c58946ab96a22e53a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#aa3f8a3a94950331c58946ab96a22e53a">I2Cwrapper</a> (uint8_t i2c_address, uint8_t maxBuf=<a class="el" href="_i2_cwrapper_8h.html#ac761f6bc28d53219cc5273671e5c0a3a">maxBufDefault</a>)</td></tr>
-<tr class="memdesc:aa3f8a3a94950331c58946ab96a22e53a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_i2_cwrapper.html#aa3f8a3a94950331c58946ab96a22e53a">More...</a><br /></td></tr>
-<tr class="separator:aa3f8a3a94950331c58946ab96a22e53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">I2Cwrapper</a> (uint8_t i2c_address, uint8_t maxBuf=<a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a>)</td></tr>
+<tr class="memdesc:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">More...</a><br /></td></tr>
+<tr class="separator:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">ping</a> ()</td></tr>
-<tr class="memdesc:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if slave is listening.  <a href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">More...</a><br /></td></tr>
+<tr class="memdesc:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if target device is listening.  <a href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">More...</a><br /></td></tr>
 <tr class="separator:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c634bb576b76b11a591fdf74bafcfdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">reset</a> ()</td></tr>
-<tr class="memdesc:a1c634bb576b76b11a591fdf74bafcfdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers, etc.) which the master does not know about.  <a href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">More...</a><br /></td></tr>
+<tr class="memdesc:a1c634bb576b76b11a591fdf74bafcfdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the target device to reset to its default state. It is recommended to reset the target every time the controller is started or restarted to put it in a defined state. Else it could happen that the target still manages units (steppers, etc.) which the controller does not know about.  <a href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">More...</a><br /></td></tr>
 <tr class="separator:a1c634bb576b76b11a591fdf74bafcfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8084b9fc49113a5a6d2214e1878457e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">changeI2Caddress</a> (uint8_t <a class="el" href="_change__address_8ino.html#a53811bf61b46bdfb67602aeafbb0b739">newAddress</a>)</td></tr>
 <tr class="memdesc:ab8084b9fc49113a5a6d2214e1878457e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permanently change the I2C address of the device. The new address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot.  <a href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">More...</a><br /></td></tr>
 <tr class="separator:ab8084b9fc49113a5a6d2214e1878457e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32301b5659f124217e59413192849dde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde">setInterruptPin</a> (int8_t pin, bool activeHigh=true)</td></tr>
-<tr class="memdesc:a32301b5659f124217e59413192849dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a global interrupt pin which can be used by device units (steppers, servos...) to inform the master that something important happend. Currently used by <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> to inform about end stop hits and target reached events.  <a href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde">More...</a><br /></td></tr>
+<tr class="memdesc:a32301b5659f124217e59413192849dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a global interrupt pin which can be used by device units (steppers, servos...) to inform the controller that something important happend. Currently used by <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> to inform about end stop hits and target reached events, and <a class="el" href="class_e_s_p32sensors_i2_c.html" title="An I2C wrapper class for ESP32 sensors (touch, temp, hall).">ESP32sensorsI2C</a> to inform a touched button event.  <a href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde">More...</a><br /></td></tr>
 <tr class="separator:a32301b5659f124217e59413192849dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1365ca44e217ce79bcfc3fe0c2ee7cac"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">clearInterrupt</a> ()</td></tr>
-<tr class="memdesc:a1365ca44e217ce79bcfc3fe0c2ee7cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledge a received interrupt to slave so that it can clear the interupt condition and return the reason for the interrupt.  <a href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">More...</a><br /></td></tr>
+<tr class="memdesc:a1365ca44e217ce79bcfc3fe0c2ee7cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledge to target that interrupt has been received, so that the target can clear the interupt condition and return the reason for the interrupt.  <a href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">More...</a><br /></td></tr>
 <tr class="separator:a1365ca44e217ce79bcfc3fe0c2ee7cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa512ca27376efd779426fcd836e629e2"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">setI2Cdelay</a> (unsigned long delay)</td></tr>
-<tr class="memdesc:aa512ca27376efd779426fcd836e629e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a minimum time that the master waits between I2C transmissions. This is to make sure that the slave has finished its earlier task or has its answer to the master's previous command ready. Particularly for ESP32 slaves this is critical, as due to its implementation of I2C slave mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed.  <a href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">More...</a><br /></td></tr>
+<tr class="memdesc:aa512ca27376efd779426fcd836e629e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a minimum time that the controller keeps between I2C transmissions. This is to make sure that the target has finished its earlier task or has its answer to the controller's previous command ready. Particularly for ESP32 targets this is critical, as due to its implementation of I2C target mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed.  <a href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">More...</a><br /></td></tr>
 <tr class="separator:aa512ca27376efd779426fcd836e629e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a421b62d34f39ae7c21908a961180bd89"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a421b62d34f39ae7c21908a961180bd89">getSlaveVersion</a> ()</td></tr>
-<tr class="memdesc:a421b62d34f39ae7c21908a961180bd89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get semver compliant version of slave firmware.  <a href="class_i2_cwrapper.html#a421b62d34f39ae7c21908a961180bd89">More...</a><br /></td></tr>
-<tr class="separator:a421b62d34f39ae7c21908a961180bd89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2c348765ec579770db7749e15a05d81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#ac2c348765ec579770db7749e15a05d81">checkVersion</a> (uint32_t masterVersion)</td></tr>
-<tr class="memdesc:ac2c348765ec579770db7749e15a05d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version of slave firmware and compare it with library version.  <a href="class_i2_cwrapper.html#ac2c348765ec579770db7749e15a05d81">More...</a><br /></td></tr>
-<tr class="separator:ac2c348765ec579770db7749e15a05d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30d42c3ddaa5ea8c69b879a6b316038c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">getVersion</a> ()</td></tr>
+<tr class="memdesc:a30d42c3ddaa5ea8c69b879a6b316038c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get semver compliant version of target firmware.  <a href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">More...</a><br /></td></tr>
+<tr class="separator:a30d42c3ddaa5ea8c69b879a6b316038c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e7b0b5ff8c1252676b9ff1bbdbe24d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">checkVersion</a> (uint32_t controllerVersion)</td></tr>
+<tr class="memdesc:ab8e7b0b5ff8c1252676b9ff1bbdbe24d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version of target firmware and compare it with library version.  <a href="class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">More...</a><br /></td></tr>
+<tr class="separator:ab8e7b0b5ff8c1252676b9ff1bbdbe24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99818d9f4b28834ce7611759c6b45032"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032">sentErrors</a> ()</td></tr>
-<tr class="memdesc:a99818d9f4b28834ce7611759c6b45032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the slave.  <a href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032">More...</a><br /></td></tr>
+<tr class="memdesc:a99818d9f4b28834ce7611759c6b45032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the target.  <a href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032">More...</a><br /></td></tr>
 <tr class="separator:a99818d9f4b28834ce7611759c6b45032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a595582aa091af76fc27c472d081db4db"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db">resultErrors</a> ()</td></tr>
-<tr class="memdesc:a595582aa091af76fc27c472d081db4db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the slave.  <a href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db">More...</a><br /></td></tr>
+<tr class="memdesc:a595582aa091af76fc27c472d081db4db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the target.  <a href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db">More...</a><br /></td></tr>
 <tr class="separator:a595582aa091af76fc27c472d081db4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af26fad87074cea9cf636cbd49226c8c5"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5">transmissionErrors</a> ()</td></tr>
 <tr class="memdesc:af26fad87074cea9cf636cbd49226c8c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return and reset the sum of failed commands sent <em>and</em> failed receive events since the last time this method was used. Use this if you are only interested in the sum of all transmission errors, not in what direction the errors occurred.  <a href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5">More...</a><br /></td></tr>
@@ -159,15 +160,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:af3b285450dd823865580c281c06bded4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#af3b285450dd823865580c281c06bded4">buf</a></td></tr>
 <tr class="separator:af3b285450dd823865580c281c06bded4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c3023339571c205c161a82576fd4f4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a51c3023339571c205c161a82576fd4f4">sentOK</a> = false</td></tr>
-<tr class="memdesc:a51c3023339571c205c161a82576fd4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if previous function call was successfully transferred to slave.  <a href="class_i2_cwrapper.html#a51c3023339571c205c161a82576fd4f4">More...</a><br /></td></tr>
+<tr class="memdesc:a51c3023339571c205c161a82576fd4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if previous function call was successfully transferred to target.  <a href="class_i2_cwrapper.html#a51c3023339571c205c161a82576fd4f4">More...</a><br /></td></tr>
 <tr class="separator:a51c3023339571c205c161a82576fd4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0d76a351cee8c7ce48f87d13e27dbc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#abf0d76a351cee8c7ce48f87d13e27dbc">resultOK</a> = false</td></tr>
 <tr class="memdesc:abf0d76a351cee8c7ce48f87d13e27dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if return value from previous function call was received successfully.  <a href="class_i2_cwrapper.html#abf0d76a351cee8c7ce48f87d13e27dbc">More...</a><br /></td></tr>
 <tr class="separator:abf0d76a351cee8c7ce48f87d13e27dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa3f8a3a94950331c58946ab96a22e53a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3f8a3a94950331c58946ab96a22e53a">&#9670;&nbsp;</a></span>I2Cwrapper()</h2>
+<a id="a0dfd77031c47e17a1b1cb833eceed3fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dfd77031c47e17a1b1cb833eceed3fa">&#9670;&nbsp;</a></span>I2Cwrapper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +183,7 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>maxBuf</em> = <code><a class="el" href="_i2_cwrapper_8h.html#ac761f6bc28d53219cc5273671e5c0a3a">maxBufDefault</a></code>&#160;</td>
+          <td class="paramname"><em>maxBuf</em> = <code><a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -195,7 +196,7 @@ Public Attributes</h2></td></tr>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i2c_address</td><td>Address of the slave device </td></tr>
+    <tr><td class="paramname">i2c_address</td><td>Address of the target device </td></tr>
     <tr><td class="paramname">maxBuf</td><td>Upper limit of send and receive buffer including 1 crc8 byte </td></tr>
   </table>
   </dd>
@@ -224,8 +225,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac2c348765ec579770db7749e15a05d81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2c348765ec579770db7749e15a05d81">&#9670;&nbsp;</a></span>checkVersion()</h2>
+<a id="ab8e7b0b5ff8c1252676b9ff1bbdbe24d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">&#9670;&nbsp;</a></span>checkVersion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,13 +235,13 @@ Public Attributes</h2></td></tr>
           <td class="memname">bool I2Cwrapper::checkVersion </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>masterVersion</em></td><td>)</td>
+          <td class="paramname"><em>controllerVersion</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get version of slave firmware and compare it with library version. </p>
+<p>Get version of target firmware and compare it with library version. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if both versions match, i.a. are compatible. </dd></dl>
 
 </div>
@@ -260,20 +261,20 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Acknowledge a received interrupt to slave so that it can clear the interupt condition and return the reason for the interrupt. </p>
+<p>Acknowledge to target that interrupt has been received, so that the target can clear the interupt condition and return the reason for the interrupt. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reason for the interrupt as 8bit BCD with triggering unit in lower 4 bits and trigger reason in the upper 4 bits. 0xff in case of error. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group___interrupt_reasons.html" title="Used by clearInterrup() to inform the master about what caused the previous interrupt.">List of possible reasons an interrupt was triggered.</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group___interrupt_reasons.html" title="Used by clearInterrup() to inform the controller about what caused the previous interrupt.">List of possible reasons an interrupt was triggered.</a> </dd></dl>
 
 </div>
 </div>
-<a id="a421b62d34f39ae7c21908a961180bd89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a421b62d34f39ae7c21908a961180bd89">&#9670;&nbsp;</a></span>getSlaveVersion()</h2>
+<a id="a30d42c3ddaa5ea8c69b879a6b316038c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30d42c3ddaa5ea8c69b879a6b316038c">&#9670;&nbsp;</a></span>getVersion()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t I2Cwrapper::getSlaveVersion </td>
+          <td class="memname">uint32_t I2Cwrapper::getVersion </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -281,7 +282,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get semver compliant version of slave firmware. </p>
+<p>Get semver compliant version of target firmware. </p>
 <dl class="section return"><dt>Returns</dt><dd>major version in bits 0-7, minor version in bits 8-15; patch version in bits 16-23; 0xFFFFFFFF on error. </dd></dl>
 
 </div>
@@ -301,8 +302,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test if slave is listening. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if slave could be found under the given address. </dd></dl>
+<p>Test if target device is listening. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if target could be found under the given address. </dd></dl>
 
 </div>
 </div>
@@ -367,7 +368,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Tells the slave to reset to it's default state. It is recommended to reset the slave every time the master is started or restarted to put it in a defined state. Else it could happen that the slave still manages units (steppers, etc.) which the master does not know about. </p>
+<p>Tells the target device to reset to its default state. It is recommended to reset the target every time the controller is started or restarted to put it in a defined state. Else it could happen that the target still manages units (steppers, etc.) which the controller does not know about. </p>
 
 </div>
 </div>
@@ -386,7 +387,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the slave. </p>
+<p>Return and reset the number of failed receive events since the last time this method was used. A receive event happens each time a function returns a value from the target. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032" title="Return and reset the number of failed commands sent since the last time this method was used....">sentErrors()</a>, <a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">transmissionErrors()</a> </dd></dl>
 
 </div>
@@ -423,7 +424,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the slave. </p>
+<p>Return and reset the number of failed commands sent since the last time this method was used. A command is sent each time a function call is transmitted to the target. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db" title="Return and reset the number of failed receive events since the last time this method was used....">resultErrors()</a>, <a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5" title="Return and reset the sum of failed commands sent and failed receive events since the last time this m...">transmissionErrors()</a> </dd></dl>
 
 </div>
@@ -444,15 +445,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Define a minimum time that the master waits between I2C transmissions. This is to make sure that the slave has finished its earlier task or has its answer to the master's previous command ready. Particularly for ESP32 slaves this is critical, as due to its implementation of I2C slave mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed. </p>
+<p>Define a minimum time that the controller keeps between I2C transmissions. This is to make sure that the target has finished its earlier task or has its answer to the controller's previous command ready. Particularly for ESP32 targets this is critical, as due to its implementation of I2C target mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delay</td><td>Minimum time in between I2C transmissions in milliseconds. The default I2CdefaultDelay is a bit conservative at 10 ms to allow for for serial debugging output to slow things down. You can try to go lower, if slave debugging is disabled. </td></tr>
+    <tr><td class="paramname">delay</td><td>Minimum time in between I2C transmissions in milliseconds. The default I2CdefaultDelay is a bit conservative at 10 ms to allow for for serial debugging output to slow things down. You can try to go lower, if target debugging is disabled. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns the previously set delay. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd><del>I2Cdelay is currently global; make it a per-slave setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd><del>I2Cdelay is currently global; make it a per-target setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>. </dd></dl>
 
 </div>
 </div>
@@ -482,15 +483,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Define a global interrupt pin which can be used by device units (steppers, servos...) to inform the master that something important happend. Currently used by <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> to inform about end stop hits and target reached events. </p>
+<p>Define a global interrupt pin which can be used by device units (steppers, servos...) to inform the controller that something important happend. Currently used by <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> to inform about end stop hits and target reached events, and <a class="el" href="class_e_s_p32sensors_i2_c.html" title="An I2C wrapper class for ESP32 sensors (touch, temp, hall).">ESP32sensorsI2C</a> to inform a touched button event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td>Pin the slave will use to send out interrupts. </td></tr>
+    <tr><td class="paramname">pin</td><td>Pin the target will use to send out interrupts. </td></tr>
     <tr><td class="paramname">activeHigh</td><td>If true, HIGH will signal an interrupt. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef" title="Start or stop sending interrupts to master for this stepper. An interrupt will be sent whenever a sta...">AccelStepperI2C::enableInterrupts()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef" title="Start or stop sending interrupts to controller for this stepper. An interrupt will be sent whenever a...">AccelStepperI2C::enableInterrupts()</a> </dd></dl>
 
 </div>
 </div>
@@ -558,7 +559,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>True if previous function call was successfully transferred to slave. </p>
+<p>True if previous function call was successfully transferred to target. </p>
 
 </div>
 </div>
@@ -572,7 +573,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

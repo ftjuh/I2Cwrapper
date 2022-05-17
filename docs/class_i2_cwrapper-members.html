@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: Member List</title>
+<title>I2Cwrapper: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -94,10 +94,10 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#af3b285450dd823865580c281c06bded4">buf</a></td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">changeI2Caddress</a>(uint8_t newAddress)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#ac2c348765ec579770db7749e15a05d81">checkVersion</a>(uint32_t masterVersion)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">checkVersion</a>(uint32_t controllerVersion)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">clearInterrupt</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a421b62d34f39ae7c21908a961180bd89">getSlaveVersion</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_i2_cwrapper.html#aa3f8a3a94950331c58946ab96a22e53a">I2Cwrapper</a>(uint8_t i2c_address, uint8_t maxBuf=maxBufDefault)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">getVersion</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">I2Cwrapper</a>(uint8_t i2c_address, uint8_t maxBuf=I2CmaxBuf)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">ping</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d">prepareCommand</a>(uint8_t cmd, uint8_t unit=-1)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#adfd966608c453a72646dfe37e061fee7">readResult</a>(uint8_t numBytes)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

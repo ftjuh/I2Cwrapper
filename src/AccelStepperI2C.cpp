@@ -1,6 +1,6 @@
 /*!
   @file AccelStepperI2C.cpp
-  @brief Part of the AccelStepperI2C firmware/library
+  @brief Part of the I2Cwrapper firmware/library
   @section author Author
   Copyright (c) 2022 juh
   @section license License
@@ -78,7 +78,7 @@ boolean AccelStepperI2C::runSpeed()
 
 
 // don't use this, use state machine instead
-bool AccelStepperI2C::runSpeedToPosition()
+boolean AccelStepperI2C::runSpeedToPosition()
 {
   wrapper->prepareCommand(runSpeedToPositionCmd, myNum);
   boolean res = false; // will be returned on transmission error

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: Class Members</title>
+<title>I2Cwrapper: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -91,9 +91,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>AccelStepperI2C()
 : <a class="el" href="class_accel_stepper_i2_c.html#a736d4d25614153edfbcb6f239337464d">AccelStepperI2C</a>
 </li>
-<li>activeLow
-: <a class="el" href="struct_endstop.html#a62dca12651ef2c7a1b20ba9fd1df4146">Endstop</a>
-</li>
 <li>analogRead()
 : <a class="el" href="class_pin_i2_c.html#a6f1557df39896fe9e079b523d06a8802">PinI2C</a>
 </li>
@@ -105,7 +102,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>attach()
 : <a class="el" href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786">AccelStepperI2C</a>
-, <a class="el" href="class_servo_i2_c.html#acffb9b254ad23a73cf35e2984837e716">ServoI2C</a>
+, <a class="el" href="class_servo_i2_c.html#a8183d1e2d560d0e402e9fa3f6b325bcd">ServoI2C</a>
 </li>
 <li>attached()
 : <a class="el" href="class_servo_i2_c.html#a6adfe3508e31fad9d113942be7e6fd5c">ServoI2C</a>
@@ -131,7 +128,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="class_simple_buffer.html#a1c32cae8a445215aa333609cef8b7b11">SimpleBuffer</a>
 </li>
 <li>checkVersion()
-: <a class="el" href="class_i2_cwrapper.html#ac2c348765ec579770db7749e15a05d81">I2Cwrapper</a>
+: <a class="el" href="class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">I2Cwrapper</a>
 </li>
 <li>clearInterrupt()
 : <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">I2Cwrapper</a>
@@ -176,45 +173,46 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>enableInterrupts()
 : <a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">AccelStepperI2C</a>
+, <a class="el" href="class_e_s_p32sensors_i2_c.html#a41ebae30537f63dfe2f7161875f3be08">ESP32sensorsI2C</a>
 </li>
 <li>enableOutputs()
 : <a class="el" href="class_accel_stepper_i2_c.html#ab5478613beb1c45de7c8ee35b216a918">AccelStepperI2C</a>
 </li>
-<li>endstopDebounceEnd
-: <a class="el" href="struct_stepper.html#a84037efe9d1722547a3cc36ebdb6b55d">Stepper</a>
-</li>
 <li>endstops()
 : <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c">AccelStepperI2C</a>
-, <a class="el" href="struct_stepper.html#a2b4137230f8c24b169d447231de2c14c">Stepper</a>
 </li>
-<li>endstopsEnabled
-: <a class="el" href="struct_stepper.html#af5fb2f1b7e77f723afebf5f5a4a378ca">Stepper</a>
+<li>ESP32sensorsI2C()
+: <a class="el" href="class_e_s_p32sensors_i2_c.html#a4d07e9553a26e62038e8ed567d4246e2">ESP32sensorsI2C</a>
 </li>
 </ul>
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
-<li>getSlaveVersion()
-: <a class="el" href="class_i2_cwrapper.html#a421b62d34f39ae7c21908a961180bd89">I2Cwrapper</a>
-</li>
 <li>getState()
 : <a class="el" href="class_accel_stepper_i2_c.html#aea0a376b22b0a0065b2257ec74f7e3b3">AccelStepperI2C</a>
+</li>
+<li>getVersion()
+: <a class="el" href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">I2Cwrapper</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>hallRead()
+: <a class="el" href="class_e_s_p32sensors_i2_c.html#ade4ee01e8f4819d2f8da2a567c95a531">ESP32sensorsI2C</a>
 </li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>I2Cwrapper()
-: <a class="el" href="class_i2_cwrapper.html#aa3f8a3a94950331c58946ab96a22e53a">I2Cwrapper</a>
+: <a class="el" href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">I2Cwrapper</a>
 </li>
 <li>idx
 : <a class="el" href="class_simple_buffer.html#a7ae740ae99dd4da7bdbe1d7245d85097">SimpleBuffer</a>
 </li>
 <li>init()
 : <a class="el" href="class_simple_buffer.html#a4fe86d8150428e236dd5958662da1b94">SimpleBuffer</a>
-</li>
-<li>interruptsEnabled
-: <a class="el" href="struct_stepper.html#aafb876574872c4278bd330a60cdefc4a">Stepper</a>
 </li>
 <li>isRunning()
 : <a class="el" href="class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d">AccelStepperI2C</a>
@@ -251,21 +249,12 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>myNum
 : <a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">AccelStepperI2C</a>
 , <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">ServoI2C</a>
-</li>
-</ul>
-
-
-<h3><a id="index_n"></a>- n -</h3><ul>
-<li>numEndstops
-: <a class="el" href="struct_stepper.html#a24eae51605c18f17f05833a2061f7ab1">Stepper</a>
+, <a class="el" href="classxxx_i2_c.html#a178297d7660a4414a4b1691d85e85d19">xxxI2C</a>
 </li>
 </ul>
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
-<li>pin
-: <a class="el" href="struct_endstop.html#a2eed94b6d3cb330c1c3f92bdc6a96f87">Endstop</a>
-</li>
 <li>ping()
 : <a class="el" href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">I2Cwrapper</a>
 </li>
@@ -277,9 +266,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>prepareCommand()
 : <a class="el" href="class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d">I2Cwrapper</a>
-</li>
-<li>prevEndstopState
-: <a class="el" href="struct_stepper.html#a178865b71f7ed8c5b63546fb0b82bb28">Stepper</a>
 </li>
 </ul>
 
@@ -315,7 +301,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7">AccelStepperI2C</a>
 </li>
 <li>runSpeedToPosition()
-: <a class="el" href="class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d">AccelStepperI2C</a>
+: <a class="el" href="class_accel_stepper_i2_c.html#a82115bbcd8ad0ba732f138d9fbc5d228">AccelStepperI2C</a>
 </li>
 <li>runSpeedToPositionState()
 : <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f">AccelStepperI2C</a>
@@ -373,7 +359,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="class_accel_stepper_i2_c.html#a6a9dfec85ceacfef6efedfbd83711bb6">AccelStepperI2C</a>
 </li>
 <li>setPinsInverted()
-: <a class="el" href="class_accel_stepper_i2_c.html#a5f233077007853c4c25e7d6d9aee0118">AccelStepperI2C</a>
+: <a class="el" href="class_accel_stepper_i2_c.html#ae4454d2eea39627485c8ebc496edd1f8">AccelStepperI2C</a>
 </li>
 <li>setSpeed()
 : <a class="el" href="class_accel_stepper_i2_c.html#a2a8c92150ae055c7ff696ff98ddb7a38">AccelStepperI2C</a>
@@ -383,12 +369,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>speed()
 : <a class="el" href="class_accel_stepper_i2_c.html#aef1d5eb59f60121d04fa2667393de392">AccelStepperI2C</a>
-</li>
-<li>state
-: <a class="el" href="struct_stepper.html#abc95f0b832f9d5a671f7afa277bf9c91">Stepper</a>
-</li>
-<li>stepper
-: <a class="el" href="struct_stepper.html#ae36f45db777f7ea1c40c91b74ff848ac">Stepper</a>
 </li>
 <li>stop()
 : <a class="el" href="class_accel_stepper_i2_c.html#abe7bea04839f7658728ad0e3fcfead68">AccelStepperI2C</a>
@@ -402,6 +382,15 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_t"></a>- t -</h3><ul>
 <li>targetPosition()
 : <a class="el" href="class_accel_stepper_i2_c.html#a82a20c64e474ca52f92f64cddb8c756b">AccelStepperI2C</a>
+</li>
+<li>temperatureRead()
+: <a class="el" href="class_e_s_p32sensors_i2_c.html#a7574c44f545cd075298ea79b61b73e18">ESP32sensorsI2C</a>
+</li>
+<li>touchRead()
+: <a class="el" href="class_e_s_p32sensors_i2_c.html#a4e09879eb6ba4bc31a0857ec8192385d">ESP32sensorsI2C</a>
+</li>
+<li>touchSetCycles()
+: <a class="el" href="class_e_s_p32sensors_i2_c.html#a245d39fddd1375d69ba9b2030414b0c3">ESP32sensorsI2C</a>
 </li>
 <li>transmissionErrors()
 : <a class="el" href="class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5">I2Cwrapper</a>
@@ -418,12 +407,25 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="class_servo_i2_c.html#ad36f1e3195cd5824bce82d502979f864">ServoI2C</a>
 </li>
 </ul>
+
+
+<h3><a id="index_x"></a>- x -</h3><ul>
+<li>xxxDemo1()
+: <a class="el" href="classxxx_i2_c.html#ae2fe9bbf6d8720bdcf00e9c628540ddc">xxxI2C</a>
+</li>
+<li>xxxDemo2()
+: <a class="el" href="classxxx_i2_c.html#a78f859fedda2c366270b577f928ff00d">xxxI2C</a>
+</li>
+<li>xxxI2C()
+: <a class="el" href="classxxx_i2_c.html#a58ae02e113e5ce877840fe5cbd9c6593">xxxI2C</a>
+</li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -5,6 +5,8 @@
    This is a 1:1 equivalent of the Servo library's Sweep example
    https://docs.arduino.cc/learn/electronics/servo-motors
 
+   Needs the ServoI2C.h module enabled in the target's firmware_modules.h.
+   
 */
 
 #include <Wire.h>
@@ -12,8 +14,8 @@
 
 uint8_t i2cAddress = 0x08;
 
-I2Cwrapper wrapper(i2cAddress); // each slave device is represented by a wrapper...
-ServoI2C myservo(&wrapper); // ...that the servo needs to communicate with the slave
+I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
+ServoI2C myservo(&wrapper); // ...that the servo needs to communicate with the target
 
 int pos = 0;    // variable to store the servo position
 
@@ -21,12 +23,12 @@ void setup()
 {
   Wire.begin();
   // Serial.begin(115200); // uncomment for debugging output (needs DEBUG set in firmware/libraries)
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
-  myservo.attach(9); // attaches the servo on _the slave's_ pin 9 to the servo object
+  myservo.attach(9); // attaches the servo on _the target's_ pin 9 to the servo object
 
 }
 

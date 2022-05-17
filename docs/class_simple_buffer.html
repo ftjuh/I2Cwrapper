@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: SimpleBuffer Class Reference</title>
+<title>I2Cwrapper: SimpleBuffer Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -100,11 +100,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4fe86d8150428e236dd5958662da1b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate and reset buffer.  <a href="class_simple_buffer.html#a4fe86d8150428e236dd5958662da1b94">More...</a><br /></td></tr>
 <tr class="separator:a4fe86d8150428e236dd5958662da1b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6af18ec1c5c082d2a8cefb9468449588"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a6af18ec1c5c082d2a8cefb9468449588"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a6af18ec1c5c082d2a8cefb9468449588">write</a> (const T &amp;value)</td></tr>
+<tr class="memitem:a6af18ec1c5c082d2a8cefb9468449588"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a6af18ec1c5c082d2a8cefb9468449588">write</a> (const T &amp;<a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a>)</td></tr>
 <tr class="memdesc:a6af18ec1c5c082d2a8cefb9468449588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write any basic data type to the buffer at the current position and increment the position pointer according to the type's size.  <a href="class_simple_buffer.html#a6af18ec1c5c082d2a8cefb9468449588">More...</a><br /></td></tr>
 <tr class="separator:a6af18ec1c5c082d2a8cefb9468449588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9680ed198edfb3f90bca8896549ab3e4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a9680ed198edfb3f90bca8896549ab3e4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4">read</a> (T &amp;value)</td></tr>
+<tr class="memitem:a9680ed198edfb3f90bca8896549ab3e4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4">read</a> (T &amp;<a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a>)</td></tr>
 <tr class="memdesc:a9680ed198edfb3f90bca8896549ab3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read any basic data type from the buffer from the current position and increment the position pointer according to the type's size.  <a href="class_simple_buffer.html#a9680ed198edfb3f90bca8896549ab3e4">More...</a><br /></td></tr>
 <tr class="separator:a9680ed198edfb3f90bca8896549ab3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0408a7143a40a819685a2de0ae16bcb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_buffer.html#a0408a7143a40a819685a2de0ae16bcb3">reset</a> ()</td></tr>
@@ -329,7 +329,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

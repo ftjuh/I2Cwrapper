@@ -2,7 +2,8 @@ var _accel_stepper_i2_c_8h =
 [
     [ "diagnosticsReport", "structdiagnostics_report.html", "structdiagnostics_report" ],
     [ "AccelStepperI2C", "class_accel_stepper_i2_c.html", "class_accel_stepper_i2_c" ],
-    [ "AccelStepperI2CmaxBuf", "_accel_stepper_i2_c_8h.html#afafaa62910a60220ce0b83ecfed27e43", null ],
+    [ "log", "_accel_stepper_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
+    [ "asCmdOffset", "_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a", null ],
     [ "attachCmd", "_accel_stepper_i2_c_8h.html#a480ddc1e935484c95a4c5a668eff6264", null ],
     [ "attachResult", "_accel_stepper_i2_c_8h.html#ac4c5abdcf30f45396395d23613ffd8d3", null ],
     [ "currentPositionCmd", "_accel_stepper_i2_c_8h.html#a75da675711616279a4bbd6797d4d0342", null ],

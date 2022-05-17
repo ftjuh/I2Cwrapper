@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: AccelStepperI2C library</title>
+<title>I2Cwrapper: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -84,46 +84,17 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="PageDoc"><div class="header">
+<div class="header">
   <div class="headertitle">
-<div class="title">AccelStepperI2C library </div>  </div>
+<div class="title">I2Cwrapper Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Arduino library for I2C-control of stepper motors connected to another Arduino which runs the associated <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. <br  />
- See the <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C class reference</a> for differences to the methods of the original AccelStepper class and for new methods of class AccelStepperI2C. Functions which address not a single stepper but the slave as a whole are documented <a class="el" href="class_i2_cwrapper.html">here (I2Cwrapper)</a>. </p>
-<h1><a class="anchor" id="author"></a>
-Author</h1>
-<p>Copyright (c) 2022 juh </p>
-<h1><a class="anchor" id="license"></a>
-License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd><p class="startdd">add emergency stop/break pin for slave (just use reset pin for the moment) </p>
-<p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
-<p class="interdd">ESP32: make use of dual cores? </p>
-<p class="interdd">use interrupts for endstops instead of main loop polling (not sure how much of a difference this would make in practice, though. The main loop is't doing much else, what really takes time are the computations.) </p>
-<p class="interdd">Multimaster? Master stop/start bit? </p>
-<p class="interdd"><del>update <a class="el" href="keywords_8txt.html">keywords.txt</a></del> </p>
-<p class="interdd"><del>clean up example sketches</del> </p>
-<p class="interdd"><del>implement runToPosition() and runToNewPosition() in master</del> - implemented </p>
-<p class="interdd"><del>test (and adapt) slave firmware for ESP8266</del> - implemented. However, I2C slave mode on ESP8266s is no fun. Run only with 160MHz CPU and start testing with 10kHz (that's right: ten kHz) I2C clock speed. </p>
-<p class="interdd"><del>checking each transmission with sentOK and resultOK is tedious. We could use some counter to accumulate errors and check them summarily, e.g. at the end of setup etc.</del> - AccelStepperI2C::sentErrors(), AccelStepperI2C::resultErrors() and AccelStepperI2C::transmissionErrors() added </p>
-<p class="interdd"><del>make time the slave has to answer I2C requests (I2CrequestDelay) configurable, as it will depend on µC and bus frequency etc.</del> - setI2Cdelay() implemented </p>
-<p class="interdd"><del>Versioning, I2C command to request version (important, as library and firmware always need to match)</del> - getVersion() and checkVersion() implemented </p>
-<p class="interdd"><del>Implement interrupt mechanism, so that the slave can inform the master about finished tasks or other events</del> - setInterruptPin() and enableInterrupts() implemented </p>
-<p class="interdd"><del>implement diagnostic functions, e.g. measurements how long messages take to be processed or current stepper pulse frequency</del> - done, performance graphs included in documentation </p>
-<p class="interdd"><del>add ESP32 compatibility for slave</del> - done, but needs further testing </p>
-<p class="interdd"><del>Make the I2C address programmable and persistent in EEPROM.</del> - done </p>
-<p class="interdd"><del>Error handling and sanity checks are rudimentary. Currently the system is not stable against transmission errors, partly due to the limitations of Wire.requestFrom() and Wire.available(). A better protocol would be needed, which would mean more overhead. Need testing to see how important this is in practics.</del> - CRC8 implemented </p>
-<p class="enddd"><del>Implement end stops/reference stops.</del> - endstop polling implemented, interrupt would be better </p>
-</dd></dl>
-<dl class="section user"><dt>Revision History</dt><dd></dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.1 initial release </dd></dl>
-</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

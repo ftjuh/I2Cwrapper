@@ -1,10 +1,10 @@
 var class_i2_cwrapper =
 [
-    [ "I2Cwrapper", "class_i2_cwrapper.html#aa3f8a3a94950331c58946ab96a22e53a", null ],
+    [ "I2Cwrapper", "class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa", null ],
     [ "changeI2Caddress", "class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e", null ],
-    [ "checkVersion", "class_i2_cwrapper.html#ac2c348765ec579770db7749e15a05d81", null ],
+    [ "checkVersion", "class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d", null ],
     [ "clearInterrupt", "class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac", null ],
-    [ "getSlaveVersion", "class_i2_cwrapper.html#a421b62d34f39ae7c21908a961180bd89", null ],
+    [ "getVersion", "class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c", null ],
     [ "ping", "class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe", null ],
     [ "prepareCommand", "class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d", null ],
     [ "readResult", "class_i2_cwrapper.html#adfd966608c453a72646dfe37e061fee7", null ],

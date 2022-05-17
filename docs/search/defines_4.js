@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pincontrol_5fsupport_612',['PINCONTROL_SUPPORT',['../firmware_8ino.html#adde1fd8a4e40d6ab989307669781128f',1,'firmware.ino']]]
+  ['stepstogo_687',['stepsToGo',['../_c_n_cv4___board__3___steppers_8ino.html#a06ab55ae03419d84676a6ce5a263206e',1,'CNCv4_Board_3_Steppers.ino']]]
 ];

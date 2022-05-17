@@ -19,7 +19,7 @@ var class_accel_stepper_i2_c =
     [ "run", "class_accel_stepper_i2_c.html#a83e1cd6db8b24c4ef1ee1f5ea2b73350", null ],
     [ "runSpeed", "class_accel_stepper_i2_c.html#a74bcee3589bcc31e911c4b09175474a8", null ],
     [ "runSpeedState", "class_accel_stepper_i2_c.html#a60f56e376242af7fe69fda51c6758ec7", null ],
-    [ "runSpeedToPosition", "class_accel_stepper_i2_c.html#a3ad21077df56b669b3cf115c794c7d1d", null ],
+    [ "runSpeedToPosition", "class_accel_stepper_i2_c.html#a82115bbcd8ad0ba732f138d9fbc5d228", null ],
     [ "runSpeedToPositionState", "class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f", null ],
     [ "runState", "class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6", null ],
     [ "runToNewPosition", "class_accel_stepper_i2_c.html#a6364796eb6b611ce0ffade2e6bd6e78f", null ],

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: PinI2C.h File Reference</title>
+<title>I2Cwrapper: PinI2C.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -93,16 +93,17 @@ $(document).ready(function(){initNavTree('_pin_i2_c_8h.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
-<p>Arduino library for I2C-control of digital and analog pins connected to another Arduino which runs the associated <a class="el" href="firmware_8ino.html">firmware.ino</a> firmware. This is more or less a byproduct of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> project, but could be used as a (slightly bloated) standalone solution for I2C control of Arduino pins. Just as <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> mimicks the interface of the original Arduino pin control functions, so that it can be used with only little adaptations.  
+<p>Arduino library for I2C-control of digital and analog pins connected to another Arduino which runs the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a class="el" href="firmware_8ino.html">firmware.ino</a> with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled.  
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Arduino library for I2C-control of digital and analog pins connected to another Arduino which runs the associated <a class="el" href="firmware_8ino.html">firmware.ino</a> firmware. This is more or less a byproduct of the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> project, but could be used as a (slightly bloated) standalone solution for I2C control of Arduino pins. Just as <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> mimicks the interface of the original Arduino pin control functions, so that it can be used with only little adaptations. </p>
+<div class="textblock"><p>Arduino library for I2C-control of digital and analog pins connected to another Arduino which runs the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a class="el" href="firmware_8ino.html">firmware.ino</a> with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled. </p>
+<p>Just as <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> mimicks the interface of the original Arduino pin control functions, so that it can be used with very few adaptations. </p>
 <h1><a class="anchor" id="author"></a>
 Author</h1>
 <p>Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>implement interrupts? </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -112,21 +113,23 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a9e526d90c799038dd692278685b2a955"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a9e526d90c799038dd692278685b2a955">pinPinModeCmd</a> = 70</td></tr>
+<tr class="memitem:ada302315731eb29975057c7d04ef84a1"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> = 60</td></tr>
+<tr class="separator:ada302315731eb29975057c7d04ef84a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e526d90c799038dd692278685b2a955"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a9e526d90c799038dd692278685b2a955">pinPinModeCmd</a> = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 0</td></tr>
 <tr class="separator:a9e526d90c799038dd692278685b2a955"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a084ac0c4e83170e397b31881374479e9"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a084ac0c4e83170e397b31881374479e9">pinDigitalReadCmd</a> = 71</td></tr>
+<tr class="memitem:a084ac0c4e83170e397b31881374479e9"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a084ac0c4e83170e397b31881374479e9">pinDigitalReadCmd</a> = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 1</td></tr>
 <tr class="separator:a084ac0c4e83170e397b31881374479e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0961198cb28e498a7e69e2067f7ae178"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a0961198cb28e498a7e69e2067f7ae178">pinDigitalReadResult</a> = 2</td></tr>
 <tr class="separator:a0961198cb28e498a7e69e2067f7ae178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a131cc945510add41ca5b162278a731fc"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a131cc945510add41ca5b162278a731fc">pinDigitalWriteCmd</a> = 72</td></tr>
+<tr class="memitem:a131cc945510add41ca5b162278a731fc"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a131cc945510add41ca5b162278a731fc">pinDigitalWriteCmd</a> = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 2</td></tr>
 <tr class="separator:a131cc945510add41ca5b162278a731fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d5cef299370fe889788b67551910b99"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a2d5cef299370fe889788b67551910b99">pinAnalogReadCmd</a> = 73</td></tr>
+<tr class="memitem:a2d5cef299370fe889788b67551910b99"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a2d5cef299370fe889788b67551910b99">pinAnalogReadCmd</a> = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 3</td></tr>
 <tr class="separator:a2d5cef299370fe889788b67551910b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6527474f17ef46ddd7ec5f457910f66"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#af6527474f17ef46ddd7ec5f457910f66">pinAnalogReadResult</a> = 2</td></tr>
 <tr class="separator:af6527474f17ef46ddd7ec5f457910f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a647237992b8ab5f85d4a29772ee2330c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a647237992b8ab5f85d4a29772ee2330c">pinAnalogWriteCmd</a> = 74</td></tr>
+<tr class="memitem:a647237992b8ab5f85d4a29772ee2330c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a647237992b8ab5f85d4a29772ee2330c">pinAnalogWriteCmd</a> = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 4</td></tr>
 <tr class="separator:a647237992b8ab5f85d4a29772ee2330c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a400d763196a8e20f3342c990fe591b6d"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a400d763196a8e20f3342c990fe591b6d">pinAnalogReferenceCmd</a> = 75</td></tr>
+<tr class="memitem:a400d763196a8e20f3342c990fe591b6d"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c_8h.html#a400d763196a8e20f3342c990fe591b6d">pinAnalogReferenceCmd</a> = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 5</td></tr>
 <tr class="separator:a400d763196a8e20f3342c990fe591b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -137,7 +140,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t pinAnalogReadCmd = 73</td>
+          <td class="memname">const uint8_t pinAnalogReadCmd = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 3</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -165,7 +168,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t pinAnalogReferenceCmd = 75</td>
+          <td class="memname">const uint8_t pinAnalogReferenceCmd = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 5</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -179,7 +182,21 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t pinAnalogWriteCmd = 74</td>
+          <td class="memname">const uint8_t pinAnalogWriteCmd = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada302315731eb29975057c7d04ef84a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada302315731eb29975057c7d04ef84a1">&#9670;&nbsp;</a></span>pinCmdOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t pinCmdOffset = 60</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -193,7 +210,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t pinDigitalReadCmd = 71</td>
+          <td class="memname">const uint8_t pinDigitalReadCmd = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -221,7 +238,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t pinDigitalWriteCmd = 72</td>
+          <td class="memname">const uint8_t pinDigitalWriteCmd = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -235,7 +252,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t pinPinModeCmd = 70</td>
+          <td class="memname">const uint8_t pinPinModeCmd = <a class="el" href="_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1">pinCmdOffset</a> + 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -248,7 +265,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_pin_i2_c_8h.html">PinI2C.h</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

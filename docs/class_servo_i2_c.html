@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: ServoI2C Class Reference</title>
+<title>I2Cwrapper: ServoI2C Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('class_servo_i2_c.html',''); initResiza
  <a href="class_servo_i2_c.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An I2C wrapper class for the Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo/">Servo library</a>. </p>
-<p>This class mimicks the <a href="https://www.arduino.cc/reference/en/libraries/servo/">original Servo interface</a>. It replicates most of its methods and transmits each method call via I2C to a slave running the <a class="el" href="firmware_8ino.html">AccelStepperI2C firmware</a>. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p><dl class="section note"><dt>Note</dt><dd>Currently, the implementation is quite dumb, as it passes any Servo library call over I2C, regardless of what it does. Write() e.g. uses WriteMicroseconds(), so that in theory it could be implemented wholly on the master's side. </dd></dl>
+<p>This class mimicks the <a href="https://www.arduino.cc/reference/en/libraries/servo/">original Servo interface</a>. It replicates most of its methods and transmits each method call via I2C to a target running the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a class="el" href="firmware_8ino.html">firmware.ino</a> with the <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> module enabled. Functions and parameters without documentation will work just as their original, but you need to take the general restrictions into account (e.g. don't take a return value for valid without error handling). </p><dl class="section note"><dt>Note</dt><dd>Currently, the implementation is quite dumb, as it passes any Servo library call over I2C, regardless of what it does. Write() e.g. uses WriteMicroseconds(), so that in theory it could be implemented wholly on the controller's side. </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,13 +108,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8183d1e2d560d0e402e9fa3f6b325bcd"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#a8183d1e2d560d0e402e9fa3f6b325bcd">attach</a> (int pin)</td></tr>
 <tr class="memdesc:a8183d1e2d560d0e402e9fa3f6b325bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach and prepare servo for use. Similar to the original, but see below.  <a href="class_servo_i2_c.html#a8183d1e2d560d0e402e9fa3f6b325bcd">More...</a><br /></td></tr>
 <tr class="separator:a8183d1e2d560d0e402e9fa3f6b325bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acffb9b254ad23a73cf35e2984837e716"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#acffb9b254ad23a73cf35e2984837e716">attach</a> (int pin, int min, int max)</td></tr>
+<tr class="memitem:acffb9b254ad23a73cf35e2984837e716"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#acffb9b254ad23a73cf35e2984837e716">attach</a> (int pin, int <a class="el" href="_servo_i2_c__firmware_8h.html#a3e202b201e6255d975cd6d3aff1f5a4d">min</a>, int <a class="el" href="_servo_i2_c__firmware_8h.html#ae1e1dde676c120fa6d10f3bb2c14059e">max</a>)</td></tr>
 <tr class="separator:acffb9b254ad23a73cf35e2984837e716"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63a62761eaf9961c9012025b5d011962"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#a63a62761eaf9961c9012025b5d011962">detach</a> ()</td></tr>
 <tr class="separator:a63a62761eaf9961c9012025b5d011962"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c14aeb7cc61c95e9a2625d4f374cff5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#a2c14aeb7cc61c95e9a2625d4f374cff5">write</a> (int value)</td></tr>
+<tr class="memitem:a2c14aeb7cc61c95e9a2625d4f374cff5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#a2c14aeb7cc61c95e9a2625d4f374cff5">write</a> (int <a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a>)</td></tr>
 <tr class="separator:a2c14aeb7cc61c95e9a2625d4f374cff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad36f1e3195cd5824bce82d502979f864"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#ad36f1e3195cd5824bce82d502979f864">writeMicroseconds</a> (int value)</td></tr>
+<tr class="memitem:ad36f1e3195cd5824bce82d502979f864"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#ad36f1e3195cd5824bce82d502979f864">writeMicroseconds</a> (int <a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a>)</td></tr>
 <tr class="separator:ad36f1e3195cd5824bce82d502979f864"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac76f80be64343ae60ee98559c17df3e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_servo_i2_c.html#ac76f80be64343ae60ee98559c17df3e1">read</a> ()</td></tr>
 <tr class="separator:ac76f80be64343ae60ee98559c17df3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,7 +149,7 @@ Public Attributes</h2></td></tr>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">w</td><td>Wrapper object representing the slave the servo is connected to. </td></tr>
+    <tr><td class="paramname">w</td><td>Wrapper object representing the target the servo is connected to. </td></tr>
   </table>
   </dd>
 </dl>
@@ -176,12 +176,12 @@ Public Attributes</h2></td></tr>
 <p>Attach and prepare servo for use. Similar to the original, but see below. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td>Hardware pin of the <em>slave</em> the servo is atached to (see note). </td></tr>
+    <tr><td class="paramname">pin</td><td>Hardware pin of the <em>target</em> the servo is atached to (see note). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">myNum</a>, which should be the same as the servo channel returned by the original Servo libraries, except if you reset your master without resetting the slave. Check for <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">myNum</a> != 255 to see if the slave successfully added the servo. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The slave's platform pin names like "D3" or "A1" might not be known to the master's platform, if both platforms are different, or they might be used with a different pin number. So it is safer to use integer equivalents as defined in the respective platform's <code>pins_arduino.h</code>, see <a class="el" href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786" title="Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper obj...">AccelStepperI2C::attach()</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">myNum</a>, which should be the same as the servo channel returned by the original Servo libraries, except if you reset your controller without resetting the target. Check for <a class="el" href="class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb">myNum</a> != 255 to see if the target successfully added the servo. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The target's platform pin names like "D3" or "A1" might not be known to the controller's platform, if both platforms are different, or they might be used with a different pin number. So it is safer to use integer equivalents as defined in the respective platform's <code>pins_arduino.h</code>, see <a class="el" href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786" title="Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper obj...">AccelStepperI2C::attach()</a> </dd></dl>
 
 </div>
 </div>
@@ -350,7 +350,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_servo_i2_c.html">ServoI2C</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

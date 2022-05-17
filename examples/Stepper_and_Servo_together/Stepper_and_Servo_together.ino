@@ -4,9 +4,11 @@
 
    This is a combination of the stepper bounce and servo sweep examples to
    demonstrate how steppers and servos can be used together.
-   Attach two servos and a stepstick (A4988 etc.) driven stepper to the slave
+   Attach two servos and a stepstick (A4988 etc.) driven stepper to the target
    pins defined below.
-   Of course, the slave's firmware needs to be compiled with SERVO_SUPPORT enabled.
+   
+   Needs AccelStepperI2C.h and ServoI2C.h modules enabled in the target's firmware_modules.h.
+   
 */
 
 #include <Wire.h>
@@ -28,10 +30,10 @@ ServoI2C servo2(&wrapper);
 void setup()
 {
   Wire.begin();
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
   // Serial.begin(115200); // uncomment for debugging output (needs DEBUG set in libraries)
 
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
   servo1.attach(servo1Pin);

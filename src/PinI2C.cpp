@@ -1,6 +1,6 @@
 /*!
   @file PinI2C.cpp
-  @brief Part of the AccelStepperI2C firmware/library
+  @brief Part of the I2Cwrapper firmware/library
   @section author Author
   Copyright (c) 2022 juh
   @section license License
@@ -10,11 +10,10 @@
 */
 
 
-#include <Wire.h>
 #include <PinI2C.h>
 
 
-const uint8_t myNum = 253; // fake myNum, as there is only one "unit" of the pin interface per slave
+const uint8_t myNum = 253; // fake myNum, as there is only one "unit" of the pin interface per target
 
 // Constructor
 PinI2C::PinI2C(I2Cwrapper* w)

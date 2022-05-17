@@ -1,13 +1,13 @@
 /*
-  AccelStepperI2C errror checking demo
+  I2Cwrapper errror checking demo
   (c) juh 2022
 
-  A variant of the sweep demo that demonstrates the available error checking
+  A variant of the AccelStepperI2C sweep demo that demonstrates the available error checking
   and safeguarding capabilities.
 
   If and how often you use them in your own sketches will depend on your
   degree of paranoia and the severity of potential harm done by uncontrolled
-  stepper movements.
+  hardware driven by the target device.
 
   Note that checking for errors is done at the wrapper's level, as it is
   the wrapper which handles communication for the stepper object.
@@ -20,13 +20,13 @@
 
 // --- Config. Change as needed for your hardware setup ---
 
-const uint8_t addr = 0x8;                     // i2c address of slave
+const uint8_t addr = 0x8;                     // i2c address of target
 const uint8_t stepPin = 8;                    // stepstick driver pin
 const uint8_t dirPin = 7;                     // stepstick driver pin
 const uint8_t enablePin = 2;                  // stepstick driver pin
-const uint8_t endstopPin = 17;                // Arduino Uno/Nano pin A3 (it's safer to use raw pin nr., since "A3" might mean sth. different if the master uses a different hardware platform)
-const uint8_t interruptPinSlave = 9;          // needs to be wired to interruptPinMaster
-const uint8_t interruptPinMaster = 2;         // wired to interruptPinSlave, needs to be a hardware interrupt pin (2 or 3 on Arduino Uno/Nano)
+const uint8_t endstopPin = 17;                // Arduino Uno/Nano pin A3 (it's safer to use raw pin nr., since "A3" might mean sth. different if the controller uses a different hardware platform)
+const uint8_t interruptPinTarget = 9;          // needs to be wired to interruptPinController
+const uint8_t interruptPinController = 2;         // wired to interruptPinTarget, needs to be a hardware interrupt pin (2 or 3 on Arduino Uno/Nano)
 const float homingSpeed  = 100.0;             // in steps/second. Adapt this for your stepper/gear/microstepping setup
 const float maxRunSpeed  = 600.0;             // in steps/second. Adapt this for your stepper/gear/microstepping setup
 const float acceleration = maxRunSpeed / 4;   // 4 seconds from 0 to max speed. Adapt this for your stepper/gear/microstepping setup
@@ -36,8 +36,8 @@ const float acceleration = maxRunSpeed / 4;   // 4 seconds from 0 to max speed. 
 long target = 3000; // initial target for sweep motion
 
 
-I2Cwrapper wrapper(addr); // each slave device is represented by a wrapper...
-AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the slave
+I2Cwrapper wrapper(addr); // each target device is represented by a wrapper...
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the target
 
 
 void setup()
@@ -45,27 +45,27 @@ void setup()
 
   Serial.begin(115200);
   Wire.begin();
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
-  Serial.println("\n\n\n*** AccelStepperI2C errror checking demo ***\n\n");
+  Serial.println("\n\n\n*** I2Cwrapper errror checking demo ***\n\n");
 
   /*
-     Use this to see if the slave device is listening.
+     Use this to see if the target device is listening.
   */
 
   if (!wrapper.ping()) {
-    halt("Slave not found! Check connections and restart.");
+    halt("Target not found! Check connections and restart.");
   } else {
-    Serial.println("Slave found as expected. Proceeding.\n");
+    Serial.println("Target found as expected. Proceeding.\n");
   }
 
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
   printVersions();
 
   /*
-     Use this to see if master and slave use the same version of the library
+     Use this to see if controller and target use the same version of the library
   */
 
   if (!wrapper.checkVersion(I2Cw_Version)) {
@@ -76,16 +76,16 @@ void setup()
        granted that future version of this software will implement the semver
        version as intended.
     */
-    halt("Warning: Master and slave are not using the same library version.");
+    halt("Warning: Controller and target are not using the same library version.");
   } else {
-    Serial.println("Slave's and master's versions match.\n");
+    Serial.println("Target's and controller's versions match. Proceeding\n");
   }
 
 
   /*
-      Attaching will usually only fail if the slave runs out of its (default) 
-      eight preallocated drivers (that's why it's important to reset the slave 
-      together with the master, see above).
+      Attaching will usually only fail if the target runs out of its (default) 
+      eight preallocated drivers (that's why it's important to reset the target 
+      together with the controller, see above).
   */
 
   stepper.attach(AccelStepper::DRIVER, stepPin, dirPin);
@@ -107,7 +107,7 @@ void setup()
   if (wrapper.transmissionErrors() > 0) { // check for an error in any of the above transmissions
     halt("Error: at least one transmission during setup failed.");
   } else {
-    Serial.println("Slave device successfully configured.");
+    Serial.println("Target device successfully configured. Proceeding.");
   }
 
 }
@@ -153,13 +153,13 @@ void halt(const char* m) {
 
 void printVersions() {
 
-  Serial.print("Master's version of I2Cwrapper package is ");
+  Serial.print("Controller's version of I2Cwrapper package is ");
   Serial.print(I2Cw_VersionMajor); Serial.print(".");
   Serial.print(I2Cw_VersionMinor); Serial.print(".");
   Serial.println(I2Cw_VersionPatch);
 
-  uint32_t v = wrapper.getSlaveVersion();
-  Serial.print("Slave's version of I2Cwrapper package is ");
+  uint32_t v = wrapper.getVersion();
+  Serial.print("Target's version of I2Cwrapper package is ");
   Serial.print(v >> 16 & 0xff); Serial.print(".");
   Serial.print(v >> 8 & 0xff); Serial.print(".");
   Serial.println(v & 0xff);

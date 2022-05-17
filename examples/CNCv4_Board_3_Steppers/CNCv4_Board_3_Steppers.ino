@@ -30,7 +30,7 @@
 
 uint8_t i2cAddress = 0x08;
 
-// Each I2C driver slave device is represented by a wrapper
+// Each I2C driver target device is represented by a wrapper
 I2Cwrapper wrapper(i2cAddress);
 AccelStepperI2C stepperX(&wrapper); // Stepper Motor 1
 AccelStepperI2C stepperY(&wrapper); // Stepper Motor 2
@@ -44,14 +44,14 @@ void setup()
 {
   Serial.begin(115200);
   Wire.begin();
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
   if (!wrapper.ping()) {
-    Serial.println("Slave not found! Check connections and restart.");
+    Serial.println("Target not found! Check connections and restart.");
     while (true) {}
   }
 
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
   wrapper.setI2Cdelay(20); // Set small delay for I2C bus communication

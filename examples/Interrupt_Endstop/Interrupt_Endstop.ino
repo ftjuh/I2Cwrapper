@@ -8,9 +8,9 @@
   different speeds and reports reproducability of end stop positions.
 
   As it uses interrupts to detect target-reached or endstop-hit
-  conditions, it does not need to poll the slave at all.
+  conditions, it does not need to poll the target at all.
 
-  Assumes that master and slave both run on an Arduino Uno/Nano.
+  Assumes that controller and target both run on an Arduino Uno/Nano.
   See config section below for hardware setup.
 
   Warning: This sketch intentionally moves beyond the endstops, so set up
@@ -25,13 +25,13 @@
 
 // --- Config. Change as needed for your hardware setup ---
 
-const uint8_t addr = 0x8;                     // i2c address of slave
+const uint8_t addr = 0x8;                     // i2c address of target
 const uint8_t stepPin = 8;                    // stepstick driver pin
 const uint8_t dirPin = 7;                     // stepstick driver pin
 const uint8_t enablePin = 2;                  // stepstick driver pin
-const uint8_t endstopPin = 17;                // Arduino Uno/Nano pin A3 (it's safer to use raw pin nr., since "A3" might mean sth. different if the master uses a different hardware platform)
-const uint8_t interruptPinSlave = 9;          // needs to be wired to interruptPinMaster
-const uint8_t interruptPinMaster = 2;         // wired to interruptPinSlave, needs to be a hardware interrupt pin (2 or 3 on Arduino Uno/Nano)
+const uint8_t endstopPin = 17;                // Arduino Uno/Nano pin A3 (it's safer to use raw pin nr., since "A3" might mean sth. different if the controller uses a different hardware platform)
+const uint8_t interruptPinTarget = 9;          // needs to be wired to interruptPinController
+const uint8_t interruptPinController = 2;         // wired to interruptPinTarget, needs to be a hardware interrupt pin (2 or 3 on Arduino Uno/Nano)
 const float homingSpeed  = 100.0;             // in steps/second. Adapt this for your stepper/gear/microstepping setup
 const float maxRunSpeed  = 600.0;             // in steps/second. Adapt this for your stepper/gear/microstepping setup
 const float acceleration = maxRunSpeed / 4;   // 4 seconds from 0 to max speed. Adapt this for your stepper/gear/microstepping setup
@@ -39,13 +39,29 @@ const float acceleration = maxRunSpeed / 4;   // 4 seconds from 0 to max speed. 
 // --- End of config ---
 
 
-I2Cwrapper wrapper(addr); // each slave device is represented by a wrapper...
-AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the slave
+I2Cwrapper wrapper(addr); // each target device is represented by a wrapper...
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the target
 
 volatile bool interruptFlag = false; // volatile for interrupt
 long lowerEndStopPos, upperEndStopPos, middlePos, range;
 long lower, upper;
 
+
+
+/***********************************************************************************
+
+   ISR
+
+ ************************************************************************************/
+// this has to come before setup(), else the Arduino environment will be confused by the conditionals and macros
+#if defined(ESP8266) || defined(ESP32)
+void IRAM_ATTR interruptFromTarget()
+#else
+void interruptFromTarget()
+#endif
+{
+  interruptFlag = true; // just set a flag, leave interrupt as quickly as possible
+}
 
 /***********************************************************************************
 
@@ -57,18 +73,18 @@ void setup()
 
   Serial.begin(115200);
   Wire.begin();
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
 
   /*
-     Prepare slave device
+     Prepare target device
   */
 
   if (!wrapper.ping()) {
-    Serial.println("Slave not found! Check connections and restart.");
+    Serial.println("Target not found! Check connections and restart.");
     while (true) {}
   }
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
 
@@ -106,13 +122,14 @@ void setup()
      Configure interrupts
   */
 
-  // First, make the slave send interrupts. The interrupt pin is shared by all units (steppers)
+  // First, make the target send interrupts. The interrupt pin is shared by all units (steppers)
   // which use interrupts, so we need the wrapper to set it up.
-  wrapper.setInterruptPin(interruptPinSlave, /* activeHigh */ true); // activeHigh -> master will have to look out for a RISING flank
-  stepper.enableInterrupts(); // make slave send out interrupts for this stepper at the pin set above
+  wrapper.setInterruptPin(interruptPinTarget, /* activeHigh */ true); // activeHigh -> controller will have to look out for a RISING flank
+  stepper.enableInterrupts(); // make target send out interrupts for this stepper at the pin set above
 
-  // And now make the master listen for the interrupt
-  attachInterrupt(digitalPinToInterrupt(interruptPinMaster), interruptFromSlave, RISING);
+  // And now make the controller listen for the interrupt
+  pinMode(interruptPinController, INPUT);
+  attachInterrupt(digitalPinToInterrupt(interruptPinController), interruptFromTarget, RISING);
 
 
   /*
@@ -251,12 +268,3 @@ void randomWalk(int repetitions, long chance) // % chance that target will be of
     } // switch
   }
 } // void randomWalk
-
-
-#if defined(ESP8266)
-ICACHE_RAM_ATTR
-#endif
-void interruptFromSlave()
-{
-  interruptFlag = true; // just set a flag, leave interrupt as quickly as possible
-}

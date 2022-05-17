@@ -1,17 +1,13 @@
 var searchData=
 [
-  ['range_528',['range',['../_interrupt___endstop_8ino.html#a0d7425a2c591319b9651b14bab4fea8e',1,'Interrupt_Endstop.ino']]],
-  ['reportnow_529',['reportNow',['../firmware_8ino.html#a4e882aeffdf111848ef1647b42fe1dde',1,'firmware.ino']]],
-  ['reportperiod_530',['reportPeriod',['../firmware_8ino.html#aab25d82c1087f38c24fedd257e192278',1,'firmware.ino']]],
-  ['reserror_531',['resError',['../_accel_stepper_i2_c_8h.html#a934384ea02abfd53c06efb8ab35a11b1',1,'AccelStepperI2C.h']]],
-  ['resetcmd_532',['resetCmd',['../_i2_cwrapper_8h.html#acec6e1426fd9aeda1f6ac91c1a0c9669',1,'I2Cwrapper.h']]],
-  ['resultok_533',['resultOK',['../class_i2_cwrapper.html#abf0d76a351cee8c7ce48f87d13e27dbc',1,'I2Cwrapper']]],
-  ['runcmd_534',['runCmd',['../_accel_stepper_i2_c_8h.html#ac5a577b7b05194baa66adb3e5a00d4ee',1,'AccelStepperI2C.h']]],
-  ['runresult_535',['runResult',['../_accel_stepper_i2_c_8h.html#a14da2e18c0d7f39520bf77af2db59aaf',1,'AccelStepperI2C.h']]],
-  ['runspeedcmd_536',['runSpeedCmd',['../_accel_stepper_i2_c_8h.html#a1dc7abae7acd49723430005dcd7ab563',1,'AccelStepperI2C.h']]],
-  ['runspeedresult_537',['runSpeedResult',['../_accel_stepper_i2_c_8h.html#a49c29726baa0f9aed662cbd0ebd51472',1,'AccelStepperI2C.h']]],
-  ['runspeedtopositioncmd_538',['runSpeedToPositionCmd',['../_accel_stepper_i2_c_8h.html#a7df5712fcf7469a487b493f4f6e29806',1,'AccelStepperI2C.h']]],
-  ['runspeedtopositionresult_539',['runSpeedToPositionResult',['../_accel_stepper_i2_c_8h.html#ac858209fd0b5e359eefcb153340294ab',1,'AccelStepperI2C.h']]],
-  ['runtonewpositioncmd_540',['runToNewPositionCmd',['../_accel_stepper_i2_c_8h.html#ab6da5e42caa09167ae7c403ab66d53b8',1,'AccelStepperI2C.h']]],
-  ['runtopositioncmd_541',['runToPositionCmd',['../_accel_stepper_i2_c_8h.html#a170d54f56d535f30b6cb09321e89c754',1,'AccelStepperI2C.h']]]
+  ['pinanalogreadcmd_585',['pinAnalogReadCmd',['../_pin_i2_c__firmware_8h.html#a9a5d67a3ab322489436d716c194d7cb1',1,'pinAnalogReadCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a2d5cef299370fe889788b67551910b99',1,'pinAnalogReadCmd():&#160;PinI2C.h']]],
+  ['pinanalogreadresult_586',['pinAnalogReadResult',['../_pin_i2_c_8h.html#af6527474f17ef46ddd7ec5f457910f66',1,'PinI2C.h']]],
+  ['pinanalogreferencecmd_587',['pinAnalogReferenceCmd',['../_pin_i2_c_8h.html#a400d763196a8e20f3342c990fe591b6d',1,'PinI2C.h']]],
+  ['pinanalogwritecmd_588',['pinAnalogWriteCmd',['../_pin_i2_c__firmware_8h.html#a3e6569d23b9bcc41fef4eee3ac977d6f',1,'pinAnalogWriteCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a647237992b8ab5f85d4a29772ee2330c',1,'pinAnalogWriteCmd():&#160;PinI2C.h']]],
+  ['pincmdoffset_589',['pinCmdOffset',['../_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1',1,'PinI2C.h']]],
+  ['pindigitalreadcmd_590',['pinDigitalReadCmd',['../_pin_i2_c__firmware_8h.html#a7daf680ff2b562761885093ced986416',1,'pinDigitalReadCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a084ac0c4e83170e397b31881374479e9',1,'pinDigitalReadCmd():&#160;PinI2C.h']]],
+  ['pindigitalreadresult_591',['pinDigitalReadResult',['../_pin_i2_c_8h.html#a0961198cb28e498a7e69e2067f7ae178',1,'PinI2C.h']]],
+  ['pindigitalwritecmd_592',['pinDigitalWriteCmd',['../_pin_i2_c__firmware_8h.html#ad994000f692b85378af36e7b20f60696',1,'pinDigitalWriteCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a131cc945510add41ca5b162278a731fc',1,'pinDigitalWriteCmd():&#160;PinI2C.h']]],
+  ['pinpinmodecmd_593',['pinPinModeCmd',['../_pin_i2_c__firmware_8h.html#aedbf1482a7ca1a20ce49effb27cdb4df',1,'pinPinModeCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a9e526d90c799038dd692278685b2a955',1,'pinPinModeCmd():&#160;PinI2C.h']]],
+  ['pos_594',['pos',['../_servo___sweep_8ino.html#a1910d262855b71da353ed0d07a6c7823',1,'Servo_Sweep.ino']]]
 ];

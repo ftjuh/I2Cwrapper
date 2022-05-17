@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: I2Cwrapper.h File Reference</title>
+<title>I2Cwrapper: I2Cwrapper.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -93,18 +93,16 @@ $(document).ready(function(){initNavTree('_i2_cwrapper_8h.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and related libraries.  
+<p>Core helper class of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> framework. Handles target device management and I2C communication on the controller's side.  
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A helper class for the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and related libraries. </p>
+<div class="textblock"><p>Core helper class of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> framework. Handles target device management and I2C communication on the controller's side. </p>
 <h1><a class="anchor" id="author"></a>
 Author</h1>
 <p>Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd><p class="startdd">Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given master-slave setup. </p>
-<p class="enddd"><del><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> should be derived from a common base class, atm there's some unhealthy copy and paste</del>implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>, but with client instead of inheritance relation. </p>
-</dd></dl>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given controller-target setup. </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -114,8 +112,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac761f6bc28d53219cc5273671e5c0a3a"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#ac761f6bc28d53219cc5273671e5c0a3a">maxBufDefault</a> = 20</td></tr>
-<tr class="separator:ac761f6bc28d53219cc5273671e5c0a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad73c883bc137fdc05d0447439c740b26"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a> = 20</td></tr>
+<tr class="separator:ad73c883bc137fdc05d0447439c740b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e670dbec664a89d717caad5333aa8a4"><td class="memItemLeft" align="right" valign="top">const unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#a8e670dbec664a89d717caad5333aa8a4">I2CdefaultDelay</a> = 20</td></tr>
 <tr class="separator:a8e670dbec664a89d717caad5333aa8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acec6e1426fd9aeda1f6ac91c1a0c9669"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#acec6e1426fd9aeda1f6ac91c1a0c9669">resetCmd</a> = 241</td></tr>
@@ -133,7 +131,7 @@ Variables</h2></td></tr>
 <tr class="memitem:afb98f245f43ac678f05b9749990473e1"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#afb98f245f43ac678f05b9749990473e1">getVersionResult</a> = 4</td></tr>
 <tr class="separator:afb98f245f43ac678f05b9749990473e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f90e0f512487244a9afb99cac141660"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">interruptReason_none</a> = 0</td></tr>
-<tr class="memdesc:ga1f90e0f512487244a9afb99cac141660"><td class="mdescLeft">&#160;</td><td class="mdescRight">You should not encounter this, as you don't want to be interrupted without a reason...  <a href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">More...</a><br /></td></tr>
+<tr class="memdesc:ga1f90e0f512487244a9afb99cac141660"><td class="mdescLeft">&#160;</td><td class="mdescRight">You should not encounter this in practice, as you don't want to be interrupted without a reason...  <a href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">More...</a><br /></td></tr>
 <tr class="separator:ga1f90e0f512487244a9afb99cac141660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -221,14 +219,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac761f6bc28d53219cc5273671e5c0a3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac761f6bc28d53219cc5273671e5c0a3a">&#9670;&nbsp;</a></span>maxBufDefault</h2>
+<a id="ad73c883bc137fdc05d0447439c740b26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad73c883bc137fdc05d0447439c740b26">&#9670;&nbsp;</a></span>I2CmaxBuf</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint16_t maxBufDefault = 20</td>
+          <td class="memname">const uint8_t I2CmaxBuf = 20</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -268,8 +266,8 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b7878ad5ecbf2506f4125b9d34c97e45.html">util</a></li><li class="navelem"><a class="el" href="_i2_cwrapper_8h.html">I2Cwrapper.h</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_i2_cwrapper_8h.html">I2Cwrapper.h</a></li>
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

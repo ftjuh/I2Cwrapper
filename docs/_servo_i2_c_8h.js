@@ -6,6 +6,7 @@ var _servo_i2_c_8h =
     [ "servoAttachedCmd", "_servo_i2_c_8h.html#ad8b62d49f383d27b1ee493d97bf9cc97", null ],
     [ "servoAttachedResult", "_servo_i2_c_8h.html#a9094d4c24f168670ca13b88441b6097a", null ],
     [ "servoAttachResult", "_servo_i2_c_8h.html#a07260e617cfa64951a6db5fd4fa75cdf", null ],
+    [ "servoCmdOffset", "_servo_i2_c_8h.html#ab7271093f4080db7f8e42277bc580448", null ],
     [ "servoDetachCmd", "_servo_i2_c_8h.html#acdcf8e912dfca4c7b876bda6c91e691f", null ],
     [ "servoReadCmd", "_servo_i2_c_8h.html#a06400364c4fd99d2fd97802201e5640e", null ],
     [ "servoReadMicrosecondsCmd", "_servo_i2_c_8h.html#ac57405b05b7fb9d6bb5c876a506bb20e", null ],

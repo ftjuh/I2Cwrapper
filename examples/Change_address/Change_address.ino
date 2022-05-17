@@ -3,14 +3,14 @@
   (c) juh 2022
 
   Test and demonstrate changing the I2C address permanently.
-  Just I2C-connect any slave device with the AccelStepperI2C firmware
-  and flash this demo to the master.
+  Just I2C-connect any target device with the AccelStepperI2C firmware
+  and flash this demo to the controller.
 
 */
 
 
 #include <Arduino.h>
-#include <AccelStepperI2C.h> // We'd only need I2Cwrapper.h, here, but it's in the src/util subfolder, so we can't include it directly
+#include <I2Cwrapper.h>
 #include <Wire.h>
 
 const uint8_t oldAddress = 0x08;
@@ -31,30 +31,30 @@ void setup()
   Serial.println("\n\n\nAccelStepperI2C change I2C address demo\n\n");
   delay(me);
 
-  Serial.println("Trying to reach slave at old address...");
+  Serial.println("Trying to reach target at old address...");
   delay(me);
 
-  if (wrapper.ping()) { // is slave present at old oldAddress?
+  if (wrapper.ping()) { // is target present at old oldAddress?
 
-    Serial.print("Slave found at old address "); Serial.println(oldAddress);
+    Serial.print("Target found at old address "); Serial.println(oldAddress);
     delay(me);
 
     Serial.print("\nChanging address to "); Serial.println(newAddress);
     wrapper.changeI2Caddress(newAddress);
     delay(me);
 
-    Serial.println("\nAddress changed. Rebooting slave....\n");
+    Serial.println("\nAddress changed. Rebooting target....\n");
     wrapper.reset();
     delay(me);
 
     // From here on we'll need to use the wrapperNew object, as the wrapper object is still bound to the old address
 
-    Serial.println("Trying to reach slave at new address...\n");
+    Serial.println("Trying to reach target at new address...\n");
     delay(me);
 
     if (wrapperNew.ping()) {
 
-      Serial.print("Slave successfully found at new address ");
+      Serial.print("Target successfully found at new address ");
       Serial.print(newAddress); Serial.println("!\n\n");
       delay(me);
 
@@ -71,11 +71,11 @@ void setup()
         Serial.println("Sorry, could not change back to old address.");
       }
     } else {
-      Serial.print("Slave *not* found at new address ");
+      Serial.print("Target *not* found at new address ");
       Serial.print(newAddress); Serial.println(", something went wrong");
     }
   } else {
-    Serial.print("Slave not found at old address ");
+    Serial.print("Target not found at old address ");
     Serial.print(oldAddress); Serial.println(", please check your connections and reboot.");
   }
   Serial.println("\n\nFinished.");

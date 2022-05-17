@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AccelStepperI2C: firmware Directory Reference</title>
+<title>I2Cwrapper: firmware Directory Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,10 +27,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">AccelStepperI2C
-   &#160;<span id="projectnumber">v0.2.2</span>
+   <div id="projectname">I2Cwrapper
+   &#160;<span id="projectnumber">v0.3.0</span>
    </div>
-   <div id="projectbrief">I2C wrapper (and a bit more) for the AccelStepper Arduino library</div>
+   <div id="projectbrief">Generic framework for Arduino I2C slave devices</div>
   </td>
  </tr>
  </tbody>
@@ -92,8 +92,23 @@ $(document).ready(function(){initNavTree('dir_d9edf6c004b4a7ff14fe9ae7a92214ee.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
+<tr class="memitem:_accel_stepper_i2_c__firmware_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c__firmware_8h.html">AccelStepperI2C_firmware.h</a></td></tr>
+<tr class="memdesc:_accel_stepper_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:_e_s_p32sensors_i2_c__firmware_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html">ESP32sensorsI2C_firmware.h</a></td></tr>
+<tr class="memdesc:_e_s_p32sensors_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:firmware_8ino"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html">firmware.ino</a></td></tr>
-<tr class="memdesc:firmware_8ino"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware for an I2C slave controlling up to 8 stepper motors with the AccelStepper library, comes with the matching <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library. <br /></td></tr>
+<tr class="memdesc:firmware_8ino"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic firmware framework for I2C targets with modular functionality, built around the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:firmware__modules_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware__modules_8h.html">firmware_modules.h</a></td></tr>
+<tr class="memdesc:firmware__modules_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file determines which modules will be included in the target firmware. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:_pin_i2_c__firmware_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html">PinI2C_firmware.h</a></td></tr>
+<tr class="memdesc:_pin_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:_servo_i2_c__firmware_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c__firmware_8h.html">ServoI2C_firmware.h</a></td></tr>
+<tr class="memdesc:_servo_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -102,7 +117,7 @@ Files</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li>
-    <li class="footer">Generated on Mon May 2 2022 21:49:06 for AccelStepperI2C by
+    <li class="footer">Generated on Tue May 17 2022 22:53:14 for I2Cwrapper by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

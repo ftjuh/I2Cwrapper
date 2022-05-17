@@ -4,6 +4,8 @@
 
    This is a 1:1 equivalent of the AccelStepper Bounce.pde example
    https://www.airspayce.com/mikem/arduino/AccelStepper/Bounce_8pde-example.html
+   
+   Needs AccelStepperI2C.h module enabled in the target's firmware_modules.h.
 
 */
 
@@ -13,21 +15,21 @@
 
 uint8_t i2cAddress = 0x08;
 
-I2Cwrapper wrapper(i2cAddress); // each slave device is represented by a wrapper...
-AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the slave
+I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the target
 
 void setup()
 {
   Serial.begin(115200);
   Wire.begin();
-  // Wire.setClock(10000); // uncomment for ESP8266 slaves, to be on the safe side
+  // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
   if (!wrapper.ping()) {
-    Serial.println("Slave not found! Check connections and restart.");
+    Serial.println("Target not found! Check connections and restart.");
     while (true) {}
   }
 
-  wrapper.reset(); // reset the slave device
+  wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
   stepper.attach(); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5
