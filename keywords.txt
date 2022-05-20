@@ -23,7 +23,6 @@ stopState	KEYWORD2
 runState	KEYWORD2
 runSpeedState	KEYWORD2
 runSpeedToPositionState	KEYWORD2
-resetAccelStepperSlave	KEYWORD2
 setEndstopPin 	KEYWORD2
 enableEndstops 	KEYWORD2
 endstops 	KEYWORD2
@@ -36,7 +35,7 @@ changeI2Caddress	KEYWORD2
 setInterruptPin	KEYWORD2
 clearInterrupt	KEYWORD2
 setI2Cdelay	KEYWORD2
-getSlaveVersion	KEYWORD2
+getVersion	KEYWORD2
 checkVersion	KEYWORD2
 sentErrors	KEYWORD2
 resultErrors	KEYWORD2
