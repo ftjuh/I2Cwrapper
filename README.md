@@ -4,7 +4,18 @@
 
 I2Cwrapper is a **generic modular framework for Arduino I2C target devices**. It supports AVR-based Arduinos (Uno, Nano etc.), ESP8266, and ESP32 platforms. 
 
-I2Cwrapper consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device and let you concentrate on implementing the actual target functionality. <replace ith Available Modules section?> Ready to use modules exist for **[stepper motor](#accelstepperi2c)** control via `AccelStepper`, **[servo motor](#servoi2c)** control via [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library, **[digital/analog pin](#pini2c)** control, and **[ESP32 touch button](#esp32sensorsi2c)** control (see below).
+I2Cwrapper consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device and let you concentrate on implementing the actual target functionality. 
+
+## Available modules
+
+In the [firmware subfolder](firmware) (see below for more detailed information):
+
+* **AccelStepperI2C**: Control up to eight stepper motors with acceleration control via Mike McCauley's [AccelStepper](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging. Works nearly like the original library. 
+* **ServoI2C**: Control servo motors via I2C. Works just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library.
+* **PinI2C**: Control the digital and analog in- and output pins of the target device via I2C, similar to an IO-expander. Works just like as the plain Arduino digitalRead() etc. commands.
+* **ESP32sensorsI2C**: Read an ESP32's touch sensors, hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press. Works nearly like the original ESP32 functions.
+
+Modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
 
 [Download I2Cwrapper on github.](https://github.com/ftjuh/I2Cwrapper)
 
@@ -37,17 +48,6 @@ The other two basic components are for the **I2C controller's side**:
 2. **Controller libraries** for each module (e.g. [`ServoI2C.h`](src/ServoI2C.h)). 
    - controller libraries use **I2Cwrapper objects** to talk to the target device (like the class `ServoI2C` in `ServoI2C.h`).
    - They implement an interface for the respective target functionality, transmit each function call to the target device, and receive the target's reply, if the command was asking for it.
-
-## Available modules
-
-Currently the following modules are available in the [firmware subfolder](firmware) (see below for more detailed information):
-
-* **AccelStepperI2C**: Control up to eight stepper motors with acceleration control via Mike McCauley's [AccelStepper](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging. Works nearly like the original library. 
-* **ServoI2C**: Control servo motors via I2C. Works just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library.
-* **PinI2C**: Control the digital and analog in- and output pins of the target device via I2C, similar to an IO-expander. Works just like as the plain Arduino digitalRead() etc. commands.
-* **ESP32sensorsI2C**: Read an ESP32's touch sensors, hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press. Works nearly like the original ESP32 functions.
-
-Modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
 
 ## Limitations
 
