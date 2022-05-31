@@ -35,7 +35,7 @@ The other two basic components are for the **I2C controller's side**:
    - Controller sketches use an object of type I2Cwrapper to **represent the target** device which handles all low level communication tasks like CRC8 checksums, error handling etc.
    - It also provides **basic functions** for target device management like changing its I2C address, setting an interrupt pin, or making it reset.
 2. **Controller libraries** for each module (e.g. [`ServoI2C.h`](src/ServoI2C.h)). 
-   - controller libraries use **I2Cwrapper objects** (like the class `ServoI2C` in `ServerI2C.h`) to talk to the target device.
+   - controller libraries use **I2Cwrapper objects** to talk to the target device (like the class `ServoI2C` in `ServoI2C.h`).
    - They implement an interface for the respective target functionality, transmit each function call to the target device, and receive the target's reply, if the command was asking for it.
 
 ## Available Modules
@@ -53,7 +53,7 @@ Modules can be selected in **any combination** at compile time for a specific ta
 
 ### Limitations for End Users
 
-   - Arduinos aren't perfect I2C target devices. Particularly, the Arduino's Wire library doesn't support [clock stretching](https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html) in a way that allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the **target is not flooded** with commands or requests with too little time to handle them. I2Cwrapper provides an [adjustable minimum delay](#adjusting-the-i2c-delay) between transmissions to handle that problem (and diagnostics to determine the delay).
+   - Arduinos aren't perfect I2C target devices. Particularly, the Arduino's Wire library doesn't support [clock stretching](https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html) in a way that allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the **target is not flooded** with commands or requests with too little time to handle them. I2Cwrapper provides an [adjustable minimum delay](#adjusting-the-i2c-delay) between transmissions to handle that problem.
 
 ### Limitations for Module Authors
 
@@ -82,7 +82,7 @@ The target device is now ready. To test it, you can use one of the example sketc
 * (optional, only tested for Linux) Open a completely **new instance** of the Arduino environment from your start menu. That way, you can connect target and controller devices at the same time without the need to change USB ports for uploading and serial output.
 * Depending on the module(s) you selected, load **one of the examples** from the example folder and upload it to your controller device. Use `Pin_control.ino` for a first test with the `PinI2C` module.
 * **Configure and upload** the example sketch or your own controller sketch to another Arduino-like (controller).
-* **Connect the I2C bus** of both devices. Don't forget  I2C pullups and, and if needed, level-shifters. Also connect GND <-> GND to power one board from the other, if needed.
+* **Connect the I2C bus** of both devices (including GND). Don't forget  I2C pullups and, and if needed, level-shifters. Also, connect V+ <-> V+ to power one board from the other, if needed.
 * **Run** the controller sketch.
 
 Have a look at the [examples](https://github.com/ftjuh/AccelStepperI2C/tree/controller/examples) for details. 
