@@ -68,10 +68,10 @@ See [below](#how-to-add-new-modules) if you are interested in writing a new modu
 
 ~~Install I2Cwrapper from the Arduino library manager (not available yet).~~ Until I2Cwrapper is picked up by the Arduino library manager, you'll have to [install it manually](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation) by copying the I2Cwrapper folder to your Arduino library folder and (re)starting the Arduino software.  You'll find an I2Cwrapper examples folder after successful installation.
 
-## Target side: configuring and uploading the firmware
+## Configuring and uploading the firmware
 
 * **Open [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/controller/firmware/firmware.ino)**  from the examples menu of the Arduino editor, you'll find it in the the I2Cwrapper submenu. It will open multiple tabs, among them one for each available module in the firmware subfolder.
-* Go to  the [`firmware_modules.h`](firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the `PinI2C` module, it is the simplest and doesn't need any extra hardware.
+* Go to  the [`firmware_modules.h`](firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware.
 * You can **save a local copy** of the firmware. Don't forget, though, that your local copy won't be updated in future releases which might result in conflicts after a library upgrade.
 * **Compile and upload** to your target device.
 
@@ -166,7 +166,7 @@ I2Cwrapper's interrupt mechanism can be used to inform the controller that the s
 ### Restrictions
 
    - The original `run()`, `runSpeed()`, or `runSpeedToPosition()` functions are implemented, but it is **not recommended to use them**. The idea of these functions is that they are called as often as possible which would cause constant I2C traffic. The I2C protocol was not designed for this kind of load, so use the state machine instead. If you feel you *must* use the original ones, take it slow and see if your setup, taking other I2C devices into consideration, allows you to [increase the I2C bus frequency](https://www.arduino.cc/en/Reference/WireSetClock). Even then you shouldn't poll as often as possible (as AccelStepper usually wants you to), but adjust the polling frequency to your max. stepping frequency, to allow the I2C bus some room to breathe.
-   - Each library function call, its parameters, and possibly a return value has to be transmitted back and forth via I2C. This makes things **slower, less precise, and prone to errors**. To be safe from errors, you'll need to do some extra checking (see [Error handling](#Error handling)).
+   - Each library function call, its parameters, and possibly a return value has to be transmitted back and forth via I2C. This makes things **slower, less precise, and prone to errors**. To be safe from errors, you'll need to do some extra checking (see [Error handling](#error-handling)).
    - Naturally, you cannot declare your own stepping functions with the [constructor [2/2] variant](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd).
 
 ### Safety precautions
@@ -194,7 +194,7 @@ Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor
 
 You can use the templates provided in the [`templates` subfolder](templates) if you want to add your own modules and **implement your own I2C target device**.
 
-- `template_I2C.h`  and `template_I2C.cpp` - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see [limitations](#Limitations for module authors)). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the I2Cwrapper library.
+- `template_I2C.h`  and `template_I2C.cpp` - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see [limitations](#limitations-for-module-authors)). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the I2Cwrapper library.
   - Often, the header file `template_I2C.h`  will very closely resemble the header file of the library that you are addressing on the target device's side.
   - The implementation  `template_I2C.cpp`, however, looks quite different: It will do nothing else but "wrap" each function's arguments into a command, transmit it to the target, and, optionally, receive the target device's reply.
 - `template_I2C_firmware.h` - Target firmware templates. Here, the most important part is injecting code into the command interpreter that will "unwrap" the controller function's command codes, react adequately, and, optionally, prepare a reply.
@@ -215,7 +215,7 @@ The following platforms will run the target firmware and have been (more or less
 
 * **Arduino AVRs (Uno, Nano etc.)**: Comes with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed not recommended for high performance situations.
 * **ESP8266**: Has no I2C  hardware. The software I2C will not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to [decrease the bus speed](https://www.arduino.cc/en/Reference/WireSetClock) below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
-* **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#Adjusting the I2C delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
+* **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-I2C-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 
 # Example
 
