@@ -81,7 +81,7 @@
       case pinAnalogReferenceCmd: {
           if (i == 1) { //1 uint8_t
             uint8_t mode; bufferIn->read(mode);
-            analogReference((eAnalogReference)mode);
+            analogReference(static_cast<eAnalogReference>(mode));
           }
         }
         break;

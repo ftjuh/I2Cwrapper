@@ -19,7 +19,10 @@
 
 #include <Arduino.h>
 #include <Wire.h>
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
+#define USE_EEPROM
 #include <EEPROM.h>
+#endif
 #include <I2Cwrapper.h>
 
 
@@ -135,6 +138,7 @@ const uint32_t eepromUsedSize = 6; // total bytes of EEPROM used by us
 */
 uint8_t retrieveI2C_address()
 {
+#ifdef USE_EEPROM
   SimpleBuffer b;
   b.init(8);
   // read 6 bytes from eeprom: [0]=CRC8; [1-4]=marker; [5]=address
@@ -155,7 +159,9 @@ uint8_t retrieveI2C_address()
   uint8_t storedAddress; b.read(storedAddress); // now idx will be at 6, so that CRC check below will work
   if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
     return storedAddress;
-  } else {
+  } else
+#endif // USE_EEPROM
+  {
     return defaultAddress;
   }
 }
@@ -167,6 +173,7 @@ uint8_t retrieveI2C_address()
 */
 void storeI2C_address(uint8_t newAddress)
 {
+#ifdef USE_EEPROM
   SimpleBuffer b;
   b.init(8);
   b.write(eepromI2CaddressMarker);
@@ -186,14 +193,15 @@ void storeI2C_address(uint8_t newAddress)
   EEPROM.end(); // end() will also commit()
 #endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   log("\n");
+#endif // USE_EEPROM
 }
 
 
 /*
    Interrupt (to controller) stuff
-   note: The interrupt pin is global, as there is only one shared by all modules 
-   and units. However, modules can implement them so that interrupts can be 
-   enabled for each unit seperately, 
+   note: The interrupt pin is global, as there is only one shared by all modules
+   and units. However, modules can implement them so that interrupts can be
+   enabled for each unit seperately,
 */
 
 int8_t interruptPin = -1; // -1 for undefined
@@ -202,16 +210,16 @@ uint8_t interruptSource = 0xF;
 uint8_t interruptReason = interruptReason_none;
 
 /*!
- * @brief Interrupt controller if an interrupt pin has been set and, optionally,
- * define a source and reason having caused the interrupt that the controller can 
- * learn about by calling the I2Cwrapper::clearInterrupt() function.
- * @param source 4-bit value that can be used to signal the controller where in the 
- * target device the interrupt occured, e.g. which end stop switch was triggered 
- * or which touch button was touched. 0xF is reserved to signal "unknown source"
- * @param reason 4-bit value that can be used to differentiate between different
- * interrupt causing events, e.g. end stop hit vs. target reached. 0xF is 
- * reserved to signal "unknown reason"
- */
+   @brief Interrupt controller if an interrupt pin has been set and, optionally,
+   define a source and reason having caused the interrupt that the controller can
+   learn about by calling the I2Cwrapper::clearInterrupt() function.
+   @param source 4-bit value that can be used to signal the controller where in the
+   target device the interrupt occured, e.g. which end stop switch was triggered
+   or which touch button was touched. 0xF is reserved to signal "unknown source"
+   @param reason 4-bit value that can be used to differentiate between different
+   interrupt causing events, e.g. end stop hit vs. target reached. 0xF is
+   reserved to signal "unknown reason"
+*/
 void triggerInterrupt(uint8_t source, uint8_t reason)
 {
   if (interruptPin >= 0) {
@@ -224,8 +232,8 @@ void triggerInterrupt(uint8_t source, uint8_t reason)
 }
 
 /*
- * Called by command interpreter, no need for modules to call it.
- */
+   Called by command interpreter, no need for modules to call it.
+*/
 void clearInterrupt()
 {
   if (interruptPin >= 0) {
@@ -276,7 +284,12 @@ void setup()
 
 #if defined(DEBUG)
   Serial.begin(115200);
-#endif
+  // all chips with "native" usb require waiting till `Serial` is true
+  unsigned int begin_time = millis();
+  while (! Serial && millis() - begin_time < 1000) {
+    delay(10);  // but at most 1 sec if not plugged in to usb
+  }
+#endif // DEBUG
   log("\n\n\n=== I2Cwrapper firmware v");
   log(I2Cw_VersionMajor); log("."); log(I2Cw_VersionMinor); log("."); log(I2Cw_VersionPatch); log(" ===\n");
   log("Running on architecture ");
@@ -286,6 +299,8 @@ void setup()
   log("ARDUINO_ARCH_ESP8266\n");
 #elif defined(ARDUINO_ARCH_ESP32)
   log("ARDUINO_ARCH_ESP32\n");
+#elif defined(ARDUINO_ARCH_SAMD)
+  log("ARDUINO_ARCH_SAMD\n");
 #else
   log("unknown\n");
 #endif
@@ -313,8 +328,8 @@ void setup()
 
 /**************************************************************************/
 /*!
-    @brief Main loop. By default, it doesn't do a lot apart from debugging: It 
-    just checks if an ISR signaled that a new message has arrived and calls 
+    @brief Main loop. By default, it doesn't do a lot apart from debugging: It
+    just checks if an ISR signaled that a new message has arrived and calls
     processMessage() accordingly.
 */
 /**************************************************************************/
@@ -441,9 +456,9 @@ void processMessage(uint8_t len)
 
     switch (cmd) {
 
-      /*
-        Inject modules' processMessage sections
-      */
+        /*
+          Inject modules' processMessage sections
+        */
 
 #define MF_STAGE MF_STAGE_processMessage
 #include "firmware_modules.h"
@@ -457,8 +472,8 @@ void processMessage(uint8_t len)
       case resetCmd: {
           if (i == 0) { // no parameters
             log("\n\n---> Resetting\n\n");
-// Inject modules' reset code
-#define MF_STAGE MF_STAGE_reset 
+            // Inject modules' reset code
+#define MF_STAGE MF_STAGE_reset
 #include "firmware_modules.h"
 #undef MF_STAGE
           }
