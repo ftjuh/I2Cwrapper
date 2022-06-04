@@ -77,7 +77,7 @@
         }
         break;
 
-#if defined(ARDUINO_ARCH_AVR) // ESPs don't have analogReference()
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD) // ESPs don't have analogReference()
       case pinAnalogReferenceCmd: {
           if (i == 1) { //1 uint8_t
             uint8_t mode; bufferIn->read(mode);
