@@ -284,12 +284,14 @@ void setup()
 
 #if defined(DEBUG)
   Serial.begin(115200);
+
   // all chips with "native" usb require waiting till `Serial` is true
   unsigned int begin_time = millis();
   while (! Serial && millis() - begin_time < 1000) {
     delay(10);  // but at most 1 sec if not plugged in to usb
   }
 #endif // DEBUG
+
   log("\n\n\n=== I2Cwrapper firmware v");
   log(I2Cw_VersionMajor); log("."); log(I2Cw_VersionMinor); log("."); log(I2Cw_VersionPatch); log(" ===\n");
   log("Running on architecture ");
