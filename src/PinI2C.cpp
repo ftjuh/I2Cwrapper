@@ -55,8 +55,7 @@ int PinI2C::analogRead(uint8_t pin){
   return res;  
 }
 
-void PinI2C::analogReference(eAnalogReference mode){
-  static_assert(sizeof(eAnalogReference) == sizeof(uint8_t),"Need argument to analogReference to be same size as uint8_t");
+void PinI2C::analogReference(uint8_t mode){
   wrapper->prepareCommand(pinAnalogReferenceCmd, myNum);
   wrapper->buf.write(static_cast<uint8_t>(mode));
   wrapper->sendCommand();
