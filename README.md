@@ -207,7 +207,7 @@ All transmissions to the target device have a three byte header followed by an a
 - [1] **command code**: Modules and the I2Cwrapper core use their own unique command code ranges, so that the command code will decide which module (if more than one is enabled) or if the core will interpret the command.
 - [3] **unit addressed**: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the `PinI2C` module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission.
 
-# Supported platforms {#supported-platforms}
+# Supported platforms
 
 The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:
 
