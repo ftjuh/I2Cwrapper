@@ -41,14 +41,14 @@ var NAVTREE =
         [ "ESP32sensorsI2C", "index.html#autotoc_md11", null ]
       ] ],
       [ "How to add new modules", "index.html#autotoc_md12", null ],
-      [ "Supported platforms", "index.html#supported-platforms", null ],
-      [ "Example", "index.html#autotoc_md13", null ],
-      [ "Documentation", "index.html#autotoc_md14", null ],
-      [ "Planned improvements", "index.html#autotoc_md15", null ],
-      [ "Author", "index.html#autotoc_md16", null ],
-      [ "Copyright", "index.html#autotoc_md17", null ],
-      [ "License", "index.html#autotoc_md18", null ],
-      [ "History", "index.html#autotoc_md19", null ]
+      [ "Supported platforms", "index.html#autotoc_md13", null ],
+      [ "Example", "index.html#autotoc_md14", null ],
+      [ "Documentation", "index.html#autotoc_md15", null ],
+      [ "Planned improvements", "index.html#autotoc_md16", null ],
+      [ "Author", "index.html#autotoc_md17", null ],
+      [ "Copyright", "index.html#autotoc_md18", null ],
+      [ "License", "index.html#autotoc_md19", null ],
+      [ "History", "index.html#autotoc_md20", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Reference", "modules.html", "modules" ],
