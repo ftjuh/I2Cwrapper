@@ -10,6 +10,8 @@ Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs
 
 [I2Cwrapper library documentation](https://ftjuh.github.io/I2Cwrapper/)
 
+[TOC]
+
 ## Firmware modules
 
 Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](firmware) (see [below](#available-modules) for more detailed information):
