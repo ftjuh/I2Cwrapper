@@ -1,4 +1,4 @@
-# Introduction {#mainpage}
+# Introduction
 
 I2Cwrapper is a **generic modular framework for Arduino I2C target devices**. It runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)).
 
