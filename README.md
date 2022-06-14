@@ -8,9 +8,7 @@ Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs
 
 [Download I2Cwrapper on github.](https://github.com/ftjuh/I2Cwrapper)
 
-[I2Cwrapper library documentation](https://ftjuh.github.io/I2Cwrapper/)
-
-[TOC]
+[I2Cwrapper library documentation](https://ftjuh.github.io/I2Cwrapper/index.html)
 
 ## Firmware modules
 
