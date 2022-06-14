@@ -1,6 +1,7 @@
 var _pin_i2_c_8h =
 [
     [ "PinI2C", "class_pin_i2_c.html", "class_pin_i2_c" ],
+    [ "log", "_pin_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "pinAnalogReadCmd", "_pin_i2_c_8h.html#a2d5cef299370fe889788b67551910b99", null ],
     [ "pinAnalogReadResult", "_pin_i2_c_8h.html#af6527474f17ef46ddd7ec5f457910f66", null ],
     [ "pinAnalogReferenceCmd", "_pin_i2_c_8h.html#a400d763196a8e20f3342c990fe591b6d", null ],

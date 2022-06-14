@@ -1,14 +1,18 @@
-(⮤ Did you know that github hides a contents menu at the top left of this line?)
+# Introduction {#mainpage}
 
-# Introduction
+I2Cwrapper is a **generic modular framework for Arduino I2C target devices**. It runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)).
 
-I2Cwrapper is a **generic modular framework for Arduino I2C target devices**. It supports standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)).
+The I2Cwrapper core consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device and let you concentrate on implementing the actual target functionality.
 
-I2Cwrapper consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device and let you concentrate on implementing the actual target functionality. 
+Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
-## Available modules
+[Download I2Cwrapper on github.](https://github.com/ftjuh/I2Cwrapper)
 
-In the [firmware subfolder](firmware) (see below for more detailed information):
+[I2Cwrapper library documentation](https://ftjuh.github.io/I2Cwrapper/)
+
+## Firmware modules
+
+Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](firmware) (see [below](#available-modules) for more detailed information):
 
 * **AccelStepperI2C**: Control up to eight stepper motors with acceleration control via Mike McCauley's [AccelStepper](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging. Works nearly like the original library. 
 * **ServoI2C**: Control servo motors via I2C. Works just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library.
@@ -16,12 +20,6 @@ In the [firmware subfolder](firmware) (see below for more detailed information):
 * **ESP32sensorsI2C**: Read an ESP32's touch sensors, hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press. Works nearly like the original ESP32 functions.
 
 Modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
-
-[Download I2Cwrapper on github.](https://github.com/ftjuh/I2Cwrapper)
-
-[I2Cwrapper library documentation](https://ftjuh.github.io/I2Cwrapper/)
-
-Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
 ## Basic components
 
@@ -209,7 +207,7 @@ All transmissions to the target device have a three byte header followed by an a
 - [1] **command code**: Modules and the I2Cwrapper core use their own unique command code ranges, so that the command code will decide which module (if more than one is enabled) or if the core will interpret the command.
 - [3] **unit addressed**: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the `PinI2C` module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission.
 
-# Supported platforms
+# Supported platforms {#supported-platforms}
 
 The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:
 
