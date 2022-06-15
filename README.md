@@ -2,24 +2,25 @@
 
 I2Cwrapper is a **generic modular framework for Arduino I2C target devices**. It runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)).
 
-The I2Cwrapper core consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device and let you concentrate on implementing the actual target functionality.
+The I2Cwrapper core consists of an easily extensible, modular firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device and let you concentrate on implementing the actual target functionality.
 
 Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
-[Download I2Cwrapper on github.](https://github.com/ftjuh/I2Cwrapper)
+Download I2Cwrapper [on github.](https://github.com/ftjuh/I2Cwrapper)
 
-[I2Cwrapper library documentation](https://ftjuh.github.io/I2Cwrapper/index.html)
+Visit the [I2Cwrapper library and firmware modules' documentation](https://ftjuh.github.io/I2Cwrapper/index.html).
 
-## Firmware modules
+## Ready to use modules
 
-Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](firmware) (see [below](#available-modules) for more detailed information):
+Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](firmware) (see [Available modules](#available-modules) for more detailed information):
 
 * **AccelStepperI2C**: Control up to eight stepper motors with acceleration control via Mike McCauley's [AccelStepper](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging. Works nearly like the original library. 
 * **ServoI2C**: Control servo motors via I2C. Works just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library.
 * **PinI2C**: Control the digital and analog in- and output pins of the target device via I2C, similar to an IO-expander. Works just like as the plain Arduino digitalRead() etc. commands.
 * **ESP32sensorsI2C**: Read an ESP32's touch sensors, hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press. Works nearly like the original ESP32 functions.
+* **TM1638lite**: Read buttons from and control the single and seven-segment LEDs of up to four [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) modules like the ubiquitous [LED&Key module](https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/) via I2C. Uses Danny Ayers' TM1638lite library and can be used just like it after slight modifications during setup.
 
-Modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
+Generally, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
 
 ## Basic components
 
@@ -64,7 +65,7 @@ See [below](#how-to-add-new-modules) if you are interested in writing a new modu
 
 ## Installation
 
-~~Install I2Cwrapper from the Arduino library manager (not available yet).~~ Until I2Cwrapper is picked up by the Arduino library manager, you'll have to [install it manually](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation) by copying the I2Cwrapper folder to your Arduino library folder and (re)starting the Arduino software.  You'll find an I2Cwrapper examples folder after successful installation.
+~~Install I2Cwrapper from the Arduino library manager (not available yet).~~ Until I2Cwrapper is picked up by the Arduino library manager, you'll have to [install it manually](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation) by copying the I2Cwrapper folder to your Arduino library folder and (re)starting the Arduino software.  You'll find an I2Cwrapper examples folder in the usual menu after successful installation.
 
 ## Configuring and uploading the firmware
 
@@ -187,6 +188,10 @@ Read and control the digital, and analog, input/output pins of the target device
 ## ESP32sensorsI2C
 
 Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor via I2C. Can use the optional I2Cwrapper interrupt mechanism to inform the controller about a touch button press. See [`ESP32sensors.ino`](examples/ESP32sensors/ESP32sensors.ino) example.
+
+## TM1638liteI2C
+
+The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus interface to control matrices of buttons and LEDs. If you want to unify your bus environment in a given project or need to save pins, it can be useful to be able to control it via I2C. To implement an I2Cwrapper module, I chose Danny Ayers' [TM1638lite library](https://github.com/danja/TM1638lite) as it came with the most straightforward and burden-free implementation in comparison with the more popular choices. Apart from the setup, it can be used just like the original. Interrupt mechanism support for key presses is planned but not implemented yet. See the [`TM1638lite.ino`](examples/TM1638lite/TM1638lite.ino) example for more details.
 
 # How to add new modules
 
