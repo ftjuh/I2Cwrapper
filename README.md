@@ -218,6 +218,8 @@ The following platforms will run the target firmware and have been (more or less
 
 # Example
 
+This is an example for addressing a target controller running the I2Cwrapper firmware with (at least) the AccelStepperI2C module enabled.
+
 ```c++
 /*
    AccelStepperI2C Bounce demo
