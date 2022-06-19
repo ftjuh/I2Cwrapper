@@ -74,7 +74,7 @@ const uint8_t interruptReason_none = 0; ///< You should not encounter this in pr
  * * 060 - 069 PinI2C
  * * 070 - 074 ESP32sensorsI2C
  * * 075 - 079 (unused)
- * * 080 - 089 TM1638lite
+ * * 080 - 089 TM1638liteI2C
  * * 090 - 239 (unused)
  * * 240 - 255 I2Cwrapper commands (reset target, change address etc.)
  * @par
