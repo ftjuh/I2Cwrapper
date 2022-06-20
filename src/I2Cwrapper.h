@@ -115,6 +115,11 @@ public:
   void changeI2Caddress(uint8_t newAddress);
 
   /*!
+   * @brief Return the i2c address of whom we are talking to (from construction time)
+   */
+  uint8_t getAddress() { return address; }
+
+  /*!
    * @brief Define a global interrupt pin which can be used by device units
    * (steppers, servos...) to inform the controller that something important happend.
    * Currently used by AccelStepperI2C to inform about end stop hits and target

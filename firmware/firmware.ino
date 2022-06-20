@@ -15,13 +15,20 @@
    @todo Reduce memory use to make it fit into an 8k Attiny
 */
 
-//#define DEBUG // Uncomment this to enable library debugging output on Serial
+/*!
+  @brief Uncomment this to enable firmware debugging output on Serial.
+*/
+//#define DEBUG
 
 #include <Arduino.h>
 #include <Wire.h>
-#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_SAMD)
 #define USE_EEPROM
+#if defined(ARDUINO_ARCH_SAMD)
+#include <FlashAsEEPROM.h>
+#else
 #include <EEPROM.h>
+#endif
 #endif
 #include <I2Cwrapper.h>
 
@@ -57,11 +64,6 @@ const uint8_t defaultAddress = 0x08; // default
   @todo make diagnostics another module?
 */
 //#define DIAGNOSTICS
-
-/*!
-  @brief Uncomment this to enable firmware debugging output on Serial.
-*/
-//#define DEBUG
 
 /************************************************************************/
 /******* end of firmware configuration settings **************************/
@@ -142,14 +144,15 @@ uint8_t retrieveI2C_address()
   SimpleBuffer b;
   b.init(8);
   // read 6 bytes from eeprom: [0]=CRC8; [1-4]=marker; [5]=address
-  //log("Reading from EEPROM: ");
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   EEPROM.begin(256);
 #endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
+  log("Reading from EEPROM: ");
   for (byte i = 0; i < 6; i++) {
     b.buffer[i] = EEPROM.read(EEPROM_OFFSET_I2C_ADDRESS + i);
-    // log(b.buffer[i]); log (" ");
+    log(b.buffer[i]); log (" ");
   }
+  log("\n");
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   EEPROM.end();
 #endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
@@ -158,10 +161,12 @@ uint8_t retrieveI2C_address()
   uint32_t markerTest; b.read(markerTest);
   uint8_t storedAddress; b.read(storedAddress); // now idx will be at 6, so that CRC check below will work
   if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
+    log("Stored address ");log(storedAddress);log("\n");
     return storedAddress;
   } else
 #endif // USE_EEPROM
   {
+    log("No stored address\n");
     return defaultAddress;
   }
 }
@@ -191,8 +196,13 @@ void storeI2C_address(uint8_t newAddress)
   }
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   EEPROM.end(); // end() will also commit()
+#elif defined(ARDUINO_ARCH_SAMD)
+  log(" commit ");log(EEPROM.isValid());
+  EEPROM.commit();
 #endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   log("\n");
+#else // USE_EEPROM
+  log("No EEPROM for this board architecture, storeI2C_address() did nothing.\n");
 #endif // USE_EEPROM
 }
 
@@ -287,7 +297,7 @@ void setup()
 
   // all chips with "native" usb require waiting till `Serial` is true
   unsigned int begin_time = millis();
-  while (! Serial && millis() - begin_time < 1000) {
+  while (! Serial && millis() - begin_time < 1500) {
     delay(10);  // but at most 1 sec if not plugged in to usb
   }
 #endif // DEBUG
@@ -317,17 +327,19 @@ void setup()
 
 
   uint8_t i2c_address = retrieveI2C_address();
-  Wire.begin(i2c_address);
-  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
-  Wire.onReceive(receiveEvent);
-  Wire.onRequest(requestEvent);
+  setup_wire(i2c_address);
 
   bufferIn = new SimpleBuffer; bufferIn->init(I2CmaxBuf);
   bufferOut = new SimpleBuffer; bufferOut->init(I2CmaxBuf);
 
 }
 
-
+void setup_wire(uint8_t i2c_address) {
+  Wire.begin(i2c_address);
+  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
+  Wire.onReceive(receiveEvent);
+  Wire.onRequest(requestEvent);
+}
 /**************************************************************************/
 /*!
     @brief Main loop. By default, it doesn't do a lot apart from debugging: It
@@ -492,6 +504,12 @@ void processMessage(uint8_t len)
             uint8_t newAddress; bufferIn->read(newAddress);
             log("Storing new Address "); log(newAddress); log("\n");
             storeI2C_address(newAddress);
+
+            // most platforms support .end, so can do live update of listening address
+            #ifdef WIRE_HAS_END
+            Wire.end(); //
+            setup_wire( newAddress );
+            #endif
           }
         }
         break;

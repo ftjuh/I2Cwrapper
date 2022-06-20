@@ -15,6 +15,6 @@
 
 //#include "AccelStepperI2C_firmware.h"   // will not compile on Attinys
 //#include "ServoI2C_firmware.h"          // will not compile on Attinys
-//#include "PinI2C_firmware.h"            // should work on any platform
+#include "PinI2C_firmware.h"            // should work on any platform
 //#include "ESP32sensorsI2C_firmware.h"   // will only compile on ESP32 boards
 //#include "TM1638liteI2C_firmware.h"     // should work on any platform
