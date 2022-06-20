@@ -73,7 +73,9 @@ const uint8_t interruptReason_none = 0; ///< You should not encounter this in pr
  * * 050 - 059 ServoI2C
  * * 060 - 069 PinI2C
  * * 070 - 074 ESP32sensorsI2C
- * * 075 - 239 (unused)
+ * * 075 - 079 (unused)
+ * * 080 - 089 TM1638liteI2C
+ * * 090 - 239 (unused)
  * * 240 - 255 I2Cwrapper commands (reset target, change address etc.)
  * @par
  * New classes could use I2Cwrapper to easily add even more capabilities

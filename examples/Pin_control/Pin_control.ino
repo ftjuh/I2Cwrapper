@@ -17,11 +17,37 @@ uint8_t i2cAddress = 0x08;
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
 PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the target
 
+/*
+ * Arduino Uno/Nano example pins
+ */
+
 const uint8_t dPinIn  = 12; // any pin; connect switch against GND and +V (or use only GND and INPUT_PULLUP below)
 const uint8_t dPinOut = 13; // any pin; connect LED with resistor or just use 13 = LED_BUILTIN on Uno/Nano
 const uint8_t aPinIn  = 14; // needs analog pin; 14 = A0 on Uno/Nano; connect potentiometer against GND and +V
 const uint8_t aPinOut = 6;  // needs PWM pin; 6 is PWM-capable on Uno/Nano; connect LED with resistor, or multimeter
 
+/*  
+ *  Attiny85/Digispark example pins
+ *  
+ *  The Digispark has 6 pins, two are needed for I2C (SDA=0/P0/PB0, SCL=2/P2/PB2).
+ *  Pin 5/P5/PB5 is not usable as IO-pin on many clones without changing the fuses, so we have only three pins (1,3, and 4).
+ *  Since this demo needs four, we'll use the same pin 3/P3/PB3 for digital *and* analog input:
+ *  
+const uint8_t dPinIn  = 3; // P3/PB3
+const uint8_t dPinOut = 1; // P1/PB1 = built in LED on Digispark Model A
+const uint8_t aPinIn  = 3; // P3/PB3; if we don't use a pullup, the analog value will float at ca. 700
+const uint8_t aPinOut = 4; // P4/PB4 is the only remaining PWM pin, the others are needed as SDA and builtin LED
+*/
+
+/*  
+ * Attiny88/MH-ET-live "HW-Tiny" example pins
+ * (choose "MH Tiny" in ATTinyCore menu options for correct pin assignments)
+ *  
+const uint8_t dPinIn  = 14; // 14
+const uint8_t dPinOut = 0;  // 0 = LED_BUILTIN
+const uint8_t aPinIn  = 22; // 22 = A6
+const uint8_t aPinOut = 10; // 10
+*/
 
 void setup()
 {
@@ -41,7 +67,6 @@ void setup()
   } else {
     Serial.println("Target found as expected. Proceeding.\n");
   }
-
   wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 

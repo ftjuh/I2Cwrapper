@@ -1,7 +1,7 @@
 var _servo_i2_c__firmware_8h =
 [
-    [ "attach", "_servo_i2_c__firmware_8h.html#ad01a0e1ca6f9db1a2a59ada1ff66091a", null ],
-    [ "attach", "_servo_i2_c__firmware_8h.html#a4b239704a8a9df727d8219b97763fcea", null ],
+    [ "attach", "_servo_i2_c__firmware_8h.html#af82b67f8bc65a8e6a13b4df0ea139f7a", null ],
+    [ "attach", "_servo_i2_c__firmware_8h.html#ab020017dad78e5c2a5e84ab9edf14a4c", null ],
     [ "log", "_servo_i2_c__firmware_8h.html#a6030a400067fe970c95a0a5717176c90", null ],
     [ "log", "_servo_i2_c__firmware_8h.html#a175b2988ee06e6ff186fa9342d16b436", null ],
     [ "read", "_servo_i2_c__firmware_8h.html#ade6037a953797525d72ac13e8d669a7e", null ],
@@ -10,8 +10,8 @@ var _servo_i2_c__firmware_8h =
     [ "read", "_servo_i2_c__firmware_8h.html#aaeac2a44f04fb12816a33ed664d7d844", null ],
     [ "validServo", "_servo_i2_c__firmware_8h.html#a18927d89764b3c8c70da59bb149524f2", null ],
     [ "write", "_servo_i2_c__firmware_8h.html#a629ab0deb2797dacef6b0049d182b4c9", null ],
-    [ "write", "_servo_i2_c__firmware_8h.html#a147775ee8907690d1d256ed75836543e", null ],
-    [ "writeMicroseconds", "_servo_i2_c__firmware_8h.html#a75e9a433ea8652659ac91ff7ef91c311", null ],
+    [ "write", "_servo_i2_c__firmware_8h.html#adc08b077145e2162aaaf2a2fdffca451", null ],
+    [ "writeMicroseconds", "_servo_i2_c__firmware_8h.html#a078e57b78ebd66b2099a313948e4d01d", null ],
     [ "break", "_servo_i2_c__firmware_8h.html#a91cf6fbebedd86150a36e5ac3d5d3bfc", null ],
     [ "max", "_servo_i2_c__firmware_8h.html#ae1e1dde676c120fa6d10f3bb2c14059e", null ],
     [ "maxServos", "_servo_i2_c__firmware_8h.html#a0f9813196df1c36828566b98fb497cd7", null ],

@@ -1,55 +1,54 @@
 /*
-@licstart  The following is the entire license notice for the
-JavaScript code in this file.
+ @licstart  The following is the entire license notice for the JavaScript code in this file.
 
-Copyright (C) 1997-2019 by Dimitri van Heesch
+ The MIT License (MIT)
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of version 2 of the GNU General Public License as published by
-the Free Software Foundation
+ Copyright (C) 1997-2020 by Dimitri van Heesch
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+ and associated documentation files (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ The above copyright notice and this permission notice shall be included in all copies or
+ substantial portions of the Software.
 
-@licend  The above is the entire license notice
-for the JavaScript code in this file
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ @licend  The above is the entire license notice for the JavaScript code in this file
 */
 var NAVTREE =
 [
   [ "I2Cwrapper", "index.html", [
-    [ "README", "md__r_e_a_d_m_e.html", [
-      [ "Introduction", "md__r_e_a_d_m_e.html#autotoc_md0", [
-        [ "Basic components", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
-        [ "Available modules", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-        [ "Limitations", "md__r_e_a_d_m_e.html#autotoc_md3", null ]
+    [ "Introduction", "index.html", [
+      [ "Firmware modules", "index.html#autotoc_md1", null ],
+      [ "Basic components", "index.html#autotoc_md2", null ],
+      [ "Limitations", "index.html#autotoc_md3", null ],
+      [ "Usage", "index.html#autotoc_md4", [
+        [ "Installation", "index.html#autotoc_md5", null ],
+        [ "Configuring and uploading the firmware", "index.html#autotoc_md6", null ],
+        [ "Usage by the controller device/sketch", "index.html#autotoc_md7", null ]
       ] ],
-      [ "Usage", "md__r_e_a_d_m_e.html#autotoc_md4", [
-        [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
-        [ "Configuring and uploading the firmware", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-        [ "Testing the firmware", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
-        [ "Usage by the controller device/sketch", "md__r_e_a_d_m_e.html#autotoc_md8", null ]
+      [ "Available modules", "index.html#autotoc_md8", [
+        [ "AccelStepperI2C", "index.html#autotoc_md9", null ],
+        [ "ServoI2C", "index.html#autotoc_md10", null ],
+        [ "PinI2C", "index.html#autotoc_md11", null ],
+        [ "ESP32sensorsI2C", "index.html#autotoc_md12", null ]
       ] ],
-      [ "Available modules", "md__r_e_a_d_m_e.html#autotoc_md9", [
-        [ "AccelStepperI2C", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-        [ "ServoI2C", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-        [ "PinI2C", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-        [ "ESP32sensorsI2C", "md__r_e_a_d_m_e.html#autotoc_md13", null ]
-      ] ],
-      [ "How to add new modules", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-      [ "Supported platforms", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
-      [ "Example", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
-      [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
-      [ "Planned improvements", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
-      [ "Author", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
-      [ "Copyright", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
-      [ "History", "md__r_e_a_d_m_e.html#autotoc_md22", null ]
+      [ "How to add new modules", "index.html#autotoc_md13", null ],
+      [ "Supported platforms", "index.html#autotoc_md14", null ],
+      [ "Example", "index.html#autotoc_md15", null ],
+      [ "Documentation", "index.html#autotoc_md16", null ],
+      [ "Planned improvements", "index.html#autotoc_md17", null ],
+      [ "Author", "index.html#autotoc_md18", null ],
+      [ "Copyright", "index.html#autotoc_md19", null ],
+      [ "License", "index.html#autotoc_md20", null ],
+      [ "History", "index.html#autotoc_md21", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Reference", "modules.html", "modules" ],
@@ -76,8 +75,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_accel_stepper_i2_c_8cpp.html",
-"_servo___sweep_8ino.html#afe461d27b9c48d5921c00d521181f12f",
-"globals_vars_w.html"
+"_servo___sweep_8ino.html#af9af55d36115b44e1997c518d666cbf9",
+"globals_vars_d.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
