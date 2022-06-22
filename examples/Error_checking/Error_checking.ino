@@ -12,6 +12,9 @@
   Note that checking for errors is done at the wrapper's level, as it is
   the wrapper which handles communication for the stepper object.
 
+  To be used it with a target device which has the AccelStepperI2C
+  module enabled.
+
 */
 
 #include <Arduino.h>
@@ -62,6 +65,14 @@ void setup()
   wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
+  // new in v0.3.0
+  Serial.print("I2C delay set to ");
+  Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. buffer usage
+  Serial.print(" ms (instead of default ");
+  Serial.print(I2CdefaultDelay);
+  Serial.println(" ms)");
+  delay(1000);
+  
   printVersions();
 
   /*

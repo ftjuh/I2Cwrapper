@@ -126,11 +126,23 @@ See the example [Interrupt_Endstop](examples/Interrupt_Endstop/Interrupt_Endstop
 
 ### Adjusting the I2C delay
 
-If a controller sends commands too quickly or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer. 
+If a controller **sends commands too quickly** or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer. 
 
-That's why I2Cwrapper makes sure that a **specified minimum delay** is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered. Depending on debugging, target device speed, target task execution time, and bus speed, the default can be adjusted to be considerably lower with the I2Cwrapper::setI2Cdelay() function.
+That's why I2Cwrapper makes sure that a **specified minimum delay** is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered and for many applications there is no need to lower it. However, depending on debugging, target device speed, target task execution time, bus speed, and the length of commands sent, the default can be adjusted manually to be considerably lower with the `I2Cwrapper::setI2Cdelay()` function. Typically, 4 to 6 ms are easily on the safe side.
 
-At the moment, you'll have to **use your own tests** to find an optimal value. A self-diagnosing auto-adjustment feature is planned for a future release.
+~~At the moment, you'll have to **use your own tests** to find an optimal value. A self-diagnosing auto-adjustment feature is planned for a future release.~~
+
+#### Auto-adjusting the I2C delay
+
+(new in v0.3.0, experimental)
+
+Alternatively, the controller can use the `I2Cwrapper::autoAdjustI2Cdelay(uint8_t safetyMargin, uint8_t maxLength)` function to make an educated guess for the **shortest, yet still reasonably safe I2C delay value** in a given hardware environment. It will be based on a number of simulated test transmissions to and from the target device. It can be supplemented by an additional safety margin (default: 2 ms) and factor in the maximum command length to be used (default: max length allowed by buffer).
+
+See[Adjust_I2Cdelay](examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-depth experiments. An everyday use example (from [Error_checking.ino](examples/Error_checking/Error_checking.ino)) could look like this:
+
+`Serial.print("I2C delay set to ");
+Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions
+Serial.print(" ms (default was "); Serial.print(I2CdefaultDelay); Serial.println(" ms)");`
 
 # Available modules
 
