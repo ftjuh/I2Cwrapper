@@ -34,7 +34,7 @@ const uint8_t I2CmaxBuf = 20; // upper limit of send and receive buffer(s), incl
 
 
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
-const unsigned long I2CdefaultDelay = 400;
+const unsigned long I2CdefaultDelay = 20; // must be <256
 
 // number of repetitions used in autoAdjustI2Cdelay()
 const uint8_t autoAdjustDefaultReps = 10;

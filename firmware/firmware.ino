@@ -118,6 +118,47 @@ SimpleBuffer* bufferIn;
 SimpleBuffer* bufferOut;
 volatile uint8_t newMessage = 0; // signals main loop that a receiveEvent with valid new data occurred
 
+// I2C state machine: takes care that we don't end up in an undefined state if things get out of order,
+// i.e. if an interrupt (receiveEvent or requestEvent) happens at an unexpected point in time
+enum I2Cstates {
+  initializing,         // setup not finished yet                               [==> readyForCommand]
+  readyForCommand,      // expecting command by receiveEvent() in main loop()   [==> processingCommand]
+  processingCommand,    // interpreting command in processMeassage() function   [==> readyForResponse *OR* readyForCommand]
+  readyForResponse,     // expecting requestEvent() in main loop()              [==> responding]
+  responding,           // sending bufferOut in writeOutputBuffer()             [==> readyForCommand]
+  // Note that state "responding" should only be relevant for ESP32 which needs to write the buffer outside of the interrupt routine.
+  // All other should be safe, as an interrupt cannot be interrupted (@todo or can it?)
+  tainted               // bufferOut data is tainted and needs to be discarded  [==> readyForCommand]
+};
+volatile I2Cstates I2Cstate = initializing;
+
+void changeI2CstateTo(I2Cstates newState) {
+  I2Cstate = newState;
+#if defined(DEBUG)
+  log("   * Switched I2C state to '");
+  switch (newState) {
+    case initializing:
+      log("initializing'\n");
+      break;
+    case readyForCommand:
+      log("readyForCommand'\n");
+      break;
+    case processingCommand:
+      log("processingCommand'\n");
+      break;
+    case readyForResponse:
+      log("readyForResponse'\n");
+      break;
+    case responding:
+      log("responding'\n");
+      break;
+    case tainted:
+      log("tainted'\n");
+      break;
+  }
+#endif
+}
+
 
 /*
    EEPROM stuff
@@ -248,7 +289,7 @@ void resetFunc()
   // wdt_enable(WDTO_30MS);
   // for (;;);
   // so let's just go for the stupid version, it should work fine for the firmware:
-  //asm volatile (" jmp 0");
+  asm volatile (" jmp 0");
 #elif defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   ESP.restart();
 #endif
@@ -299,14 +340,16 @@ void setup()
 #undef MF_STAGE
 
 
+  bufferIn = new SimpleBuffer; bufferIn->init(I2CmaxBuf);
+  bufferOut = new SimpleBuffer; bufferOut->init(I2CmaxBuf);
+
   uint8_t i2c_address = retrieveI2C_address();
   Wire.begin(i2c_address);
   log("I2C started, listening to address "); log(i2c_address); log("\n\n");
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
 
-  bufferIn = new SimpleBuffer; bufferIn->init(I2CmaxBuf);
-  bufferOut = new SimpleBuffer; bufferOut->init(I2CmaxBuf);
+  changeI2CstateTo(readyForCommand);
 
 }
 
@@ -347,10 +390,12 @@ void loop()
 #endif
 
   // Check for new incoming messages from I2C interrupt
-  if (newMessage > 0) {
+  //if (newMessage > 0) {
+  if (I2Cstate == processingCommand) {
     processMessage(newMessage);
-    newMessage = 0;
   }
+
+
 
 #if defined(DEBUG)
   if (sentOnRequest > 0) { // check if a requestEvent() happened and data was sent
@@ -369,39 +414,9 @@ void loop()
 
 
 
-/**************************************************************************/
-/*!
-  @ brief Handle I2C receive event. Just read the message and inform main loop.
-*/
-/**************************************************************************/
-#if defined(ARDUINO_ARCH_ESP8266)
-ICACHE_RAM_ATTR
-#endif
-void receiveEvent(int howMany)
-{
-  //log("[Int with "); log(howMany); log(newMessage == 0 ? ", ready]\n" : ", NOT ready]\n");
-#if defined(DIAGNOSTICS)
-  thenMicros = micros();
-#endif // DIAGNOSTICS
-  if (newMessage == 0) { // Only accept message if an earlier one is fully processed.
-    bufferIn->reset();
-    for (uint8_t i = 0; i < howMany; i++) {
-      bufferIn->buffer[i] = Wire.read();
-    }
-    bufferIn->idx = howMany;
-    newMessage = howMany; // tell main loop that new data has arrived
-  }
-
-#if defined(DIAGNOSTICS)
-  // delay storing the executing time for one cycle, else diagnostics() would always return
-  // its own receive time, not the one of the previous command
-  currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
-  previousLastReceiveTime = micros() - thenMicros;
-#endif // DIAGNOSTICS
-
-}
-
-
+// ================================================================================
+// =========================== processMessage() ===================================
+// ================================================================================
 
 /**************************************************************************/
 /*!
@@ -519,7 +534,7 @@ void processMessage(uint8_t len)
             }
           }
         }
-        break;
+        break;newMessage
 
       default:
         log("No matching command found");
@@ -543,11 +558,27 @@ void processMessage(uint8_t len)
     // ### what exactly is the role of slaveWrite() vs. Write(), here?
     // ### slaveWrite() is only for ESP32, not for it's poorer cousins ESP32-S2 and ESP32-C3. Need to fine tune the compiler directive, here?
     // log("   ESP32 buffer prefill  ");
+    changeI2CstateTo(responding);
     writeOutputBuffer();
+    changeI2CstateTo(readyForCommand);
 #endif  // ESP32
 
   } // if (bufferIn->checkCRC8())
   log("\n");
+  newMessage = 0;
+
+
+  // determine new state
+  if (I2Cstate != tainted) {
+    if (bufferOut->idx > 1) {  // a reply is waiting to be requested; @todo buffer class needs a method to tell us if it's filled, this way is prone to error
+      changeI2CstateTo(readyForResponse);
+    } else { // we have no reply to give, so expect next command
+      changeI2CstateTo(readyForCommand);
+    }
+  } else { // some unexpected interrupt made a mess, discard output and start again
+    bufferOut->reset();  // discard output buffer
+    changeI2CstateTo(readyForCommand);
+  }
 
 
 #if defined(DIAGNOSTICS)
@@ -556,6 +587,90 @@ void processMessage(uint8_t len)
 
 }
 
+
+
+// ================================================================================
+// ============================ receiveEvent() ====================================
+// ================================================================================
+
+/**************************************************************************/
+/*!
+  @ brief Handle I2C receive event. Just read the message and inform main loop.
+*/
+/**************************************************************************/
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
+void IRAM_ATTR receiveEvent(int howMany) // both platforms now use "IRAM_ATTR"
+#else
+void receiveEvent(int howMany)
+#endif
+{
+
+#if defined(DIAGNOSTICS)
+  thenMicros = micros();
+#endif // DIAGNOSTICS
+
+  switch (I2Cstate) {
+
+
+    case readyForResponse: { // not to be expected here (this is why we should move it to the back, but it needs to be here up front for the fallthrough)
+        /* An outputBuffer is ready for response, but the controller is sending another command instead of requesting
+           its contents, making the buffer useless. So discard it right away, switch to readyForCommand state and
+           fall through to receiving it. */
+        bufferOut->reset();
+        changeI2CstateTo(readyForCommand); // not really needed for fall through, but feels cleaner
+      }
+    [[fallthrough]];
+
+
+    case readyForCommand:  { // this is the expected state when a receiveEvent happens
+
+        //log("[Int with "); log(howMany); log(newMessage == 0 ? ", ready]\n" : ", NOT ready]\n");
+
+        // if (newMessage == 0) { // Only accept message if an earlier one is fully processed. // this check obsolete with I2Cstate machine
+        bufferIn->reset();
+        for (uint8_t i = 0; i < howMany; i++) {
+          bufferIn->buffer[i] = Wire.read();
+        }
+        bufferIn->idx = howMany;
+        newMessage = howMany; // tell main loop that and how much data has arrived
+        changeI2CstateTo(processingCommand);  // and move on to next state
+        // }
+
+      } // case readyForCommand
+      break;
+
+
+    case processingCommand: { // not to be expected here
+        /* An earlier command is still beeing processed, so the outputBuffer is possibly being filled right now,
+          but the controller is already sending another command, making the buffer useless.
+          We cannot terminate the processMessage() function from here, so signal it that it should discard the
+          buffer at the end of processing and switch to readyForCommand state after. */
+        changeI2CstateTo(tainted);
+      }
+      break;
+
+
+    case initializing:
+    case responding:
+    case tainted:
+      break; // do nothing, ignore receiveEvent and stay in the respective state
+
+  } // switch (I2Cstate)
+
+#if defined(DIAGNOSTICS)
+  // delay storing the executing time for one cycle, else diagnostics() would always return
+  // its own receive time, not the one of the previous command
+  currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
+  previousLastReceiveTime = micros() - thenMicros;
+#endif // DIAGNOSTICS
+
+}
+
+
+
+// ================================================================================
+// ========================== writeOutputBuffer() =================================
+// ================================================================================
 
 // If there is anything in the output buffer, write it out to I2C.
 // This is outsourced to a function, as, depending on the architecture,
@@ -590,11 +705,15 @@ void writeOutputBuffer()
 }
 
 
+// ================================================================================
+// ============================ requestEvent() ====================================
+// ================================================================================
 /*!
   @brief Handle I2C request event. Will send results or information requested
     by the last command, as defined by the contents of the outputBuffer.
   @todo <del>Find sth. meaningful to report from requestEvent() if no message is
   pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)
+
 */
 
 #if defined(ESP8266) || defined(ESP32)
@@ -608,13 +727,42 @@ void requestEvent()
   thenMicros = micros();
 #endif // DIAGNOSTICS
 
+  switch (I2Cstate) {
+
+
+    case readyForResponse: {
+
+        changeI2CstateTo(responding);
+
 #if !defined(ARDUINO_ARCH_ESP32) // ESP32 has (hopefully) already written the buffer in the main loop
-  writeOutputBuffer();
+        writeOutputBuffer();
 #endif // not ESP32
 
 #if defined(DEBUG)
-  sentOnRequest = writtenToBuffer; // signal main loop that we sent buffer contents
+        sentOnRequest = writtenToBuffer; // signal main loop that we sent buffer contents
 #endif // DEBUG
+
+        changeI2CstateTo(readyForCommand);
+
+      } // case readyForResponse
+      break;
+
+    case processingCommand: {
+        /* A command is still beeing processed and the outputBuffer is not ready yet, the Controller is
+          probably too eager to want its reply. Unfortunately, an incomplete buffer is useless.
+          We cannot terminate the processMessage() function from here, so signal it that it should discard the
+          buffer at the end of processing and switch to readyForCommand state after. */
+        changeI2CstateTo(tainted);
+      }
+      break;
+
+    case readyForCommand:
+    case initializing:
+    case responding:
+    case tainted:
+      break; // do nothing, ignore requestEvent and stay in the respective state
+
+  } // switch (I2Cstate)
 
 #if defined(DIAGNOSTICS)
   currentDiagnostics.lastRequestTime = micros() - thenMicros;

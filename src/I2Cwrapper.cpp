@@ -161,6 +161,7 @@ bool I2Cwrapper::pingBack(uint8_t testData, uint8_t testLength) {
 uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t safetyMargin, uint8_t maxLength) {
   uint8_t testI2Cdelay = 0;
   uint8_t numErrors;
+  log("autoAdjustI2Cdelay\n");
   do {
     setI2Cdelay(++testI2Cdelay);  // start with 1 ms
     log("I2Cdelay = "); log(testI2Cdelay); log(": ");
