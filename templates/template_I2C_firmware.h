@@ -16,6 +16,8 @@
  * (4) loop() function
  * (5) processMessage() function ("command interpreter")
  * (6) reset event
+ * (7) (end of) receiveEvent()
+ * (8) (end of) requestEvent()
  * 
  * See below for instructions on what code to place where. See existing modules
  * for illustration. PinI2C and ServoI2C are good and simple starting points, 
@@ -83,7 +85,7 @@ log("###template### module enabled.\n");
 
 
 /*
- * (4) loop() function
+ * (4) main loop() function
  * 
  * This code will be injected into the target's loop() function.
  * You may use triggerInterrupt() here to inform the controller about some 
@@ -162,6 +164,38 @@ log("###template### module enabled.\n");
  */
 #if MF_STAGE == MF_STAGE_reset
 #endif // MF_STAGE_reset
+
+
+/*
+ * (7) receiveEvent()
+ * 
+ * Normal modules usually should not mess around here.
+ * 
+ */
+#if MF_STAGE == MF_STAGE_receiveEvent
+#endif // MF_STAGE_receiveEvent
+
+
+/*
+ * (8) requestEvent()
+ * 
+ * Normal modules usually should not mess around here.
+ * 
+ */
+#if MF_STAGE == MF_STAGE_requestEvent
+#endif // MF_STAGE_requestEvent
+
+
+/*
+ * (9) Change of I2C state machine's state
+ * 
+ * Normal modules usually should not mess around here.
+ * 
+ */
+
+#if MF_STAGE == MF_STAGE_I2CstateChange
+#endif // MF_STAGE_I2CstateChange
+
 
 
 
