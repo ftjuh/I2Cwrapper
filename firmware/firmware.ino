@@ -15,7 +15,7 @@
    @todo Reduce memory use to make it fit into an 8k Attiny
 */
 
-#define DEBUG // Uncomment this to enable library debugging output on Serial
+// #define DEBUG // Uncomment this to enable library debugging output on Serial
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -32,6 +32,9 @@
 #define MF_STAGE_loop           4
 #define MF_STAGE_processMessage 5
 #define MF_STAGE_reset          6
+#define MF_STAGE_receiveEvent   7
+#define MF_STAGE_requestEvent   8
+#define MF_STAGE_I2CstateChange 9
 
 
 /************************************************************************/
@@ -73,7 +76,6 @@ const uint8_t defaultAddress = 0x08; // default
 #undef MF_STAGE
 
 
-
 /*
    Debugging stuff
 */
@@ -92,6 +94,7 @@ uint32_t now, then = millis();
 bool reportNow = true;
 uint32_t lastCycles = 0; // for simple cycles/reportPeriod diagnostics
 const uint32_t reportPeriod = 2000; // ms between main loop simple diagnostics output
+// #define DEBUG_printCycles  // uncomment to print no. of cycles each reportPeriod
 #endif // DEBUG
 
 
@@ -157,6 +160,12 @@ void changeI2CstateTo(I2Cstates newState) {
       break;
   }
 #endif
+/*
+   Inject module code
+*/
+#define MF_STAGE MF_STAGE_I2CstateChange
+#include "firmware_modules.h"
+#undef MF_STAGE
 }
 
 
@@ -369,7 +378,9 @@ void loop()
   now = millis();
   if (now > then) { // report cycles/reportPeriod statistics
     reportNow = true;
+#if defined(DEBUG_printCycles)
     log("\n    > Cycles/s = "); log((cycles - lastCycles) * 1000 / reportPeriod); log("\n");
+#endif // defined(DEBUG_printCycles)
     lastCycles = cycles;
     then = now + reportPeriod;
   }
@@ -384,7 +395,7 @@ void loop()
 
 #if defined(DEBUG)
   if (reportNow) {
-    log("\n\n");
+    log("\n");
     reportNow = false;
   }
 #endif
@@ -534,7 +545,7 @@ void processMessage(uint8_t len)
             }
           }
         }
-        break;newMessage
+        break;
 
       default:
         log("No matching command found");
@@ -608,6 +619,14 @@ void receiveEvent(int howMany)
 #if defined(DIAGNOSTICS)
   thenMicros = micros();
 #endif // DIAGNOSTICS
+
+
+/*
+   Inject module receiveEvent() code
+*/
+#define MF_STAGE MF_STAGE_receiveEvent
+#include "firmware_modules.h"
+#undef MF_STAGE
 
   switch (I2Cstate) {
 
@@ -726,6 +745,14 @@ void requestEvent()
 #if defined(DIAGNOSTICS)
   thenMicros = micros();
 #endif // DIAGNOSTICS
+
+
+/*
+   Inject module receiveEvent() code
+*/
+#define MF_STAGE MF_STAGE_requestEvent
+#include "firmware_modules.h"
+#undef MF_STAGE
 
   switch (I2Cstate) {
 

@@ -158,12 +158,12 @@ bool I2Cwrapper::pingBack(uint8_t testData, uint8_t testLength) {
   return res;  
 }
 
-uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t safetyMargin, uint8_t maxLength) {
-  uint8_t testI2Cdelay = 0;
+uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t startWith, uint8_t safetyMargin, uint8_t maxLength) {
+  uint8_t testI2Cdelay = startWith;
   uint8_t numErrors;
   log("autoAdjustI2Cdelay\n");
   do {
-    setI2Cdelay(++testI2Cdelay);  // start with 1 ms
+    setI2Cdelay(testI2Cdelay--);  // start with default
     log("I2Cdelay = "); log(testI2Cdelay); log(": ");
     numErrors = 0;
     for (uint8_t j = 0; j < autoAdjustDefaultReps; j++) { // do for a number of repetitions
@@ -172,8 +172,8 @@ uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t safetyMargin, uint8_t maxLength) 
         maxLength) ? 0 : 1; // inc by 1 for every error
     }
     log(numErrors); log(" errors\n");    
-  } while ((numErrors > 0) and (testI2Cdelay < I2CdefaultDelay));
-  setI2Cdelay(min(testI2Cdelay + safetyMargin, I2CdefaultDelay));
+  } while ((numErrors == 0) and (testI2Cdelay > 0));
+  setI2Cdelay(min(testI2Cdelay + 1 + safetyMargin, uint8_t(I2CdefaultDelay)));
   return I2Cdelay;
 }
 

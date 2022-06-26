@@ -30,14 +30,14 @@
 #endif // log
 
 
-const uint8_t I2CmaxBuf = 20; // upper limit of send and receive buffer(s), includes 1 byte for CRC8
+const uint8_t I2CmaxBuf = 20; // upper limit of send and receive buffer(s), includes 1 byte for CRC8 and 2 bytes for msg header (command + unit)
 
 
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
 const unsigned long I2CdefaultDelay = 20; // must be <256
 
 // number of repetitions used in autoAdjustI2Cdelay()
-const uint8_t autoAdjustDefaultReps = 10;
+const uint8_t autoAdjustDefaultReps = 3;
 
 // I2C commands used by the wrapper
 const uint8_t resetCmd              = 241;
@@ -165,26 +165,29 @@ public:
   
   /*!
    * @brief Set I2C delay to the smallest value that still allows error
-   * free transmissions. To determine it, a simulation test is used: A number
+   * free transmissions. To determine this value, a simulation test is run: A number
    * of dummy transmissions are repeatedly exchanged with the target using the
-   * pingBack() function, while successively increasing the I2C delay, starting 
-   * at 1 ms. The test stops if all repetitions came back error free with the 
-   * currently used I2C delay, or if the maxI2Cdelay constant is reached. This 
-   * value, increased by the safety margin, or maxI2Cdelay, will be set as the 
-   * new I2C delay.
+   * pingBack() function, while successively decreasing the I2C delay. The test 
+   * will stop as soon as a transmission error occurs. The smallest error free 
+   * value (or 0 ms), increased by the safety margin, will be set as the new 
+   * I2C delay.
+   * @param startWith The delay value in ms to start with, defaults to 
+   * I2CdefaultDelay. Mainly meant to be used if serial debugging is enabled
+   * in the target firmware. If there is heavy debugging output, the default
+   * I2CdefaultDelay may sometimes be too low.
    * @param safetyMargin A number of microseconds that will be added to the 
    * empirically determined minimum I2C delay. As the test transmissions do 
    * nothing but send back the amount of specified simulated parameter bytes, 
    * you will want to specify some extra time to allow for the time the controller
    * will need to process any given command on top of the pure transmissions.
    * Its optimal value fully depends on how fast the target's module(s) do their
-   * job. It should usually be at least 1 ms, for the included modules 2 ms are
+   * job. It should usually be at least 1 ms. For the included modules 2 ms are
    * a safe bet, that's why it's used as the default. 
    * @param maxLength Number of simulated test parameter bytes sent with each
    * testing transmission, defaulting to the maximum bytes that are possible 
    * with the given I2C buffer size. This theoretical maximum (I2CmaxBuf minus 
    * three bytes for the message header) will not be fully used by most modules. 
-   * So if you know what the maximum number of parameter bytes sent or reveiced 
+   * So if you know what the maximum number of parameter bytes sent or receiced 
    * by any of the commands you will use in your project is, you can 
    * specify it here to get a more aggressive, shorter I2C delay. Leave it to 
    * the default to be on the safe side, it should not make a diference of more
@@ -193,7 +196,7 @@ public:
    * @return The newly set I2C delay
    * @see setI2Cdelay()
    */
-  uint8_t autoAdjustI2Cdelay(uint8_t safetyMargin = 2, uint8_t maxLength = I2CmaxBuf - 3);  
+  uint8_t autoAdjustI2Cdelay(uint8_t startWith = I2CdefaultDelay, uint8_t safetyMargin = 2, uint8_t maxLength = I2CmaxBuf - 3);  
 
   /*!
    * @brief Get semver compliant version of target firmware.

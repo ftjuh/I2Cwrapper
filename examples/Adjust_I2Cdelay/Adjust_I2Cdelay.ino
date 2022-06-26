@@ -43,12 +43,12 @@ void setup()
 
 void loop()
 {
-  Serial.println("\nTesting raw minimum delay with safetyMargin = 0 ms and increasing values of maxLength\n");
+  Serial.println("\nTesting raw minimum delay with safetyMargin = 0 ms and decreasing values of maxLength\n");
 
-  for (int i = /*I2CmaxBuf - 3*/ 4; i > 0 ; i--) {
+  for (int i = I2CmaxBuf - 3; i > 0 ; i--) {
     Serial.print("maxLength = "); Serial.print(i); Serial.print(" --> I2C delay = ");
     for (int j = 0; j < 10; j++) {
-      Serial.print(wrapper.autoAdjustI2Cdelay(0, i)); Serial.print(", ");
+      Serial.print(wrapper.autoAdjustI2Cdelay(5, 0, i)); Serial.print(", ");
       delay(50);
     }
     Serial.print("\n");
