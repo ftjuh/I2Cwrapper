@@ -171,10 +171,6 @@ public:
    * will stop as soon as a transmission error occurs. The smallest error free 
    * value (or 0 ms), increased by the safety margin, will be set as the new 
    * I2C delay.
-   * @param startWith The delay value in ms to start with, defaults to 
-   * I2CdefaultDelay. Mainly meant to be used if serial debugging is enabled
-   * in the target firmware. If there is heavy debugging output, the default
-   * I2CdefaultDelay may sometimes be too low.
    * @param safetyMargin A number of microseconds that will be added to the 
    * empirically determined minimum I2C delay. As the test transmissions do 
    * nothing but send back the amount of specified simulated parameter bytes, 
@@ -192,11 +188,15 @@ public:
    * specify it here to get a more aggressive, shorter I2C delay. Leave it to 
    * the default to be on the safe side, it should not make a diference of more
    * than 1 ms.
+   * @param startWith The delay value in ms to start with, defaults to 
+   * I2CdefaultDelay. Mainly meant to be used if serial debugging is enabled
+   * in the target firmware. If there is heavy debugging output, the default
+   * I2CdefaultDelay may sometimes be too low.
    * @note new in v0.3.0, experimental
    * @return The newly set I2C delay
    * @see setI2Cdelay()
    */
-  uint8_t autoAdjustI2Cdelay(uint8_t startWith = I2CdefaultDelay, uint8_t safetyMargin = 2, uint8_t maxLength = I2CmaxBuf - 3);  
+  uint8_t autoAdjustI2Cdelay(uint8_t maxLength = I2CmaxBuf - 3, uint8_t safetyMargin = 2, uint8_t startWith = I2CdefaultDelay);  
 
   /*!
    * @brief Get semver compliant version of target firmware.

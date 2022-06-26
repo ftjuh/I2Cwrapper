@@ -146,7 +146,7 @@ bool I2Cwrapper::pingBack(uint8_t testData, uint8_t testLength) {
   // second step: receive data back and check if it's correct
   bool res = false;  
   if (sendCommand() and readResult(testLength)) { // not a constant as usual but number of repetetions
-    uint8_t receivedData;
+    uint8_t receivedData = 0;
     uint8_t expectedData = testData;
     res = true; // for the moment
     for (int i = 0; i < testLength; i++) { // read back data
@@ -158,7 +158,7 @@ bool I2Cwrapper::pingBack(uint8_t testData, uint8_t testLength) {
   return res;  
 }
 
-uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t startWith, uint8_t safetyMargin, uint8_t maxLength) {
+uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith) {
   uint8_t testI2Cdelay = startWith;
   uint8_t numErrors;
   log("autoAdjustI2Cdelay\n");
