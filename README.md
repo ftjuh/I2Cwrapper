@@ -114,7 +114,7 @@ The respective counter(s) will be reset to 0 with each invocation of these metho
 
 See the [Error_checking.ino](examples/Error_checking/Error_checking.ino) example for further illustration.
 
-In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See [I2C state machine.svg](docs/images/I2C_state_machine.svg) for details.
+In v0.3.0 an **I2C state machine** was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive. See [I2C state machine.svg](docs/images/I2C_state_machine.svg) for details on the state machine's flow of states.
 
 ### Interrupt mechanism
 
@@ -144,11 +144,8 @@ See [Adjust_I2Cdelay](examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-
 
 ```c++
 Serial.print("I2C delay set to ");
-
 Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions
-
-Serial.print(" ms (default was "); 
-
+Serial.print(" ms (default was ");
 Serial.print(I2CdefaultDelay); Serial.println(" ms)");
 ```
 
@@ -230,7 +227,7 @@ Feature modules extend or modify the firmware with additional features. As they 
 
 ### Status LED
 
-Including the `_statusLED_firmware.h` in `firmware_modules.h`will make the target's built in LED (`LED_BUILTIN`) flash briefly when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state. Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in `firmware_modules.h`to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.
+Including the `_statusLED_firmware.h` in `firmware_modules.h`will make the target's built in LED (`LED_BUILTIN`) flash briefly when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see [Error handling](#error-handling)). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in `firmware_modules.h`to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.
 
 # How to add new modules
 
@@ -259,6 +256,7 @@ The following platforms will run the target firmware and have been (more or less
 * **ESP8266**: Has no I2C  hardware. The software I2C may not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to [decrease the bus speed](https://www.arduino.cc/en/Reference/WireSetClock) below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 * **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-I2C-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 * **ATtiny**: Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](examples/Pin_control/Pin_control.ino) and [TM1638lite](examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
+  *Warning*: While testing the new [auto adjust](#auto-adjusting-the-i2c-delay) I realized that the ATtiny85 did only transmit commands with less than 12 parameter bytes error free. I'm not sure yet why that is, but everything seems fine below that threshold.
 
 # Example
 
@@ -341,7 +339,7 @@ void loopClassic()
 
 # Planned improvements
 
-- Self-adjusting I2C-delay
+- ~~Self-adjusting I2C-delay~~
 - Determine I2C-address from hardware pins
 - Move I2C-address options (fixed, EEPROM, hardware pins) to modules
 - ~~Attiny support (memory will be an issue, though)~~ 
