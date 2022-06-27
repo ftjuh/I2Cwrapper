@@ -114,6 +114,8 @@ The respective counter(s) will be reset to 0 with each invocation of these metho
 
 See the [Error_checking.ino](examples/Error_checking/Error_checking.ino) example for further illustration.
 
+In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See [I2C state machine.svg](docs/images/I2C state machine.svg) for details.
+
 ### Interrupt mechanism
 
 To keep the controller from having to constantly poll the target device for some new event (e.g. an input pin change), the controller can use the `I2Cwrapper::setInterruptPin()` function to tell the target to use one if its pins as an **interrupt line**. The target may use it if it wants to inform the controller about some new event. Of course, an additional hardware line connecting this target pin and a free, interrupt-capable controller pin is needed to use the interrupt mechanism.

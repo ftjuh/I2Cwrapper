@@ -171,14 +171,6 @@ public:
    * will stop as soon as a transmission error occurs. The smallest error free 
    * value (or 0 ms), increased by the safety margin, will be set as the new 
    * I2C delay.
-   * @param safetyMargin A number of microseconds that will be added to the 
-   * empirically determined minimum I2C delay. As the test transmissions do 
-   * nothing but send back the amount of specified simulated parameter bytes, 
-   * you will want to specify some extra time to allow for the time the controller
-   * will need to process any given command on top of the pure transmissions.
-   * Its optimal value fully depends on how fast the target's module(s) do their
-   * job. It should usually be at least 1 ms. For the included modules 2 ms are
-   * a safe bet, that's why it's used as the default. 
    * @param maxLength Number of simulated test parameter bytes sent with each
    * testing transmission, defaulting to the maximum bytes that are possible 
    * with the given I2C buffer size. This theoretical maximum (I2CmaxBuf minus 
@@ -188,8 +180,16 @@ public:
    * specify it here to get a more aggressive, shorter I2C delay. Leave it to 
    * the default to be on the safe side, it should not make a diference of more
    * than 1 ms.
+   * @param safetyMargin A number of microseconds that will be added to the 
+   * empirically determined minimum I2C delay. As the test transmissions do 
+   * nothing but send back the amount of specified simulated parameter bytes, 
+   * you will want to specify some extra time to allow for the time the controller
+   * will need to process any given command on top of the pure transmissions.
+   * Its optimal value fully depends on how fast the target's module(s) do their
+   * job. It should usually be at least 1 ms. For the included modules 2 ms are
+   * a safe bet, that's why it's used as the default. 
    * @param startWith The delay value in ms to start with, defaults to 
-   * I2CdefaultDelay. Mainly meant to be used if serial debugging is enabled
+   * I2CdefaultDelay (20 ms). Mainly meant to be used if serial debugging is enabled
    * in the target firmware. If there is heavy debugging output, the default
    * I2CdefaultDelay may sometimes be too low.
    * @note new in v0.3.0, experimental

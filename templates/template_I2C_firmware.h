@@ -18,6 +18,7 @@
  * (6) reset event
  * (7) (end of) receiveEvent()
  * (8) (end of) requestEvent()
+ * (9) Change of I2C state machine's state
  * 
  * See below for instructions on what code to place where. See existing modules
  * for illustration. PinI2C and ServoI2C are good and simple starting points, 
