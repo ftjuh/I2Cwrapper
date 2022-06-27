@@ -194,7 +194,7 @@ Usage by the controller device/sketch</h2>
 </ul>
 <p >The respective counter(s) will be reset to 0 with each invocation of these methods.</p>
 <p >See the <a href="examples/Error_checking/Error_checking.ino">Error_checking.ino</a> example for further illustration.</p>
-<p >In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a <code><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent()</a></code> happening while a <code><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a></code> was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See <a href="docs/images/I2C state machine.svg">I2C state machine.svg</a> for details.</p>
+<p >In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a <code><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent()</a></code> happening while a <code><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a></code> was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See <a href="docs/images/I2C_state_machine.svg">I2C state machine.svg</a> for details.</p>
 <h3>Interrupt mechanism</h3>
 <p >To keep the controller from having to constantly poll the target device for some new event (e.g. an input pin change), the controller can use the <code><a class="el" href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde" title="Define a global interrupt pin which can be used by device units (steppers, servos....">I2Cwrapper::setInterruptPin()</a></code> function to tell the target to use one if its pins as an <b>interrupt line</b>. The target may use it if it wants to inform the controller about some new event. Of course, an additional hardware line connecting this target pin and a free, interrupt-capable controller pin is needed to use the interrupt mechanism.</p>
 <p >The <b>controller</b> will have to implement an interrupt service routine (ISR) to listen to the respective controller pin. After having received an interrupt, it must call <code><a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge to target that interrupt has been received, so that the target can clear the interupt con...">I2Cwrapper::clearInterrupt()</a></code> to clear the target's interrupt state and find out about the reason that caused the interrupt.</p>
@@ -208,10 +208,18 @@ Usage by the controller device/sketch</h2>
 <p >(new in v0.3.0, experimental)</p>
 <p >Alternatively, the controller can use the <code><a class="el" href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140" title="Set I2C delay to the smallest value that still allows error free transmissions. To determine this val...">I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith)</a></code> function to make an educated guess for the <b>shortest, yet still reasonably safe I2C delay value</b> in a given hardware environment. It will be based on a number of simulated test transmissions to and from the target device. It can be supplemented by an additional safety margin (default: 2 ms) and factor in the maximum command length to be used (default: max length allowed by buffer).</p>
 <p >See <a href="examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino">Adjust_I2Cdelay</a> for some in-depth experiments. An everyday use example used in a <code><a class="el" href="_adjust___i2_cdelay_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></code> function could look like this (from <a href="examples/Error_checking/Error_checking.ino">Error_checking.ino</a>):</p>
-<p >`Serial.print("I2C delay set to "); Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions Serial.print(" ms (default was "); Serial.print(I2CdefaultDelay); Serial.println(" ms)");`</p>
-<p >or simply</p>
-<p ><code>wrapper.autoAdjustI2Cdelay();</code></p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">Serial.print(&quot;I2C delay set to &quot;);</div>
+<div class="line"> </div>
+<div class="line">Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions</div>
+<div class="line"> </div>
+<div class="line">Serial.print(&quot; ms (default was &quot;); </div>
+<div class="line"> </div>
+<div class="line">Serial.print(I2CdefaultDelay); Serial.println(&quot; ms)&quot;);</div>
+</div><!-- fragment --><p >or simply</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">wrapper.autoAdjustI2Cdelay();</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Available modules</h1>
 <p >To chose which modules are supported by an I2C target device, edit the <a href="firmware/firmware_modules.h"><code>firmware_modules.h</code></a> file accordingly.</p>
 <h2><a class="anchor" id="autotoc_md9"></a>
@@ -396,7 +404,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jun 27 2022 18:27:41 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jun 27 2022 18:37:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

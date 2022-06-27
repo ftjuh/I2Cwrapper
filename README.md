@@ -142,13 +142,21 @@ Alternatively, the controller can use the `I2Cwrapper::autoAdjustI2Cdelay(uint8_
 
 See [Adjust_I2Cdelay](examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-depth experiments. An everyday use example used in a `setup()` function could look like this (from [Error_checking.ino](examples/Error_checking/Error_checking.ino)):
 
-`Serial.print("I2C delay set to ");`
-`Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions`
-`Serial.print(" ms (default was "); Serial.print(I2CdefaultDelay); Serial.println(" ms)");`
+```c++
+Serial.print("I2C delay set to ");
+
+Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions
+
+Serial.print(" ms (default was "); 
+
+Serial.print(I2CdefaultDelay); Serial.println(" ms)");
+```
 
 or simply
 
-`wrapper.autoAdjustI2Cdelay();`
+```c++
+wrapper.autoAdjustI2Cdelay();
+```
 
 # Available modules
 
