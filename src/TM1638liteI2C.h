@@ -34,7 +34,7 @@
 
 
 // TM1638liteI2C commands
-const uint8_t TM1638liteCmdOffset       = 75; 
+const uint8_t TM1638liteCmdOffset       = 80; 
 const uint8_t TM1638liteAttachCmd       = TM1638liteCmdOffset + 0; const uint8_t TM1638liteAttachResult = 1; // 1 uint8_t
 const uint8_t TM1638liteSendCommandCmd  = TM1638liteCmdOffset + 1;
 const uint8_t TM1638liteResetCmd        = TM1638liteCmdOffset + 2;
