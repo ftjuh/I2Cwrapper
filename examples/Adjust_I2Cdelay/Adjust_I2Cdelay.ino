@@ -13,12 +13,14 @@
 
   You can try it with differently configured target devices (firmware compiled
   with/without debugging; different hardware platforms etc.), or vary the lenght
-  of your I2C connections, size of pullups etc. to test their effect.
+  of your I2C connections, size of pullups etc. to test their effect (I don't
+  expect the latter to have one).
 
   On an Arduino Nano w/o serial debugging, all test will probably come out with 3 ms,
   showing that max buffer usage will not really make a difference, and that I2C
-  transmissions alone don't really need an I2C delay. It's what the target is
-  actually doing, what's creating the need for it.
+  transmissions alone don't really need an I2C delay larger than 1 ms (remember, we set 
+  2 ms as safety margin). It's what the target is actually doing, what's creating the 
+  need for the delay.
   
 */
 

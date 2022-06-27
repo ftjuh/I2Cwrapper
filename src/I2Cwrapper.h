@@ -178,8 +178,8 @@ public:
    * So if you know what the maximum number of parameter bytes sent or receiced 
    * by any of the commands you will use in your project is, you can 
    * specify it here to get a more aggressive, shorter I2C delay. Leave it to 
-   * the default to be on the safe side, it should not make a diference of more
-   * than 1 ms.
+   * the default to be on the safe side, in most cases it should not make a 
+   * significant difference.
    * @param safetyMargin A number of microseconds that will be added to the 
    * empirically determined minimum I2C delay. As the test transmissions do 
    * nothing but send back the amount of specified simulated parameter bytes, 

@@ -174,7 +174,7 @@ uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, 
     log(numErrors); log(" errors\n");    
   } while ((numErrors == 0) and (testI2Cdelay > 0));
   setI2Cdelay(min(testI2Cdelay + 1 + safetyMargin, uint8_t(I2CdefaultDelay)));
-  return I2Cdelay;
+  return getI2Cdelay();
 }
 
 
