@@ -26,7 +26,7 @@ var NAVTREE =
 [
   [ "I2Cwrapper", "index.html", [
     [ "Introduction", "index.html", [
-      [ "Firmware modules", "index.html#autotoc_md1", null ],
+      [ "Ready to use modules", "index.html#autotoc_md1", null ],
       [ "Basic components", "index.html#autotoc_md2", null ],
       [ "Limitations", "index.html#autotoc_md3", null ],
       [ "Usage", "index.html#autotoc_md4", [
@@ -38,17 +38,19 @@ var NAVTREE =
         [ "AccelStepperI2C", "index.html#autotoc_md9", null ],
         [ "ServoI2C", "index.html#autotoc_md10", null ],
         [ "PinI2C", "index.html#autotoc_md11", null ],
-        [ "ESP32sensorsI2C", "index.html#autotoc_md12", null ]
+        [ "ESP32sensorsI2C", "index.html#autotoc_md12", null ],
+        [ "TM1638liteI2C", "index.html#autotoc_md13", null ],
+        [ "Feature modules", "index.html#autotoc_md14", null ]
       ] ],
-      [ "How to add new modules", "index.html#autotoc_md13", null ],
-      [ "Supported platforms", "index.html#autotoc_md14", null ],
-      [ "Example", "index.html#autotoc_md15", null ],
-      [ "Documentation", "index.html#autotoc_md16", null ],
-      [ "Planned improvements", "index.html#autotoc_md17", null ],
-      [ "Author", "index.html#autotoc_md18", null ],
-      [ "Copyright", "index.html#autotoc_md19", null ],
-      [ "License", "index.html#autotoc_md20", null ],
-      [ "History", "index.html#autotoc_md21", null ]
+      [ "How to add new modules", "index.html#autotoc_md15", null ],
+      [ "Supported platforms", "index.html#autotoc_md16", null ],
+      [ "Example", "index.html#autotoc_md17", null ],
+      [ "Documentation", "index.html#autotoc_md18", null ],
+      [ "Planned improvements", "index.html#autotoc_md19", null ],
+      [ "Author", "index.html#autotoc_md20", null ],
+      [ "Copyright", "index.html#autotoc_md21", null ],
+      [ "License", "index.html#autotoc_md22", null ],
+      [ "History", "index.html#autotoc_md23", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Reference", "modules.html", "modules" ],
@@ -66,6 +68,8 @@ var NAVTREE =
         [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", "globals_vars" ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -74,9 +78,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_accel_stepper_i2_c_8cpp.html",
-"_servo___sweep_8ino.html#af9af55d36115b44e1997c518d666cbf9",
-"globals_vars_d.html"
+"__status_l_e_d__firmware_8h.html",
+"_pin_i2_c__firmware_8h.html#acfe587652e1874f51eb76cf1095290ba",
+"firmware_8ino.html#a6e6fb94a3ed8d18ebc8e982e14b3f8ee"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

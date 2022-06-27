@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sendcommand_0',['sendCommand',['../class_i2_cwrapper.html#a64dc95baffdae6e8cfe07ea902fc926b',1,'I2Cwrapper']]],
+  ['sendcommand_0',['sendCommand',['../class_t_m1638lite_i2_c.html#a3808bad71b965749770ed1d88703c56c',1,'TM1638liteI2C::sendCommand()'],['../class_i2_cwrapper.html#a64dc95baffdae6e8cfe07ea902fc926b',1,'I2Cwrapper::sendCommand()']]],
   ['senterrors_1',['sentErrors',['../class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032',1,'I2Cwrapper']]],
   ['servoi2c_2',['ServoI2C',['../class_servo_i2_c.html#aae8af80be429d5d2fd4bd504ef8fc6d3',1,'ServoI2C']]],
   ['setacceleration_3',['setAcceleration',['../class_accel_stepper_i2_c.html#ade720eb58be99807c3c76da25fdf4ead',1,'AccelStepperI2C']]],
@@ -10,15 +10,16 @@ var searchData=
   ['setendstoppin_7',['setEndstopPin',['../class_accel_stepper_i2_c.html#a0cc31b57b4d082744a94cb712b71a6e5',1,'AccelStepperI2C']]],
   ['seti2cdelay_8',['setI2Cdelay',['../class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2',1,'I2Cwrapper']]],
   ['setinterruptpin_9',['setInterruptPin',['../class_i2_cwrapper.html#a32301b5659f124217e59413192849dde',1,'I2Cwrapper']]],
-  ['setmaxspeed_10',['setMaxSpeed',['../class_accel_stepper_i2_c.html#a66b733b7031401a7b74da8936d1869e8',1,'AccelStepperI2C']]],
-  ['setminpulsewidth_11',['setMinPulseWidth',['../class_accel_stepper_i2_c.html#a6a9dfec85ceacfef6efedfbd83711bb6',1,'AccelStepperI2C']]],
-  ['setpinsinverted_12',['setPinsInverted',['../class_accel_stepper_i2_c.html#ae4454d2eea39627485c8ebc496edd1f8',1,'AccelStepperI2C::setPinsInverted(bool directionInvert=false, bool stepInvert=false, bool enableInvert=false)'],['../class_accel_stepper_i2_c.html#a5f233077007853c4c25e7d6d9aee0118',1,'AccelStepperI2C::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3Invert, bool pin4Invert, bool enableInvert)']]],
-  ['setspeed_13',['setSpeed',['../class_accel_stepper_i2_c.html#a2a8c92150ae055c7ff696ff98ddb7a38',1,'AccelStepperI2C']]],
-  ['setstate_14',['setState',['../class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8',1,'AccelStepperI2C']]],
-  ['setup_15',['setup',['../_change__address_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Change_address.ino'],['../_c_n_cv4___board__3___steppers_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;CNCv4_Board_3_Steppers.ino'],['../_error__checking_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Error_checking.ino'],['../_e_s_p32sensors_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;ESP32sensors.ino'],['../_interrupt___endstop_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Interrupt_Endstop.ino'],['../_pin__control_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Pin_control.ino'],['../_servo___sweep_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Servo_Sweep.ino'],['../_stepper__and___servo__together_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Stepper_and_Servo_together.ino'],['../_stepper___bounce_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Stepper_Bounce.ino'],['../firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;firmware.ino']]],
-  ['speed_16',['speed',['../class_accel_stepper_i2_c.html#aef1d5eb59f60121d04fa2667393de392',1,'AccelStepperI2C']]],
-  ['stop_17',['stop',['../class_accel_stepper_i2_c.html#abe7bea04839f7658728ad0e3fcfead68',1,'AccelStepperI2C']]],
-  ['stopstate_18',['stopState',['../class_accel_stepper_i2_c.html#a509c7691efe52e80615e937e693bdbc1',1,'AccelStepperI2C']]],
-  ['storei2c_5faddress_19',['storeI2C_address',['../firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee',1,'firmware.ino']]],
-  ['switch_20',['switch',['../_e_s_p32sensors_i2_c__firmware_8h.html#aff221285a694d3fdadf4dd7e70741050',1,'ESP32sensorsI2C_firmware.h']]]
+  ['setled_10',['setLED',['../class_t_m1638lite_i2_c.html#ac4bae7dc359baaadb07602d0b73e089e',1,'TM1638liteI2C']]],
+  ['setmaxspeed_11',['setMaxSpeed',['../class_accel_stepper_i2_c.html#a66b733b7031401a7b74da8936d1869e8',1,'AccelStepperI2C']]],
+  ['setminpulsewidth_12',['setMinPulseWidth',['../class_accel_stepper_i2_c.html#a6a9dfec85ceacfef6efedfbd83711bb6',1,'AccelStepperI2C']]],
+  ['setpinsinverted_13',['setPinsInverted',['../class_accel_stepper_i2_c.html#ae4454d2eea39627485c8ebc496edd1f8',1,'AccelStepperI2C::setPinsInverted(bool directionInvert=false, bool stepInvert=false, bool enableInvert=false)'],['../class_accel_stepper_i2_c.html#a5f233077007853c4c25e7d6d9aee0118',1,'AccelStepperI2C::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3Invert, bool pin4Invert, bool enableInvert)']]],
+  ['setspeed_14',['setSpeed',['../class_accel_stepper_i2_c.html#a2a8c92150ae055c7ff696ff98ddb7a38',1,'AccelStepperI2C']]],
+  ['setstate_15',['setState',['../class_accel_stepper_i2_c.html#a213e402f63727c105d9ea2a20b125fe8',1,'AccelStepperI2C']]],
+  ['setup_16',['setup',['../firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;firmware.ino'],['../_adjust___i2_cdelay_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Adjust_I2Cdelay.ino'],['../_change__address_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Change_address.ino'],['../_c_n_cv4___board__3___steppers_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;CNCv4_Board_3_Steppers.ino'],['../_error__checking_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Error_checking.ino'],['../_e_s_p32sensors_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;ESP32sensors.ino'],['../_interrupt___endstop_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Interrupt_Endstop.ino'],['../_pin__control_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Pin_control.ino'],['../_servo___sweep_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Servo_Sweep.ino'],['../_stepper__and___servo__together_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Stepper_and_Servo_together.ino'],['../_stepper___bounce_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;Stepper_Bounce.ino'],['../_t_m1638lite_8ino.html#a76c30daa1589cf5db3acec7f761b09b8',1,'setup():&#160;TM1638lite.ino']]],
+  ['speed_17',['speed',['../class_accel_stepper_i2_c.html#aef1d5eb59f60121d04fa2667393de392',1,'AccelStepperI2C']]],
+  ['stop_18',['stop',['../class_accel_stepper_i2_c.html#abe7bea04839f7658728ad0e3fcfead68',1,'AccelStepperI2C']]],
+  ['stopstate_19',['stopState',['../class_accel_stepper_i2_c.html#a509c7691efe52e80615e937e693bdbc1',1,'AccelStepperI2C']]],
+  ['storei2c_5faddress_20',['storeI2C_address',['../firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee',1,'firmware.ino']]],
+  ['switch_21',['switch',['../_e_s_p32sensors_i2_c__firmware_8h.html#aff221285a694d3fdadf4dd7e70741050',1,'ESP32sensorsI2C_firmware.h']]]
 ];

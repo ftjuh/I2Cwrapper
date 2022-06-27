@@ -436,7 +436,7 @@ Public Attributes</h2></td></tr>
 
 <p>Tell the state machine to check the endstops regularly. If any of the (one or two) stepper's endstops is hit, the state machine will revert to state_stopped. To prevent overshoot, also the stepper's speed is set to 0 and its target to the current position. </p>
 <p >An interrupt will be triggered, if interrupts are enabled, in that case <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge to target that interrupt has been received, so that the target can clear the interupt con...">I2Cwrapper::clearInterrupt()</a> will then inform about the interrupt's cause. Independent of an interrupt, the controller can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current raw, i.e. not debounced state of endstops. It&#39;s basically one or two digitalReads() comb...">endstops()</a> to find out if an endstop was hit and which one it was.</p>
-<p >A "hit" condition is defined as an end stop switch becoming active. Nothing happens if it stays active or becomes inactive. A simple debouncing mechanism is in place. After a new flank (switch becoming active <em>or</em> inactive), it will ignore any further flanks for a set interval of 5 milliseconds, which should suffice for most switches to get into a stable state. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone. </dd></dl>
+<p >A "hit" condition is defined as an end stop switch becoming active. Nothing happens if it stays active or becomes inactive. A simple debouncing mechanism is in place. After a new flank (switch becoming active <em>or</em> inactive), it will ignore any further flanks for a set interval of 5 milliseconds, which should suffice for most switches to get into a stable state. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td>true (default) to enable, false to disable. </td></tr>
@@ -1115,7 +1115,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jun 27 2022 18:27:40 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

@@ -43,5 +43,6 @@ var searchData=
   ['stepperydir_40',['stepperYdir',['../_c_n_cv4___board__3___steppers_8ino.html#aee435c340469d602b0db39036fd5c83e',1,'CNCv4_Board_3_Steppers.ino']]],
   ['stepperzdir_41',['stepperZdir',['../_c_n_cv4___board__3___steppers_8ino.html#a6ead8a3f93c9bf10ecbd912e6f54b3a4',1,'CNCv4_Board_3_Steppers.ino']]],
   ['steppin_42',['stepPin',['../_error__checking_8ino.html#a3fd94c7cf1734a0901f6dd8f3dfd3a15',1,'stepPin():&#160;Error_checking.ino'],['../_interrupt___endstop_8ino.html#a3fd94c7cf1734a0901f6dd8f3dfd3a15',1,'stepPin():&#160;Interrupt_Endstop.ino'],['../_stepper__and___servo__together_8ino.html#a3fd94c7cf1734a0901f6dd8f3dfd3a15',1,'stepPin():&#160;Stepper_and_Servo_together.ino']]],
-  ['stopcmd_43',['stopCmd',['../_accel_stepper_i2_c_8h.html#a701b5c3b5816e355a8cec77d581ac415',1,'AccelStepperI2C.h']]]
+  ['stopcmd_43',['stopCmd',['../_accel_stepper_i2_c_8h.html#a701b5c3b5816e355a8cec77d581ac415',1,'AccelStepperI2C.h']]],
+  ['strobepin_44',['strobePin',['../_t_m1638lite_8ino.html#a0b124ff604888aa8f33365a1a251bdd4',1,'TM1638lite.ino']]]
 ];

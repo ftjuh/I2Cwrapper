@@ -1,9 +1,11 @@
 var class_i2_cwrapper =
 [
     [ "I2Cwrapper", "class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa", null ],
+    [ "autoAdjustI2Cdelay", "class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140", null ],
     [ "changeI2Caddress", "class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e", null ],
     [ "checkVersion", "class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d", null ],
     [ "clearInterrupt", "class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac", null ],
+    [ "getI2Cdelay", "class_i2_cwrapper.html#a03edf9e2b6cda53ae2c6380ad6dade08", null ],
     [ "getVersion", "class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c", null ],
     [ "ping", "class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe", null ],
     [ "prepareCommand", "class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d", null ],

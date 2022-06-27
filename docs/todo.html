@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt>File <a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>add emergency stop/break pin for target (just use reset pin for the moment) </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000006"></a>add emergency stop/break pin for target (just use reset pin for the moment) </p>
 <p class="interdd"></p>
 <p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
 <p class="interdd"></p>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <p class="enddd"><del>Implement end stops/reference stops.</del> - endstop polling implemented, interrupt would be better  </p>
 </dd>
 <dt>Member <a class="el" href="class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401">AccelStepperI2C::enableEndstops</a>  (bool enable=true)</dt>
-<dd><a class="anchor" id="_todo000006"></a><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone.  </dd>
+<dd><a class="anchor" id="_todo000007"></a><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone.  </dd>
 <dt>File <a class="el" href="firmware_8ino.html">firmware.ino</a>  </dt>
 <dd><p class="startdd"><a class="anchor" id="_todo000001"></a>make I2C address configurable by hardware (with module?) </p>
 <p class="interdd"></p>
@@ -136,9 +136,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <p class="enddd">Reduce memory use to make it fit into an 8k Attiny  </p>
 </dd>
 <dt>File <a class="el" href="_i2_cwrapper_8h.html">I2Cwrapper.h</a>  </dt>
-<dd><a class="anchor" id="_todo000007"></a>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given controller-target setup.  </dd>
-<dt>Member <a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">I2Cwrapper::setI2Cdelay</a>  (unsigned long delay)</dt>
-<dd><a class="anchor" id="_todo000008"></a><del>I2Cdelay is currently global; make it a per-target setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>.  </dd>
+<dd><a class="anchor" id="_todo000008"></a>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given controller-target setup.  </dd>
 <dt>Member <a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>  </dt>
 <dd><a class="anchor" id="_todo000002"></a>make diagnostics another module?  </dd>
 <dt>Class <a class="el" href="class_pin_i2_c.html">PinI2C</a>  </dt>
@@ -146,9 +144,11 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <dt>File <a class="el" href="_pin_i2_c_8h.html">PinI2C.h</a>  </dt>
 <dd><a class="anchor" id="_todo000009"></a>implement interrupts?  </dd>
 <dt>Member <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a>  ()</dt>
-<dd><a class="anchor" id="_todo000003"></a><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)  </dd>
+<dd><a class="anchor" id="_todo000003"></a><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh) </dd>
 <dt>File <a class="el" href="_servo_i2_c__firmware_8h.html">ServoI2C_firmware.h</a>  </dt>
-<dd><a class="anchor" id="_todo000004"></a>Need to typecast the transmission of int values to int16_t. </dd>
+<dd><a class="anchor" id="_todo000004"></a>Need to typecast the transmission of int values to int16_t.  </dd>
+<dt>File <a class="el" href="_t_m1638lite_i2_c__firmware_8h.html">TM1638liteI2C_firmware.h</a>  </dt>
+<dd><a class="anchor" id="_todo000005"></a>Implement interrupt mechanism for button presses like ESP32sensors. </dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jun 27 2022 18:27:40 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

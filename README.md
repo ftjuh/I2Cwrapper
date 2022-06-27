@@ -114,7 +114,7 @@ The respective counter(s) will be reset to 0 with each invocation of these metho
 
 See the [Error_checking.ino](examples/Error_checking/Error_checking.ino) example for further illustration.
 
-In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See [I2C state machine.svg](docs/images/I2C state machine.svg) for details.
+In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See [I2C state machine.svg](docs/images/I2C_state_machine.svg) for details.
 
 ### Interrupt mechanism
 
@@ -142,9 +142,9 @@ Alternatively, the controller can use the `I2Cwrapper::autoAdjustI2Cdelay(uint8_
 
 See [Adjust_I2Cdelay](examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-depth experiments. An everyday use example used in a `setup()` function could look like this (from [Error_checking.ino](examples/Error_checking/Error_checking.ino)):
 
-`Serial.print("I2C delay set to ");
-Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions
-Serial.print(" ms (default was "); Serial.print(I2CdefaultDelay); Serial.println(" ms)");`
+`Serial.print("I2C delay set to ");`
+`Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions`
+`Serial.print(" ms (default was "); Serial.print(I2CdefaultDelay); Serial.println(" ms)");`
 
 or simply
 

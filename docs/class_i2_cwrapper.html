@@ -103,7 +103,9 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 <li>050 - 059 <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></li>
 <li>060 - 069 <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></li>
 <li>070 - 074 <a class="el" href="class_e_s_p32sensors_i2_c.html" title="An I2C wrapper class for ESP32 sensors (touch, temp, hall).">ESP32sensorsI2C</a></li>
-<li>075 - 239 (unused)</li>
+<li>075 - 079 (unused)</li>
+<li>080 - 089 <a class="el" href="class_t_m1638lite_i2_c.html" title="An I2C wrapper class for Danny Ayers&#39; TM1638lite library (https://www.arduino.cc/reference/en/librari...">TM1638liteI2C</a></li>
+<li>090 - 239 (unused)</li>
 <li>240 - 255 <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> commands (reset target, change address etc.) </li>
 </ul>
 </dd></dl>
@@ -130,8 +132,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1365ca44e217ce79bcfc3fe0c2ee7cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledge to target that interrupt has been received, so that the target can clear the interupt condition and return the reason for the interrupt.  <a href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">More...</a><br /></td></tr>
 <tr class="separator:a1365ca44e217ce79bcfc3fe0c2ee7cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa512ca27376efd779426fcd836e629e2"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">setI2Cdelay</a> (unsigned long delay)</td></tr>
-<tr class="memdesc:aa512ca27376efd779426fcd836e629e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a minimum time that the controller keeps between I2C transmissions. This is to make sure that the target has finished its earlier task or has its answer to the controller's previous command ready. Particularly for ESP32 targets this is critical, as due to its implementation of I2C target mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed.  <a href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">More...</a><br /></td></tr>
+<tr class="memdesc:aa512ca27376efd779426fcd836e629e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a minimum duration of time that the controller keeps between I2C transmissions. This is to make sure that the target has finished its earlier task or has its answer to the controller's previous command ready. Particularly for ESP32 targets this is critical, as due to its implementation of I2C target mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed.  <a href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2">More...</a><br /></td></tr>
 <tr class="separator:aa512ca27376efd779426fcd836e629e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03edf9e2b6cda53ae2c6380ad6dade08"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a03edf9e2b6cda53ae2c6380ad6dade08">getI2Cdelay</a> ()</td></tr>
+<tr class="memdesc:a03edf9e2b6cda53ae2c6380ad6dade08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns currently set I2Cdelay.  <a href="class_i2_cwrapper.html#a03edf9e2b6cda53ae2c6380ad6dade08">More...</a><br /></td></tr>
+<tr class="separator:a03edf9e2b6cda53ae2c6380ad6dade08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3dd6653d03a02c1c4efb1d7edec9140"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140">autoAdjustI2Cdelay</a> (uint8_t maxLength=<a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a> - 3, uint8_t safetyMargin=2, uint8_t startWith=<a class="el" href="_i2_cwrapper_8h.html#a8e670dbec664a89d717caad5333aa8a4">I2CdefaultDelay</a>)</td></tr>
+<tr class="memdesc:aa3dd6653d03a02c1c4efb1d7edec9140"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set I2C delay to the smallest value that still allows error free transmissions. To determine this value, a simulation test is run: A number of dummy transmissions are repeatedly exchanged with the target using the pingBack() function, while successively decreasing the I2C delay. The test will stop as soon as a transmission error occurs. The smallest error free value (or 0 ms), increased by the safety margin, will be set as the new I2C delay.  <a href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140">More...</a><br /></td></tr>
+<tr class="separator:aa3dd6653d03a02c1c4efb1d7edec9140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30d42c3ddaa5ea8c69b879a6b316038c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">getVersion</a> ()</td></tr>
 <tr class="memdesc:a30d42c3ddaa5ea8c69b879a6b316038c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get semver compliant version of target firmware.  <a href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">More...</a><br /></td></tr>
 <tr class="separator:a30d42c3ddaa5ea8c69b879a6b316038c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,6 +212,53 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa3dd6653d03a02c1c4efb1d7edec9140" name="aa3dd6653d03a02c1c4efb1d7edec9140"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3dd6653d03a02c1c4efb1d7edec9140">&#9670;&nbsp;</a></span>autoAdjustI2Cdelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t I2Cwrapper::autoAdjustI2Cdelay </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>maxLength</em> = <code><a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a>&#160;-&#160;3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>safetyMargin</em> = <code>2</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>startWith</em> = <code><a class="el" href="_i2_cwrapper_8h.html#a8e670dbec664a89d717caad5333aa8a4">I2CdefaultDelay</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set I2C delay to the smallest value that still allows error free transmissions. To determine this value, a simulation test is run: A number of dummy transmissions are repeatedly exchanged with the target using the pingBack() function, while successively decreasing the I2C delay. The test will stop as soon as a transmission error occurs. The smallest error free value (or 0 ms), increased by the safety margin, will be set as the new I2C delay. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxLength</td><td>Number of simulated test parameter bytes sent with each testing transmission, defaulting to the maximum bytes that are possible with the given I2C buffer size. This theoretical maximum (I2CmaxBuf minus three bytes for the message header) will not be fully used by most modules. So if you know what the maximum number of parameter bytes sent or receiced by any of the commands you will use in your project is, you can specify it here to get a more aggressive, shorter I2C delay. Leave it to the default to be on the safe side, in most cases it should not make a significant difference. </td></tr>
+    <tr><td class="paramname">safetyMargin</td><td>A number of microseconds that will be added to the empirically determined minimum I2C delay. As the test transmissions do nothing but send back the amount of specified simulated parameter bytes, you will want to specify some extra time to allow for the time the controller will need to process any given command on top of the pure transmissions. Its optimal value fully depends on how fast the target's module(s) do their job. It should usually be at least 1 ms. For the included modules 2 ms are a safe bet, that's why it's used as the default. </td></tr>
+    <tr><td class="paramname">startWith</td><td>The delay value in ms to start with, defaults to I2CdefaultDelay (20 ms). Mainly meant to be used if serial debugging is enabled in the target firmware. If there is heavy debugging output, the default I2CdefaultDelay may sometimes be too low. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>new in v0.3.0, experimental </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The newly set I2C delay </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2" title="Define a minimum duration of time that the controller keeps between I2C transmissions....">setI2Cdelay()</a> </dd></dl>
+
+</div>
+</div>
 <a id="ab8084b9fc49113a5a6d2214e1878457e" name="ab8084b9fc49113a5a6d2214e1878457e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab8084b9fc49113a5a6d2214e1878457e">&#9670;&nbsp;</a></span>changeI2Caddress()</h2>
 
@@ -263,6 +318,25 @@ Public Attributes</h2></td></tr>
 <p>Acknowledge to target that interrupt has been received, so that the target can clear the interupt condition and return the reason for the interrupt. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reason for the interrupt as 8bit BCD with triggering unit in lower 4 bits and trigger reason in the upper 4 bits. 0xff in case of error. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group___interrupt_reasons.html" title="Used by clearInterrup() to inform the controller about what caused the previous interrupt.">List of possible reasons an interrupt was triggered.</a> </dd></dl>
+
+</div>
+</div>
+<a id="a03edf9e2b6cda53ae2c6380ad6dade08" name="a03edf9e2b6cda53ae2c6380ad6dade08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03edf9e2b6cda53ae2c6380ad6dade08">&#9670;&nbsp;</a></span>getI2Cdelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long I2Cwrapper::getI2Cdelay </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns currently set I2Cdelay. </p>
 
 </div>
 </div>
@@ -444,7 +518,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Define a minimum time that the controller keeps between I2C transmissions. This is to make sure that the target has finished its earlier task or has its answer to the controller's previous command ready. Particularly for ESP32 targets this is critical, as due to its implementation of I2C target mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed. </p>
+<p>Define a minimum duration of time that the controller keeps between I2C transmissions. This is to make sure that the target has finished its earlier task or has its answer to the controller's previous command ready. Particularly for ESP32 targets this is critical, as due to its implementation of I2C target mode, an ESP32 could theoretically send incomplete data if a request is sent too early. The actual delay will take the time spent since the last I2C transmission into account, so that it won't wait at all if the given time has already passed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">delay</td><td>Minimum time in between I2C transmissions in milliseconds. The default I2CdefaultDelay is a bit conservative at 10 ms to allow for for serial debugging output to slow things down. You can try to go lower, if target debugging is disabled. </td></tr>
@@ -452,7 +526,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns the previously set delay. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd><del>I2Cdelay is currently global; make it a per-target setting.</del> implemented with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140" title="Set I2C delay to the smallest value that still allows error free transmissions. To determine this val...">autoAdjustI2Cdelay()</a> </dd></dl>
 
 </div>
 </div>
@@ -572,7 +646,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jun 27 2022 18:27:40 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>
