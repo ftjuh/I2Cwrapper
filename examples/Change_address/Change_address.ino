@@ -39,6 +39,11 @@ void setup()
     Serial.print("Target found at old address "); Serial.println(oldAddress);
     delay(me);
 
+    // new in v0.3.0
+    Serial.print(wrapper.autoAdjustI2Cdelay());
+    Serial.println(" ms I2C delay");
+    delay(me);
+
     Serial.print("\nChanging address to "); Serial.println(newAddress);
     wrapper.changeI2Caddress(newAddress);
     delay(me);
@@ -60,6 +65,7 @@ void setup()
 
       Serial.println("Changing back to old address and rebooting...\n");
       wrapperNew.changeI2Caddress(oldAddress);
+      delay(me);
       wrapperNew.reset();
       delay(me);
 

@@ -114,6 +114,8 @@ The respective counter(s) will be reset to 0 with each invocation of these metho
 
 See the [Error_checking.ino](examples/Error_checking/Error_checking.ino) example for further illustration.
 
+In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See [I2C state machine.svg](docs/images/I2C state machine.svg) for details.
+
 ### Interrupt mechanism
 
 To keep the controller from having to constantly poll the target device for some new event (e.g. an input pin change), the controller can use the `I2Cwrapper::setInterruptPin()` function to tell the target to use one if its pins as an **interrupt line**. The target may use it if it wants to inform the controller about some new event. Of course, an additional hardware line connecting this target pin and a free, interrupt-capable controller pin is needed to use the interrupt mechanism.
@@ -126,11 +128,27 @@ See the example [Interrupt_Endstop](examples/Interrupt_Endstop/Interrupt_Endstop
 
 ### Adjusting the I2C delay
 
-If a controller sends commands too quickly or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer. 
+If a controller **sends commands too quickly** or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer. 
 
-That's why I2Cwrapper makes sure that a **specified minimum delay** is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered. Depending on debugging, target device speed, target task execution time, and bus speed, the default can be adjusted to be considerably lower with the I2Cwrapper::setI2Cdelay() function.
+That's why I2Cwrapper makes sure that a **specified minimum delay** is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered and for many applications there is no need to lower it. However, depending on debugging, target device speed, target task execution time, bus speed, and the length of commands sent, the default can be adjusted manually to be considerably lower with the `I2Cwrapper::setI2Cdelay()` function. Typically, 4 to 6 ms are easily on the safe side.
 
-At the moment, you'll have to **use your own tests** to find an optimal value. A self-diagnosing auto-adjustment feature is planned for a future release.
+~~At the moment, you'll have to **use your own tests** to find an optimal value. A self-diagnosing auto-adjustment feature is planned for a future release.~~
+
+#### Auto-adjusting the I2C delay
+
+(new in v0.3.0, experimental)
+
+Alternatively, the controller can use the `I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith)` function to make an educated guess for the **shortest, yet still reasonably safe I2C delay value** in a given hardware environment. It will be based on a number of simulated test transmissions to and from the target device. It can be supplemented by an additional safety margin (default: 2 ms) and factor in the maximum command length to be used (default: max length allowed by buffer).
+
+See [Adjust_I2Cdelay](examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-depth experiments. An everyday use example used in a `setup()` function could look like this (from [Error_checking.ino](examples/Error_checking/Error_checking.ino)):
+
+`Serial.print("I2C delay set to ");
+Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions
+Serial.print(" ms (default was "); Serial.print(I2CdefaultDelay); Serial.println(" ms)");`
+
+or simply
+
+`wrapper.autoAdjustI2Cdelay();`
 
 # Available modules
 
@@ -195,6 +213,16 @@ Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor
 ## TM1638liteI2C
 
 The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus interface to control matrices of buttons and LEDs. If you want to unify your bus environment in a given project or need to save pins, it can be useful to be able to control it via I2C. To implement an I2Cwrapper module, I chose Danny Ayers' [TM1638lite library](https://github.com/danja/TM1638lite) as it came with the most straightforward and burden-free implementation in comparison with the more popular choices. Apart from the setup, it can be used just like the original. Interrupt mechanism support for key presses is planned but not implemented yet. See the [`TM1638lite.ino`](examples/TM1638lite/TM1638lite.ino) example for more details.
+
+## Feature modules
+
+(new in v0.3.0)
+
+Feature modules extend or modify the firmware with additional features. As they are not meant to enable I2C access for addressing target hardware, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").
+
+### Status LED
+
+Including the `_statusLED_firmware.h` in `firmware_modules.h`will make the target's built in LED (`LED_BUILTIN`) flash briefly when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state. Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in `firmware_modules.h`to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.
 
 # How to add new modules
 

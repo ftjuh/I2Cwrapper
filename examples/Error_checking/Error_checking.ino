@@ -10,7 +10,10 @@
   hardware driven by the target device.
 
   Note that checking for errors is done at the wrapper's level, as it is
-  the wrapper which handles communication for the stepper object.
+  the wrapper which handles communication for the modules' objects.
+
+  To be used it with a target device which has the AccelStepperI2C
+  module enabled.
 
 */
 
@@ -62,6 +65,15 @@ void setup()
   wrapper.reset(); // reset the target device
   delay(500); // and give it time to reboot
 
+  // new in v0.3.0
+  Serial.print("I2C delay set to ");
+  Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions
+  Serial.print(" ms (default was ");
+  Serial.print(I2CdefaultDelay);
+  Serial.println(" ms)");
+
+  delay(1000);
+
   printVersions();
 
   /*
@@ -83,8 +95,8 @@ void setup()
 
 
   /*
-      Attaching will usually only fail if the target runs out of its (default) 
-      eight preallocated drivers (that's why it's important to reset the target 
+      Attaching will usually only fail if the target runs out of its (default)
+      eight preallocated drivers (that's why it's important to reset the target
       together with the controller, see above).
   */
 
