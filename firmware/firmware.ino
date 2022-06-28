@@ -313,7 +313,17 @@ void resetFunc()
 #include "firmware_modules.h"
 #undef MF_STAGE
 
-void requestEvent(); // Forward declaration. Without it the Arduino magic will be confused by the compiler directives.
+// Forward declarations. Without it the Arduino magic will be confused by the compiler directives.
+// Not sure, if the IRAM stuff needs to happen here already, but I guess it won't harm.
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
+void IRAM_ATTR receiveEvent(int howMany);
+void IRAM_ATTR requestEvent();
+#else
+void receiveEvent(int howMany);
+void requestEvent();
+#endif
+
+
 
 /**************************************************************************/
 /*!
@@ -599,7 +609,6 @@ void processMessage(uint8_t len)
 }
 
 
-
 // ================================================================================
 // ============================ receiveEvent() ====================================
 // ================================================================================
@@ -609,8 +618,9 @@ void processMessage(uint8_t len)
   @ brief Handle I2C receive event. Just read the message and inform main loop.
 */
 /**************************************************************************/
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-void IRAM_ATTR receiveEvent(int howMany) // both platforms now use "IRAM_ATTR"
+
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
+void IRAM_ATTR receiveEvent(int howMany) 
 #else
 void receiveEvent(int howMany)
 #endif
@@ -735,7 +745,7 @@ void writeOutputBuffer()
 
 */
 
-#if defined(ESP8266) || defined(ESP32)
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
 void IRAM_ATTR requestEvent()
 #else
 void requestEvent()
