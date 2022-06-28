@@ -136,7 +136,8 @@ bool I2Cwrapper::pingBack(uint8_t testData, uint8_t testLength) {
   const uint8_t testDataIncConst = 73; // am arbitrary prime number to generate some variety in the test data
   // first step: send some test data
   prepareCommand(pingBackCmd);
-  testLength = min(max(testLength, 1), I2CmaxBuf - 3 - 1); // 3 header bytes, 1 byte already used for transmitting testLength
+  testLength = (testLength < 1) ? 1 : testLength;
+  testLength = (testLength > I2CmaxBuf - 3 - 1) ? I2CmaxBuf - 3 - 1 : testLength; // minus 3 header bytes minus 1 byte already used for transmitting testLength
   buf.write(testLength);
   uint8_t sentData = testData;
   for (int i = 0; i < testLength; i++) {
@@ -173,7 +174,7 @@ uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, 
     }
     log(numErrors); log(" errors\n");    
   } while ((numErrors == 0) and (testI2Cdelay > 0));
-  setI2Cdelay(min(testI2Cdelay + 1 + safetyMargin, uint8_t(I2CdefaultDelay)));
+  setI2Cdelay(testI2Cdelay + 1 + safetyMargin);
   return getI2Cdelay();
 }
 
