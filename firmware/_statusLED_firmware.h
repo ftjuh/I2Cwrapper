@@ -3,6 +3,7 @@
    @brief Feature module that makes the LED_BUILTIN flash on incoming interrupts
    (receiveEvent and requestEvent). Meant mainly as a still-alive monitor.
    To make it flash on I2C state machine state changes, (un)comment the respective lines below in secitions (7), (8) and (9)
+   If your board has no LED_BUILTIN, make sure to edit the proper pin number in the declaration stage below..
    @section author Author
    Copyright (c) 2022 juh
    @section license License
@@ -27,7 +28,11 @@
 
 #if MF_STAGE == MF_STAGE_declarations
 
-const uint8_t statusLED = LED_BUILTIN; // If your board has no LED_BUILTIN this will throw an error. You'll need to change it to a pin with an LED attached, yourself.
+#ifdef LED_BUILTIN
+const uint8_t statusLED = LED_BUILTIN;
+#else
+const uint8_t statusLED = 9; // If your board has no LED_BUILTIN, change this to a pin with an LED attached, yourself.
+#endif
 const unsigned long statusFlashLength = 500; // microseconds
 unsigned long startOfStatusFlash;
 bool statusFlashIsOn = false;
