@@ -108,10 +108,11 @@ bool I2Cwrapper::ping()
   return Wire.endTransmission() == 0;
 }
 
-void I2Cwrapper::reset()
+void I2Cwrapper::reset(unsigned long resetDelay)
 {
   prepareCommand(resetCmd);
   sendCommand();
+  delay(resetDelay);
 }
 
 void I2Cwrapper::changeI2Caddress(uint8_t newAddress)

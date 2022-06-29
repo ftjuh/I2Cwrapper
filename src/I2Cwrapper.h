@@ -36,6 +36,9 @@ const uint8_t I2CmaxBuf = 20; // upper limit of send and receive buffer(s), incl
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
 const unsigned long I2CdefaultDelay = 20; // must be <256
 
+// ms to wait after sending a reset command, to give the target and its modules time to reinitialize
+const unsigned long defaultResetDelay = 100;
+
 // number of repetitions used in autoAdjustI2Cdelay()
 const uint8_t autoAdjustDefaultReps = 3;
 
@@ -108,13 +111,18 @@ public:
    * recommended to reset the target every time the controller is started or restarted 
    * to put it in a defined state. Else it could happen that the target still 
    * manages units (steppers, etc.) which the controller does not know about.
+   * @param resetDelay (new in v0.3.0, optional) delay in ms that the controller 
+   * waits after sending the reset command to give the target enough time to 
+   * reinitialize the firmware core and the activated modules. Defaults to 
+   * defaultResetDelay (100 ms).
    */
-  void reset();
+  void reset(unsigned long resetDelay = defaultResetDelay);
 
   /*!
    * @brief Permanently change the I2C address of the device. The new address is
    * stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the
    * next reset/reboot.
+   * @sa reset()
    */
   void changeI2Caddress(uint8_t newAddress);
 
