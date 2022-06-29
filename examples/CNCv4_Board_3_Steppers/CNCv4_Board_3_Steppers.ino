@@ -52,7 +52,6 @@ void setup()
   }
 
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   wrapper.setI2Cdelay(20); // Set small delay for I2C bus communication
 

@@ -40,7 +40,7 @@ long target = 3000; // initial target for sweep motion
 
 
 I2Cwrapper wrapper(addr); // each target device is represented by a wrapper...
-AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the target
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the controller
 
 
 void setup()
@@ -63,7 +63,6 @@ void setup()
   }
 
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   // new in v0.3.0
   Serial.print("I2C delay set to ");

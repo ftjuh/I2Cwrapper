@@ -40,7 +40,7 @@ const float acceleration = maxRunSpeed / 4;   // 4 seconds from 0 to max speed. 
 
 
 I2Cwrapper wrapper(addr); // each target device is represented by a wrapper...
-AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the target
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the controller
 
 volatile bool interruptFlag = false; // volatile for interrupt
 long lowerEndStopPos, upperEndStopPos, middlePos, range;
@@ -85,7 +85,6 @@ void setup()
     while (true) {}
   }
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
 
   /*

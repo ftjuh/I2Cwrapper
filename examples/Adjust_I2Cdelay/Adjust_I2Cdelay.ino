@@ -46,7 +46,6 @@ void setup()
     Serial.println("Target found as expected. Proceeding.\n");
   }
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
 }
 

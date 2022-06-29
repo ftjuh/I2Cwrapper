@@ -289,7 +289,6 @@ void setup()
     while (true) {}
   }  
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
   
   stepper.attach(); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5
   // attach() replaces the AccelStepper constructor, so it could also be called like this: 

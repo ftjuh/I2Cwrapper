@@ -15,7 +15,7 @@
 uint8_t i2cAddress = 0x08;
 
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
-PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the target
+PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the controller
 
 /*
  * Arduino Uno/Nano example pins
@@ -61,7 +61,6 @@ void setup()
     Serial.println("Target found as expected. Proceeding.\n");
   }
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   pins.pinMode(dPinIn, INPUT); // INPUT_PULLUP will also work
   pins.pinMode(dPinOut, OUTPUT);

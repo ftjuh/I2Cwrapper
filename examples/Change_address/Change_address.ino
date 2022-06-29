@@ -6,6 +6,11 @@
   Just I2C-connect any target device with the AccelStepperI2C firmware
   and flash this demo to the controller.
 
+  Note that if sth. goes wrong or if you interrupt this sketch prematurely,
+  you'll end up with a target using the wrong address. You'll need to switch
+  oldAddress and newAddress, then, and interrupt it again to make the old 
+  address stick.
+
 */
 
 
@@ -28,7 +33,7 @@ void setup()
   Serial.begin(115200);
   while (!Serial) {}
 
-  Serial.println("\n\n\nAccelStepperI2C change I2C address demo\n\n");
+  Serial.println("\n\n\nI2Cwrapper change I2C address demo\n\n");
   delay(me);
 
   Serial.println("Trying to reach target at old address...");
@@ -48,7 +53,7 @@ void setup()
     wrapper.changeI2Caddress(newAddress);
     delay(me);
 
-    Serial.println("\nAddress changed. Rebooting target....\n");
+    Serial.println("\nAddress changed. Resetting target....\n");
     wrapper.reset();
     delay(me);
 
@@ -63,7 +68,7 @@ void setup()
       Serial.print(newAddress); Serial.println("!\n\n");
       delay(me);
 
-      Serial.println("Changing back to old address and rebooting...\n");
+      Serial.println("Changing back to old address and resetting target again...\n");
       wrapperNew.changeI2Caddress(oldAddress);
       delay(me);
       wrapperNew.reset();
@@ -82,7 +87,7 @@ void setup()
     }
   } else {
     Serial.print("Target not found at old address ");
-    Serial.print(oldAddress); Serial.println(", please check your connections and reboot.");
+    Serial.print(oldAddress); Serial.println(", please check your connections and restart.");
   }
   Serial.println("\n\nFinished.");
 }
