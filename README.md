@@ -35,7 +35,7 @@ The I2Cwrapper framework consists of **four basic components.** The first two dr
    - transmission **error control** with CRC8-checksums, 
    - different ways for setting the target's **I2C address**: fixed address; EEPROM stored; and (not implemented yet) read from hardware pins,
    - a controller **interrupt** mechanism which modules can use to alert the master proactively,
-   - triggering a **target reset**.
+   - triggering a **target reset** (i.e. re-initialization to initial state).
 2. **Firmware modules** that implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.
    - Modules exist as separate **include files**, e.g. [`ServoI2C_firmware.h`](firmware/ServoI2C_firmware.h), and are **selected** for compilation via the [`firmware_modules.h`](firmware/firmware_modules.h) file.
    - Modules don't have to worry about the I2C overhead but can **concentrate on what's important**: interpreting and reacting to the controller device's commands and requests.

@@ -160,9 +160,10 @@ void changeI2CstateTo(I2Cstates newState) {
       break;
   }
 #endif
-/*
-   Inject module code
-*/
+
+  /*
+     Inject module code for I2C state change
+  */
 #define MF_STAGE MF_STAGE_I2CstateChange
 #include "firmware_modules.h"
 #undef MF_STAGE
@@ -173,7 +174,7 @@ void changeI2CstateTo(I2Cstates newState) {
    EEPROM stuff
 */
 
-#define EEPROM_OFFSET_I2C_ADDRESS 0 // where in eeprom is the I2C address stored, if any? [1 CRC8 + 4 marker + 1 address = 6 bytes]
+#define EEPROM_OFFSET_I2C_ADDRESS 0 // where in eeprom is the I2C address stored, if any? [1 CRC8 + 4 marker + 1 address = 6 bytes] // @todo why is this a macro? Change to const later.
 const uint32_t eepromI2CaddressMarker = 0x12C0ACCF; // arbitrary 32bit marker proving that next byte in EEPROM is in fact an I2C address
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
 const uint32_t eepromUsedSize = 6; // total bytes of EEPROM used by us
@@ -244,12 +245,13 @@ void storeI2C_address(uint8_t newAddress)
    note: The interrupt pin is global, as there is only one shared by all modules
    and units. However, modules can implement them so that interrupts can be
    enabled for each unit seperately,
+   Note: these variables are initialized during setup() in initializeFirmware().
 */
 
-int8_t interruptPin = -1; // -1 for undefined
-bool interruptActiveHigh = true;
-uint8_t interruptSource = 0xF;
-uint8_t interruptReason = interruptReason_none;
+int8_t interruptPin;
+bool interruptActiveHigh;
+uint8_t interruptSource;
+uint8_t interruptReason;
 
 /*!
    @brief Interrupt controller if an interrupt pin has been set and, optionally,
@@ -286,22 +288,24 @@ void clearInterrupt()
 
 
 /*
-    Reset stuff
+    Reset/initialization stuff
 */
 
-void resetFunc()
+// Put core firmware and modules (back) to initial state. This is used by setup() and resetCmd
+void initializeFirmware()
 {
-#if defined(ARDUINO_ARCH_AVR)
-  // The watchdog method supposedly is the preferred one, however it did not make my Nano restart normally,
-  // I think maybe it got stuck in the bootloader.
-  // cli();
-  // wdt_enable(WDTO_30MS);
-  // for (;;);
-  // so let's just go for the stupid version, it should work fine for the firmware:
-  asm volatile (" jmp 0");
-#elif defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  ESP.restart();
-#endif
+  
+  // reset/initialize interrupt subsystem
+  clearInterrupt();
+  interruptPin = -1; // -1 for undefined
+  interruptActiveHigh = true;
+  interruptSource = 0xF;
+  interruptReason = interruptReason_none;
+  
+  // empty buffers
+  bufferIn->reset();
+  bufferOut->reset();
+
 }
 
 
@@ -313,7 +317,7 @@ void resetFunc()
 #include "firmware_modules.h"
 #undef MF_STAGE
 
-// Forward declarations. Without it the Arduino magic will be confused by the compiler directives.
+// Forward declarations. Without it the Arduino magic will be confused by the IRAM_ATTR stuff.
 // Not sure, if the IRAM stuff needs to happen here already, but I guess it won't harm.
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
 void IRAM_ATTR receiveEvent(int howMany);
@@ -368,6 +372,8 @@ void setup()
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
 
+  initializeFirmware();
+  
   changeI2CstateTo(readyForCommand);
 
 }
@@ -492,18 +498,21 @@ void processMessage(uint8_t len)
 
       case resetCmd: {
           if (i == 0) { // no parameters
-            log("\n\n---> Resetting\n\n");
+            log("\n\n---> Resetting firmware and modules to initial state\n\n");
+            changeI2CstateTo(initializing); // ignore interrupts during reset
 
-            // Inject modules' reset code
+            // Inject modules' reset code first
 #define MF_STAGE MF_STAGE_reset
 #include "firmware_modules.h"
 #undef MF_STAGE
 
-          }
+            initializeFirmware(); // then reset firmware to initial state
+
 #if defined(DEBUG)
-          Serial.flush();
+            Serial.flush();
 #endif
-          resetFunc();
+            changeI2CstateTo(readyForCommand); // ready again
+          }
         }
         break;
 
@@ -620,7 +629,7 @@ void processMessage(uint8_t len)
 /**************************************************************************/
 
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
-void IRAM_ATTR receiveEvent(int howMany) 
+void IRAM_ATTR receiveEvent(int howMany)
 #else
 void receiveEvent(int howMany)
 #endif
@@ -631,9 +640,9 @@ void receiveEvent(int howMany)
 #endif // DIAGNOSTICS
 
 
-/*
-   Inject module receiveEvent() code
-*/
+  /*
+     Inject module receiveEvent() code
+  */
 #define MF_STAGE MF_STAGE_receiveEvent
 #include "firmware_modules.h"
 #undef MF_STAGE
@@ -648,7 +657,7 @@ void receiveEvent(int howMany)
         bufferOut->reset();
         changeI2CstateTo(readyForCommand); // not really needed for fall through, but feels cleaner
       }
-    [[fallthrough]];
+      [[fallthrough]];
 
 
     case readyForCommand:  { // this is the expected state when a receiveEvent happens
@@ -757,9 +766,9 @@ void requestEvent()
 #endif // DIAGNOSTICS
 
 
-/*
-   Inject module receiveEvent() code
-*/
+  /*
+     Inject module receiveEvent() code
+  */
 #define MF_STAGE MF_STAGE_requestEvent
 #include "firmware_modules.h"
 #undef MF_STAGE

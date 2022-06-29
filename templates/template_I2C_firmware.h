@@ -158,9 +158,12 @@ log("###template### module enabled.\n");
 /*
  * (6) reset event
  * 
- * This code will be called if the target device is to perform a reset via I2C 
- * command. Use it to do any necessary cleanup, and to put the device in a 
- * defined initial state.
+ * This code will be called if the target device is to perform a (soft) reset 
+ * via I2C command. Here, the module needs to free any ressources it has allocated 
+ * and put any hardware under its rule in its initial state. Note: From v0.3.0
+ * on, no hardware reset is performed any more. So it is essential that after 
+ * calling this code, the target device presents itself as a clean slate to the
+ * controller, just like after power up.
  * 
  */
 #if MF_STAGE == MF_STAGE_reset

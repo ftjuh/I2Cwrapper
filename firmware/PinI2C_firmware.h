@@ -13,23 +13,49 @@
  *  published by the Free Software Foundation, version 2.
  */
 
+
+/*
+   (1) includes
+*/
+
 #if MF_STAGE == MF_STAGE_includes
 #include <PinI2C.h>
 #endif
 
 
+/*
+   (2) declarations
+*/
+
 #if MF_STAGE == MF_STAGE_declarations
+
+// we need to track all used pins to be able to reset them if needed
+uint8_t usedPins[NUM_DIGITAL_PINS]; // number of available pins on this platform
+uint8_t numUsedPins = 0;
+
 #endif
 
+
+/*
+   (3) setup() function
+*/
 
 #if MF_STAGE == MF_STAGE_setup
   log("PinI2C module enabled.\n");
 #endif
 
 
+/*
+   (4) main loop() function
+*/
+
 #if MF_STAGE == MF_STAGE_loop
 #endif
 
+
+/*
+   (5) processMessage() function
+*/
 
 #if MF_STAGE == MF_STAGE_processMessage
 
@@ -39,6 +65,8 @@
             uint8_t mode; bufferIn->read(mode);
             log("pinMode("); log(pin); log(", "); log(mode); log(")\n\n");
             pinMode(pin, mode);
+            usedPins[numUsedPins++] = pin; // track this pin to be able to reset it later
+            numUsedPins %= NUM_DIGITAL_PINS; // in case the controller allocates more pins than available...
           }
         }
         break;
@@ -71,7 +99,7 @@
       case pinAnalogWriteCmd: {
           if (i == 3) { // 1 uint8_t, 1 int16_t ("int")
             uint8_t pin; bufferIn->read(pin);
-            int16_t value; bufferIn->read(value);
+            int16_t value = 0; bufferIn->read(value);
             analogWrite(pin, value);
           }
         }
@@ -87,5 +115,18 @@
         break;
 #endif // defined(ARDUINO_ARCH_AVR)
 
-
 #endif
+
+
+/*
+   (6) reset event
+*/
+
+#if MF_STAGE == MF_STAGE_reset
+
+for (uint8_t i = 0; i < numUsedPins; i++) {
+  pinMode(usedPins[i], INPUT); // pin default state (https://www.arduino.cc/en/Tutorial/Foundations/DigitalPins), will also turn it off, if it was high output before
+}
+numUsedPins = 0;
+
+#endif // MF_STAGE_reset

@@ -557,7 +557,12 @@ break;
 for (uint8_t j = 0; j < numSteppers; j++) {
   steppers[j].stepper->stop();
   steppers[j].stepper->disableOutputs();
+  for (uint8_t k = 0; k < steppers[j].numEndstops; k++) {   // reset endstops
+    pinMode(steppers[j].endstops[k].pin, INPUT); // INPUT is Arduino default
+  }
+  delete steppers[j].stepper; // destroy object allocated earlier with new(). Note: will throw a compiler warning, as AccelStepper has no virtual destructor. This is without consequence, as we're not using the class polymorphically.
 }
+numSteppers = 0;
 #endif // MF_STAGE_reset
 
 
