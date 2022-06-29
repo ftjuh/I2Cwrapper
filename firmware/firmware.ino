@@ -239,6 +239,25 @@ void storeI2C_address(uint8_t newAddress)
   log("\n");
 }
 
+// Forward declarations. Without it the Arduino magic will be confused by the IRAM_ATTR stuff.
+// Not sure, if the IRAM stuff needs to happen here already, but I guess it won't harm.
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
+void IRAM_ATTR receiveEvent(int howMany);
+void IRAM_ATTR requestEvent();
+#else
+void receiveEvent(int howMany);
+void requestEvent();
+#endif
+
+
+// outsourced into function, as it is needed by setup() and reset code
+void startI2C() {
+  uint8_t i2c_address = retrieveI2C_address();
+  Wire.begin(i2c_address);
+  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
+  Wire.onReceive(receiveEvent);
+  Wire.onRequest(requestEvent);
+}
 
 /*
    Interrupt (to controller) stuff
@@ -294,14 +313,14 @@ void clearInterrupt()
 // Put core firmware and modules (back) to initial state. This is used by setup() and resetCmd
 void initializeFirmware()
 {
-  
+
   // reset/initialize interrupt subsystem
   clearInterrupt();
   interruptPin = -1; // -1 for undefined
   interruptActiveHigh = true;
   interruptSource = 0xF;
   interruptReason = interruptReason_none;
-  
+
   // empty buffers
   bufferIn->reset();
   bufferOut->reset();
@@ -316,16 +335,6 @@ void initializeFirmware()
 #define MF_STAGE MF_STAGE_declarations
 #include "firmware_modules.h"
 #undef MF_STAGE
-
-// Forward declarations. Without it the Arduino magic will be confused by the IRAM_ATTR stuff.
-// Not sure, if the IRAM stuff needs to happen here already, but I guess it won't harm.
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
-void IRAM_ATTR receiveEvent(int howMany);
-void IRAM_ATTR requestEvent();
-#else
-void receiveEvent(int howMany);
-void requestEvent();
-#endif
 
 
 
@@ -366,14 +375,10 @@ void setup()
   bufferIn = new SimpleBuffer; bufferIn->init(I2CmaxBuf);
   bufferOut = new SimpleBuffer; bufferOut->init(I2CmaxBuf);
 
-  uint8_t i2c_address = retrieveI2C_address();
-  Wire.begin(i2c_address);
-  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
-  Wire.onReceive(receiveEvent);
-  Wire.onRequest(requestEvent);
+  startI2C();
 
   initializeFirmware();
-  
+
   changeI2CstateTo(readyForCommand);
 
 }
@@ -508,10 +513,17 @@ void processMessage(uint8_t len)
 
             initializeFirmware(); // then reset firmware to initial state
 
+            // restart Wire and reread our current I2C address
+#ifndef WIRE_HAS_END
+#error "Sorry, the Wire library of your platform has no Wire.end() implementation"
+#endif
+            Wire.end();
+            startI2C(); // will use updated I2C address, if it has been changed
+
 #if defined(DEBUG)
             Serial.flush();
 #endif
-            changeI2CstateTo(readyForCommand); // ready again
+            // changeI2CstateTo(readyForCommand); // ready again // no, will be changed at the end of processMessage()
           }
         }
         break;
