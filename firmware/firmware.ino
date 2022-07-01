@@ -41,14 +41,6 @@
 /************* firmware configuration settings **************************/
 /************************************************************************/
 
-/*
-   I2C address
-   Change this if you want to flash the firmware with a different I2C address.
-   Alternatively, you can use setI2Caddress() from the library to change it later
-*/
-const uint8_t defaultAddress = 0x08; // default
-
-
 /*!
   @brief Uncomment this to enable time keeping diagnostics. You probably should disable
   debugging, as Serial output will distort the measurements severely. Diagnostics
@@ -207,7 +199,7 @@ uint8_t retrieveI2C_address()
   if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
     return storedAddress;
   } else {
-    return defaultAddress;
+    return I2CwrapperDefaultAddress;
   }
 }
 
