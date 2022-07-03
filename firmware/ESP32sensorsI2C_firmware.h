@@ -108,7 +108,7 @@ case ESP32sensorsTouchSetCyclesCmd: {
     uint16_t measure; bufferIn->read(measure);
     uint16_t sleep; bufferIn->read(sleep);
     if (!ESP32sensorsTouchSetCyclesChanged) { // store initial values for later restore in reset code
-      touch_pad_get_meas_time(&ESP32sensorsTouchSetCycles_old_sleep_cycle, &ESP32sensorsTouchSetCycles_old_meas_cycle); 
+      touch_pad_get_meas_time(&ESP32sensorsTouchSetCycles_old_sleep_cycle, &ESP32sensorsTouchSetCycles_old_meas_cycle);
       ESP32sensorsTouchSetCyclesChanged = true;
     }
     touchSetCycles(measure, sleep);

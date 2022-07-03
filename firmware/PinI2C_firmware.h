@@ -1,17 +1,17 @@
 /*!
- *  @file PinI2C_firmware.h
- *  @brief Firmware module for the I2Cwrapper firmare.
- *  
- *  Provides access to the target's analog and digital input and output pins.
- *  Mimicks the standard Arduino functions like pinMode(), digitalRead(), etc.
- * 
- *  @section author Author
- *  Copyright (c) 2022 juh
- *  @section license License
- *  This program is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU General Public License as
- *  published by the Free Software Foundation, version 2.
- */
+    @file PinI2C_firmware.h
+    @brief Firmware module for the I2Cwrapper firmare.
+
+    Provides access to the target's analog and digital input and output pins.
+    Mimicks the standard Arduino functions like pinMode(), digitalRead(), etc.
+
+    @section author Author
+    Copyright (c) 2022 juh
+    @section license License
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation, version 2.
+*/
 
 
 /*
@@ -41,7 +41,7 @@ uint8_t numUsedPins = 0;
 */
 
 #if MF_STAGE == MF_STAGE_setup
-  log("PinI2C module enabled.\n");
+log("PinI2C module enabled.\n");
 #endif
 
 
@@ -59,60 +59,60 @@ uint8_t numUsedPins = 0;
 
 #if MF_STAGE == MF_STAGE_processMessage
 
-      case pinPinModeCmd: {
-          if (i == 2) { // 2 uint8_t
-            uint8_t pin; bufferIn->read(pin);
-            uint8_t mode; bufferIn->read(mode);
-            log("pinMode("); log(pin); log(", "); log(mode); log(")\n\n");
-            pinMode(pin, mode);
-            usedPins[numUsedPins++] = pin; // track this pin to be able to reset it later
-            numUsedPins %= NUM_DIGITAL_PINS; // in case the controller allocates more pins than available...
-          }
-        }
-        break;
+case pinPinModeCmd: {
+  if (i == 2) { // 2 uint8_t
+    uint8_t pin; bufferIn->read(pin);
+    uint8_t mode; bufferIn->read(mode);
+    log("pinMode("); log(pin); log(", "); log(mode); log(")\n\n");
+    pinMode(pin, mode);
+    usedPins[numUsedPins++] = pin; // track this pin to be able to reset it later
+    numUsedPins %= NUM_DIGITAL_PINS; // in case the controller allocates more pins than available...
+  }
+}
+break;
 
-      case pinDigitalReadCmd: {
-          if (i == 1) { // 1 uint8_t
-            uint8_t pin; bufferIn->read(pin);            
-            bufferOut->write((int16_t)digitalRead(pin)); // int is not 2 bytes on all Arduinos (sigh)
-          }
-        }
-        break;
+case pinDigitalReadCmd: {
+  if (i == 1) { // 1 uint8_t
+    uint8_t pin; bufferIn->read(pin);
+    bufferOut->write((int16_t)digitalRead(pin)); // int is not 2 bytes on all Arduinos (sigh)
+  }
+}
+break;
 
-      case pinDigitalWriteCmd: {
-          if (i == 2) { // 2 uint8_t
-            uint8_t pin; bufferIn->read(pin);
-            uint8_t value; bufferIn->read(value);
-            digitalWrite(pin, value);
-          }
-        }
-        break;
+case pinDigitalWriteCmd: {
+  if (i == 2) { // 2 uint8_t
+    uint8_t pin; bufferIn->read(pin);
+    uint8_t value; bufferIn->read(value);
+    digitalWrite(pin, value);
+  }
+}
+break;
 
-      case pinAnalogReadCmd: {
-          if (i == 1) { // 1 uint8_t
-            uint8_t pin; bufferIn->read(pin);            
-            bufferOut->write((int16_t)analogRead(pin)); // int is not 2 bytes on all Arduinos (sigh)
-          }
-        }
-        break;
+case pinAnalogReadCmd: {
+  if (i == 1) { // 1 uint8_t
+    uint8_t pin; bufferIn->read(pin);
+    bufferOut->write((int16_t)analogRead(pin)); // int is not 2 bytes on all Arduinos (sigh)
+  }
+}
+break;
 
-      case pinAnalogWriteCmd: {
-          if (i == 3) { // 1 uint8_t, 1 int16_t ("int")
-            uint8_t pin; bufferIn->read(pin);
-            int16_t value = 0; bufferIn->read(value);
-            analogWrite(pin, value);
-          }
-        }
-        break;
+case pinAnalogWriteCmd: {
+  if (i == 3) { // 1 uint8_t, 1 int16_t ("int")
+    uint8_t pin; bufferIn->read(pin);
+    int16_t value = 0; bufferIn->read(value);
+    analogWrite(pin, value);
+  }
+}
+break;
 
 #if defined(ARDUINO_ARCH_AVR) // ESPs don't have analogReference()
-      case pinAnalogReferenceCmd: {
-          if (i == 1) { //1 uint8_t
-            uint8_t mode; bufferIn->read(mode);
-            analogReference(mode);
-          }
-        }
-        break;
+case pinAnalogReferenceCmd: {
+  if (i == 1) { //1 uint8_t
+    uint8_t mode; bufferIn->read(mode);
+    analogReference(mode);
+  }
+}
+break;
 #endif // defined(ARDUINO_ARCH_AVR)
 
 #endif

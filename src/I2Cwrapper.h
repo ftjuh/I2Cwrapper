@@ -30,8 +30,9 @@
 #endif // log
 
 
-const uint8_t I2CmaxBuf = 20; // upper limit of send and receive buffer(s), includes 1 byte for CRC8 and 2 bytes for msg header (command + unit)
+const uint8_t I2CwrapperDefaultAddress = 0x08; // default I2C address
 
+const uint8_t I2CmaxBuf = 20; // upper limit of send and receive buffer(s), includes 1 byte for CRC8 and 2 bytes for msg header (command + unit)
 
 // ms to wait between I2C communication, can be changed by setI2Cdelay()
 const unsigned long I2CdefaultDelay = 20; // must be <256

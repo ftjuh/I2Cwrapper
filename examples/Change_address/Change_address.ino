@@ -1,10 +1,10 @@
 /*
-  AccelStepperI2C - Change I2C address demo
+  I2Cwrapper - Change I2C address demo (needs addressFromFlash module enabled)
   (c) juh 2022
 
   Test and demonstrate changing the I2C address permanently.
-  Just I2C-connect any target device with the AccelStepperI2C firmware
-  and flash this demo to the controller.
+  Just I2C-connect any target device with the I2Cwrapper firmware ***including the
+  _addressFromFlash_firmware.h module*** and flash this demo to the controller.
 
   Note that if sth. goes wrong or if you interrupt this sketch prematurely,
   you'll end up with a target using the wrong address. You'll need to switch
@@ -19,7 +19,7 @@
 #include <Wire.h>
 
 const uint8_t oldAddress = 0x08;
-const uint8_t newAddress = 0x07;
+const uint8_t newAddress = 0x09;  // acceptable address range is 0x08 - 0x77
 const int me = 2500; // delay between steps
 
 I2Cwrapper wrapper(oldAddress);
@@ -83,7 +83,7 @@ void setup()
       }
     } else {
       Serial.print("Target *not* found at new address ");
-      Serial.print(newAddress); Serial.println(", something went wrong");
+      Serial.print(newAddress); Serial.println(", something went wrong (did you think of enabling the addressFromFlash module in the target firmware?)");
     }
   } else {
     Serial.print("Target not found at old address ");
