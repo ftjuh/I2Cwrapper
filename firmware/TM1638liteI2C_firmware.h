@@ -109,7 +109,7 @@ case TM1638liteSetLEDCmd: {
 break;
 
 
-// TM1638liteDisplayTextCmd is missing by design. It's implemented locally in 
+// TM1638liteDisplayTextCmd is missing by design. It's implemented locally in
 // the controller library and uses TM1638liteDisplayASCII()
 
 
