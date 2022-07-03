@@ -227,7 +227,15 @@ Feature modules extend or modify the firmware with additional features. As they 
 
 ### Status LED
 
-Including the `_statusLED_firmware.h` in `firmware_modules.h`will make the target's built in LED (`LED_BUILTIN`) flash briefly when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see [Error handling](#error-handling)). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in `firmware_modules.h`to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.
+Including the `_statusLED_firmware.h` in `firmware_modules.h`will make the target's built in LED (`LED_BUILTIN`) **flash briefly when an external interrupt** (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see [Error handling](#error-handling)). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in `firmware_modules.h`to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.
+
+### I2C address modules
+
+To make the target device **use a different I2C address** than the default (0x08), you can include one (and only one) of the following feature modules:
+
+* `_addressFixed_firmware.h`: use a fixed I2C address for the target other than the default
+* `addressFromPins_firmware.h`: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup
+* `_addressFromFlash_firmware.h`: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.
 
 # How to add new modules
 
@@ -339,8 +347,8 @@ void loopClassic()
 # Planned improvements
 
 - ~~Self-adjusting I2C-delay~~
-- Determine I2C-address from hardware pins
-- Move I2C-address options (fixed, EEPROM, hardware pins) to modules
+- ~~Determine I2C-address from hardware pins~~
+- ~~Move I2C-address options (fixed, EEPROM, hardware pins) to modules~~
 - ~~Attiny support (memory will be an issue, though)~~ 
 
 # Author

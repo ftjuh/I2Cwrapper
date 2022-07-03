@@ -15,11 +15,10 @@
    @todo Reduce memory use to make it fit into an 8k Attiny
 */
 
-// #define DEBUG // Uncomment this to enable library debugging output on Serial
+#define DEBUG // Uncomment this to enable library debugging output on Serial
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <EEPROM.h>
 #include <I2Cwrapper.h>
 
 
@@ -38,11 +37,12 @@
 
 
 /************************************************************************/
-/************* firmware configuration settings **************************/
 /************************************************************************/
 
+uint8_t i2c_address = I2CwrapperDefaultAddress;  // this target's I2C address, will later be set by module or left to this default
+
 /*!
-  @brief Uncomment this to enable time keeping diagnostics. You probably should disable
+  @brief [deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable
   debugging, as Serial output will distort the measurements severely. Diagnostics
   take a little extra time and ressources, so you best disable it in production
   environments.
@@ -50,10 +50,7 @@
 */
 //#define DIAGNOSTICS
 
-/*!
-  @brief Uncomment this to enable firmware debugging output on Serial.
-*/
-//#define DEBUG
+
 
 /************************************************************************/
 /******* end of firmware configuration settings **************************/
@@ -152,7 +149,6 @@ void changeI2CstateTo(I2Cstates newState) {
       break;
   }
 #endif
-
   /*
      Inject module code for I2C state change
   */
@@ -162,77 +158,8 @@ void changeI2CstateTo(I2Cstates newState) {
 }
 
 
-/*
-   EEPROM stuff
-*/
-
-#define EEPROM_OFFSET_I2C_ADDRESS 0 // where in eeprom is the I2C address stored, if any? [1 CRC8 + 4 marker + 1 address = 6 bytes] // @todo why is this a macro? Change to const later.
-const uint32_t eepromI2CaddressMarker = 0x12C0ACCF; // arbitrary 32bit marker proving that next byte in EEPROM is in fact an I2C address
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-const uint32_t eepromUsedSize = 6; // total bytes of EEPROM used by us
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-
-
-/*!
-  @brief Read a stored I2C address from EEPROM. If there is none, use default.
-*/
-uint8_t retrieveI2C_address()
-{
-  SimpleBuffer b;
-  b.init(8);
-  // read 6 bytes from eeprom: [0]=CRC8; [1-4]=marker; [5]=address
-  //log("Reading from EEPROM: ");
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.begin(256);
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  for (byte i = 0; i < 6; i++) {
-    b.buffer[i] = EEPROM.read(EEPROM_OFFSET_I2C_ADDRESS + i);
-    // log(b.buffer[i]); log (" ");
-  }
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.end();
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  log("\n");
-  // we wrote directly to the buffer, so reader idx is still at 1
-  uint32_t markerTest; b.read(markerTest);
-  uint8_t storedAddress; b.read(storedAddress); // now idx will be at 6, so that CRC check below will work
-  if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
-    return storedAddress;
-  } else {
-    return I2CwrapperDefaultAddress;
-  }
-}
-
-
-/*!
-  @brief Write I2C address to EEPROM
-  @note ESP eeprom.h works a bit different from AVRs: https://arduino-esp8266.readthedocs.io/en/3.0.2/libraries.html#eeprom
-*/
-void storeI2C_address(uint8_t newAddress)
-{
-  SimpleBuffer b;
-  b.init(8);
-  b.write(eepromI2CaddressMarker);
-  b.write(newAddress);
-  b.setCRC8();
-  log("Writing to EEPROM: ");
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.begin(32);
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  for (byte i = 0; i < 6; i++) { // [0]=CRC8; [1-4]=marker; [5]=address
-    EEPROM.write(EEPROM_OFFSET_I2C_ADDRESS + i, b.buffer[i]);
-    //EEPROM.put(EEPROM_OFFSET_I2C_ADDRESS + i, b.buffer[i]);
-    //delay(120);
-    log(b.buffer[i]); log (" ");
-  }
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.end(); // end() will also commit()
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  log("\n");
-}
-
-// Forward declarations. Without it the Arduino magic will be confused by the IRAM_ATTR stuff.
-// Not sure, if the IRAM stuff needs to happen here already, but I guess it won't harm.
+// Forward declarations. Without them, the Arduino magic will be confused by the IRAM_ATTR stuff.
+// Not sure if the IRAM stuff needs to happen here already, but I guess it won't harm.
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
 void IRAM_ATTR receiveEvent(int howMany);
 void IRAM_ATTR requestEvent();
@@ -241,15 +168,6 @@ void receiveEvent(int howMany);
 void requestEvent();
 #endif
 
-
-// outsourced into function, as it is needed by setup() and reset code
-void startI2C() {
-  uint8_t i2c_address = retrieveI2C_address();
-  Wire.begin(i2c_address);
-  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
-  Wire.onReceive(receiveEvent);
-  Wire.onRequest(requestEvent);
-}
 
 /*
    Interrupt (to controller) stuff
@@ -329,11 +247,31 @@ void initializeFirmware()
 #undef MF_STAGE
 
 
+// Join I2C bus as target and start the necessary ISRs.
+// This is outsourced to a function, as it is needed by setup() and reset code.
+// Must be placed here after the MF_STAGE_declarations module injection, so that
+// modules can claim I2C address definition by defining I2C_ADDRESS_DEFINED_BY_MODULE.
+void startI2C() {
+
+#ifdef I2C_ADDRESS_DEFINED_BY_MODULE // a module has defined a way to retrieve our address
+  i2c_address = I2C_ADDRESS_DEFINED_BY_MODULE ;
+#endif // otherwise leave the default address 
+
+  if ((i2c_address < 0x08) or (i2c_address > 0x77)) { // prevent invalid address, see https://learn.adafruit.com/i2c-addresses/the-list
+    i2c_address = I2CwrapperDefaultAddress;
+  }
+
+  Wire.begin(i2c_address);
+  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
+  Wire.onReceive(receiveEvent);
+  Wire.onRequest(requestEvent);
+
+}
+
 
 /**************************************************************************/
 /*!
-    @brief Setup system. Retrieve I2C address from EEPROM or default
-    and initialize I2C target.
+    @brief Setup system.
 */
 /**************************************************************************/
 void setup()
@@ -520,15 +458,7 @@ void processMessage(uint8_t len)
         }
         break;
 
-
-      case changeI2CaddressCmd: {
-          if (i == 1) { // 1 uint8_t
-            uint8_t newAddress; bufferIn->read(newAddress);
-            log("Storing new Address "); log(newAddress); log("\n");
-            storeI2C_address(newAddress);
-          }
-        }
-        break;
+      // case changeI2CaddressCmd: { // now outsourced to _addressFromFlash_firmware.h
 
       case setInterruptPinCmd: {
           if (i == 2) {
