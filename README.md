@@ -1,10 +1,14 @@
 # Introduction
 
-I2Cwrapper is a **generic modular framework for Arduino I2C target devices** which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to integrate devices without dedicated I2C interface in an I2C-bus environment.
+I2Cwrapper is a generic modular framework for **Arduino I2C target devices**(1) which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to **integrate peripherals without dedicated I2C interface** in an I2C-bus environment.
 
-The I2Cwrapper **core** consists of an easily extensible firmware framework and a controller library. Together, they take care of the **overhead** necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific **modules**.
+The **I2Cwrapper core** consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific **modules**.
 
-Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
+This is a possible example setup:
+
+![example setup](README.assets/example%20setup.png)
+
+(1) Note that I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
 Download I2Cwrapper [on github.](https://github.com/ftjuh/I2Cwrapper)
 
@@ -22,7 +26,9 @@ Currently, the following modules come shipped with I2Cwrapper in the [firmware s
 
 While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is **nearly identical**, so that adapting existing code for I2C remote control is pretty straightforward.
 
-Generally, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
+If there are no intrinsic resource conflicts, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
+
+v0.3.0 introduced additional [**feature modules**](#feature-modules). They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED or reading the I2C address from hardware pins.
 
 ## Basic components
 
