@@ -1,7 +1,7 @@
 var searchData=
 [
   ['datapin_0',['dataPin',['../_t_m1638lite_8ino.html#ae68db9318c89c4fe768ed7d835b67385',1,'TM1638lite.ino']]],
-  ['defaultaddress_1',['defaultAddress',['../firmware_8ino.html#a2003b6239df3eaf89667542a178aee22',1,'firmware.ino']]],
+  ['defaultresetdelay_1',['defaultResetDelay',['../_i2_cwrapper_8h.html#a1d6006d51ea23f9641a437ce5326b962',1,'I2Cwrapper.h']]],
   ['diagnosticscmd_2',['diagnosticsCmd',['../_accel_stepper_i2_c_8h.html#ac40bdeccbbd41e5714c84a8fb682e376',1,'AccelStepperI2C.h']]],
   ['diagnosticsresult_3',['diagnosticsResult',['../_accel_stepper_i2_c_8h.html#a6b607d8b9107f3a41ac7f92347b8a7d1',1,'AccelStepperI2C.h']]],
   ['dirpin_4',['dirPin',['../_error__checking_8ino.html#add6290aff0847d41da32c1d5fe4cbf45',1,'dirPin():&#160;Error_checking.ino'],['../_interrupt___endstop_8ino.html#add6290aff0847d41da32c1d5fe4cbf45',1,'dirPin():&#160;Interrupt_Endstop.ino'],['../_stepper__and___servo__together_8ino.html#add6290aff0847d41da32c1d5fe4cbf45',1,'dirPin():&#160;Stepper_and_Servo_together.ino']]],

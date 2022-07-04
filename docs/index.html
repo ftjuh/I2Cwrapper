@@ -88,9 +88,11 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Introduction </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a <b>generic modular framework for Arduino I2C target devices</b> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see supported platforms). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to integrate devices without dedicated I2C interface in an I2C-bus environment.</p>
-<p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <b>core</b> consists of an easily extensible firmware framework and a controller library. Together, they take care of the <b>overhead</b> necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific <b>modules</b>.</p>
-<p >Note that <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> uses the <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">current I2C terminology</a> which replaced <em>master</em> with <em>controller</em>, and <em>slave</em> with <em>target</em>.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b>(1) which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see supported platforms). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
+<p >The <b><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core</b> consists of an easily extensible firmware framework and a controller library. Together, they <b>take care of the overhead</b> necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific <b>modules</b>.</p>
+<p >This is a possible example setup:</p>
+<p ><img src="docs/images/example%20setup.png" alt="example setup" class="inline"/></p>
+<p >(1) <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> uses the <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">current I2C terminology</a> which replaced <em>master</em> with <em>controller</em>, and <em>slave</em> with <em>target</em>.</p>
 <p >Download <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a href="https://github.com/ftjuh/I2Cwrapper">on github.</a></p>
 <p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library and the module libraries <a href="https://ftjuh.github.io/I2Cwrapper/index.html">are documented here</a>.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
@@ -99,27 +101,28 @@ Ready to use modules</h1>
 <ul>
 <li><b><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></b>: Control up to eight stepper motors with acceleration control via Mike McCauley's <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/index.html">AccelStepper</a> library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging.</li>
 <li><b><a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></b>: Control servo motors via I2C just like the plain Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo">Servo library</a>.</li>
-<li><b><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></b>: Control the digital and analog in- and output pins of the target device via I2C, similar to an IO-expander. Works just like the plain Arduino digitalRead() etc. commands.</li>
-<li><b><a class="el" href="class_e_s_p32sensors_i2_c.html" title="An I2C wrapper class for ESP32 sensors (touch, temp, hall).">ESP32sensorsI2C</a></b>: Read an ESP32's touch sensors, hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press.</li>
-<li><b>TM1638lite</b>: Read buttons from and control the single and seven-segment LEDs of up to four <a href="https://duckduckgo.com/?q=TM1638+datasheet">TM1638</a> modules like the ubiquitous <a href="https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/">LED&amp;Key module</a> via I2C. Uses Danny Ayers' TM1638lite library.</li>
+<li><b><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></b>: Control the digital and analog in- and output pins of the target device via I2C, similar to an IO-expander. Works just like the plain Arduino <a class="el" href="_pin_i2_c__firmware_8h.html#ac7f5b7d2759eda4979330dd102b8976c">pinMode()</a>, digitalRead(), etc. commands.</li>
+<li><b><a class="el" href="class_e_s_p32sensors_i2_c.html" title="An I2C wrapper class for ESP32 sensors (touch, temp, hall).">ESP32sensorsI2C</a></b>: Read an ESP32's <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/touch_pad.html">touch sensors</a>, hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press.</li>
+<li><b>TM1638lite</b>: Read buttons from and control the single and seven-segment LEDs of up to four <a href="https://duckduckgo.com/?q=TM1638+datasheet">TM1638</a> modules like the ubiquitous <a href="https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/">LED&amp;Key module</a> via I2C. Uses Danny Ayers' <a href="https://www.arduino.cc/reference/en/libraries/tm1638lite/">TM1638lite library</a>.</li>
 </ul>
 <p >While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is <b>nearly identical</b>, so that adapting existing code for I2C remote control is pretty straightforward.</p>
-<p >Generally, modules can be selected in <b>any combination</b> at compile time for a specific target (see below for details). It is easy to <b>add new modules</b> with help of the provided <b>[templates](templates)</b>.</p>
+<p >If there are no intrinsic resource conflicts, modules can be selected in <b>any combination</b> at compile time for a specific target (see below for details). It is easy to <b>add new modules</b> with help of the provided <b>[templates](templates)</b>.</p>
+<p >v0.3.0 introduced additional **feature modules**. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Basic components</h1>
 <p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> framework consists of <b>four basic components.</b> The first two drive the <b>I2C target device</b>:</p>
 <ol type="1">
 <li>A <b>firmware framework</b> for the target device, implemented in the <a href="firmware/firmware.ino"><code>firmware.ino</code></a> sketch. It provides the basic I2C target functionality:<ul>
-<li><b>onReceive</b>() and <b>onRequest</b>() interrupt functions that listen and react to the controller's transmissions,</li>
-<li>a <b>command interpreter</b> that processes the controller's commands received by onReceive() (in traditional I2C hardware this is equivalent to register writes and reads),</li>
-<li>an <b>output Buffer</b> that allows the target to prepare a reply which will be sent upon the next onRequest() event,</li>
+<li><b>onReceive</b>() and <b>onRequest</b>() interrupt service routines (ISRs) which listen and react to the controller's transmissions,</li>
+<li>a <b>command interpreter</b> which processes the controller's commands received by onReceive() (in traditional I2C hardware this is equivalent to register writes and reads),</li>
+<li>an <b>output Buffer</b> which allows the target to prepare a reply which will be sent upon the next onRequest() event,</li>
 <li>transmission <b>error control</b> with CRC8-checksums,</li>
-<li>different ways for setting the target's <b>I2C address</b>: fixed address; EEPROM stored; and (not implemented yet) read from hardware pins,</li>
+<li>different ways for setting the target's <b>I2C address</b>: fixed address; EEPROM stored; and ~~(not implemented yet)~~ read from hardware pins,</li>
 <li>a controller <b>interrupt</b> mechanism which modules can use to alert the master proactively,</li>
-<li>triggering a <b>target reset</b>.</li>
+<li>triggering a <b>target reset</b> (i.e. re-initialization to initial state).</li>
 </ul>
 </li>
-<li><b>Firmware modules</b> that implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.<ul>
+<li><b>Firmware modules</b> which implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.<ul>
 <li>Modules exist as separate <b>include files</b>, e.g. <a href="firmware/ServoI2C_firmware.h"><code>ServoI2C_firmware.h</code></a>, and are <b>selected</b> for compilation via the <a href="firmware/firmware_modules.h"><code>firmware_modules.h</code></a> file.</li>
 <li>Modules don't have to worry about the I2C overhead but can <b>concentrate on what's important</b>: interpreting and reacting to the controller device's commands and requests.</li>
 <li>Modules can "inject" their code at different places in the firmware (e.g. setup, main loop, command interpreter), so that there is a <b>high degree of flexibility</b>.</li>
@@ -144,7 +147,7 @@ Limitations</h1>
 <h2>Limitations for end users</h2>
 <ul>
 <li>Arduinos aren't perfect I2C target devices. Not all Arduino hardware platforms have dedicated I2C hardware, which entails possible performance issues (see Supported platforms).</li>
-<li>The Arduino's Wire library doesn't support <a href="https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html">clock stretching</a> in a way that allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the <b>target is not flooded</b> with commands or requests with too little time to handle them. <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> provides an adjustable minimum delay between transmissions to handle that problem.</li>
+<li>The Arduino's Wire library doesn't support <a href="https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html">clock stretching</a> in a way which allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the <b>target is not flooded</b> with commands or requests with too little time to handle them. <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> provides an adjustable minimum delay between transmissions to handle that problem.</li>
 </ul>
 <h2>Limitations for module authors</h2>
 <ul>
@@ -157,6 +160,8 @@ Usage</h1>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Installation</h2>
 <p ><strike>Install <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> from the Arduino library manager (not available yet).</strike> Until <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is picked up by the Arduino library manager, you'll have to <a href="https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation">install it manually</a> by copying the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> folder to your Arduino library folder and (re)starting the Arduino software. You'll find an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> examples folder in the usual menu after successful installation.</p>
+<p >If you haven't done so yet, you'll also have to install the <b>libraries needed by the modules</b> you want to use, e.g. AccelSteppper, TM1638lite, etc. the usual way from the Arduino library manager.</p>
+<p >If you've used the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Configuring and uploading the firmware</h2>
 <ul>
@@ -172,12 +177,12 @@ Configuring and uploading the firmware</h2>
 <li>Depending on the module(s) you selected, load <b>one of the examples</b> from the example folder and upload it to your controller device. Use <code><a class="el" href="_pin__control_8ino.html">Pin_control.ino</a></code> for a first test with the <code><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></code> module.</li>
 <li><b>Configure and upload</b> the example sketch or your own controller sketch to another Arduino-like which will act as I2C-controller.</li>
 <li><b>Connect the I2C bus</b> of both devices (SDA, SCL, and GND). Don't forget I2C pullups and, and if needed, level-shifters. Also, connect V+ &lt;-&gt; V+ to power one board from the other, if needed.</li>
-<li><b>Run</b> the controller sketch.</li>
+<li>Open the controller sketch's serial output and <b>run</b> the controller sketch.</li>
 </ul>
 <p >Have a look at the <a href="https://github.com/ftjuh/AccelStepperI2C/tree/controller/examples">examples</a> for details.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
 Usage by the controller device/sketch</h2>
-<p >Simply include the <b>controller libraries</b> for the module(s) you compiled into your target firmware and use them as shown in the documentation and example sketches of the respective modules.</p>
+<p >Simply include the <b>controller libraries</b> for the module(s) you compiled into your target firmware (e.g. <code><a class="el" href="_servo_i2_c_8h.html" title="Arduino library for I2C-control of servo motors connected to another Arduino which runs the I2Cwrappe...">ServoI2C.h</a></code>) and use them as shown in the documentation and example sketches of the respective modules.</p>
 <h3>Addressing target pins</h3>
 <p >Many functions take target pin numbers as an argument, e.g. when you define an interrupt pin with <code><a class="el" href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde" title="Define a global interrupt pin which can be used by device units (steppers, servos....">I2Cwrapper::setInterruptPin()</a></code>. If controller and target devices run on <b>different hardware platforms</b> (e.g. ESP8266 and ATtiny85), you'll have to be careful that the controller addresses the target's side pins correctly. Pin constants like <code>A0</code>, <code>D1</code>, <code>LED_BUILTIN</code> etc. might not be known at the controller's side or, even worse, might represent a different pin number. In this case it is recommended to use the raw pin numbers. They are defined in the respective platform's <code>pins_arduino.h</code> file, or can easily be found out by running <code>Serial.println(A0);</code> etc. on the target platform.</p>
 <h3>Error handling</h3>
@@ -194,27 +199,24 @@ Usage by the controller device/sketch</h2>
 </ul>
 <p >The respective counter(s) will be reset to 0 with each invocation of these methods.</p>
 <p >See the <a href="examples/Error_checking/Error_checking.ino">Error_checking.ino</a> example for further illustration.</p>
-<p >In v0.3.0 an I2C state machine was introduced to explicitly handle irregular sequences of events, e.g. a <code><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent()</a></code> happening while a <code><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a></code> was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive so that it won't need to be reset manually when starting over. See <a href="docs/images/I2C_state_machine.svg">I2C state machine.svg</a> for details.</p>
+<p >In v0.3.0 an <b>I2C state machine</b> was introduced to explicitly handle irregular sequences of events, e.g. a <code><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent()</a></code> happening while a <code><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a></code> was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive. See <a href="docs/images/I2C_state_machine.svg">I2C state machine.svg</a> for details on the state machine's flow of states.</p>
 <h3>Interrupt mechanism</h3>
-<p >To keep the controller from having to constantly poll the target device for some new event (e.g. an input pin change), the controller can use the <code><a class="el" href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde" title="Define a global interrupt pin which can be used by device units (steppers, servos....">I2Cwrapper::setInterruptPin()</a></code> function to tell the target to use one if its pins as an <b>interrupt line</b>. The target may use it if it wants to inform the controller about some new event. Of course, an additional hardware line connecting this target pin and a free, interrupt-capable controller pin is needed to use the interrupt mechanism.</p>
+<p >To keep the controller from having to constantly poll the target device for some new event (e.g. an input pin change) over I2C, the controller can use the <code><a class="el" href="class_i2_cwrapper.html#a32301b5659f124217e59413192849dde" title="Define a global interrupt pin which can be used by device units (steppers, servos....">I2Cwrapper::setInterruptPin()</a></code> function to tell the target to use one if the target pins as an <b>interrupt line</b>. The target's modules may use it if they want to inform the controller about some new event. Of course, an additional hardware line connecting this target pin and a free, interrupt-capable controller pin is needed to use the interrupt mechanism.</p>
 <p >The <b>controller</b> will have to implement an interrupt service routine (ISR) to listen to the respective controller pin. After having received an interrupt, it must call <code><a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge to target that interrupt has been received, so that the target can clear the interupt con...">I2Cwrapper::clearInterrupt()</a></code> to clear the target's interrupt state and find out about the reason that caused the interrupt.</p>
 <p ><b>Interrupt reasons</b> are specific for a module. A module can send an interrupt to the controller with the <code><a class="el" href="firmware_8ino.html#a4f3ec17f4d90ce7c4b1714e8e5931452" title="Interrupt controller if an interrupt pin has been set and, optionally, define a source and reason hav...">triggerInterrupt()</a></code> function which is provided by the <code><a class="el" href="firmware_8ino.html" title="Generic firmware framework for I2C targets with modular functionality, built around the I2Cwrapper li...">firmware.ino</a></code> framework. It can provide additional information on the interrupt reason and the target device's (sub)unit that caused the interrupt.</p>
 <p >See the example <a href="examples/Interrupt_Endstop/Interrupt_Endstop.ino">Interrupt_Endstop</a> for further illustration.</p>
 <h3>Adjusting the I2C delay</h3>
 <p >If a controller <b>sends commands too quickly</b> or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer.</p>
-<p >That's why <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> makes sure that a <b>specified minimum delay</b> is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered and for many applications there is no need to lower it. However, depending on debugging, target device speed, target task execution time, bus speed, and the length of commands sent, the default can be adjusted manually to be considerably lower with the <code><a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2" title="Define a minimum duration of time that the controller keeps between I2C transmissions....">I2Cwrapper::setI2Cdelay()</a></code> function. Typically, 4 to 6 ms are easily on the safe side.</p>
+<p >That's why <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> makes sure that a <b>specified minimum delay</b> is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered and for many not time-critical applications there is no need to lower it. However, depending on debugging, target device speed, target task execution time, bus speed, and the length of commands sent, the default can be adjusted manually to be considerably lower with the <code><a class="el" href="class_i2_cwrapper.html#aa512ca27376efd779426fcd836e629e2" title="Define a minimum duration of time that the controller keeps between I2C transmissions....">I2Cwrapper::setI2Cdelay()</a></code> function. Typically, 4 to 6 ms are easily on the safe side.</p>
 <p ><strike>At the moment, you'll have to <b>use your own tests</b> to find an optimal value. A self-diagnosing auto-adjustment feature is planned for a future release.</strike></p>
 <h4>Auto-adjusting the I2C delay</h4>
 <p >(new in v0.3.0, experimental)</p>
-<p >Alternatively, the controller can use the <code><a class="el" href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140" title="Set I2C delay to the smallest value that still allows error free transmissions. To determine this val...">I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith)</a></code> function to make an educated guess for the <b>shortest, yet still reasonably safe I2C delay value</b> in a given hardware environment. It will be based on a number of simulated test transmissions to and from the target device. It can be supplemented by an additional safety margin (default: 2 ms) and factor in the maximum command length to be used (default: max length allowed by buffer).</p>
+<p >Alternatively, the controller can use the <code><a class="el" href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140" title="Set I2C delay to the smallest value that still allows error free transmissions. To determine this val...">I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith)</a></code> function to make an educated guess for the <b>shortest, yet still reasonably safe I2C delay value</b> in a given environment. It will be based on a number of simulated test transmissions to and from the target device. It can be supplemented by an additional safety margin (default: 2 ms) and factor in the maximum command length to be used (default: max length allowed by buffer).</p>
 <p >See <a href="examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino">Adjust_I2Cdelay</a> for some in-depth experiments. An everyday use example used in a <code><a class="el" href="_adjust___i2_cdelay_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></code> function could look like this (from <a href="examples/Error_checking/Error_checking.ino">Error_checking.ino</a>):</p>
 <div class="fragment"><div class="line"> {c++}</div>
 <div class="line">Serial.print(&quot;I2C delay set to &quot;);</div>
-<div class="line"> </div>
 <div class="line">Serial.print(wrapper.autoAdjustI2Cdelay()); // uses default safetyMargin of 2ms and max. length transmissions</div>
-<div class="line"> </div>
-<div class="line">Serial.print(&quot; ms (default was &quot;); </div>
-<div class="line"> </div>
+<div class="line">Serial.print(&quot; ms (default was &quot;);</div>
 <div class="line">Serial.print(I2CdefaultDelay); Serial.println(&quot; ms)&quot;);</div>
 </div><!-- fragment --><p >or simply</p>
 <div class="fragment"><div class="line"> {c++}</div>
@@ -256,7 +258,7 @@ AccelStepperI2C</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md10"></a>
 ServoI2C</h2>
-<p >Controls servo motors via I2C. Works just like the plain Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo"><code>Servo</code></a> library. See <a href="examples/Servo_Sweep/Servo_Sweep.ino"><code>Servo_Sweep.ino</code></a> example.</p>
+<p >Controls servo motors via I2C. Works literally just like the plain Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo"><code>Servo</code></a> library. See <a href="examples/Servo_Sweep/Servo_Sweep.ino"><code>Servo_Sweep.ino</code></a> example.</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
 PinI2C</h2>
 <p >Read and control the digital and analog input and output pins of the target device via I2C. Can replace a dedicated digital or analog port expander like MCP23017, PCF8574, PCF8591, or ADS1115. Can be used like the plain Arduino <code>digitalRead()</code>, <code><a class="el" href="_pin_i2_c__firmware_8h.html#a69e0c3ae83f2d0c45e822abd668e43f7">analogWrite()</a></code>etc. commands. See <a href="examples/Pin_control/Pin_control.ino"><code>Pin_control.ino</code></a> example.</p>
@@ -269,19 +271,26 @@ TM1638liteI2C</h2>
 <h2><a class="anchor" id="autotoc_md14"></a>
 Feature modules</h2>
 <p >(new in v0.3.0)</p>
-<p >Feature modules extend or modify the firmware with additional features. As they are not meant to enable I2C access for addressing target hardware, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").</p>
+<p >Feature modules extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").</p>
 <h3>Status LED</h3>
-<p >Including the <code><a class="el" href="__status_l_e_d__firmware_8h.html" title="Feature module that makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent...">_statusLED_firmware.h</a></code> in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware.">firmware_modules.h</a></code>will make the target's built in LED (<code>LED_BUILTIN</code>) flash briefly when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state. Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware.">firmware_modules.h</a></code>to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.</p>
+<p >Including the <code><a class="el" href="__status_l_e_d__firmware_8h.html" title="Feature module that makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent...">_statusLED_firmware.h</a></code> in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>will make the target's built in LED (<code>LED_BUILTIN</code>) <b>flash briefly</b> when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see Error handling). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.</p>
+<h3>I2C address modules</h3>
+<p >To make the target device <b>use a different I2C address</b> than the default (0x08), you can include one (and only one) of the following feature modules:</p>
+<ul>
+<li><code><a class="el" href="__address_fixed__firmware_8h.html" title="Define a fixed address for the target.">_addressFixed_firmware.h</a></code>: use a fixed I2C address for the target other than the default</li>
+<li><code>addressFromPins_firmware.h</code>: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup</li>
+<li><code><a class="el" href="__address_from_flash__firmware_8h.html" title="Read target&#39;s own I2C address from non volatile memory (EEPROM, flash memory) and store a new changed...">_addressFromFlash_firmware.h</a></code>: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.</li>
+</ul>
 <h1><a class="anchor" id="autotoc_md15"></a>
-How to add new modules</h1>
+How to add your own modules</h1>
 <p >If you want to add your own modules and <b>implement your own I2C target device</b>, you can use the templates provided in the [templates subfolder](templates).</p>
 <ul>
 <li><code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> and <code><a class="el" href="template___i2_c_8cpp.html" title="Part of the I2Cwrapper firmware/library.">template_I2C.cpp</a></code> - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see limitations). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library.<ul>
-<li>Often, the header file <code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> will very closely resemble the header file of the library that you are addressing on the target device's side.</li>
+<li>Often, the header file <code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> will very closely resemble the header file of the library which you are addressing on the target device's side.</li>
 <li>The implementation <code><a class="el" href="template___i2_c_8cpp.html" title="Part of the I2Cwrapper firmware/library.">template_I2C.cpp</a></code>, however, looks quite different: It will do nothing else but "**wrap**" each function's arguments into a command, transmit it to the target, and, optionally, receive the target device's reply.</li>
 </ul>
 </li>
-<li><code><a class="el" href="template___i2_c__firmware_8h.html" title="Use this file as a template for your own optional extension module of the I2Cwrapper firmware....">template_I2C_firmware.h</a></code> - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the <code><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad" title="Process the message stored in bufferIn with lenght len which was received via I2C....">processMessage()</a></code> function) that will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.</li>
+<li><code><a class="el" href="template___i2_c__firmware_8h.html" title="Use this file as a template for your own optional extension module of the I2Cwrapper firmware....">template_I2C_firmware.h</a></code> - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the <code><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad" title="Process the message stored in bufferIn with lenght len which was received via I2C....">processMessage()</a></code> function) which will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.</li>
 </ul>
 <p >Refer to the documentation within the templates' source code and to the [existing modules](src) for more details and illustration.</p>
 <h3>A note on messages and units</h3>
@@ -298,11 +307,60 @@ Supported platforms</h1>
 <li><b>Arduino AVRs (Uno, Nano etc.)</b>: Comes with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed not recommended for high performance situations.</li>
 <li><b>ESP8266</b>: Has no I2C hardware. The software I2C may not work stable at the default 80MHz CPU speed, make sure to configure the <b>CPU clock speed to 160MHz</b>. Even then, it might be necessary to <a href="https://www.arduino.cc/en/Reference/WireSetClock">decrease the bus speed</a> below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.</li>
 <li><b>ESP32</b>: Has no I2C hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so timing is critical. Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.</li>
-<li><b>ATtiny</b>: Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic <a href="https://github.com/SpenceKonde/ATTinyCore">ATTinyCore</a> comes with <a href="https://github.com/SpenceKonde/ATTinyCore#i2c-support">fully transparent I2C support</a> which chooses the appropriate Wire library variant automatically. Using ATTinyCore, <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and <a class="el" href="class_t_m1638lite_i2_c.html" title="An I2C wrapper class for Danny Ayers&#39; TM1638lite library (https://www.arduino.cc/reference/en/librari...">TM1638liteI2C</a> will run without changes. See the respective comment sections in the <a href="examples/Pin_control/Pin_control.ino">Pin_Control.ino</a> and <a href="examples/TM1638lite/TM1638lite.ino">TM1638lite</a> examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled it's 54%.</li>
+<li><b>ATtiny</b>: Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic <a href="https://github.com/SpenceKonde/ATTinyCore">ATTinyCore</a> comes with <a href="https://github.com/SpenceKonde/ATTinyCore#i2c-support">fully transparent I2C support</a> which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of <a href="https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47">USI implementations</a> (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> commands to 12. Using ATTinyCore, <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and <a class="el" href="class_t_m1638lite_i2_c.html" title="An I2C wrapper class for Danny Ayers&#39; TM1638lite library (https://www.arduino.cc/reference/en/librari...">TM1638liteI2C</a> will run without changes. See the respective comment sections in the <a href="examples/Pin_control/Pin_control.ino">Pin_Control.ino</a> and <a href="examples/TM1638lite/TM1638lite.ino">TM1638lite</a> examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled it's 54%.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md17"></a>
-Example</h1>
-<p >This is an example for addressing a target controller running the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware with (at least) the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> module enabled.</p>
+Examples</h1>
+<p >This is a simplified version of the <a href="examples/Pin_control.ino"><code>Pin_control.ino</code></a> example sketch for addressing a target device running the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled.</p>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">/*</div>
+<div class="line">   PinI2C Pin control demo</div>
+<div class="line">   (c) juh 2022</div>
+<div class="line"> </div>
+<div class="line">   Reads a digital and an analog input pin and mirrors their values on a</div>
+<div class="line">   digital and a PWM-capable output pin.</div>
+<div class="line">   Needs PinI2C.h module enabled in the target&#39;s firmware_modules.h.</div>
+<div class="line">*/</div>
+<div class="line"> </div>
+<div class="line">#include &lt;Wire.h&gt;</div>
+<div class="line">#include &lt;PinI2C.h&gt;</div>
+<div class="line"> </div>
+<div class="line">uint8_t i2cAddress = 0x08;</div>
+<div class="line">I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...</div>
+<div class="line">PinI2C pins(&amp;wrapper); // ...that the pin interface needs to communicate with the controller</div>
+<div class="line"> </div>
+<div class="line">// Arduino Uno/Nano example pins</div>
+<div class="line">const uint8_t dPinIn  = 12; // any pin; connect switch against GND and +V (or use only GND and INPUT_PULLUP below)</div>
+<div class="line">const uint8_t dPinOut = 13; // any pin; connect LED with resistor or just use 13 = LED_BUILTIN on Uno/Nano </div>
+<div class="line">const uint8_t aPinIn  = 14; // needs analog pin; 14 = A0 on Uno/Nano; connect potentiometer against GND and +V</div>
+<div class="line">const uint8_t aPinOut = 6;  // needs PWM pin; 6 is PWM-capable on Uno/Nano; connect LED with resistor, or multimeter</div>
+<div class="line"> </div>
+<div class="line">void setup()</div>
+<div class="line">{</div>
+<div class="line">  Wire.begin();</div>
+<div class="line">  Serial.begin(115200);</div>
+<div class="line">  </div>
+<div class="line">  if (!wrapper.ping()) {</div>
+<div class="line">    Serial.println(&quot;Target not found! Check connections and restart.&quot;);</div>
+<div class="line">    while (true) {};</div>
+<div class="line">  }</div>
+<div class="line">  wrapper.reset(); // reset the target device for a clean slate</div>
+<div class="line"> </div>
+<div class="line">  pins.pinMode(dPinIn, INPUT); // INPUT_PULLUP will also work</div>
+<div class="line">  pins.pinMode(dPinOut, OUTPUT);</div>
+<div class="line">  pins.pinMode(aPinIn, INPUT);</div>
+<div class="line">  pins.pinMode(aPinOut, OUTPUT);  </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">void loop()</div>
+<div class="line">{</div>
+<div class="line">  pins.digitalWrite(dPinOut, pins.digitalRead(dPinIn));</div>
+<div class="line">  pins.analogWrite(aPinOut, pins.analogRead(aPinIn)/4);</div>
+<div class="line">  Serial.print(&quot;Digital input pin = &quot;); Serial.print(pins.digitalRead(dPinIn));</div>
+<div class="line">  Serial.print(&quot; | Analog input pin = &quot;); Serial.println(pins.analogRead(aPinIn));</div>
+<div class="line">  delay(500);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >This is an example for addressing a target device running the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware with (at least) the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> module enabled.</p>
 <div class="fragment"><div class="line"> {c++}</div>
 <div class="line">/*</div>
 <div class="line">   AccelStepperI2C Bounce demo</div>
@@ -330,7 +388,6 @@ Example</h1>
 <div class="line">    while (true) {}</div>
 <div class="line">  }  </div>
 <div class="line">  wrapper.reset(); // reset the target device</div>
-<div class="line">  delay(500); // and give it time to reboot</div>
 <div class="line">  </div>
 <div class="line">  stepper.attach(); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5</div>
 <div class="line">  // attach() replaces the AccelStepper constructor, so it could also be called like this: </div>
@@ -378,14 +435,15 @@ Documentation</h1>
 <h1><a class="anchor" id="autotoc_md19"></a>
 Planned improvements</h1>
 <ul>
-<li>Self-adjusting I2C-delay</li>
-<li>Determine I2C-address from hardware pins</li>
-<li>Move I2C-address options (fixed, EEPROM, hardware pins) to modules</li>
+<li>Interrupt mechanism support for TM1638I2C module</li>
+<li><strike>Self-adjusting I2C-delay</strike></li>
+<li><strike>Determine I2C-address from hardware pins</strike></li>
+<li><strike>Move I2C-address options (fixed, EEPROM, hardware pins) to modules</strike></li>
 <li><strike>Attiny support (memory will be an issue, though)</strike></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md20"></a>
 Author</h1>
-<p >Apart from its predecessor <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is in 3D printing, you can find me on <a href="https://www.prusaprinters.org/social/202816-juh/about">prusaprinters</a>, <a href="https://www.thingiverse.com/juh/designs">thingiverse</a>, and <a href="https://www.youmagine.com/juh3d/designs">youmagine</a>. This library first saw the light of day as part of my <a href="https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll">StepFish project</a> (<a href="https://forum.ftcommunity.de/viewtopic.php?t=5341">also here</a>).</p>
+<p >Apart from its predecessor <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is nor in programming, but in 3D printing, you can find me on <a href="https://www.prusaprinters.org/social/202816-juh/about">prusaprinters</a>, <a href="https://www.thingiverse.com/juh/designs">thingiverse</a>, and <a href="https://www.youmagine.com/juh3d/designs">youmagine</a>. This library first saw the light of day as part of my <a href="https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll">StepFish project</a> (<a href="https://forum.ftcommunity.de/viewtopic.php?t=5341">also here</a>).</p>
 <p >Contact me at <a href="#" onclick="location.href='mai'+'lto:'+'ftj'+'uh'+'@po'+'st'+'eo.'+'ne'+'t'; return false;">ftjuh<span class="obfuscator">.nosp@m.</span>@pos<span class="obfuscator">.nosp@m.</span>teo.n<span class="obfuscator">.nosp@m.</span>et</a>.</p>
 <p >Jan (juh)</p>
 <h1><a class="anchor" id="autotoc_md21"></a>
@@ -396,15 +454,15 @@ License</h1>
 <p ><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.</p>
 <h1><a class="anchor" id="autotoc_md23"></a>
 History</h1>
-<p >v0.3.0 Initial release, forked from <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></p>
-<p >Historical note: <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> evolved from the <a href="https://github.com/ftjuh/AccelStepperI2C">AccelStepperI2C project</a>. The latter is still available in the Arduino library manager even if its use is discouraged. <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is functionally fully equivalent to AccelSteperI2C if you simply select only the AccelSteperI2C module for compilation and ignore the other modules. </p>
+<p >v0.3.0 Initial release of <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a>, forked from <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></p>
+<p >Historical note: <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> evolved from the <a href="https://github.com/ftjuh/AccelStepperI2C">AccelStepperI2C project</a>. The latter is still available in the Arduino library manager even if its use is discouraged. <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is functionally fully equivalent to AccelSteperI2C if you simply select only the AccelSteperI2C and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> modules for compilation and ignore the other modules. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jun 27 2022 18:37:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jul 4 2022 12:06:10 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

@@ -113,15 +113,15 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">I2Cwrapper</a> (uint8_t i2c_address, uint8_t maxBuf=<a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a>)</td></tr>
+<tr class="memitem:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">I2Cwrapper</a> (uint8_t <a class="el" href="firmware_8ino.html#afd5dbf719bae2b1ea9260a55e7c289cf">i2c_address</a>, uint8_t maxBuf=<a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a>)</td></tr>
 <tr class="memdesc:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">More...</a><br /></td></tr>
 <tr class="separator:a0dfd77031c47e17a1b1cb833eceed3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">ping</a> ()</td></tr>
 <tr class="memdesc:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if target device is listening.  <a href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">More...</a><br /></td></tr>
 <tr class="separator:a8efa3b87ade5a202bd57255fcf6a5bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c634bb576b76b11a591fdf74bafcfdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">reset</a> ()</td></tr>
-<tr class="memdesc:a1c634bb576b76b11a591fdf74bafcfdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the target device to reset to its default state. It is recommended to reset the target every time the controller is started or restarted to put it in a defined state. Else it could happen that the target still manages units (steppers, etc.) which the controller does not know about.  <a href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">More...</a><br /></td></tr>
-<tr class="separator:a1c634bb576b76b11a591fdf74bafcfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2712bde196b501809ef5eba90e498f5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#a2712bde196b501809ef5eba90e498f5c">reset</a> (unsigned long resetDelay=<a class="el" href="_i2_cwrapper_8h.html#a1d6006d51ea23f9641a437ce5326b962">defaultResetDelay</a>)</td></tr>
+<tr class="memdesc:a2712bde196b501809ef5eba90e498f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the target device to reset to its default state. It is recommended to reset the target every time the controller is started or restarted to put it in a defined state. Else it could happen that the target still manages units (steppers, etc.) which the controller does not know about.  <a href="class_i2_cwrapper.html#a2712bde196b501809ef5eba90e498f5c">More...</a><br /></td></tr>
+<tr class="separator:a2712bde196b501809ef5eba90e498f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8084b9fc49113a5a6d2214e1878457e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">changeI2Caddress</a> (uint8_t <a class="el" href="_change__address_8ino.html#a53811bf61b46bdfb67602aeafbb0b739">newAddress</a>)</td></tr>
 <tr class="memdesc:ab8084b9fc49113a5a6d2214e1878457e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permanently change the I2C address of the device. The new address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot.  <a href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">More...</a><br /></td></tr>
 <tr class="separator:ab8084b9fc49113a5a6d2214e1878457e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,6 +276,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Permanently change the I2C address of the device. The new address is stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the next reset/reboot. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_i2_cwrapper.html#a2712bde196b501809ef5eba90e498f5c" title="Tells the target device to reset to its default state. It is recommended to reset the target every ti...">reset()</a> </dd></dl>
 
 </div>
 </div>
@@ -426,8 +427,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1c634bb576b76b11a591fdf74bafcfdb" name="a1c634bb576b76b11a591fdf74bafcfdb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c634bb576b76b11a591fdf74bafcfdb">&#9670;&nbsp;</a></span>reset()</h2>
+<a id="a2712bde196b501809ef5eba90e498f5c" name="a2712bde196b501809ef5eba90e498f5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2712bde196b501809ef5eba90e498f5c">&#9670;&nbsp;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,13 +436,20 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void I2Cwrapper::reset </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>resetDelay</em> = <code><a class="el" href="_i2_cwrapper_8h.html#a1d6006d51ea23f9641a437ce5326b962">defaultResetDelay</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Tells the target device to reset to its default state. It is recommended to reset the target every time the controller is started or restarted to put it in a defined state. Else it could happen that the target still manages units (steppers, etc.) which the controller does not know about. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resetDelay</td><td>(new in v0.3.0, optional) delay in ms that the controller waits after sending the reset command to give the target enough time to reinitialize the firmware core and the activated modules. Defaults to defaultResetDelay (100 ms). </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -646,7 +654,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Mon Jun 27 2022 18:37:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jul 4 2022 12:06:10 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

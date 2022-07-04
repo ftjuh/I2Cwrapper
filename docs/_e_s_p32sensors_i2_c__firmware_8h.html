@@ -102,7 +102,8 @@ Author</h1>
 <p >Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p>
+<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>touchAttachInterruptArg() is available since May 2022 with esp32 release 2.0.3. Implement it for a much easier and cleaner solution. Also implement touchInterruptSetThresholdDirection() Also adapt for SOC_TOUCH_SENSOR_NUM no. of sensors (I think newer ESP32 variants have more than 10) </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -132,6 +133,8 @@ Functions</h2></td></tr>
 <tr class="separator:a27e870e73c2f1123b742e404e0f62a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a578d3054e1fe9a5fd0e0b31bfde1843f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="firmware_8ino.html#a9eca28b463b5850006c7d00aa43a2498">bufferIn</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a578d3054e1fe9a5fd0e0b31bfde1843f">read</a> (<a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aaf96c765f5870f38fe7c8fdc0dd49074">sleep</a>)</td></tr>
 <tr class="separator:a578d3054e1fe9a5fd0e0b31bfde1843f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca6e3f59f78580cf6b2f6d54cfeb229a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aca6e3f59f78580cf6b2f6d54cfeb229a">if</a> (!<a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a2ce9c582436e687737f4069a41cd4072">ESP32sensorsTouchSetCyclesChanged</a>)</td></tr>
+<tr class="separator:aca6e3f59f78580cf6b2f6d54cfeb229a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa638802b43f4263872ae413c21b6d447"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aa638802b43f4263872ae413c21b6d447">touchSetCycles</a> (measure, <a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aaf96c765f5870f38fe7c8fdc0dd49074">sleep</a>)</td></tr>
 <tr class="separator:aa638802b43f4263872ae413c21b6d447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8ac786354c30a4051f38e799fbbe35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="firmware_8ino.html#a9eca28b463b5850006c7d00aa43a2498">bufferIn</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a5f8ac786354c30a4051f38e799fbbe35">read</a> (pin)</td></tr>
@@ -142,7 +145,7 @@ Functions</h2></td></tr>
 <tr class="separator:ae778b3ef237889b896261aa785e7d07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0de188a79256d9682f095c5be7bb057d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="firmware_8ino.html#a9eca28b463b5850006c7d00aa43a2498">bufferIn</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a0de188a79256d9682f095c5be7bb057d">read</a> (<a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a8629cf8204d4463a5021a1d696b85fbd">falling</a>)</td></tr>
 <tr class="separator:a0de188a79256d9682f095c5be7bb057d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb34f71213c4767bd66fcfefd21a2952"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#abb34f71213c4767bd66fcfefd21a2952">log</a> (&quot;    enabling int for touch pin #&quot;)</td></tr>
+<tr class="memitem:abb34f71213c4767bd66fcfefd21a2952"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#abb34f71213c4767bd66fcfefd21a2952">log</a> (&quot;    enabling int <a class="el" href="_servo_i2_c__firmware_8h.html#ae789bf1c8c624ef187f4ef9130d7f8fe">for</a> touch pin #&quot;)</td></tr>
 <tr class="separator:abb34f71213c4767bd66fcfefd21a2952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1662c22de4fd5eb360f85c944e7fe15b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a1662c22de4fd5eb360f85c944e7fe15b">log</a> (pin)</td></tr>
 <tr class="separator:a1662c22de4fd5eb360f85c944e7fe15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,9 +159,21 @@ Functions</h2></td></tr>
 <tr class="separator:a55a24f45a7c75619a74fd7598e2d3b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a561a9c9b082673b004d5ddd22b247321"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a561a9c9b082673b004d5ddd22b247321">log</a> (&quot;\n&quot;)</td></tr>
 <tr class="separator:a561a9c9b082673b004d5ddd22b247321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac613e83b468c40ec7e54ad3e196acff1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#ac613e83b468c40ec7e54ad3e196acff1">if</a> (<a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a2ce9c582436e687737f4069a41cd4072">ESP32sensorsTouchSetCyclesChanged</a>)</td></tr>
+<tr class="separator:ac613e83b468c40ec7e54ad3e196acff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94af1e93b0e0de94a6c689630a6e0f1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a94af1e93b0e0de94a6c689630a6e0f1a">for</a> (uint8_t i=0;i&lt; SOC_TOUCH_SENSOR_NUM;i++)</td></tr>
+<tr class="separator:a94af1e93b0e0de94a6c689630a6e0f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a8cfd01b94de6dfd54fc5c82604c60f36"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a8cfd01b94de6dfd54fc5c82604c60f36">isAttached</a> = 0</td></tr>
+<tr class="separator:a8cfd01b94de6dfd54fc5c82604c60f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bcb6c604ee458a5cc7e5ed14ec6fe55"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a3bcb6c604ee458a5cc7e5ed14ec6fe55">ESP32sensorsTouchSetCycles_old_sleep_cycle</a></td></tr>
+<tr class="separator:a3bcb6c604ee458a5cc7e5ed14ec6fe55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ebb6e145ec9491081112275d720814"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aa4ebb6e145ec9491081112275d720814">ESP32sensorsTouchSetCycles_old_meas_cycle</a></td></tr>
+<tr class="separator:aa4ebb6e145ec9491081112275d720814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce9c582436e687737f4069a41cd4072"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a2ce9c582436e687737f4069a41cd4072">ESP32sensorsTouchSetCyclesChanged</a> = false</td></tr>
+<tr class="separator:a2ce9c582436e687737f4069a41cd4072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1306273ce7c90f04a303a84101046f62"><td class="memItemLeft" align="right" valign="top">case&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a1306273ce7c90f04a303a84101046f62">ESP32sensorsTouchSetCyclesCmd</a></td></tr>
 <tr class="separator:a1306273ce7c90f04a303a84101046f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf96c765f5870f38fe7c8fdc0dd49074"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#aaf96c765f5870f38fe7c8fdc0dd49074">sleep</a></td></tr>
@@ -179,6 +194,59 @@ Variables</h2></td></tr>
 <tr class="separator:a60669834b1a4c4cdbc6acff2953c6af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a94af1e93b0e0de94a6c689630a6e0f1a" name="a94af1e93b0e0de94a6c689630a6e0f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94af1e93b0e0de94a6c689630a6e0f1a">&#9670;&nbsp;</a></span>for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca6e3f59f78580cf6b2f6d54cfeb229a" name="aca6e3f59f78580cf6b2f6d54cfeb229a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca6e3f59f78580cf6b2f6d54cfeb229a">&#9670;&nbsp;</a></span>if() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">if </td>
+          <td>(</td>
+          <td class="paramtype">!&#160;</td>
+          <td class="paramname"><em>ESP32sensorsTouchSetCyclesChanged</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac613e83b468c40ec7e54ad3e196acff1" name="ac613e83b468c40ec7e54ad3e196acff1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac613e83b468c40ec7e54ad3e196acff1">&#9670;&nbsp;</a></span>if() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">if </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html#a2ce9c582436e687737f4069a41cd4072">ESP32sensorsTouchSetCyclesChanged</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abb34f71213c4767bd66fcfefd21a2952" name="abb34f71213c4767bd66fcfefd21a2952"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb34f71213c4767bd66fcfefd21a2952">&#9670;&nbsp;</a></span>log() <span class="overload">[1/7]</span></h2>
 
@@ -188,7 +256,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">log </td>
           <td>(</td>
-          <td class="paramtype">&quot; enabling int for touch pin #&quot;&#160;</td>
+          <td class="paramtype">&quot; enabling int <a class="el" href="_servo_i2_c__firmware_8h.html#ae789bf1c8c624ef187f4ef9130d7f8fe">for</a> touch pin #&quot;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -699,6 +767,48 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aa4ebb6e145ec9491081112275d720814" name="aa4ebb6e145ec9491081112275d720814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ebb6e145ec9491081112275d720814">&#9670;&nbsp;</a></span>ESP32sensorsTouchSetCycles_old_meas_cycle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t ESP32sensorsTouchSetCycles_old_meas_cycle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3bcb6c604ee458a5cc7e5ed14ec6fe55" name="a3bcb6c604ee458a5cc7e5ed14ec6fe55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bcb6c604ee458a5cc7e5ed14ec6fe55">&#9670;&nbsp;</a></span>ESP32sensorsTouchSetCycles_old_sleep_cycle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t ESP32sensorsTouchSetCycles_old_sleep_cycle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ce9c582436e687737f4069a41cd4072" name="a2ce9c582436e687737f4069a41cd4072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ce9c582436e687737f4069a41cd4072">&#9670;&nbsp;</a></span>ESP32sensorsTouchSetCyclesChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ESP32sensorsTouchSetCyclesChanged = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1306273ce7c90f04a303a84101046f62" name="a1306273ce7c90f04a303a84101046f62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1306273ce7c90f04a303a84101046f62">&#9670;&nbsp;</a></span>ESP32sensorsTouchSetCyclesCmd</h2>
 
@@ -721,6 +831,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool falling</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cfd01b94de6dfd54fc5c82604c60f36" name="a8cfd01b94de6dfd54fc5c82604c60f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cfd01b94de6dfd54fc5c82604c60f36">&#9670;&nbsp;</a></span>isAttached</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t isAttached = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -761,7 +885,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html">ESP32sensorsI2C_firmware.h</a></li>
-    <li class="footer">Generated on Mon Jun 27 2022 18:37:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jul 4 2022 12:06:10 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

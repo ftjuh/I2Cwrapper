@@ -2,6 +2,7 @@ var _servo_i2_c__firmware_8h =
 [
     [ "attach", "_servo_i2_c__firmware_8h.html#af82b67f8bc65a8e6a13b4df0ea139f7a", null ],
     [ "attach", "_servo_i2_c__firmware_8h.html#ab020017dad78e5c2a5e84ab9edf14a4c", null ],
+    [ "for", "_servo_i2_c__firmware_8h.html#ae789bf1c8c624ef187f4ef9130d7f8fe", null ],
     [ "log", "_servo_i2_c__firmware_8h.html#a6030a400067fe970c95a0a5717176c90", null ],
     [ "log", "_servo_i2_c__firmware_8h.html#a175b2988ee06e6ff186fa9342d16b436", null ],
     [ "read", "_servo_i2_c__firmware_8h.html#ade6037a953797525d72ac13e8d669a7e", null ],
@@ -16,7 +17,7 @@ var _servo_i2_c__firmware_8h =
     [ "max", "_servo_i2_c__firmware_8h.html#ae1e1dde676c120fa6d10f3bb2c14059e", null ],
     [ "maxServos", "_servo_i2_c__firmware_8h.html#a0f9813196df1c36828566b98fb497cd7", null ],
     [ "min", "_servo_i2_c__firmware_8h.html#a3e202b201e6255d975cd6d3aff1f5a4d", null ],
-    [ "numServos", "_servo_i2_c__firmware_8h.html#a8270206122d7d60c6447798625bec3c5", null ],
+    [ "numServos", "_servo_i2_c__firmware_8h.html#a0452666d03dc9d87280c16b5b7895a49", null ],
     [ "servoAttach1Cmd", "_servo_i2_c__firmware_8h.html#a62599dad1a3a2bdb55460f3d737997a4", null ],
     [ "servoAttach2Cmd", "_servo_i2_c__firmware_8h.html#aca3d823eacc0f344cfa172f7b49855f8", null ],
     [ "servoAttachedCmd", "_servo_i2_c__firmware_8h.html#a4436bbd7e23bb2b3e707727a00a3b60d", null ],

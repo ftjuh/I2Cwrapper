@@ -1,5 +1,8 @@
 var dir_d9edf6c004b4a7ff14fe9ae7a92214ee =
 [
+    [ "_addressFixed_firmware.h", "__address_fixed__firmware_8h.html", null ],
+    [ "_addressFromFlash_firmware.h", "__address_from_flash__firmware_8h.html", null ],
+    [ "_addressFromPins_firmware.h", "__address_from_pins__firmware_8h.html", null ],
     [ "_statusLED_firmware.h", "__status_l_e_d__firmware_8h.html", null ],
     [ "AccelStepperI2C_firmware.h", "_accel_stepper_i2_c__firmware_8h.html", null ],
     [ "ESP32sensorsI2C_firmware.h", "_e_s_p32sensors_i2_c__firmware_8h.html", "_e_s_p32sensors_i2_c__firmware_8h" ],

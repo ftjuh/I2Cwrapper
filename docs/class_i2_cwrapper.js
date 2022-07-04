@@ -10,7 +10,7 @@ var class_i2_cwrapper =
     [ "ping", "class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe", null ],
     [ "prepareCommand", "class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d", null ],
     [ "readResult", "class_i2_cwrapper.html#adfd966608c453a72646dfe37e061fee7", null ],
-    [ "reset", "class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb", null ],
+    [ "reset", "class_i2_cwrapper.html#a2712bde196b501809ef5eba90e498f5c", null ],
     [ "resultErrors", "class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db", null ],
     [ "sendCommand", "class_i2_cwrapper.html#a64dc95baffdae6e8cfe07ea902fc926b", null ],
     [ "sentErrors", "class_i2_cwrapper.html#a99818d9f4b28834ce7611759c6b45032", null ],

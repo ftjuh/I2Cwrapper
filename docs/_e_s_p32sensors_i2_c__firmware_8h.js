@@ -1,5 +1,8 @@
 var _e_s_p32sensors_i2_c__firmware_8h =
 [
+    [ "for", "_e_s_p32sensors_i2_c__firmware_8h.html#a94af1e93b0e0de94a6c689630a6e0f1a", null ],
+    [ "if", "_e_s_p32sensors_i2_c__firmware_8h.html#aca6e3f59f78580cf6b2f6d54cfeb229a", null ],
+    [ "if", "_e_s_p32sensors_i2_c__firmware_8h.html#ac613e83b468c40ec7e54ad3e196acff1", null ],
     [ "log", "_e_s_p32sensors_i2_c__firmware_8h.html#abb34f71213c4767bd66fcfefd21a2952", null ],
     [ "log", "_e_s_p32sensors_i2_c__firmware_8h.html#afa13fc1fbc97962c490c6139169149e5", null ],
     [ "log", "_e_s_p32sensors_i2_c__firmware_8h.html#a381d75a717a2a4707dfd49f6cfa30397", null ],
@@ -30,8 +33,12 @@ var _e_s_p32sensors_i2_c__firmware_8h =
     [ "ESP32sensorsHallReadCmd", "_e_s_p32sensors_i2_c__firmware_8h.html#a9eae0ec59b0de086b5ae2ea479f0d9dd", null ],
     [ "ESP32sensorsTemperatureReadCmd", "_e_s_p32sensors_i2_c__firmware_8h.html#a60669834b1a4c4cdbc6acff2953c6af5", null ],
     [ "ESP32sensorsTouchReadCmd", "_e_s_p32sensors_i2_c__firmware_8h.html#a30d0aa1645b49060959355985d887acb", null ],
+    [ "ESP32sensorsTouchSetCycles_old_meas_cycle", "_e_s_p32sensors_i2_c__firmware_8h.html#aa4ebb6e145ec9491081112275d720814", null ],
+    [ "ESP32sensorsTouchSetCycles_old_sleep_cycle", "_e_s_p32sensors_i2_c__firmware_8h.html#a3bcb6c604ee458a5cc7e5ed14ec6fe55", null ],
+    [ "ESP32sensorsTouchSetCyclesChanged", "_e_s_p32sensors_i2_c__firmware_8h.html#a2ce9c582436e687737f4069a41cd4072", null ],
     [ "ESP32sensorsTouchSetCyclesCmd", "_e_s_p32sensors_i2_c__firmware_8h.html#a1306273ce7c90f04a303a84101046f62", null ],
     [ "falling", "_e_s_p32sensors_i2_c__firmware_8h.html#a8629cf8204d4463a5021a1d696b85fbd", null ],
+    [ "isAttached", "_e_s_p32sensors_i2_c__firmware_8h.html#a8cfd01b94de6dfd54fc5c82604c60f36", null ],
     [ "sleep", "_e_s_p32sensors_i2_c__firmware_8h.html#aaf96c765f5870f38fe7c8fdc0dd49074", null ],
     [ "threshold", "_e_s_p32sensors_i2_c__firmware_8h.html#ab1306e35299d8bdd10ea0adfbf9827ad", null ]
 ];

@@ -6,7 +6,7 @@ The **I2Cwrapper core** consists of an easily extensible firmware framework and 
 
 This is a possible example setup:
 
-![example setup](README.assets/example%20setup.png)
+![example setup](docs/images/example%20setup.png)
 
 (1) I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
@@ -39,10 +39,10 @@ The I2Cwrapper framework consists of **four basic components.** The first two dr
    - a **command interpreter** which processes the controller's commands received by onReceive() (in traditional I2C hardware this is equivalent to register writes and reads),
    - an **output Buffer** which allows the target to prepare a reply which  will be sent upon the next onRequest() event,
    - transmission **error control** with CRC8-checksums, 
-   - different ways for setting the target's **I2C address**: fixed address; EEPROM stored; and (not implemented yet) read from hardware pins,
+   - different ways for setting the target's **I2C address**: fixed address; EEPROM stored; and ~~(not implemented yet)~~ read from hardware pins,
    - a controller **interrupt** mechanism which modules can use to alert the master proactively,
    - triggering a **target reset** (i.e. re-initialization to initial state).
-2. **Firmware modules** that implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.
+2. **Firmware modules** which implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.
    - Modules exist as separate **include files**, e.g. [`ServoI2C_firmware.h`](firmware/ServoI2C_firmware.h), and are **selected** for compilation via the [`firmware_modules.h`](firmware/firmware_modules.h) file.
    - Modules don't have to worry about the I2C overhead but can **concentrate on what's important**: interpreting and reacting to the controller device's commands and requests.
    - Modules can "inject" their code at different places in the firmware (e.g. setup, main loop, command interpreter), so that there is a **high degree of flexibility**.
@@ -77,6 +77,8 @@ See the [How to add new modules](#how-to-add-new-modules) section if you are int
 ~~Install I2Cwrapper from the Arduino library manager (not available yet).~~ Until I2Cwrapper is picked up by the Arduino library manager, you'll have to [install it manually](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation) by copying the I2Cwrapper folder to your Arduino library folder and (re)starting the Arduino software.  You'll find an I2Cwrapper examples folder in the usual menu after successful installation.
 
 If you haven't done so yet, you'll also have to install the **libraries needed by the modules** you want to use, e.g. AccelSteppper, TM1638lite, etc. the usual way from the Arduino library manager.
+
+If you've used the AccelStepperI2C library before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.
 
 ## Configuring and uploading the firmware
 
@@ -276,7 +278,7 @@ The following platforms will run the target firmware and have been (more or less
 
 # Examples
 
-This is a simplified version of the [`Pin_control.ino`](examples/Pin_control.ino) example sketch for addressing a target controller running the I2Cwrapper firmware with (at least) the PinI2C module enabled.
+This is a simplified version of the [`Pin_control.ino`](examples/Pin_control.ino) example sketch for addressing a target device running the I2Cwrapper firmware with the PinI2C module enabled.
 
 ```c++
 /*
@@ -328,7 +330,7 @@ void loop()
 }
 ```
 
-This is an example for addressing a target controller running the I2Cwrapper firmware with (at least) the AccelStepperI2C module enabled.
+This is an example for addressing a target device running the I2Cwrapper firmware with (at least) the AccelStepperI2C module enabled.
 
 ```c++
 /*

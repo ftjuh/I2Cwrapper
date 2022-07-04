@@ -134,9 +134,15 @@ Functions</h2></td></tr>
 <tr class="separator:a137d0a9bbda7ad51f76732ee42a696b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69e0c3ae83f2d0c45e822abd668e43f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a69e0c3ae83f2d0c45e822abd668e43f7">analogWrite</a> (pin, <a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a>)</td></tr>
 <tr class="separator:a69e0c3ae83f2d0c45e822abd668e43f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58844088bb192e39c5d3853f706d9614"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a58844088bb192e39c5d3853f706d9614">for</a> (uint8_t i=0;i&lt; <a class="el" href="_pin_i2_c__firmware_8h.html#a72944eb6813db9340b6aed04e1f03032">numUsedPins</a>;i++)</td></tr>
+<tr class="separator:a58844088bb192e39c5d3853f706d9614"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a5471b439dbc2eec55ffdaf16d2995c1f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a5471b439dbc2eec55ffdaf16d2995c1f">usedPins</a> [NUM_DIGITAL_PINS] = pin</td></tr>
+<tr class="separator:a5471b439dbc2eec55ffdaf16d2995c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72944eb6813db9340b6aed04e1f03032"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a72944eb6813db9340b6aed04e1f03032">numUsedPins</a> = 0</td></tr>
+<tr class="separator:a72944eb6813db9340b6aed04e1f03032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedbf1482a7ca1a20ce49effb27cdb4df"><td class="memItemLeft" align="right" valign="top">case&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#aedbf1482a7ca1a20ce49effb27cdb4df">pinPinModeCmd</a></td></tr>
 <tr class="separator:aedbf1482a7ca1a20ce49effb27cdb4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37e90f5e3bd99fac2021fb3a326607d4"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a37e90f5e3bd99fac2021fb3a326607d4">mode</a></td></tr>
@@ -147,7 +153,7 @@ Variables</h2></td></tr>
 <tr class="separator:a7daf680ff2b562761885093ced986416"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad994000f692b85378af36e7b20f60696"><td class="memItemLeft" align="right" valign="top">case&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#ad994000f692b85378af36e7b20f60696">pinDigitalWriteCmd</a></td></tr>
 <tr class="separator:ad994000f692b85378af36e7b20f60696"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7375fa3485ce43bbc621f90ce895d52a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a></td></tr>
+<tr class="memitem:a7375fa3485ce43bbc621f90ce895d52a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a> = 0</td></tr>
 <tr class="separator:a7375fa3485ce43bbc621f90ce895d52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a5d67a3ab322489436d716c194d7cb1"><td class="memItemLeft" align="right" valign="top">case&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html#a9a5d67a3ab322489436d716c194d7cb1">pinAnalogReadCmd</a></td></tr>
 <tr class="separator:a9a5d67a3ab322489436d716c194d7cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,6 +211,23 @@ Variables</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a58844088bb192e39c5d3853f706d9614" name="a58844088bb192e39c5d3853f706d9614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58844088bb192e39c5d3853f706d9614">&#9670;&nbsp;</a></span>for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -475,6 +498,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a72944eb6813db9340b6aed04e1f03032" name="a72944eb6813db9340b6aed04e1f03032"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72944eb6813db9340b6aed04e1f03032">&#9670;&nbsp;</a></span>numUsedPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">numUsedPins = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9a5d67a3ab322489436d716c194d7cb1" name="a9a5d67a3ab322489436d716c194d7cb1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a5d67a3ab322489436d716c194d7cb1">&#9670;&nbsp;</a></span>pinAnalogReadCmd</h2>
 
@@ -545,6 +582,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a5471b439dbc2eec55ffdaf16d2995c1f" name="a5471b439dbc2eec55ffdaf16d2995c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5471b439dbc2eec55ffdaf16d2995c1f">&#9670;&nbsp;</a></span>usedPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">usedPins[<a class="el" href="_pin_i2_c__firmware_8h.html#a72944eb6813db9340b6aed04e1f03032">numUsedPins</a>++] = pin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7375fa3485ce43bbc621f90ce895d52a" name="a7375fa3485ce43bbc621f90ce895d52a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7375fa3485ce43bbc621f90ce895d52a">&#9670;&nbsp;</a></span>value</h2>
 
@@ -552,7 +603,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t value</td>
+          <td class="memname">int16_t value = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -565,7 +616,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="_pin_i2_c__firmware_8h.html">PinI2C_firmware.h</a></li>
-    <li class="footer">Generated on Mon Jun 27 2022 18:37:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Mon Jul 4 2022 12:06:10 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

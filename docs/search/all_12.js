@@ -9,7 +9,7 @@ var searchData=
   ['template_5fi2c_2ecpp_6',['template_I2C.cpp',['../template___i2_c_8cpp.html',1,'']]],
   ['template_5fi2c_2eh_7',['template_I2C.h',['../template___i2_c_8h.html',1,'']]],
   ['template_5fi2c_5ffirmware_2eh_8',['template_I2C_firmware.h',['../template___i2_c__firmware_8h.html',1,'']]],
-  ['then_9',['then',['../_e_s_p32sensors_8ino.html#aa6e6e17fe4bd050544508ba0f8ae1eb2',1,'ESP32sensors.ino']]],
+  ['then_9',['then',['../firmware_8ino.html#a570420b17131e93d2c3ff7665f121800',1,'then():&#160;firmware.ino'],['../_e_s_p32sensors_8ino.html#aa6e6e17fe4bd050544508ba0f8ae1eb2',1,'then():&#160;ESP32sensors.ino']]],
   ['threshold_10',['threshold',['../_e_s_p32sensors_i2_c__firmware_8h.html#ab1306e35299d8bdd10ea0adfbf9827ad',1,'ESP32sensorsI2C_firmware.h']]],
   ['tm1638lite_2eino_11',['TM1638lite.ino',['../_t_m1638lite_8ino.html',1,'']]],
   ['tm1638liteattachcmd_12',['TM1638liteAttachCmd',['../_t_m1638lite_i2_c_8h.html#a9365627b30acaea684a3033b68ddaeb8',1,'TM1638liteI2C.h']]],
@@ -41,7 +41,7 @@ var searchData=
   ['touchpin_38',['touchPin',['../_e_s_p32sensors_8ino.html#a8fb596c00fdba7e0bf252201c8526527',1,'ESP32sensors.ino']]],
   ['touchpinid_39',['touchPinID',['../_e_s_p32sensors_8ino.html#a806c4d1661fb9272804aeb66fbc37c61',1,'ESP32sensors.ino']]],
   ['touchread_40',['touchRead',['../class_e_s_p32sensors_i2_c.html#a4e09879eb6ba4bc31a0857ec8192385d',1,'ESP32sensorsI2C']]],
-  ['touchsetcycles_41',['touchSetCycles',['../_e_s_p32sensors_i2_c__firmware_8h.html#aa638802b43f4263872ae413c21b6d447',1,'touchSetCycles():&#160;ESP32sensorsI2C_firmware.h'],['../class_e_s_p32sensors_i2_c.html#a245d39fddd1375d69ba9b2030414b0c3',1,'ESP32sensorsI2C::touchSetCycles()']]],
+  ['touchsetcycles_41',['touchSetCycles',['../class_e_s_p32sensors_i2_c.html#a245d39fddd1375d69ba9b2030414b0c3',1,'ESP32sensorsI2C::touchSetCycles()'],['../_e_s_p32sensors_i2_c__firmware_8h.html#aa638802b43f4263872ae413c21b6d447',1,'touchSetCycles():&#160;ESP32sensorsI2C_firmware.h']]],
   ['transmissionerrors_42',['transmissionErrors',['../class_i2_cwrapper.html#af26fad87074cea9cf636cbd49226c8c5',1,'I2Cwrapper']]],
   ['triggerinterrupt_43',['triggerInterrupt',['../firmware_8ino.html#a4f3ec17f4d90ce7c4b1714e8e5931452',1,'firmware.ino']]]
 ];

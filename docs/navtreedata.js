@@ -42,9 +42,9 @@ var NAVTREE =
         [ "TM1638liteI2C", "index.html#autotoc_md13", null ],
         [ "Feature modules", "index.html#autotoc_md14", null ]
       ] ],
-      [ "How to add new modules", "index.html#autotoc_md15", null ],
+      [ "How to add your own modules", "index.html#autotoc_md15", null ],
       [ "Supported platforms", "index.html#autotoc_md16", null ],
-      [ "Example", "index.html#autotoc_md17", null ],
+      [ "Examples", "index.html#autotoc_md17", null ],
       [ "Documentation", "index.html#autotoc_md18", null ],
       [ "Planned improvements", "index.html#autotoc_md19", null ],
       [ "Author", "index.html#autotoc_md20", null ],
@@ -78,9 +78,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"__status_l_e_d__firmware_8h.html",
-"_pin_i2_c__firmware_8h.html#acfe587652e1874f51eb76cf1095290ba",
-"firmware_8ino.html#a6e6fb94a3ed8d18ebc8e982e14b3f8ee"
+"__address_fixed__firmware_8h.html",
+"_pin_i2_c__firmware_8h.html#a3e6569d23b9bcc41fef4eee3ac977d6f",
+"firmware_8ino.html#a07f64187675c9231ee2b969011945161"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
