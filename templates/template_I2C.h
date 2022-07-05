@@ -2,9 +2,9 @@
   @file template_I2C.h
   @brief Template for a user module/controller library for the I2Cwrapper @ref 
   firmware.ino. "xxx" represents the name of your module, e.g. "PinI2C"
-  @section author Author
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.

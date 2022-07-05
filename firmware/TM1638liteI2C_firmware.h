@@ -1,9 +1,9 @@
 /*!
    @file TM1638liteI2C_firmware.h
    @brief TM1638liteI2C firmware module. See TM1638liteI2C.h for details.
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.

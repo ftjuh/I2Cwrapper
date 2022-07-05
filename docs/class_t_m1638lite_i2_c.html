@@ -104,7 +104,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a83778659f7601c8aa7d0e87a327ff65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_t_m1638lite_i2_c.html#a83778659f7601c8aa7d0e87a327ff65e">More...</a><br /></td></tr>
 <tr class="separator:a83778659f7601c8aa7d0e87a327ff65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab40cf6781b4dcc5c8f42c2cd6ba6864f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_m1638lite_i2_c.html#ab40cf6781b4dcc5c8f42c2cd6ba6864f">attach</a> (uint8_t strobe, uint8_t clock, uint8_t data)</td></tr>
-<tr class="memdesc:ab40cf6781b4dcc5c8f42c2cd6ba6864f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the TM1638lite constructor and takes the same arguments. Will allocate an TM1638lite object on the target's side and make it ready for use.  <a href="class_t_m1638lite_i2_c.html#ab40cf6781b4dcc5c8f42c2cd6ba6864f">More...</a><br /></td></tr>
+<tr class="memdesc:ab40cf6781b4dcc5c8f42c2cd6ba6864f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the TM1638lite constructor and takes the same arguments. Will allocate an TM1638lite object on the target's side and make it ready for use. Check <a class="el" href="class_t_m1638lite_i2_c.html#a0602b1eb49d4205042c78bee0b99224b">myNum</a> &gt;= 0 to see if the target successfully added the object. If not, it's -1.  <a href="class_t_m1638lite_i2_c.html#ab40cf6781b4dcc5c8f42c2cd6ba6864f">More...</a><br /></td></tr>
 <tr class="separator:ab40cf6781b4dcc5c8f42c2cd6ba6864f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3808bad71b965749770ed1d88703c56c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_m1638lite_i2_c.html#a3808bad71b965749770ed1d88703c56c">sendCommand</a> (uint8_t <a class="el" href="_pin_i2_c__firmware_8h.html#a7375fa3485ce43bbc621f90ce895d52a">value</a>)</td></tr>
 <tr class="separator:a3808bad71b965749770ed1d88703c56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,14 +188,13 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Replaces the TM1638lite constructor and takes the same arguments. Will allocate an TM1638lite object on the target's side and make it ready for use. </p>
+<p>Replaces the TM1638lite constructor and takes the same arguments. Will allocate an TM1638lite object on the target's side and make it ready for use. Check <a class="el" href="class_t_m1638lite_i2_c.html#a0602b1eb49d4205042c78bee0b99224b">myNum</a> &gt;= 0 to see if the target successfully added the object. If not, it's -1. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">strobe,clock,data</td><td>See original library </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Check <a class="el" href="class_t_m1638lite_i2_c.html#a0602b1eb49d4205042c78bee0b99224b">myNum</a> &gt;= 0 to see if the target successfully added the object. If not, it's -1. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The target's platform pin names might not be known to the controller's platform, if both are different. So it is safer to use integer equivalents as defined in the respective platform's <code>pins_arduino.h</code> </dd></dl>
 
 </div>
@@ -408,7 +407,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_t_m1638lite_i2_c.html">TM1638liteI2C</a></li>
-    <li class="footer">Generated on Tue Jul 5 2022 22:36:32 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue Jul 5 2022 23:32:48 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

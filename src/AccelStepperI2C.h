@@ -5,9 +5,9 @@
   See the @ref AccelStepperI2C "AccelStepperI2C class reference" for
   differences to the methods of the original AccelStepper class and for new
   methods of class %AccelStepperI2C.
-  @section author Author
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
@@ -171,13 +171,13 @@ public:
   /*!
    * @brief Replaces the AccelStepper constructor and takes the same arguments.
    * Will allocate an AccelStepper object on the target's side and make it ready for use.
+   * Does not return an success/error result. Instead check @ref myNum >= 0 to 
+   * see if the target successfully added the stepper. If not, it's -1.
    * @param interface Only AccelStepper::DRIVER is tested at the moment, but
    * AccelStepper::FULL2WIRE, AccelStepper::FULL3WIRE, AccelStepper::FULL4WIRE,
    * AccelStepper::HALF3WIRE, and AccelStepper::HALF4WIRE should work as well,
    * AccelStepper::FUNCTION of course not
    * @param pin1,pin2,pin3,pin4, enable see original library
-   * @result Check @ref myNum >= 0 to see if the target successfully added the
-   * stepper. If not, it's -1.
    * @note The target's platform pin names might not be known to the controller's platform,
    * if both are different. So it is safer to use integer equivalents
    * as defined in the respective platform's `pins_arduino.h`, e.g. for ESP8266:

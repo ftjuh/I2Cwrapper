@@ -2,9 +2,9 @@
    @file firmware.ino
    @brief Generic firmware framework for I2C targets with modular functionality,
    built around the I2Cwrapper library
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.

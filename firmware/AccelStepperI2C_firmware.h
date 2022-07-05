@@ -5,9 +5,9 @@
     Provides control of up to eight stepper motors with up to two endstops each
     connected to the I2C target.
 
-    @section author Author
+    ## Author
     Copyright (c) 2022 juh
-    @section license License
+    ## License
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
     published by the Free Software Foundation, version 2.
@@ -17,7 +17,7 @@
    Note: Code injection will confuse doxygen, as withouth the including
    firmware.ino it looks like incomplete code. So, to prevent it from generating
    all kinds of gibberish documentation, the rest of this file is enclosed in
-   @cond/@endcond tags to make doxygen ignore it. Usually, there's nothing of
+   cond/endcond tags to make doxygen ignore it. Usually, there's nothing of
    interest to document for end users anyway.
 */
 

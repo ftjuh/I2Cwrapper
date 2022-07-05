@@ -6,9 +6,9 @@
     Meant mostly as a simple demo for user contributed modules using the
     interrupt mechanism. Will not compile for platforms other than ESP32.
 
-    @section author Author
+    ## Author
     Copyright (c) 2022 juh
-    @section license License
+    ## License
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
     published by the Free Software Foundation, version 2.

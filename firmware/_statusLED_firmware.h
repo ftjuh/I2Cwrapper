@@ -4,9 +4,9 @@
    (receiveEvent and requestEvent). Meant mainly as a still-alive monitor.
    To make it flash on I2C state machine state changes, (un)comment the respective lines below in secitions (7), (8) and (9)
    If your board has no LED_BUILTIN, make sure to edit the proper pin number in the declaration stage below..
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.

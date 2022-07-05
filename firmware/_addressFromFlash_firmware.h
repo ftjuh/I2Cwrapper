@@ -4,9 +4,9 @@
    @brief Read target's own I2C address from non volatile memory (EEPROM, flash
    memory) and store a new changed address upon the controller's command.
 
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.

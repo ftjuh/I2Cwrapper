@@ -2,9 +2,9 @@
   @file ESP32sensorsI2C.h
   @brief Arduino library for I2C-control of touch buttons and hall sensors
   of an ESP32 which runs the associated @ref firmware.ino firmware.
-  @section author Author
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.

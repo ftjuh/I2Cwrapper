@@ -2,9 +2,9 @@
    @file SimpleBuffer.h
    @brief Simple and ugly serialization buffer for any data type.
    Template technique and CRC8 adapted from Nick Gammon.
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.

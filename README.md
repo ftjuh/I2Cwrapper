@@ -58,10 +58,14 @@ The other two basic components are for the **I2C controller's side**:
 
 ## Limitations
 
+<a id="limitations-for-end-users"></a>
+
 ### Limitations for end users
 
    - Arduinos aren't perfect I2C target devices. Not all Arduino hardware platforms have dedicated I2C hardware, which entails possible performance issues (see [Supported platforms](#supported-platforms)).
    - The Arduino's Wire library doesn't support [clock stretching](https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html) in a way which allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the **target is not flooded** with commands or requests with too little time to handle them. I2Cwrapper provides an [adjustable minimum delay](#adjusting-the-i2c-delay) between transmissions to handle that problem.
+
+<a id="limitations-for-module-authors"></a>
 
 ### Limitations for module authors
 
@@ -107,6 +111,8 @@ Simply include the **controller libraries** for the module(s) you compiled into 
 
 Many functions take target pin numbers as an argument, e.g. when you define an interrupt pin with `I2Cwrapper::setInterruptPin()`. If controller and target devices run on **different hardware platforms** (e.g. ESP8266 and ATtiny85), you'll have to be careful that the controller addresses the target's side pins correctly. Pin constants like `A0`, `D1`, `LED_BUILTIN` etc. might not be known at the controller's side or, even worse, might represent a different pin number. In this case it is recommended to use the raw pin numbers. They are defined in the respective platform's `pins_arduino.h` file, or can easily be found out by running `Serial.println(A0);` etc. on the target platform.
 
+<a id="error-handling"></a>
+
 ### Error handling
 
 If I2C transmission problems occur, any command sent to the I2C target could fail and every return value could be corrupted. Depending on context, this could lead to severe consequences, e.g. with uncontrolled  stepper motor movements. That's why I2Cwrapper transmits each command and response with a CRC8 checksum. To find out if a controller's command or a target's response was **transmitted correctly**, the controller can check the following: 
@@ -136,6 +142,8 @@ The **controller** will have to implement an interrupt service routine (ISR) to 
 
 See the example [Interrupt_Endstop](examples/Interrupt_Endstop/Interrupt_Endstop.ino) for further illustration.
 
+<a id="adjusting-the-i2c-delay"></a>
+
 ### Adjusting the I2C delay
 
 If a controller **sends commands too quickly** or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer. 
@@ -164,6 +172,8 @@ or simply
 ```c++
 wrapper.autoAdjustI2Cdelay();
 ```
+
+<a id="available-modules"></a>
 
 # Available modules
 
@@ -229,6 +239,8 @@ Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor
 
 The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus interface to control matrices of buttons and LEDs. If you want to unify your bus environment in a given project or need to save pins, it can be useful to be able to control it via I2C. To implement an I2Cwrapper module, I chose Danny Ayers' [TM1638lite library](https://github.com/danja/TM1638lite) as it came with the most straightforward and burden-free implementation in comparison with the more popular choices. Apart from the setup, it can be used just like the original. Interrupt mechanism support for key presses is planned but not implemented yet. See the [`TM1638lite.ino`](examples/TM1638lite/TM1638lite.ino) example for more details.
 
+<a id="feature-modules"></a>
+
 ## Feature modules
 
 (new in v0.3.0)
@@ -247,6 +259,8 @@ To make the target device **use a different I2C address** than the default (0x08
 * `addressFromPins_firmware.h`: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup
 * `_addressFromFlash_firmware.h`: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.
 
+<a id="how-to-add-new-modules"></a>
+
 # How to add your own modules
 
 If you want to add your own modules and **implement your own I2C target device**, you can use the templates provided in the [templates subfolder](templates).
@@ -257,6 +271,8 @@ If you want to add your own modules and **implement your own I2C target device**
 - `template_I2C_firmware.h` - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the `processMessage()` function) which will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.
 
 Refer to the documentation within the templates' source code and to the [existing modules](src) for more details and illustration.
+
+<a id="a-note-on-messages-and-units"></a>
 
 ### A note on messages and units
 
@@ -272,7 +288,7 @@ The following platforms will run the target firmware and have been (more or less
 
 * **Arduino AVRs (Uno, Nano etc.)**: Comes with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed not recommended for high performance situations.
 * **ESP8266**: Has no I2C  hardware. The software I2C may not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to [decrease the bus speed](https://www.arduino.cc/en/Reference/WireSetClock) below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
-* **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-I2C-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
+* **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-i2c-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 * **ATtiny**: Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 12.
   Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](examples/Pin_control/Pin_control.ino) and [TM1638lite](examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
 

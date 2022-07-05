@@ -5,9 +5,9 @@
   the TM1638liteI2C module enabled. TM1638liteI2C mimicks the interface of Danny 
   Ayers' TM1638lite library, so that it can be used with only minor adaptations 
   to non-I2C code.  
-  @section author Author
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
@@ -63,9 +63,9 @@ public:
   /*!
    * @brief Replaces the TM1638lite constructor and takes the same arguments.
    * Will allocate an TM1638lite object on the target's side and make it ready for use.
-   * @param strobe, clock, data See original library
-   * @result Check @ref myNum >= 0 to see if the target successfully added the
+   * Check @ref myNum >= 0 to see if the target successfully added the
    * object. If not, it's -1.
+   * @param strobe, clock, data See original library
    * @note The target's platform pin names might not be known to the controller's 
    * platform, if both are different. So it is safer to use integer equivalents
    * as defined in the respective platform's `pins_arduino.h`

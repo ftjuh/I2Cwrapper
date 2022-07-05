@@ -26,31 +26,31 @@ var NAVTREE =
 [
   [ "I2Cwrapper", "index.html", [
     [ "Introduction", "index.html", [
-      [ "Ready to use modules", "index.html#autotoc_md1", null ],
-      [ "Basic components", "index.html#autotoc_md2", null ],
-      [ "Limitations", "index.html#autotoc_md3", null ],
-      [ "Usage", "index.html#autotoc_md4", [
-        [ "Installation", "index.html#autotoc_md5", null ],
-        [ "Configuring and uploading the firmware", "index.html#autotoc_md6", null ],
-        [ "Usage by the controller device/sketch", "index.html#autotoc_md7", null ]
+      [ "Ready to use modules", "index.html#autotoc_md23", null ],
+      [ "Basic components", "index.html#autotoc_md24", null ],
+      [ "Limitations", "index.html#autotoc_md25", null ],
+      [ "Usage", "index.html#autotoc_md26", [
+        [ "Installation", "index.html#autotoc_md27", null ],
+        [ "Configuring and uploading the firmware", "index.html#autotoc_md28", null ],
+        [ "Usage by the controller device/sketch", "index.html#autotoc_md29", null ]
       ] ],
-      [ "Available modules", "index.html#autotoc_md8", [
-        [ "AccelStepperI2C", "index.html#autotoc_md9", null ],
-        [ "ServoI2C", "index.html#autotoc_md10", null ],
-        [ "PinI2C", "index.html#autotoc_md11", null ],
-        [ "ESP32sensorsI2C", "index.html#autotoc_md12", null ],
-        [ "TM1638liteI2C", "index.html#autotoc_md13", null ],
-        [ "Feature modules", "index.html#autotoc_md14", null ]
+      [ "Available modules", "index.html#autotoc_md30", [
+        [ "AccelStepperI2C", "index.html#autotoc_md31", null ],
+        [ "ServoI2C", "index.html#autotoc_md32", null ],
+        [ "PinI2C", "index.html#autotoc_md33", null ],
+        [ "ESP32sensorsI2C", "index.html#autotoc_md34", null ],
+        [ "TM1638liteI2C", "index.html#autotoc_md35", null ],
+        [ "Feature modules", "index.html#autotoc_md36", null ]
       ] ],
-      [ "How to add your own modules", "index.html#autotoc_md15", null ],
-      [ "Supported platforms", "index.html#autotoc_md16", null ],
-      [ "Examples", "index.html#autotoc_md17", null ],
-      [ "Documentation", "index.html#autotoc_md18", null ],
-      [ "Planned improvements", "index.html#autotoc_md19", null ],
-      [ "Author", "index.html#autotoc_md20", null ],
-      [ "Copyright", "index.html#autotoc_md21", null ],
-      [ "License", "index.html#autotoc_md22", null ],
-      [ "History", "index.html#autotoc_md23", null ]
+      [ "How to add your own modules", "index.html#autotoc_md37", null ],
+      [ "Supported platforms", "index.html#autotoc_md38", null ],
+      [ "Examples", "index.html#autotoc_md39", null ],
+      [ "Documentation", "index.html#autotoc_md40", null ],
+      [ "Planned improvements", "index.html#autotoc_md41", null ],
+      [ "Author", "index.html#autotoc_md42", null ],
+      [ "Copyright", "index.html#autotoc_md43", null ],
+      [ "License", "index.html#autotoc_md44", null ],
+      [ "History", "index.html#autotoc_md45", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Reference", "modules.html", "modules" ],

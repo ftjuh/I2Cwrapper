@@ -28,9 +28,9 @@
  * You can use the log() macro for debug output. It will produce no code with
  * DEBUG unset, and be extended into "Serial.print()" with DEBUG set.
  * 
- * @section author Author
+ * ## Author
  * Copyright (c) 2022 juh
- * @section license License
+ * ## License
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, version 2.
@@ -40,9 +40,9 @@
  * Note: Code injection will confuse doxygen, as withouth the including 
  * firmware.ino it looks like incomplete code. So, to prevent it from generating 
  * all kinds of gibberish documentation, the rest of this file is enclosed in 
- * @cond/@endcond tags to make doxygen ignore it. Usually, there's nothing of
+ * cond/endcond tags to make doxygen ignore it. Usually, there's nothing of
  * interest here to document for end users anyway. If you feel otherwise, just 
- * enable doxygen for the relevant parts by enclosing them in @endcond/@cond 
+ * enable doxygen for the relevant parts by enclosing them in endcond/cond 
  * tags.
  */
 

@@ -3,9 +3,9 @@
    @brief This file determines which modules will be included in the target firmware. Add
    other modules or (un)comment out the existing ones as needed.
 
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.
