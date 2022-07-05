@@ -1,6 +1,6 @@
 # Introduction
 
-I2Cwrapper is a generic modular framework for **Arduino I2C target devices**(1) which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to **integrate peripherals without dedicated I2C interface** in an I2C-bus environment.
+I2Cwrapper is a generic modular framework for **Arduino I2C target devices**<sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to **integrate peripherals without dedicated I2C interface** in an I2C-bus environment.
 
 The **I2Cwrapper core** consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific **modules**.
 
@@ -8,7 +8,7 @@ This is a possible example setup:
 
 ![example setup](docs/images/example%20setup.png)
 
-(1) I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
+<sup>(1)</sup>I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
 Download I2Cwrapper [on github.](https://github.com/ftjuh/I2Cwrapper)
 
@@ -411,7 +411,7 @@ void loopClassic()
 - Interrupt mechanism support for TM1638liteI2C and PinI2Cmodule
 - Sonar sensor module  with support for 1 to n sensors
 - Infrared receiver module with support for 1 to n sensors
-- reintroduce diagnostics as a standalone module
+- reintroduce diagnostics as a standalone feature module
 - enable debugging for the firmware by feature module, instead of macro (completely eliminate the need to edit `firmware.ino`)
 
 - ~~Self-adjusting I2C-delay~~

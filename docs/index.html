@@ -88,11 +88,11 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Introduction </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b>(1) which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see supported platforms). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b><sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see supported platforms). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
 <p >The <b><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core</b> consists of an easily extensible firmware framework and a controller library. Together, they <b>take care of the overhead</b> necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific <b>modules</b>.</p>
 <p >This is a possible example setup:</p>
 <p ><img src="docs/images/example%20setup.png" alt="example setup" class="inline"/></p>
-<p >(1) <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> uses the <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">current I2C terminology</a> which replaced <em>master</em> with <em>controller</em>, and <em>slave</em> with <em>target</em>.</p>
+<p ><sup>(1)</sup><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> uses the <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">current I2C terminology</a> which replaced <em>master</em> with <em>controller</em>, and <em>slave</em> with <em>target</em>.</p>
 <p >Download <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a href="https://github.com/ftjuh/I2Cwrapper">on github.</a></p>
 <p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library and the module libraries <a href="https://ftjuh.github.io/I2Cwrapper/index.html">are documented here</a>.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
@@ -438,7 +438,7 @@ Planned improvements</h1>
 <li>Interrupt mechanism support for <a class="el" href="class_t_m1638lite_i2_c.html" title="An I2C wrapper class for Danny Ayers&#39; TM1638lite library (https://www.arduino.cc/reference/en/librari...">TM1638liteI2C</a> and PinI2Cmodule</li>
 <li>Sonar sensor module with support for 1 to n sensors</li>
 <li>Infrared receiver module with support for 1 to n sensors</li>
-<li>reintroduce diagnostics as a standalone module</li>
+<li>reintroduce diagnostics as a standalone feature module</li>
 <li>enable debugging for the firmware by feature module, instead of macro (completely eliminate the need to edit <code><a class="el" href="firmware_8ino.html" title="Generic firmware framework for I2C targets with modular functionality, built around the I2Cwrapper li...">firmware.ino</a></code>)</li>
 <li><strike>Self-adjusting I2C-delay</strike></li>
 <li><strike>Determine I2C-address from hardware pins</strike></li>
@@ -466,7 +466,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 5 2022 14:23:58 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue Jul 5 2022 22:02:45 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>
