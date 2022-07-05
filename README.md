@@ -28,7 +28,7 @@ While the setup for these modules differs from their respective non-I2C counterp
 
 If there are no intrinsic resource conflicts, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
 
-v0.3.0 introduced additional [**feature modules**](#feature-modules). They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.
+v0.3.0 introduced additional **[feature modules](#feature-modules)**. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.
 
 ## Basic components
 
@@ -265,7 +265,7 @@ All transmissions to the target device have a **three byte header** followed by 
 - [0] **CRC8 checksum**
 - [1] **command code**: Modules and the I2Cwrapper core use their own unique command code ranges (see [Limitations for end users](#limitations-for-end-users), though), so that the command code will decide which module or if the I2Cwrapper library itself will interpret the command.
 - [3] **unit addressed**: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the `PinI2C` module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission.
-
+<a id="supported-platforms"></a>
 # Supported platforms
 
 The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:

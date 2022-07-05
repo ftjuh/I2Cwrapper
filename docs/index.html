@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Introduction </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b><sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see supported platforms). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b><sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see <a class="el" href="index.html#supported-platforms">supported platforms</a>). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
 <p >The <b><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core</b> consists of an easily extensible firmware framework and a controller library. Together, they <b>take care of the overhead</b> necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific <b>modules</b>.</p>
 <p >This is a possible example setup:</p>
 <p ><img src="docs/images/example%20setup.png" alt="example setup" class="inline"/></p>
@@ -107,7 +107,7 @@ Ready to use modules</h1>
 </ul>
 <p >While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is <b>nearly identical</b>, so that adapting existing code for I2C remote control is pretty straightforward.</p>
 <p >If there are no intrinsic resource conflicts, modules can be selected in <b>any combination</b> at compile time for a specific target (see below for details). It is easy to <b>add new modules</b> with help of the provided <b>[templates](templates)</b>.</p>
-<p >v0.3.0 introduced additional **feature modules**. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.</p>
+<p >v0.3.0 introduced additional <b>feature modules</b>. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Basic components</h1>
 <p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> framework consists of <b>four basic components.</b> The first two drive the <b>I2C target device</b>:</p>
@@ -146,7 +146,7 @@ Basic components</h1>
 Limitations</h1>
 <h2>Limitations for end users</h2>
 <ul>
-<li>Arduinos aren't perfect I2C target devices. Not all Arduino hardware platforms have dedicated I2C hardware, which entails possible performance issues (see Supported platforms).</li>
+<li>Arduinos aren't perfect I2C target devices. Not all Arduino hardware platforms have dedicated I2C hardware, which entails possible performance issues (see <a class="el" href="index.html#supported-platforms">Supported platforms</a>).</li>
 <li>The Arduino's Wire library doesn't support <a href="https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html">clock stretching</a> in a way which allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the <b>target is not flooded</b> with commands or requests with too little time to handle them. <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> provides an adjustable minimum delay between transmissions to handle that problem.</li>
 </ul>
 <h2>Limitations for module authors</h2>
@@ -298,7 +298,7 @@ How to add your own modules</h1>
 <ul>
 <li>[0] <b>CRC8 checksum</b></li>
 <li>[1] <b>command code</b>: Modules and the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core use their own unique command code ranges (see Limitations for end users, though), so that the command code will decide which module or if the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library itself will interpret the command.</li>
-<li>[3] <b>unit addressed</b>: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the <code><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></code> module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission.</li>
+<li>[3] <b>unit addressed</b>: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the <code><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></code> module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission. <a class="anchor" id="supported-platforms"></a> </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md16"></a>
 Supported platforms</h1>
@@ -466,7 +466,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 5 2022 22:02:45 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue Jul 5 2022 22:36:32 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>
