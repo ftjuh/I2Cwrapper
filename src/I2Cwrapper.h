@@ -8,8 +8,8 @@
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, version 2.
- * @todo Enhance diagnostics with a self-diagnosing function to determine the
- * optimal/minimal I2Cdelay in a given controller-target setup.
+ * @todo <del>Enhance diagnostics with a self-diagnosing function to determine the
+ * optimal/minimal I2Cdelay in a given controller-target setup.</del>
  */
 
 #ifndef I2Cwrapper_h
@@ -115,7 +115,8 @@ public:
    * @param resetDelay (new in v0.3.0, optional) delay in ms that the controller 
    * waits after sending the reset command to give the target enough time to 
    * reinitialize the firmware core and the activated modules. Defaults to 
-   * defaultResetDelay (100 ms).
+   * defaultResetDelay (100 ms), 10 ms would probably be more than enough for all
+   * current modules.
    */
   void reset(unsigned long resetDelay = defaultResetDelay);
 

@@ -8,11 +8,11 @@
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.
-   @todo make I2C address configurable by hardware (with module?)
+   @todo <del>make I2C address configurable by hardware (with module?)</del>
    @todo return messages (results) should ideally come with an id, too, so that controller can be sure
       it's the correct result. Currently only CRC8, i.e. correct transmission is checked.
    @todo volatile variables / ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {}
-   @todo Reduce memory use to make it fit into an 8k Attiny
+   @todo Reduce memory use to make it fit into an <del>8k Attiny</del>4k ATtiny
 */
 
 #define DEBUG // Uncomment this to enable library debugging output on Serial
@@ -41,14 +41,15 @@
 
 uint8_t i2c_address = I2CwrapperDefaultAddress;  // this target's I2C address, will later be set by module or left to this default
 
-/*!
-  @brief [deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable
+/* !
+  @brief [deprecated in v0.3.0, don't use] 
+  Uncomment this to enable time keeping diagnostics. You probably should disable
   debugging, as Serial output will distort the measurements severely. Diagnostics
   take a little extra time and ressources, so you best disable it in production
   environments.
   @todo make diagnostics another module?
 */
-//#define DIAGNOSTICS
+//#define DIAGNOSTICS [deprecated in v0.3.0, don't use]
 
 
 
@@ -89,15 +90,15 @@ const uint32_t reportPeriod = 2000; // ms between main loop simple diagnostics o
 
 
 /*
-   Diagnostics stuff
+   Diagnostics stuff [deprecated in v0.3.0, don't use]
 */
 
-#if defined(DIAGNOSTICS)
-bool diagnosticsEnabled = false;
-uint32_t thenMicros;
-diagnosticsReport currentDiagnostics;
-uint32_t previousLastReceiveTime; // used to delay receive times by one receive event
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+// bool diagnosticsEnabled = false;
+// uint32_t thenMicros;
+// diagnosticsReport currentDiagnostics;
+// uint32_t previousLastReceiveTime; // used to delay receive times by one receive event
+// #endif // DIAGNOSTICS
 
 uint32_t cycles = 0; // keeps count of main loop iterations
 
@@ -396,9 +397,9 @@ void loop()
 void processMessage(uint8_t len)
 {
 
-#if defined(DIAGNOSTICS)
-  uint32_t thenMicrosP = micros();
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   uint32_t thenMicrosP = micros();
+// #endif // DIAGNOSTICS
 
   log("New message with "); log(len); log(" bytes. ");
   for (int j = 0; j < len; j++)  { // I expect the compiler will optimize this away if debugging is off
@@ -545,9 +546,9 @@ void processMessage(uint8_t len)
   }
 
 
-#if defined(DIAGNOSTICS)
-  currentDiagnostics.lastProcessTime = micros() - thenMicrosP;
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   currentDiagnostics.lastProcessTime = micros() - thenMicrosP;
+// #endif // DIAGNOSTICS
 
 }
 
@@ -569,9 +570,9 @@ void receiveEvent(int howMany)
 #endif
 {
 
-#if defined(DIAGNOSTICS)
-  thenMicros = micros();
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   thenMicros = micros();
+// #endif // DIAGNOSTICS
 
 
   /*
@@ -629,12 +630,12 @@ void receiveEvent(int howMany)
 
   } // switch (I2Cstate)
 
-#if defined(DIAGNOSTICS)
+// #if defined(DIAGNOSTICS)
   // delay storing the executing time for one cycle, else diagnostics() would always return
   // its own receive time, not the one of the previous command
-  currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
-  previousLastReceiveTime = micros() - thenMicros;
-#endif // DIAGNOSTICS
+//   currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
+//   previousLastReceiveTime = micros() - thenMicros;
+// #endif // DIAGNOSTICS
 
 }
 
@@ -695,9 +696,9 @@ void requestEvent()
 #endif
 {
 
-#if defined(DIAGNOSTICS)
-  thenMicros = micros();
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   thenMicros = micros();
+// #endif // DIAGNOSTICS
 
 
   /*
@@ -744,8 +745,8 @@ void requestEvent()
 
   } // switch (I2Cstate)
 
-#if defined(DIAGNOSTICS)
-  currentDiagnostics.lastRequestTime = micros() - thenMicros;
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   currentDiagnostics.lastRequestTime = micros() - thenMicros;
+// #endif // DIAGNOSTICS
 
 }

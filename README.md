@@ -408,7 +408,12 @@ void loopClassic()
 
 # Planned improvements
 
-- Interrupt mechanism support for TM1638I2C module
+- Interrupt mechanism support for TM1638liteI2C and PinI2Cmodule
+- Sonar sensor module  with support for 1 to n sensors
+- Infrared receiver module with support for 1 to n sensors
+- reintroduce diagnostics as a standalone module
+- enable debugging for the firmware by feature module, instead of macro (completely eliminate the need to edit `firmware.ino`)
+
 - ~~Self-adjusting I2C-delay~~
 - ~~Determine I2C-address from hardware pins~~
 - ~~Move I2C-address options (fixed, EEPROM, hardware pins) to modules~~
@@ -432,7 +437,7 @@ I2Cwrapper is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.
 
 # History
 
-v0.3.0 Initial release of I2Cwrapper, forked from AccelStepperI2C
+see [releases page](releases)
 
 Historical note: I2Cwrapper evolved from the [AccelStepperI2C project](https://github.com/ftjuh/AccelStepperI2C). The latter is still available in the Arduino library manager even if its use is discouraged. I2Cwrapper is functionally fully equivalent to AccelSteperI2C if you simply select only the AccelSteperI2C and ServoI2C modules for compilation and ignore the other modules.
 

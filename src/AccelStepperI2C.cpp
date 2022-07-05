@@ -265,21 +265,21 @@ bool AccelStepperI2C::isRunning()
  *
  */
 
-void AccelStepperI2C::enableDiagnostics(bool enable)
-{
-  wrapper->prepareCommand(enableDiagnosticsCmd, myNum);
-  wrapper->buf.write(enable);
-  wrapper->sendCommand();
-}
-
-
-void AccelStepperI2C::diagnostics(diagnosticsReport* report)
-{
-  wrapper->prepareCommand(diagnosticsCmd, myNum);
-  if (wrapper->sendCommand() and wrapper->readResult(diagnosticsResult)) {
-    wrapper->buf.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
-  }
-}
+// void AccelStepperI2C::enableDiagnostics(bool enable)
+// {
+//   wrapper->prepareCommand(enableDiagnosticsCmd, myNum);
+//   wrapper->buf.write(enable);
+//   wrapper->sendCommand();
+// }
+// 
+// 
+// void AccelStepperI2C::diagnostics(diagnosticsReport* report)
+// {
+//   wrapper->prepareCommand(diagnosticsCmd, myNum);
+//   if (wrapper->sendCommand() and wrapper->readResult(diagnosticsResult)) {
+//     wrapper->buf.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
+//   }
+// }
 
 
 void AccelStepperI2C::setState(uint8_t newState)

@@ -74,16 +74,17 @@
 const long resError = 0;
 
 
-/*!
- * @brief Used to transmit diagnostic info with AccelStepperI2C::diagnostics().
+/* !
+ * @brief [deprecated in v0.3.0, don't use] Used to transmit diagnostic info with AccelStepperI2C::diagnostics().
  */
+/* 
 struct diagnosticsReport
 {
   uint32_t cycles;          ///< Number of target's main loop executions since the last reboot
   uint16_t lastProcessTime; ///< microseconds the target needed to process (interpret) most recently received command
   uint16_t lastRequestTime; ///< microseconds the target spent in the most recent onRequest() interrupt
   uint16_t lastReceiveTime; ///< microseconds the target spent in the most recent onReceive() interrupt
-};
+}; */
 
 // AccelStepperI2C commands (reserved: 010 - 049 AccelStepperI2C)
 const uint8_t asCmdOffset          = 10;
@@ -115,8 +116,9 @@ const uint8_t isRunningCmd          = asCmdOffset + 23; const uint8_t isRunningR
 // new commands for AccelStepperI2C start here
 
 const uint8_t attachCmd             = asCmdOffset + 24; const uint8_t attachResult         = 1; // 1 uint8_t
-const uint8_t enableDiagnosticsCmd  = asCmdOffset + 25;
-const uint8_t diagnosticsCmd        = asCmdOffset + 26; const uint8_t diagnosticsResult        = sizeof(diagnosticsReport);
+// diagnostics disabled in v0.3.0
+//const uint8_t enableDiagnosticsCmd  = asCmdOffset + 25;
+//const uint8_t diagnosticsCmd        = asCmdOffset + 26; const uint8_t diagnosticsResult        = sizeof(diagnosticsReport);
 const uint8_t enableInterruptsCmd   = asCmdOffset + 27;
 const uint8_t setStateCmd           = asCmdOffset + 28;
 const uint8_t getStateCmd           = asCmdOffset + 29; const uint8_t getStateResult           = 1; // 1 uint8_t
@@ -266,23 +268,23 @@ public:
   bool    isRunning();
 
 
-  /*!
-   * @brief Turn on/off diagnostic speed logging. Needs diagnostics enabled and a target
+  /* !
+   * @brief [deprecated in v0.3.0, don't use] Turn on/off diagnostic speed logging. Needs diagnostics enabled and a target
    * which was compiled with the DIAGNOSTICS compiler directive enabled.
    * @param enable true for enable, false for disable
    * @sa diagnostics()
    */
-  void enableDiagnostics(bool enable);
+//  void enableDiagnostics(bool enable);
 
 
-  /*!
-   * @brief Get most recent diagnostics data. Needs diagnostics enabled and a target
+  /* !
+   * @brief [deprecated in v0.3.0, don't use]Get most recent diagnostics data. Needs diagnostics enabled and a target
    * which was compiled with the DIAGNOSTICS compiler directive enabled.
    * @param report where to put the data, preallocated struct of type
    * diagnosticsReport.
    * @sa enableDiagnostics()
    */
-  void diagnostics(diagnosticsReport* report);
+//  void diagnostics(diagnosticsReport* report);
 
 
   /*!
