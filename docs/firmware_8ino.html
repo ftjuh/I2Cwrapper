@@ -103,10 +103,10 @@ Author</h1>
 <p >Copyright (c) 2022 juh </p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
-<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd">make I2C address configurable by hardware (with module?) </p>
+<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd"><del>make I2C address configurable by hardware (with module?)</del> </p>
 <p class="interdd">return messages (results) should ideally come with an id, too, so that controller can be sure it's the correct result. Currently only CRC8, i.e. correct transmission is checked. </p>
 <p class="interdd">volatile variables / ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {} </p>
-<p class="enddd">Reduce memory use to make it fit into an 8k Attiny </p>
+<p class="enddd">Reduce memory use to make it fit into an <del>8k Attiny</del>4k ATtiny </p>
 </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -132,33 +132,24 @@ Macros</h2></td></tr>
 <tr class="memitem:a48b41eab07667bb7fa30dc00e3099709"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a48b41eab07667bb7fa30dc00e3099709">MF_STAGE_I2CstateChange</a>&#160;&#160;&#160;9</td></tr>
 <tr class="separator:a48b41eab07667bb7fa30dc00e3099709"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a896bf85b60dac55dcacd7c5091baeb2a">MF_STAGE_includes</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)&#160;&#160;&#160;Serial.print(__VA_ARGS__)</td></tr>
 <tr class="separator:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a48b41eab07667bb7fa30dc00e3099709">MF_STAGE_I2CstateChange</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a93d88b00f1ad9a279e28690d5f26360e">MF_STAGE_declarations</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#af6947169b907d913e36c8ca994514d66">MF_STAGE_setup</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#aaa7c7cb4c233d24cc72015628493b54f">MF_STAGE_loop</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a691e9051b923e4047c0c60a2a03dcb0d">MF_STAGE_processMessage</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a15c2b0539284cc4454cde158bd7f60f7">MF_STAGE_reset</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a8b2a75603cd542e296b689e265e182f1">MF_STAGE_receiveEvent</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a07f64187675c9231ee2b969011945161">MF_STAGE_requestEvent</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -287,9 +278,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
@@ -303,9 +291,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
 
 </div>
 </div>
@@ -321,9 +306,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
@@ -337,9 +319,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
 
 </div>
 </div>
@@ -355,9 +334,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
@@ -371,9 +347,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
 
 </div>
 </div>
@@ -389,9 +362,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
@@ -406,9 +376,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
@@ -422,9 +389,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>[deprecated, don't use] Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
 
 </div>
 </div>
@@ -704,7 +668,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)</dd></dl>
 
 </div>
 </div>
@@ -1043,7 +1007,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="firmware_8ino.html">firmware.ino</a></li>
-    <li class="footer">Generated on Mon Jul 4 2022 12:06:10 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue Jul 5 2022 14:23:58 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

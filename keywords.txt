@@ -6,6 +6,7 @@ I2Cwrapper	KEYWORD1
 PinI2C	KEYWORD1
 ServoI2C	KEYWORD1
 SimpleBuffer	KEYWORD1
+TM1638liteI2C	KEYWORD1
 # Structs
 diagnosticsReport	KEYWORD3
 # Typedefs
@@ -13,11 +14,13 @@ diagnosticsReport	KEYWORD3
 asCmdOffset	LITERAL1
 attachCmd	LITERAL1
 attachResult	LITERAL1
+autoAdjustDefaultReps	LITERAL1
 changeI2CaddressCmd	LITERAL1
 clearInterruptCmd	LITERAL1
 clearInterruptResult	LITERAL1
 currentPositionCmd	LITERAL1
 currentPositionResult	LITERAL1
+defaultResetDelay	LITERAL1
 diagnosticsCmd	LITERAL1
 diagnosticsResult	LITERAL1
 disableOutputsCmd	LITERAL1
@@ -44,6 +47,7 @@ getVersionCmd	LITERAL1
 getVersionResult	LITERAL1
 I2CdefaultDelay	LITERAL1
 I2CmaxBuf	LITERAL1
+I2CwrapperDefaultAddress	LITERAL1
 I2Cw_Version	LITERAL1
 I2Cw_VersionMajor	LITERAL1
 I2Cw_VersionMinor	LITERAL1
@@ -67,6 +71,7 @@ pinCmdOffset	LITERAL1
 pinDigitalReadCmd	LITERAL1
 pinDigitalReadResult	LITERAL1
 pinDigitalWriteCmd	LITERAL1
+pingBackCmd	LITERAL1
 pinPinModeCmd	LITERAL1
 resError	LITERAL1
 resetCmd	LITERAL1
@@ -111,6 +116,17 @@ state_stopped	LITERAL1
 stopCmd	LITERAL1
 targetPositionCmd	LITERAL1
 targetPositionResult	LITERAL1
+TM1638liteAttachCmd	LITERAL1
+TM1638liteAttachResult	LITERAL1
+TM1638liteCmdOffset	LITERAL1
+TM1638liteDisplayASCIICmd	LITERAL1
+TM1638liteDisplayHexCmd	LITERAL1
+TM1638liteDisplaySSCmd	LITERAL1
+TM1638liteReadButtonsCmd	LITERAL1
+TM1638liteReadButtonsResult	LITERAL1
+TM1638liteResetCmd	LITERAL1
+TM1638liteSendCommandCmd	LITERAL1
+TM1638liteSetLEDCmd	LITERAL1
 # Methods
 AccelStepperI2C	KEYWORD1
 analogRead	KEYWORD1
@@ -118,6 +134,7 @@ analogReference	KEYWORD1
 analogWrite	KEYWORD1
 attach	KEYWORD1
 attached	KEYWORD1
+autoAdjustI2Cdelay	KEYWORD1
 calculateCRC8	KEYWORD1
 changeI2Caddress	KEYWORD1
 checkCRC8	KEYWORD1
@@ -129,6 +146,10 @@ diagnostics	KEYWORD1
 digitalRead	KEYWORD1
 digitalWrite	KEYWORD1
 disableOutputs	KEYWORD1
+displayASCII	KEYWORD1
+displayHex	KEYWORD1
+displaySS	KEYWORD1
+displayText	KEYWORD1
 distanceToGo	KEYWORD1
 doDelay	KEYWORD1
 enableDiagnostics	KEYWORD1
@@ -137,6 +158,7 @@ enableInterrupts	KEYWORD1
 enableOutputs	KEYWORD1
 endstops	KEYWORD1
 ESP32sensorsI2C	KEYWORD1
+getI2Cdelay	KEYWORD1
 getState	KEYWORD1
 getVersion	KEYWORD1
 hallRead	KEYWORD1
@@ -147,10 +169,12 @@ maxSpeed	KEYWORD1
 move	KEYWORD1
 moveTo	KEYWORD1
 ping	KEYWORD1
+pingBack	KEYWORD1
 PinI2C	KEYWORD1
 pinMode	KEYWORD1
 prepareCommand	KEYWORD1
 read	KEYWORD1
+readButtons	KEYWORD1
 readMicroseconds	KEYWORD1
 readResult	KEYWORD1
 reset	KEYWORD1
@@ -173,6 +197,7 @@ setEnablePin	KEYWORD1
 setEndstopPin	KEYWORD1
 setI2Cdelay	KEYWORD1
 setInterruptPin	KEYWORD1
+setLED	KEYWORD1
 setMaxSpeed	KEYWORD1
 setMinPulseWidth	KEYWORD1
 setPinsInverted	KEYWORD1
@@ -183,6 +208,7 @@ stop	KEYWORD1
 stopState	KEYWORD1
 targetPosition	KEYWORD1
 temperatureRead	KEYWORD1
+TM1638liteI2C	KEYWORD1
 touchRead	KEYWORD1
 touchSetCycles	KEYWORD1
 transmissionErrors	KEYWORD1
@@ -197,6 +223,7 @@ log	LITERAL1
 PinI2C_h	LITERAL1
 ServoI2C_h	LITERAL1
 SimpleBuffer_h	LITERAL1
+TM1638liteI2C_h	LITERAL1
 # members
 address	LITERAL2
 buf	LITERAL2

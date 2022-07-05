@@ -446,7 +446,7 @@ Public Attributes</h2></td></tr>
 <p>Tells the target device to reset to its default state. It is recommended to reset the target every time the controller is started or restarted to put it in a defined state. Else it could happen that the target still manages units (steppers, etc.) which the controller does not know about. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resetDelay</td><td>(new in v0.3.0, optional) delay in ms that the controller waits after sending the reset command to give the target enough time to reinitialize the firmware core and the activated modules. Defaults to defaultResetDelay (100 ms). </td></tr>
+    <tr><td class="paramname">resetDelay</td><td>(new in v0.3.0, optional) delay in ms that the controller waits after sending the reset command to give the target enough time to reinitialize the firmware core and the activated modules. Defaults to defaultResetDelay (100 ms), 10 ms would probably be more than enough for all current modules. </td></tr>
   </table>
   </dd>
 </dl>
@@ -654,7 +654,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Mon Jul 4 2022 12:06:10 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Tue Jul 5 2022 14:23:58 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

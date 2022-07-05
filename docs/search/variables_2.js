@@ -6,5 +6,5 @@ var searchData=
   ['clockpin_3',['clockPin',['../_t_m1638lite_8ino.html#aab1fa5147134ab631cf5bffecd6c2f5e',1,'TM1638lite.ino']]],
   ['currentpositioncmd_4',['currentPositionCmd',['../_accel_stepper_i2_c_8h.html#a75da675711616279a4bbd6797d4d0342',1,'AccelStepperI2C.h']]],
   ['currentpositionresult_5',['currentPositionResult',['../_accel_stepper_i2_c_8h.html#a1c0e153b531dbc4ce0c5773bcfba4140',1,'AccelStepperI2C.h']]],
-  ['cycles_6',['cycles',['../structdiagnostics_report.html#a14178ad9926d73c00aae6db42daacdd5',1,'diagnosticsReport::cycles()'],['../_interrupt___endstop_8ino.html#adaf551887df230c7ca7069a80c1addd4',1,'cycles():&#160;Interrupt_Endstop.ino'],['../firmware_8ino.html#af9405df89f8c78a1f50085b10911ca37',1,'cycles():&#160;firmware.ino']]]
+  ['cycles_6',['cycles',['../_interrupt___endstop_8ino.html#adaf551887df230c7ca7069a80c1addd4',1,'cycles():&#160;Interrupt_Endstop.ino'],['../firmware_8ino.html#af9405df89f8c78a1f50085b10911ca37',1,'cycles():&#160;firmware.ino']]]
 ];
