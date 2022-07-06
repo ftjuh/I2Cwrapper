@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library and the module libraries <a href="https://ftjuh.github.io/I2Cwrapper/index.html">are documented here</a>.</p>
 <h1><a class="anchor" id="autotoc_md23"></a>
 Ready to use modules</h1>
-<p >Currently, the following modules come shipped with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> in the [firmware subfolder](firmware) (see <a class="el" href="index.html#available-modules">Available modules</a> for more detailed information):</p>
+<p >Currently, the following modules come shipped with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> in the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/firmware">firmware subfolder</a> (see <a class="el" href="index.html#available-modules">Available modules</a> for more detailed information):</p>
 <ul>
 <li><b><a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a></b>: Control up to eight stepper motors with acceleration control via Mike McCauley's <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/index.html">AccelStepper</a> library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging.</li>
 <li><b><a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a></b>: Control servo motors via I2C just like the plain Arduino <a href="https://www.arduino.cc/reference/en/libraries/servo">Servo library</a>.</li>
@@ -106,7 +106,7 @@ Ready to use modules</h1>
 <li><b>TM1638lite</b>: Read buttons from and control the single and seven-segment LEDs of up to four <a href="https://duckduckgo.com/?q=TM1638+datasheet">TM1638</a> modules like the ubiquitous <a href="https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/">LED&amp;Key module</a> via I2C. Uses Danny Ayers' <a href="https://www.arduino.cc/reference/en/libraries/tm1638lite/">TM1638lite library</a>.</li>
 </ul>
 <p >While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is <b>nearly identical</b>, so that adapting existing code for I2C remote control is pretty straightforward.</p>
-<p >If there are no intrinsic resource conflicts, modules can be selected in <b>any combination</b> at compile time for a specific target (see below for details). It is easy to <b><a class="el" href="index.html#how-to-add-new-modules">add new modules</a></b> with help of the provided <b>[templates](templates)</b>.</p>
+<p >If there are no intrinsic resource conflicts, modules can be selected in <b>any combination</b> at compile time for a specific target (see below for details). It is easy to <b><a class="el" href="index.html#how-to-add-new-modules">add new modules</a></b> with help of the provided <b><a href="https://github.com/ftjuh/I2Cwrapper/tree/main/templates">templates</a></b>.</p>
 <p >v0.3.0 introduced additional <b><a class="el" href="index.html#feature-modules">feature modules</a></b>. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.</p>
 <h1><a class="anchor" id="autotoc_md24"></a>
 Basic components</h1>
@@ -290,7 +290,7 @@ Feature modules</h2>
 <p ><a class="anchor" id="how-to-add-new-modules"></a></p>
 <h1><a class="anchor" id="autotoc_md37"></a>
 How to add your own modules</h1>
-<p >If you want to add your own modules and <b>implement your own I2C target device</b>, you can use the templates provided in the [templates subfolder](templates).</p>
+<p >If you want to add your own modules and <b>implement your own I2C target device</b>, you can use the templates provided in the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/templates">templates subfolder</a>.</p>
 <ul>
 <li><code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> and <code><a class="el" href="template___i2_c_8cpp.html" title="Part of the I2Cwrapper firmware/library.">template_I2C.cpp</a></code> - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see <a class="el" href="index.html#limitations-for-module-authors">limitations</a>). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library.<ul>
 <li>Often, the header file <code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> will very closely resemble the header file of the library which you are addressing on the target device's side.</li>
@@ -299,7 +299,7 @@ How to add your own modules</h1>
 </li>
 <li><code><a class="el" href="template___i2_c__firmware_8h.html" title="Use this file as a template for your own optional extension module of the I2Cwrapper firmware....">template_I2C_firmware.h</a></code> - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the <code><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad" title="Process the message stored in bufferIn with lenght len which was received via I2C....">processMessage()</a></code> function) which will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.</li>
 </ul>
-<p >Refer to the documentation within the templates' source code and to the [existing modules](src) for more details and illustration.</p>
+<p >Refer to the documentation within the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/templates">templates' source code</a> and to the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/firmware">existing modules</a> for more details and illustration.</p>
 <p ><a class="anchor" id="a-note-on-messages-and-units"></a></p>
 <h3>A note on messages and units</h3>
 <p >All transmissions to the target device have a <b>three byte header</b> followed by an arbitrary number of zero or more parameter bytes:</p>
@@ -466,7 +466,7 @@ License</h1>
 <p ><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.</p>
 <h1><a class="anchor" id="autotoc_md45"></a>
 History</h1>
-<p >see [releases page](releases)</p>
+<p >see <a href="https://github.com/ftjuh/I2Cwrapper/releases">releases page</a></p>
 <p >Historical note: <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> evolved from the <a href="https://github.com/ftjuh/AccelStepperI2C">AccelStepperI2C project</a>. The latter is still available in the Arduino library manager even if its use is discouraged. <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is functionally fully equivalent to AccelSteperI2C if you simply select only the AccelSteperI2C and <a class="el" href="class_servo_i2_c.html" title="An I2C wrapper class for the Arduino Servo library.">ServoI2C</a> modules for compilation and ignore the other modules. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
@@ -474,7 +474,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jul 5 2022 23:32:48 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Wed Jul 6 2022 08:08:44 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

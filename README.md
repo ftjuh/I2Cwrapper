@@ -16,7 +16,7 @@ The I2Cwrapper library and the module libraries  [are documented here](https://f
 
 ## Ready to use modules
 
-Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](firmware) (see [Available modules](#available-modules) for more detailed information):
+Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](https://github.com/ftjuh/I2Cwrapper/tree/main/firmware) (see [Available modules](#available-modules) for more detailed information):
 
 * **AccelStepperI2C**: Control up to eight stepper motors with acceleration control via Mike McCauley's [AccelStepper](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging.
 * **ServoI2C**: Control servo motors via I2C just like the plain Arduino [Servo library](https://www.arduino.cc/reference/en/libraries/servo).
@@ -26,7 +26,7 @@ Currently, the following modules come shipped with I2Cwrapper in the [firmware s
 
 While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is **nearly identical**, so that adapting existing code for I2C remote control is pretty straightforward.
 
-If there are no intrinsic resource conflicts, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](templates)**.
+If there are no intrinsic resource conflicts, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](https://github.com/ftjuh/I2Cwrapper/tree/main/templates)**.
 
 v0.3.0 introduced additional **[feature modules](#feature-modules)**. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.
 
@@ -263,14 +263,14 @@ To make the target device **use a different I2C address** than the default (0x08
 
 # How to add your own modules
 
-If you want to add your own modules and **implement your own I2C target device**, you can use the templates provided in the [templates subfolder](templates).
+If you want to add your own modules and **implement your own I2C target device**, you can use the templates provided in the [templates subfolder](https://github.com/ftjuh/I2Cwrapper/tree/main/templates).
 
 - `template_I2C.h`  and `template_I2C.cpp` - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see [limitations](#limitations-for-module-authors)). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the I2Cwrapper library.
   - Often, the header file `template_I2C.h`  will very closely resemble the header file of the library which you are addressing on the target device's side.
   - The implementation  `template_I2C.cpp`, however, looks quite different: It will do nothing else but "**wrap**" each function's arguments into a command, transmit it to the target, and, optionally, receive the target device's reply.
 - `template_I2C_firmware.h` - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the `processMessage()` function) which will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.
 
-Refer to the documentation within the templates' source code and to the [existing modules](src) for more details and illustration.
+Refer to the documentation within the [templates' source code](https://github.com/ftjuh/I2Cwrapper/tree/main/templates) and to the [existing modules](https://github.com/ftjuh/I2Cwrapper/tree/main/firmware) for more details and illustration.
 
 <a id="a-note-on-messages-and-units"></a>
 
@@ -453,7 +453,7 @@ I2Cwrapper is distributed under the GNU GENERAL PUBLIC LICENSE Version 2.
 
 # History
 
-see [releases page](releases)
+see [releases page](https://github.com/ftjuh/I2Cwrapper/releases)
 
 Historical note: I2Cwrapper evolved from the [AccelStepperI2C project](https://github.com/ftjuh/AccelStepperI2C). The latter is still available in the Arduino library manager even if its use is discouraged. I2Cwrapper is functionally fully equivalent to AccelSteperI2C if you simply select only the AccelSteperI2C and ServoI2C modules for compilation and ignore the other modules.
 
