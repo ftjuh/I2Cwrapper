@@ -1,6 +1,12 @@
 /*!
   @file template_I2C.cpp
-  @brief Part of the I2Cwrapper firmware/library
+  @brief Template for a user module/controller library for the I2Cwrapper @ref 
+  firmware. "xxx" represents the name of your module, e.g. "PinI2C".
+  
+  For most modules, the core task of this file is to convert the controller's
+  function calls into commands and parameters, send them to the target and,
+  optionally, receive its response and return it as function result.
+  
   ## Author
   Copyright (c) 2022 juh
   ## License
@@ -20,6 +26,7 @@ xxxI2C::xxxI2C(I2Cwrapper* w)
 }
 
 /*
+ * A note on units:
  * Some modules will want to differentiate between multiple instances of some 
  * hardware like steppers or servos. We call these units. Others like PinI2C 
  * and ESP32sensors don't use units, as there is only one instance of hardware 
@@ -33,7 +40,6 @@ xxxI2C::xxxI2C(I2Cwrapper* w)
  * Modules which don't use units, like PinI2C, can simply omit the unit parameter 
  * in the below prepareCommand() calls.
  */
-
 
 // example for a void function/command
 void xxxI2C::xxxDemo1(uint8_t arg1) {

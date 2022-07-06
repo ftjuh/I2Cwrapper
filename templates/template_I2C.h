@@ -1,7 +1,8 @@
 /*!
   @file template_I2C.h
   @brief Template for a user module/controller library for the I2Cwrapper @ref 
-  firmware.ino. "xxx" represents the name of your module, e.g. "PinI2C"
+  firmware. "xxx" represents the name of your module, e.g. "PinI2C"
+  
   ## Author
   Copyright (c) 2022 juh
   ## License
@@ -68,7 +69,7 @@ public:
   void xxxDemo1(uint8_t);
   uint8_t xxxDemo2(uint16_t, float, bool); // return type uint8_t needs to correspond to xxxDemo2CmdResult
   
-  int8_t myNum = -1;    // for modules that use 
+  int8_t myNum = -1;    // for modules that support units, i.e. more than one instance of the hardware represented by this class
   
 private:
   I2Cwrapper* wrapper;

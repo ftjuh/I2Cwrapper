@@ -1,10 +1,13 @@
 /*!
  * @file template_I2C_firmware.h
- * @brief Use this file as a template for your own optional extension module of 
+ * @brief Template for a user firmware module for the I2Cwrapper @ref
+ * firmware.ino. "xxx" represents the name of your module, e.g. "PinI2C"
+ *
+ * Use this file as a template for your own optional extension module of 
  * the I2Cwrapper firmware. You will usually want to bundle it with a matching 
- * controller library. Don't forget to copy it into the firmware folder and 
- * activate it in the firmware_modules.h configuration file before compiling 
- * the firmware.
+ * controller library (see template_I2C.h|cpp). Don't forget to copy it (I use
+ * symlinks) into the firmware folder and activate it in the firmware_modules.h 
+ * configuration file before compiling the firmware.
  * 
  * Currently, your code can be injected between the respective 
  * "#if MF_STAGE == ...." compiler directives (leave those untouched) at the 
@@ -19,6 +22,9 @@
  * (7) (end of) receiveEvent()
  * (8) (end of) requestEvent()
  * (9) Change of I2C state machine's state
+ * 
+ * Many modules use only a small subset of these stages. (1), (2), (5) are
+ * probably always necessary for normal (non feature) modules.
  * 
  * See below for instructions on what code to place where. See existing modules
  * for illustration. PinI2C and ServoI2C are good and simple starting points, 
