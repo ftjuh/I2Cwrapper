@@ -34,7 +34,7 @@ v0.3.0 introduced additional **[feature modules](#feature-modules)**. They don't
 
 The I2Cwrapper framework consists of **four basic components.** The first two drive the **I2C target device**:
 
-1. A **firmware framework** for the target device, implemented in the [`firmware.ino`](firmware/firmware.ino) sketch. It provides the basic I2C target functionality:
+1. A **firmware framework** for the target device, implemented in the [`firmware.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware.ino) sketch. It provides the basic I2C target functionality:
    - **onReceive**() and **onRequest**() interrupt service routines (ISRs) which listen and react to the controller's transmissions,
    - a **command interpreter** which processes the controller's commands received by onReceive() (in traditional I2C hardware this is equivalent to register writes and reads),
    - an **output Buffer** which allows the target to prepare a reply which  will be sent upon the next onRequest() event,
@@ -43,7 +43,7 @@ The I2Cwrapper framework consists of **four basic components.** The first two dr
    - a controller **interrupt** mechanism which modules can use to alert the master proactively,
    - triggering a **target reset** (i.e. re-initialization to initial state).
 2. **Firmware modules** which implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.
-   - Modules exist as separate **include files**, e.g. [`ServoI2C_firmware.h`](firmware/ServoI2C_firmware.h), and are **selected** for compilation via the [`firmware_modules.h`](firmware/firmware_modules.h) file.
+   - Modules exist as separate **include files**, e.g. [`ServoI2C_firmware.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/ServoI2C_firmware.h), and are **selected** for compilation via the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) file.
    - Modules don't have to worry about the I2C overhead but can **concentrate on what's important**: interpreting and reacting to the controller device's commands and requests.
    - Modules can "inject" their code at different places in the firmware (e.g. setup, main loop, command interpreter), so that there is a **high degree of flexibility**.
 
@@ -70,7 +70,7 @@ The other two basic components are for the **I2C controller's side**:
 ### Limitations for module authors
 
    - No **serialization protocol** is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Modules will have to take care that transmitted commands and requests will transmit defined amounts of bytes by using typeguards for ambiguously sized datatypes like *int*.
-   - Modules use one byte **command codes** (similar to conventional I2C-registers) for each distinct function call to the target. At the moment, no mechanism is in place to prevent newly developed modules from reusing codes already used by another module or by one of the I2Cwrapper core functions. Note that this will only lead to problems if two conflicting modules are used concurrently by a target device. The [I2Cwrapper documentation](https://ftjuh.github.io/I2Cwrapper/docs/class_i2_cwrapper.html) has a list of code ranges used by the currently available modules. Strictly reserved ranges are 0-9 and 240-255.
+   - Modules use one byte **command codes** (similar to conventional I2C-registers) for each distinct function call to the target. At the moment, no mechanism is in place to prevent newly developed modules from reusing codes already used by another module or by one of the I2Cwrapper core functions. Note that this will only lead to problems if two conflicting modules are used concurrently by a target device. The [I2Cwrapper documentation](https://ftjuh.github.io/I2Cwrapper/class_i2_cwrapper.html) has a list of code ranges used by the currently available modules. Strictly reserved ranges are 0-9 and 240-255.
 
 See the [How to add new modules](#how-to-add-new-modules) section if you are interested in writing a new module and implementing your own target device.
 
@@ -86,8 +86,8 @@ If you've used the AccelStepperI2C library before, please uninstall it (i.e. del
 
 ## Configuring and uploading the firmware
 
-* **Open [firmware.ino](https://github.com/ftjuh/AccelStepperI2C/blob/controller/firmware/firmware.ino)**  from the examples menu of the Arduino editor, you'll find it in the the I2Cwrapper submenu. It will open multiple tabs, among them one for each available module in the firmware subfolder.
-* Go to  the [`firmware_modules.h`](firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware.
+* **Open firmware.ino**  from the examples menu of the Arduino editor, you'll find it in the the I2Cwrapper submenu. It will open multiple tabs, among them one for each available module in the firmware subfolder.
+* Go to  the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware.
 * You can **save a local copy** of the firmware. Don't forget, though, that your local copy won't be updated in future releases which might result in conflicts after a library upgrade.
 * **Compile and upload** to your target device.
 
@@ -128,7 +128,7 @@ The library keeps an internal count of the **number of failed transmissions**, i
 
 The respective counter(s) will be reset to 0 with each invocation of these methods.
 
-See the [Error_checking.ino](examples/Error_checking/Error_checking.ino) example for further illustration.
+See the [Error_checking.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Error_checking/Error_checking.ino) example for further illustration.
 
 In v0.3.0 an **I2C state machine** was introduced to explicitly handle irregular sequences of events, e.g. a `receiveEvent()` happening while a `requestEvent()` was expected. It's main aim is to always keep the target in a responsive state and prevent it from sending bogus data. So even if errors occur, at least the target should remain responsive. See [I2C state machine.svg](docs/images/I2C_state_machine.svg) for details on the state machine's flow of states.
 
@@ -140,7 +140,7 @@ The **controller** will have to implement an interrupt service routine (ISR) to 
 
 **Interrupt reasons** are specific for a module. A module can send an interrupt to the controller with the `triggerInterrupt()` function which is provided by the `firmware.ino` framework. It can provide additional information on the interrupt reason and the target device's [(sub)unit](#a-note-on-messages-and-units) that caused the interrupt.
 
-See the example [Interrupt_Endstop](examples/Interrupt_Endstop/Interrupt_Endstop.ino) for further illustration.
+See the example [Interrupt_Endstop](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Interrupt_Endstop/Interrupt_Endstop.ino) for further illustration.
 
 <a id="adjusting-the-i2c-delay"></a>
 
@@ -158,7 +158,7 @@ That's why I2Cwrapper makes sure that a **specified minimum delay** is kept betw
 
 Alternatively, the controller can use the `I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith)` function to make an educated guess for the **shortest, yet still reasonably safe I2C delay value** in a given environment. It will be based on a number of simulated test transmissions to and from the target device. It can be supplemented by an additional safety margin (default: 2 ms) and factor in the maximum command length to be used (default: max length allowed by buffer).
 
-See [Adjust_I2Cdelay](examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-depth experiments. An everyday use example used in a `setup()` function could look like this (from [Error_checking.ino](examples/Error_checking/Error_checking.ino)):
+See [Adjust_I2Cdelay.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Adjust_I2Cdelay/Adjust_I2Cdelay.ino) for some in-depth experiments. An everyday use example used in a `setup()` function could look like this (from [Error_checking.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Error_checking/Error_checking.ino)):
 
 ```c++
 Serial.print("I2C delay set to ");
@@ -177,7 +177,7 @@ wrapper.autoAdjustI2Cdelay();
 
 # Available modules
 
-To chose which modules are supported by an I2C target device, edit the [`firmware_modules.h`](firmware/firmware_modules.h) file accordingly.
+To chose which modules are supported by an I2C target device, edit the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) file accordingly.
 
 ## AccelStepperI2C
 
@@ -202,11 +202,11 @@ All the controller has to do is make the appropriate settings, e.g. set a target
 
 Up to **two end stop switches** can be defined for each stepper. If enabled and the stepper runs into one of them, it will make the state machine (and the stepper motor) stop.
 
-Of course, this is most useful in combination with `AccelStepperI2C::runSpeedState()` for homing and calibration tasks at startup. See [`Interrupt_Endstop.ino`](examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
+Of course, this is most useful in combination with `AccelStepperI2C::runSpeedState()` for homing and calibration tasks at startup. See [`Interrupt_Endstop.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
 
 ### Interrupt mechanism
 
-I2Cwrapper's interrupt mechanism can be used to inform the controller that the state machine's state has changed. Currently, this will happen when a set **target has been reached** or when an **endstop** switch was triggered. See [`Interrupt_Endstop.ino`](examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
+I2Cwrapper's interrupt mechanism can be used to inform the controller that the state machine's state has changed. Currently, this will happen when a set **target has been reached** or when an **endstop** switch was triggered. See [`Interrupt_Endstop.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
 
 ### Restrictions
 
@@ -225,19 +225,19 @@ Steppers can exert damaging forces, even if they are moving slow. If in doubt, s
 
 ## ServoI2C
 
-Controls servo motors via I2C. Works literally just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library. See [`Servo_Sweep.ino`](examples/Servo_Sweep/Servo_Sweep.ino) example.
+Controls servo motors via I2C. Works literally just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library. See [`Servo_Sweep.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Servo_Sweep/Servo_Sweep.ino) example.
 
 ## PinI2C
 
-Read and control the digital and analog input and output pins of the target device via I2C. Can replace a dedicated digital or analog port expander like MCP23017, PCF8574, PCF8591, or ADS1115. Can be used like  the plain Arduino `digitalRead()`, `analogWrite()`etc. commands. See [`Pin_control.ino`](examples/Pin_control/Pin_control.ino) example.
+Read and control the digital and analog input and output pins of the target device via I2C. Can replace a dedicated digital or analog port expander like MCP23017, PCF8574, PCF8591, or ADS1115. Can be used like  the plain Arduino `digitalRead()`, `analogWrite()`etc. commands. See [`Pin_control.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) example.
 
 ## ESP32sensorsI2C
 
-Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor via I2C. Can use the optional I2Cwrapper interrupt mechanism to inform the controller about a touch button press. See [`ESP32sensors.ino`](examples/ESP32sensors/ESP32sensors.ino) example.
+Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor via I2C. Can use the optional I2Cwrapper interrupt mechanism to inform the controller about a touch button press. See [`ESP32sensors.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/ESP32sensors/ESP32sensors.ino) example.
 
 ## TM1638liteI2C
 
-The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus interface to control matrices of buttons and LEDs. If you want to unify your bus environment in a given project or need to save pins, it can be useful to be able to control it via I2C. To implement an I2Cwrapper module, I chose Danny Ayers' [TM1638lite library](https://github.com/danja/TM1638lite) as it came with the most straightforward and burden-free implementation in comparison with the more popular choices. Apart from the setup, it can be used just like the original. Interrupt mechanism support for key presses is planned but not implemented yet. See the [`TM1638lite.ino`](examples/TM1638lite/TM1638lite.ino) example for more details.
+The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus interface to control matrices of buttons and LEDs. If you want to unify your bus environment in a given project or need to save pins, it can be useful to be able to control it via I2C. To implement an I2Cwrapper module, I chose Danny Ayers' [TM1638lite library](https://github.com/danja/TM1638lite) as it came with the most straightforward and burden-free implementation in comparison with the more popular choices. Apart from the setup, it can be used just like the original. Interrupt mechanism support for key presses is planned but not implemented yet. See the [`TM1638lite.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) example for more details.
 
 <a id="feature-modules"></a>
 
@@ -290,11 +290,11 @@ The following platforms will run the target firmware and have been (more or less
 * **ESP8266**: Has no I2C  hardware. The software I2C may not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to [decrease the bus speed](https://www.arduino.cc/en/Reference/WireSetClock) below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 * **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-i2c-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 * **ATtiny**: Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 12.
-  Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](examples/Pin_control/Pin_control.ino) and [TM1638lite](examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
+  Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
 
 # Examples
 
-This is a simplified version of the [`Pin_control.ino`](examples/Pin_control.ino) example sketch for addressing a target device running the I2Cwrapper firmware with the PinI2C module enabled.
+This is a simplified version of the [`Pin_control.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control.ino) example sketch for addressing a target device running the I2Cwrapper firmware with the PinI2C module enabled.
 
 ```c++
 /*

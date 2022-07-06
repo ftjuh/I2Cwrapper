@@ -53,10 +53,6 @@ uint8_t i2c_address = I2CwrapperDefaultAddress;  // this target's I2C address, w
 
 
 
-/************************************************************************/
-/******* end of firmware configuration settings **************************/
-/************************************************************************/
-
 
 /*
    Inject module includes
