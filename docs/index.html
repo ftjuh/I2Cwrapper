@@ -181,7 +181,7 @@ Configuring and uploading the firmware</h2>
 <li><b>Connect the I2C bus</b> of both devices (SDA, SCL, and GND). Don't forget I2C pullups and, and if needed, level-shifters. Also, connect V+ &lt;-&gt; V+ to power one board from the other, if needed.</li>
 <li>Open the controller sketch's serial output and <b>run</b> the controller sketch.</li>
 </ul>
-<p >Have a look at the <a href="https://github.com/ftjuh/AccelStepperI2C/tree/controller/examples">examples</a> for details.</p>
+<p >Have a look at the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/examples">examples</a> for details.</p>
 <h2><a class="anchor" id="autotoc_md29"></a>
 Usage by the controller device/sketch</h2>
 <p >Simply include the <b>controller libraries</b> for the module(s) you compiled into your target firmware (e.g. <code><a class="el" href="_servo_i2_c_8h.html" title="Arduino library for I2C-control of servo motors connected to another Arduino which runs the I2Cwrappe...">ServoI2C.h</a></code>) and use them as shown in the documentation and example sketches of the respective modules.</p>
@@ -284,7 +284,7 @@ Feature modules</h2>
 <p >To make the target device <b>use a different I2C address</b> than the default (0x08), you can include one (and only one) of the following feature modules:</p>
 <ul>
 <li><code><a class="el" href="__address_fixed__firmware_8h.html" title="Define a fixed address for the target.">_addressFixed_firmware.h</a></code>: use a fixed I2C address for the target other than the default</li>
-<li><code>addressFromPins_firmware.h</code>: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup</li>
+<li><code><a class="el" href="__address_from_pins__firmware_8h.html" title="Makes the target retrieve its own address from the input state of one or more pins at startup,...">_addressFromPins_firmware.h</a></code>: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup</li>
 <li><code><a class="el" href="__address_from_flash__firmware_8h.html" title="Read target&#39;s own I2C address from non volatile memory (EEPROM, flash memory) and store a new changed...">_addressFromFlash_firmware.h</a></code>: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.</li>
 </ul>
 <p ><a class="anchor" id="how-to-add-new-modules"></a></p>
@@ -292,12 +292,12 @@ Feature modules</h2>
 How to add your own modules</h1>
 <p >If you want to add your own modules and <b>implement your own I2C target device</b>, you can use the templates provided in the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/templates">templates subfolder</a>.</p>
 <ul>
-<li><code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> and <code><a class="el" href="template___i2_c_8cpp.html" title="Part of the I2Cwrapper firmware/library.">template_I2C.cpp</a></code> - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see <a class="el" href="index.html#limitations-for-module-authors">limitations</a>). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library.<ul>
-<li>Often, the header file <code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the n...">template_I2C.h</a></code> will very closely resemble the header file of the library which you are addressing on the target device's side.</li>
-<li>The implementation <code><a class="el" href="template___i2_c_8cpp.html" title="Part of the I2Cwrapper firmware/library.">template_I2C.cpp</a></code>, however, looks quite different: It will do nothing else but "**wrap**" each function's arguments into a command, transmit it to the target, and, optionally, receive the target device's reply.</li>
+<li><code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware. &quot;xxx&quot; represents the name ...">template_I2C.h</a></code> and <code><a class="el" href="template___i2_c_8cpp.html" title="Template for a user module/controller library for the I2Cwrapper firmware. &quot;xxx&quot; represents the name ...">template_I2C.cpp</a></code> - controller library templates. Their main function is to define an interface for the target's functionality and the related command codes (see <a class="el" href="index.html#limitations-for-module-authors">limitations</a>). Each function is implemented so that the function's command code and parameters are transmitted to the target with the help of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library.<ul>
+<li>Often, the header file <code><a class="el" href="template___i2_c_8h.html" title="Template for a user module/controller library for the I2Cwrapper firmware. &quot;xxx&quot; represents the name ...">template_I2C.h</a></code> will very closely resemble the header file of the library which you are addressing on the target device's side.</li>
+<li>The implementation <code><a class="el" href="template___i2_c_8cpp.html" title="Template for a user module/controller library for the I2Cwrapper firmware. &quot;xxx&quot; represents the name ...">template_I2C.cpp</a></code>, however, looks quite different: It will do nothing else but "**wrap**" each function's arguments into a command, transmit it to the target, and, optionally, receive the target device's reply.</li>
 </ul>
 </li>
-<li><code><a class="el" href="template___i2_c__firmware_8h.html" title="Use this file as a template for your own optional extension module of the I2Cwrapper firmware....">template_I2C_firmware.h</a></code> - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the <code><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad" title="Process the message stored in bufferIn with lenght len which was received via I2C....">processMessage()</a></code> function) which will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.</li>
+<li><code><a class="el" href="template___i2_c__firmware_8h.html" title="Template for a user firmware module for the I2Cwrapper firmware.ino. &quot;xxx&quot; represents the name of you...">template_I2C_firmware.h</a></code> - Target firmware templates. Here, the most important part is injecting code into the command interpreter (the <code><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad" title="Process the message stored in bufferIn with lenght len which was received via I2C....">processMessage()</a></code> function) which will "**unwrap**" the controller function's command codes and arguments, react adequately, and, optionally, prepare a reply.</li>
 </ul>
 <p >Refer to the documentation within the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/templates">templates' source code</a> and to the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/firmware">existing modules</a> for more details and illustration.</p>
 <p ><a class="anchor" id="a-note-on-messages-and-units"></a></p>
@@ -474,7 +474,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jul 6 2022 11:23:20 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Wed Jul 6 2022 18:18:59 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>
