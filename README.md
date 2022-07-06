@@ -52,7 +52,7 @@ The other two basic components are for the **I2C controller's side**:
 3. The [**I2Cwrapper class**](https://ftjuh.github.io/I2Cwrapper/class_i2_cwrapper.html), provided by the `I2Cwrapper.h` library.
    - Controller sketches use an object of type I2Cwrapper to **represent the target device** which handles all low level communication tasks like CRC8 checksums, error handling etc.
    - It also provides **basic functions** for target device management like changing its I2C address, setting an interrupt pin, or making it reset.
-4. **Controller libraries** for each module, e.g. [`ServoI2C.h`](src/ServoI2C.h). 
+4. **Controller libraries** for each module, e.g. [`ServoI2C.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/src/ServoI2C.h). 
    - Controller libraries use **I2Cwrapper objects** to talk to the target device (like the `ServoI2C` class in `ServoI2C.h`).
    - They implement an **interface** for the respective target functionality, which transmits function calls to the target device, and receives the target's reply, if the command was asking for it.
 
@@ -101,7 +101,7 @@ The target device is now ready. To test it, you can use one of the example sketc
 * **Connect the I2C bus** of both devices (SDA, SCL, and GND). Don't forget  I2C pullups and, and if needed, level-shifters. Also, connect V+ <-> V+ to power one board from the other, if needed.
 * Open the controller sketch's serial output and **run** the controller sketch.
 
-Have a look at the [examples](https://github.com/ftjuh/AccelStepperI2C/tree/controller/examples) for details. 
+Have a look at the [examples](https://github.com/ftjuh/I2Cwrapper/tree/main/examples) for details. 
 
 ## Usage by the controller device/sketch
 
@@ -256,7 +256,7 @@ Including the `_statusLED_firmware.h` in `firmware_modules.h`will make the targe
 To make the target device **use a different I2C address** than the default (0x08), you can include one (and only one) of the following feature modules:
 
 * `_addressFixed_firmware.h`: use a fixed I2C address for the target other than the default
-* `addressFromPins_firmware.h`: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup
+* `_addressFromPins_firmware.h`: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup
 * `_addressFromFlash_firmware.h`: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.
 
 <a id="how-to-add-new-modules"></a>
@@ -282,6 +282,10 @@ All transmissions to the target device have a **three byte header** followed by 
 - [1] **command code**: Modules and the I2Cwrapper core use their own unique command code ranges (see [Limitations for end users](#limitations-for-end-users), though), so that the command code will decide which module or if the I2Cwrapper library itself will interpret the command.
 - [3] **unit addressed**: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the `PinI2C` module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission.
 <a id="supported-platforms"></a>
+### Module reset code
+
+Since v0.3.0 dropped the hardware reset (it's considered bad practice), each module now needs to provide proper **cleanup code** in the (6) reset event section. This code needs to free all allocated resources and reset all hardware used by the module. The goal is to put all resources used by the module, and only(!) those,  into the state they were after bootup, so that a controller can make sure it finds a clean slate when it starts to use the target by sending a reset command.
+
 # Supported platforms
 
 The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:
@@ -294,7 +298,7 @@ The following platforms will run the target firmware and have been (more or less
 
 # Examples
 
-This is a simplified version of the [`Pin_control.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control.ino) example sketch for addressing a target device running the I2Cwrapper firmware with the PinI2C module enabled.
+This is a simplified version of the [`Pin_control.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) example sketch for addressing a target device running the I2Cwrapper firmware with the PinI2C module enabled.
 
 ```c++
 /*
