@@ -204,7 +204,7 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">i2c_address</td><td>Address of the target device </td></tr>
-    <tr><td class="paramname">maxBuf</td><td>Upper limit of send and receive buffer including 1 crc8 byte </td></tr>
+    <tr><td class="paramname">maxBuf</td><td>[not implemented yet in the firmware, don't use] Upper limit of send and receive buffer including 1 crc8 byte and, for transmissions from the controller to the target, 2 header bytes. Note that this is corrently only implemented for the controller, but not in the firmware, so that it is not usable yet. </td></tr>
   </table>
   </dd>
 </dl>
@@ -654,7 +654,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></li>
-    <li class="footer">Generated on Wed Jul 6 2022 18:18:59 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Jul 7 2022 21:51:23 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

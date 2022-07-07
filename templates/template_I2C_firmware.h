@@ -166,11 +166,11 @@ log("###template### module enabled.\n");
  * 
  * This code will be called if the target device is to perform a (soft) reset 
  * via I2C command. Here, the module needs to free any ressources it has allocated 
- * and put any hardware under its rule in its initial state. Note: From v0.3.0
- * on, no hardware reset is performed any more. So it is essential that after 
- * calling this code, the target device presents itself as a clean slate to the
- * controller, just like after power up.
+ * and put any hardware under its rule (and only that!) in its initial state. 
  * 
+ * Note: From v0.3.0  on, no hardware reset is performed any more. So it is 
+ * essential that after calling this code, the target device presents itself as 
+ * a clean slate to the controller, just like after power up.
  */
 #if MF_STAGE == MF_STAGE_reset
 #endif // MF_STAGE_reset
