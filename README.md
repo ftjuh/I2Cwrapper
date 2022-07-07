@@ -24,7 +24,7 @@ Currently, the following modules come shipped with I2Cwrapper in the [firmware s
 * **ESP32sensorsI2C**: Read an ESP32's [touch sensors](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/touch_pad.html), hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press.
 * **TM1638lite**: Read buttons from and control the single and seven-segment LEDs of up to four [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) modules like the ubiquitous [LED&Key module](https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/) via I2C. Uses Danny Ayers' [TM1638lite library](https://www.arduino.cc/reference/en/libraries/tm1638lite/).
 
-While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is **nearly identical**, so that adapting existing code for I2C remote control is pretty straightforward.
+While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is **very similar**, so that adapting existing code for I2C remote control is pretty straightforward.
 
 If there are no intrinsic resource conflicts, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](https://github.com/ftjuh/I2Cwrapper/tree/main/templates)**.
 
@@ -45,6 +45,7 @@ The I2Cwrapper framework consists of **four basic components.** The first two dr
 2. **Firmware modules** which implement the actual functionality of the target device, e.g. controlling stepper and/or servo motors, or reading sensors.
    - Modules exist as separate **include files**, e.g. [`ServoI2C_firmware.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/ServoI2C_firmware.h), and are **selected** for compilation via the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) file.
    - Modules don't have to worry about the I2C overhead but can **concentrate on what's important**: interpreting and reacting to the controller device's commands and requests.
+   - A module's main job is to **interpret and react to commands** passed to them from the controller through the firmware framework.
    - Modules can "inject" their code at different places in the firmware (e.g. setup, main loop, command interpreter), so that there is a **high degree of flexibility**.
 
 The other two basic components are for the **I2C controller's side**:
@@ -55,6 +56,7 @@ The other two basic components are for the **I2C controller's side**:
 4. **Controller libraries** for each module, e.g. [`ServoI2C.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/src/ServoI2C.h). 
    - Controller libraries use **I2Cwrapper objects** to talk to the target device (like the `ServoI2C` class in `ServoI2C.h`).
    - They implement an **interface** for the respective target functionality, which transmits function calls to the target device, and receives the target's reply, if the command was asking for it.
+   - In the simplest case, they closely **mimick the interface** of an existing library  (like Arduino  `Servo.h`) which is used on the target's side to drive the actual hardware.
 
 ## Limitations
 
@@ -71,6 +73,7 @@ The other two basic components are for the **I2C controller's side**:
 
    - No **serialization protocol** is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Modules will have to take care that transmitted commands and requests will transmit defined amounts of bytes by using typeguards for ambiguously sized datatypes like *int*.
    - Modules use one byte **command codes** (similar to conventional I2C-registers) for each distinct function call to the target. At the moment, no mechanism is in place to prevent newly developed modules from reusing codes already used by another module or by one of the I2Cwrapper core functions. Note that this will only lead to problems if two conflicting modules are used concurrently by a target device. The [I2Cwrapper documentation](https://ftjuh.github.io/I2Cwrapper/class_i2_cwrapper.html) has a list of code ranges used by the currently available modules. Strictly reserved ranges are 0-9 and 240-255.
+   - The **I2C buffer size** used by I2Cwrapper objects defaults to 20 bytes. The CRC checksum takes 1 byte, the command header for transmissions from controller to the target take 2 bytes. That leaves 17 bytes as maximum parameter payload for commands and 19 bytes for target responses. A more flexible approach is planned for a future release.
 
 See the [How to add new modules](#how-to-add-new-modules) section if you are interested in writing a new module and implementing your own target device.
 
@@ -181,9 +184,9 @@ To chose which modules are supported by an I2C target device, edit the [`firmwar
 
 ## AccelStepperI2C
 
-The AccelStepperI2C module provides access to **up to eight stepper motors** over I2C. It uses Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) and additionally supports **two end stops per stepper**.  Think of it as a more accessible and more flexible replacement for dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223 with some extra bells and whistles. Use it with your own hardware or with a plain stepper driver shield like the Protoneer CNC GRBL shield (recent [V3.51](https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html) or [V3.00 clone](https://forum.protoneer.co.nz/viewforum.php?f=17)).
+The AccelStepperI2C module provides access to **up to eight stepper motors** over I2C. It uses Mike McCauley's [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) and additionally supports **two end stops per stepper** and the I2Cwrapper interrupt mechanism.  Think of it as a more accessible and more flexible alternative to dedicated I2C stepper motor controller ICs like AMIS-30622, PCA9629 or TMC223 with some extra bells and whistles. Use it with your own hardware or with a plain stepper driver shield like the Protoneer CNC GRBL shield (recent [V3.51](https://www.elecrow.com/arduino-cnc-shield-v3-51-grbl-v0-9-compatible-uses-pololu-drivers.html) or [V3.00 clone](https://forum.protoneer.co.nz/viewforum.php?f=17)).
 
-### State machine
+### AccelStepperI2C State machine
 
 The original AccelStepper needs the client to **constantly 'poll'** each stepper by invoking one of the `run()` commands (`run()`, `runSpeed()`, or `runSpeedToPosition()`) at a frequency which mustn't be lower than the stepping frequency. Over I2C, this would clutter the bus, put limits on stepper speeds, and be unstable if there are other I2C devices on the bus, particularly with multiple steppers and microstepping.
 
@@ -206,19 +209,18 @@ Of course, this is most useful in combination with `AccelStepperI2C::runSpeedSta
 
 ### Interrupt mechanism
 
-I2Cwrapper's interrupt mechanism can be used to inform the controller that the state machine's state has changed. Currently, this will happen when a set **target has been reached** or when an **endstop** switch was triggered. See [`Interrupt_Endstop.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
+I2Cwrapper's interrupt mechanism can be used to inform the controller that the AccelStepperI2C state machine's state has changed. Currently, this will happen when a set **target has been reached** or when an **endstop** switch was triggered. See [`Interrupt_Endstop.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Interrupt_Endstop/Interrupt_Endstop.ino) example for a use case.
 
 ### Restrictions
 
-   - The original `run()`, `runSpeed()`, or `runSpeedToPosition()` functions are implemented, but it is **not recommended to use them**. The idea of these functions is that they are called as often as possible which would cause constant I2C traffic. The I2C protocol was not designed for this kind of load, so use the state machine instead. If you feel you *must* use the original ones, take it slow and see if your setup, taking other I2C devices into consideration, allows you to [increase the I2C bus frequency](https://www.arduino.cc/en/Reference/WireSetClock). Even then you shouldn't poll as often as possible (as AccelStepper usually wants you to), but adjust the polling frequency to your max. stepping frequency, to allow the I2C bus some room to breathe.
-   - Each library function call, its parameters, and possibly a return value has to be transmitted back and forth via I2C. This makes things **slower, less precise, and prone to errors**. To be safe from errors, you'll need to do some extra checking (see [Error handling](#error-handling)).
+   - The original `run()`, `runSpeed()`, or `runSpeedToPosition()` functions are implemented, but it is **not recommended to use them**. The idea of these functions is that they are called as often as possible which would cause *constant* I2C traffic. The I2C protocol was not designed for this kind of load, so use the state machine instead. If you feel you *must* use the original ones, take it slow and see if your setup, taking other I2C devices into consideration, allows you to [increase the I2C bus frequency](https://www.arduino.cc/en/Reference/WireSetClock). Even then you shouldn't poll as often as possible (as AccelStepper usually expects you to), but adjust the polling frequency to your max. stepping frequency, so that the I2C bus still has some room to breathe.
    - Naturally, you cannot declare your own stepping functions with the [constructor [2/2] variant](https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html#afa3061ce813303a8f2fa206ee8d012bd).
 
 ### Safety precautions
 
-Steppers can exert damaging forces, even if they are moving slow. If in doubt, set up your system in a way that errors will not break things, particularly during testing:
+Steppers can exert **damaging forces**, even if they are moving slow. If in doubt, set up your system in a way that errors will not break things, particularly during testing:
 
-* Place your end stops in a **non-blocking position** so that they are activated in a by-passing way but do not block the way themselves.
+* Place your end stops in a **non-blocking position** so that they are activated in a by-passing way but do not block the way themselves. That way you still have time to stop things manually if they fail.
 * To be really safe, put **emergency stops** which shut down the target in a final end position. Currently there is no dedicated pin mechanism for that, so just use the target's reset pin instead.
 * Always keep a **manual emergency stop** at hand or make it easy to cut the power quickly.
 * And again, do check for transmission errors in critical situations (see **[error handling](#error-handling)**).
@@ -290,11 +292,23 @@ Since v0.3.0 dropped the hardware reset (it's considered bad practice), each mod
 
 The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:
 
-* **Arduino AVRs (Uno, Nano etc.)**: Comes with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed not recommended for high performance situations.
-* **ESP8266**: Has no I2C  hardware. The software I2C may not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to [decrease the bus speed](https://www.arduino.cc/en/Reference/WireSetClock) below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
-* **ESP32**: Has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-i2c-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
-* **ATtiny**: Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 12.
-  Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
+### Arduino AVRs (Uno, Nano etc.)
+
+ATmega328 based Arduinos come with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed not recommended for high performance situations.
+
+### ESP8266
+
+The ESP8266 has no I2C  hardware. The software I2C may not work stable at the default 80MHz CPU speed, make sure to configure the **CPU clock speed to 160MHz**. Even then, it might be necessary to [decrease the bus speed](https://www.arduino.cc/en/Reference/WireSetClock) below 100kHz for stable bus performance, start as low as 10kHz if in doubt. Apart from that, expect a performance increase of ca. 10-15x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
+
+### ESP32
+
+The ESP 32 has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-i2c-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
+
+### ATtiny
+
+Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 13.
+
+Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
 
 # Examples
 
@@ -365,7 +379,6 @@ This is an example for addressing a target device running the I2Cwrapper firmwar
 #include <AccelStepperI2C.h>
 
 uint8_t i2cAddress = 0x08;
-
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
 AccelStepperI2C stepper(&wrapper); // ...that the stepper needs to communicate with it
 
@@ -428,12 +441,14 @@ void loopClassic()
 
 # Planned improvements
 
-- Interrupt mechanism support for TM1638liteI2C and PinI2Cmodule
-- Sonar sensor module  with support for 1 to n sensors
-- Infrared receiver module with support for 1 to n sensors
+- Improve I2C buffer size handling, which is currently fixed. Either let the user decide on both sides (with parameter in I2Cwrapper constructor - already implemented - and command to target for changing the buffer size), or let the source decide on its own by using the preprocessor to determine the maximum value needed given the used modules (not sure if this will work).
 - reintroduce diagnostics as a standalone feature module
+- Interrupt mechanism support for TM1638liteI2C and PinI2Cmodule
 - enable debugging for the firmware by feature module, instead of macro (completely eliminate the need to edit `firmware.ino`)
-
+- New modules:
+  - SonarI2C  module  with support for 1 to n ultrasonic distance sensors
+  - InfraredI2C  module with support for 1 to n infrared remote receivers
+  - TFT_I2C module based on (a subset of) Ucglib or Adafruit's GFX lib for SPI bus color TFTs
 - ~~Self-adjusting I2C-delay~~
 - ~~Determine I2C-address from hardware pins~~
 - ~~Move I2C-address options (fixed, EEPROM, hardware pins) to modules~~
