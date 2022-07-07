@@ -97,7 +97,11 @@ public:
   /*!
    * @brief Constructor.
    * @param i2c_address Address of the target device
-   * @param maxBuf Upper limit of send and receive buffer including 1 crc8 byte
+   * @param maxBuf [not implemented yet in the firmware, don't use] Upper limit 
+   * of send and receive buffer including 1 crc8 byte and, for transmissions 
+   * from the controller to the target, 2 header bytes. Note that this is 
+   * corrently only implemented for the controller, but not in the firmware, so 
+   * that it is not usable yet.
    */
   I2Cwrapper(uint8_t i2c_address, uint8_t maxBuf = I2CmaxBuf);
 
