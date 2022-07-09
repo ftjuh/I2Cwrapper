@@ -73,7 +73,7 @@ The other two basic components are for the **I2C controller's side**:
 
    - No **serialization protocol** is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Modules will have to take care that transmitted commands and requests will transmit defined amounts of bytes by using typeguards for ambiguously sized datatypes like *int*.
    - Modules use one byte **command codes** (similar to conventional I2C-registers) for each distinct function call to the target. At the moment, no mechanism is in place to prevent newly developed modules from reusing codes already used by another module or by one of the I2Cwrapper core functions. Note that this will only lead to problems if two conflicting modules are used concurrently by a target device. The [I2Cwrapper documentation](https://ftjuh.github.io/I2Cwrapper/class_i2_cwrapper.html) has a list of code ranges used by the currently available modules. Strictly reserved ranges are 0-9 and 240-255.
-   - The **I2C buffer size** used by I2Cwrapper objects defaults to 20 bytes. The CRC checksum takes 1 byte, the command header for transmissions from controller to the target take 2 bytes. That leaves 17 bytes as maximum parameter payload for commands and 19 bytes for target responses. A more flexible approach is planned for a future release.
+   - The **I2C buffer size** used by I2Cwrapper objects defaults to 20 bytes. The CRC checksum takes 1 byte, the command header for transmissions from controller to the target take 2 bytes. That leaves 17 bytes as maximum parameter payload for commands and 19 bytes for target responses. A more flexible approach is planned for a future release. Note for ATtiny: depending on the Wire library selected by ATtinyCore, the maximum usable buffer size might even be smaller, see [supported platforms](#supported-platforms))
 
 See the [How to add new modules](#how-to-add-new-modules) section if you are interested in writing a new module and implementing your own target device.
 
@@ -449,6 +449,7 @@ void loopClassic()
   - SonarI2C  module  with support for 1 to n ultrasonic distance sensors
   - InfraredI2C  module with support for 1 to n infrared remote receivers
   - TFT_I2C module based on (a subset of) Ucglib or Adafruit's GFX lib for SPI bus color TFTs
+  - DC motor control module
 - ~~Self-adjusting I2C-delay~~
 - ~~Determine I2C-address from hardware pins~~
 - ~~Move I2C-address options (fixed, EEPROM, hardware pins) to modules~~
