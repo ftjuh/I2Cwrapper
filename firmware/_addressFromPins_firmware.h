@@ -1,7 +1,8 @@
 /*!
    @file _addressFromPins_firmware.h
 
-   @brief Makes the target retrieve its own address from the input state of one or
+   @brief Feature module.
+   Makes the target retrieve its own address from the input state of one or
    more pins at startup, so that the end user can change it e.g. with solder
    bridges or DIP switches.
    To adapt for your specific needs, you'll have to change the following values below:

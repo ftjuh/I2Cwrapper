@@ -1,7 +1,8 @@
 /*!
    @file _addressFromFlash_firmware.h
 
-   @brief Read target's own I2C address from non volatile memory (EEPROM, flash
+   @brief Feature module.
+   Read target's own I2C address from non volatile memory (EEPROM, flash
    memory) and store a new changed address upon the controller's command.
 
    ## Author

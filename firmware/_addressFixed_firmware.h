@@ -1,7 +1,8 @@
 /*!
    @file _addressFixed_firmware.h
 
-   @brief Define a fixed address for the target.
+   @brief Feature module.
+   Defines a fixed address, other than the default 0x08, for the target.
 
    ## Author
    Copyright (c) 2022 juh

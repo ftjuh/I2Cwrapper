@@ -1,6 +1,7 @@
 /*!
    @file _statusLED_firmware.h
-   @brief Feature module that makes the LED_BUILTIN flash on incoming interrupts
+   @brief Feature module.
+   Makes the LED_BUILTIN flash on incoming interrupts
    (receiveEvent and requestEvent). Meant mainly as a still-alive monitor.
    To make it flash on I2C state machine state changes, (un)comment the respective lines below in secitions (7), (8) and (9)
    If your board has no LED_BUILTIN, make sure to edit the proper pin number in the declaration stage below..

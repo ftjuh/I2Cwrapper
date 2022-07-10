@@ -68,13 +68,11 @@ const uint8_t interruptReason_none = 0; ///< You should not encounter this in pr
 /*!
  * @brief A helper class for the AccelStepperI2C and related libraries.
  *
- * I split
- * it from an earlier version of the AccelStepperI2C library when adding Servo
- * support, to be able to have a clean separation librarywise between the two:
- * The wrapper represents the I2C target and handles all communication with it.
- * AccelStepperI2C, ServoI2C, and others use it for communicating with the target. To do
- * so, an I2Cwrapper object is instantiated with the target's I2C address and
- * then passed to its client object's (AccelStepperI2C etc.) constructor.
+ * An object of type I2Cwrapper represents an I2C target and handles all 
+ * communication with it. AccelStepperI2C, ServoI2C, and other modules use it 
+ * for communicating with the target. To do so, an I2Cwrapper object is 
+ * instantiated with the target's I2C address and then passed to its client 
+ * object's (AccelStepperI2C etc.) constructor.
  * @par Command codes
  * * 000 - 009 (reserved)
  * * 010 - 049 AccelStepperI2C
@@ -86,7 +84,7 @@ const uint8_t interruptReason_none = 0; ///< You should not encounter this in pr
  * * 090 - 239 (unused)
  * * 240 - 255 I2Cwrapper commands (reset target, change address etc.)
  * @par
- * New classes could use I2Cwrapper to easily add even more capabilities
+ * New classes can use I2Cwrapper to easily add even more capabilities
  * to the target, e.g. for driving DC motors, granted that the firmware is extended
  * accordingly and the above list of uint8_t command codes is kept free from duplicates.
  */
@@ -113,9 +111,10 @@ public:
 
   /*!
    * @brief Tells the target device to reset to its default state. It is 
-   * recommended to reset the target every time the controller is started or restarted 
-   * to put it in a defined state. Else it could happen that the target still 
-   * manages units (steppers, etc.) which the controller does not know about.
+   * recommended to reset the target every time the controller is started or 
+   * restarted to put the target in a defined state. Otherwise it could happen 
+   * that the target still manages units (steppers, etc.) which the controller 
+   * does not know about.
    * @param resetDelay (new in v0.3.0, optional) delay in ms that the controller 
    * waits after sending the reset command to give the target enough time to 
    * reinitialize the firmware core and the activated modules. Defaults to 
@@ -128,6 +127,9 @@ public:
    * @brief Permanently change the I2C address of the device. The new address is
    * stored in EEPROM (AVR) or flash memory (ESPs) and will be active after the
    * next reset/reboot.
+   * @note (since v0.3.0) This command needs a target with the 
+   * _addressFromFlash_firmware.h feature module activated. Without it,the 
+   * target will just ignore this command.
    * @sa reset()
    */
   void changeI2Caddress(uint8_t newAddress);
@@ -155,18 +157,15 @@ public:
 
   /*!
    * @brief Define a minimum duration of time that the controller keeps between 
-   * I2C transmissions.
-   * This is to make sure that the target has finished its earlier task or has
-   * its answer to the controller's previous command ready. Particularly for ESP32
-   * targets this is critical, as due to its implementation of I2C target mode,
-   * an ESP32 could theoretically send incomplete data if a request is sent too
-   * early. The actual delay will take the time spent since the last I2C 
-   * transmission into account, so that it won't wait at all if the given time 
-   * has already passed.
+   * I2C transmissions. This is to make sure that the target has finished its 
+   * earlier task or has its answer to the controller's previous command ready
+   * (see [Adjusting the I2C delay](#adjusting-the-i2c-delay)). The actual delay 
+   * will take the time spent since the last I2C transmission into account, so 
+   * that it won't wait at all if the given time has already passed.
    * @param delay Minimum time in between I2C transmissions in milliseconds.
-   * The default I2CdefaultDelay is a bit conservative at 10 ms to allow for 
-   * for serial debugging output to slow things down. You can try to go lower, 
-   * if target debugging is disabled.
+   * The default I2CdefaultDelay is a bit conservative at 20 ms to allow 
+   * for serial debugging output to slow things down. 4 to 6 ms is usually more
+   * than enough.
    * @return Returns the previously set delay.
    * @see autoAdjustI2Cdelay()
    */
@@ -192,20 +191,20 @@ public:
    * So if you know what the maximum number of parameter bytes sent or receiced 
    * by any of the commands you will use in your project is, you can 
    * specify it here to get a more aggressive, shorter I2C delay. Leave it to 
-   * the default to be on the safe side, in most cases it should not make a 
+   * the default to be on the safe side, in most cases it will not make a 
    * significant difference.
    * @param safetyMargin A number of microseconds that will be added to the 
    * empirically determined minimum I2C delay. As the test transmissions do 
    * nothing but send back the amount of specified simulated parameter bytes, 
    * you will want to specify some extra time to allow for the time the controller
-   * will need to process any given command on top of the pure transmissions.
+   * will need to process any given command on top of the transmission itself.
    * Its optimal value fully depends on how fast the target's module(s) do their
    * job. It should usually be at least 1 ms. For the included modules 2 ms are
    * a safe bet, that's why it's used as the default. 
    * @param startWith The delay value in ms to start with, defaults to 
-   * I2CdefaultDelay (20 ms). Mainly meant to be used if serial debugging is enabled
-   * in the target firmware. If there is heavy debugging output, the default
-   * I2CdefaultDelay may sometimes be too low.
+   * I2CdefaultDelay (20 ms). Mainly meant to be used if serial debugging is 
+   * enabled in the target firmware. If there is heavy debugging output, the 
+   * default I2CdefaultDelay may sometimes be too low.
    * @note new in v0.3.0, experimental
    * @return The newly set I2C delay
    * @see setI2Cdelay()
