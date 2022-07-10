@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p ><sup>(1)</sup><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> uses the <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">current I2C terminology</a> which replaced <em>master</em> with <em>controller</em>, and <em>slave</em> with <em>target</em>.</p>
 <p >Download <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a href="https://github.com/ftjuh/I2Cwrapper">on github.</a></p>
 <p >The <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library and the module libraries <a href="https://ftjuh.github.io/I2Cwrapper/index.html">are documented here</a>.</p>
+<p >See <a class="el" href="index.html#usage">Usage</a> for a quick start.</p>
 <h1><a class="anchor" id="autotoc_md23"></a>
 Ready to use modules</h1>
 <p >Currently, the following modules come shipped with <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> in the <a href="https://github.com/ftjuh/I2Cwrapper/tree/main/firmware">firmware subfolder</a> (see <a class="el" href="index.html#available-modules">Available modules</a> for more detailed information):</p>
@@ -157,9 +158,9 @@ Limitations</h1>
 <ul>
 <li>No <b>serialization protocol</b> is used at the moment, so the implementation is machine dependent in regard to the endians and sizes of data types. Modules will have to take care that transmitted commands and requests will transmit defined amounts of bytes by using typeguards for ambiguously sized datatypes like <em>int</em>.</li>
 <li>Modules use one byte <b>command codes</b> (similar to conventional I2C-registers) for each distinct function call to the target. At the moment, no mechanism is in place to prevent newly developed modules from reusing codes already used by another module or by one of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core functions. Note that this will only lead to problems if two conflicting modules are used concurrently by a target device. The <a href="https://ftjuh.github.io/I2Cwrapper/class_i2_cwrapper.html">I2Cwrapper documentation</a> has a list of code ranges used by the currently available modules. Strictly reserved ranges are 0-9 and 240-255.</li>
-<li>The <b>I2C buffer size</b> used by <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> objects defaults to 20 bytes. The CRC checksum takes 1 byte, the command header for transmissions from controller to the target take 2 bytes. That leaves 17 bytes as maximum parameter payload for commands and 19 bytes for target responses. A more flexible approach is planned for a future release.</li>
+<li>The <b>I2C buffer size</b> used by <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> objects defaults to 20 bytes. The CRC checksum takes 1 byte, the command header for transmissions from controller to the target take 2 bytes. That leaves 17 bytes as maximum parameter payload for commands and 19 bytes for target responses. A more flexible approach is planned for a future release. Note for ATtiny: depending on the Wire library selected by ATtinyCore, the maximum usable buffer size might even be smaller, see <a class="el" href="index.html#supported-platforms">supported platforms</a>)</li>
 </ul>
-<p >See the <a class="el" href="index.html#how-to-add-new-modules">How to add new modules</a> section if you are interested in writing a new module and implementing your own target device.</p>
+<p >See the <a class="el" href="index.html#how-to-add-new-modules">How to add new modules</a> section if you are interested in writing a new module and implementing your own target device. <a class="anchor" id="usage"></a></p>
 <h1><a class="anchor" id="autotoc_md26"></a>
 Usage</h1>
 <h2><a class="anchor" id="autotoc_md27"></a>
@@ -281,13 +282,13 @@ Feature modules</h2>
 <p >(new in v0.3.0)</p>
 <p >Feature modules extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").</p>
 <h3>Status LED</h3>
-<p >Including the <code><a class="el" href="__status_l_e_d__firmware_8h.html" title="Feature module that makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent...">_statusLED_firmware.h</a></code> in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>will make the target's built in LED (<code>LED_BUILTIN</code>) <b>flash briefly</b> when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see <a class="el" href="index.html#error-handling">Error handling</a>). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.</p>
+<p >Including the <code><a class="el" href="__status_l_e_d__firmware_8h.html" title="Feature module. Makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent)....">_statusLED_firmware.h</a></code> in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>will make the target's built in LED (<code>LED_BUILTIN</code>) <b>flash briefly</b> when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see <a class="el" href="index.html#error-handling">Error handling</a>). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.</p>
 <h3>I2C address modules</h3>
 <p >To make the target device <b>use a different I2C address</b> than the default (0x08), you can include one (and only one) of the following feature modules:</p>
 <ul>
-<li><code><a class="el" href="__address_fixed__firmware_8h.html" title="Define a fixed address for the target.">_addressFixed_firmware.h</a></code>: use a fixed I2C address for the target other than the default</li>
-<li><code><a class="el" href="__address_from_pins__firmware_8h.html" title="Makes the target retrieve its own address from the input state of one or more pins at startup,...">_addressFromPins_firmware.h</a></code>: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup</li>
-<li><code><a class="el" href="__address_from_flash__firmware_8h.html" title="Read target&#39;s own I2C address from non volatile memory (EEPROM, flash memory) and store a new changed...">_addressFromFlash_firmware.h</a></code>: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.</li>
+<li><code><a class="el" href="__address_fixed__firmware_8h.html" title="Feature module. Defines a fixed address, other than the default 0x08, for the target.">_addressFixed_firmware.h</a></code>: use a fixed I2C address for the target other than the default</li>
+<li><code><a class="el" href="__address_from_pins__firmware_8h.html" title="Feature module. Makes the target retrieve its own address from the input state of one or more pins at...">_addressFromPins_firmware.h</a></code>: make the target read its I2C address from a given set of input pin states (jumper bridges, DIP switches etc.) at startup</li>
+<li><code><a class="el" href="__address_from_flash__firmware_8h.html" title="Feature module. Read target&#39;s own I2C address from non volatile memory (EEPROM, flash memory) and sto...">_addressFromFlash_firmware.h</a></code>: make the target read its I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command.</li>
 </ul>
 <p ><a class="anchor" id="how-to-add-new-modules"></a></p>
 <h1><a class="anchor" id="autotoc_md37"></a>
@@ -457,6 +458,7 @@ Planned improvements</h1>
 <li>SonarI2C module with support for 1 to n ultrasonic distance sensors</li>
 <li>InfraredI2C module with support for 1 to n infrared remote receivers</li>
 <li>TFT_I2C module based on (a subset of) Ucglib or Adafruit's GFX lib for SPI bus color TFTs</li>
+<li>DC motor control module</li>
 </ul>
 </li>
 <li><strike>Self-adjusting I2C-delay</strike></li>
@@ -485,7 +487,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 7 2022 21:51:23 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

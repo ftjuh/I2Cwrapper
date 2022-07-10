@@ -14,6 +14,8 @@ Download I2Cwrapper [on github.](https://github.com/ftjuh/I2Cwrapper)
 
 The I2Cwrapper library and the module libraries  [are documented here](https://ftjuh.github.io/I2Cwrapper/index.html).
 
+See [Usage](#usage) for a quick start.
+
 ## Ready to use modules
 
 Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](https://github.com/ftjuh/I2Cwrapper/tree/main/firmware) (see [Available modules](#available-modules) for more detailed information):
@@ -76,6 +78,7 @@ The other two basic components are for the **I2C controller's side**:
    - The **I2C buffer size** used by I2Cwrapper objects defaults to 20 bytes. The CRC checksum takes 1 byte, the command header for transmissions from controller to the target take 2 bytes. That leaves 17 bytes as maximum parameter payload for commands and 19 bytes for target responses. A more flexible approach is planned for a future release. Note for ATtiny: depending on the Wire library selected by ATtinyCore, the maximum usable buffer size might even be smaller, see [supported platforms](#supported-platforms))
 
 See the [How to add new modules](#how-to-add-new-modules) section if you are interested in writing a new module and implementing your own target device.
+<a id="usage"></a>
 
 # Usage
 
