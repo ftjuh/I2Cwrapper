@@ -84,11 +84,11 @@ See the [How to add new modules](#how-to-add-new-modules) section if you are int
 
 ## Installation
 
-~~Install I2Cwrapper from the Arduino library manager (not available yet).~~ Until I2Cwrapper is picked up by the Arduino library manager, you'll have to [install it manually](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation) by copying the I2Cwrapper folder to your Arduino library folder and (re)starting the Arduino software.  You'll find an I2Cwrapper examples folder in the usual menu after successful installation.
+Install I2Cwrapper from the Arduino library manager.  You'll find an I2Cwrapper examples folder in the usual menu after successful installation.
 
 If you haven't done so yet, you'll also have to install the **libraries needed by the modules** you want to use, e.g. AccelSteppper, TM1638lite, etc. the usual way from the Arduino library manager.
 
-If you've used the AccelStepperI2C library before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.
+If you've used the AccelStepperI2C *library* (not the module) before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.
 
 ## Configuring and uploading the firmware
 
