@@ -48,8 +48,8 @@
  */
 // xxx commands
 const uint8_t xxxCmdOffset = /* choose an offset that doesn't conflict with other modules */;
-const uint8_t xxxDemo2Cmd  = xxxCmdOffset + 1; const uint8_t xxxDemo2CmdResult = 1 /* number of bytes returned for non void functions/commands */;
 const uint8_t xxxDemo1Cmd  = xxxCmdOffset + 0; // void functions/commands don't need a "const xxx...Result"
+const uint8_t xxxDemo2Cmd  = xxxCmdOffset + 1; const uint8_t xxxDemo2CmdResult = 1 /* number of bytes returned for non void functions/commands */;
 // add more commands here
 
 /*!

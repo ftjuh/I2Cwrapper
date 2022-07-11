@@ -66,7 +66,7 @@ public:
   
   /*!
    * @brief Constructor.
-   * @param w Wrapper object representing the target the pin is connected to.
+   * @param w Wrapper object representing the target the pins are connected to.
    */
   PinI2C(I2Cwrapper* w);
 
