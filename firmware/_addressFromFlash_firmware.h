@@ -26,8 +26,8 @@
 #include <FlashAsEEPROM.h>
 #else
 #include <EEPROM.h>
-#endif # SAMD
-#endif # AVR ... SAMD
+#endif // SAMD
+#endif // AVR ... SAMD
 #endif // MF_STAGE_includes
 
 
