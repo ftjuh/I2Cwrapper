@@ -91,6 +91,18 @@ $(document).ready(function(){initNavTree('dir_d9edf6c004b4a7ff14fe9ae7a92214ee.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__address_fixed__firmware_8h.html">_addressFixed_firmware.h</a></td></tr>
+<tr class="memdesc:__address_fixed__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Defines a fixed address, other than the default 0x08, for the target. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__address_from_flash__firmware_8h.html">_addressFromFlash_firmware.h</a></td></tr>
+<tr class="memdesc:__address_from_flash__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Read target's own I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__address_from_pins__firmware_8h.html">_addressFromPins_firmware.h</a></td></tr>
+<tr class="memdesc:__address_from_pins__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Makes the target retrieve its own address from the input state of one or more pins at startup, so that the end user can change it e.g. with solder bridges or DIP switches. To adapt for your specific needs, you'll have to change the following values below: <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__status_l_e_d__firmware_8h.html">_statusLED_firmware.h</a></td></tr>
+<tr class="memdesc:__status_l_e_d__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent). Meant mainly as a still-alive monitor. To make it flash on I2C state machine state changes, (un)comment the respective lines below in secitions (7), (8) and (9) If your board has no LED_BUILTIN, make sure to edit the proper pin number in the declaration stage below.. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c__firmware_8h.html">AccelStepperI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_accel_stepper_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,13 +113,16 @@ Files</h2></td></tr>
 <tr class="memdesc:firmware_8ino"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic firmware framework for I2C targets with modular functionality, built around the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware__modules_8h.html">firmware_modules.h</a></td></tr>
-<tr class="memdesc:firmware__modules_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file determines which modules will be included in the target firmware. <br /></td></tr>
+<tr class="memdesc:firmware__modules_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file determines which modules will be included in the target firmware. Add other modules or (un)comment out the existing ones as needed. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html">PinI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_pin_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c__firmware_8h.html">ServoI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_servo_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_t_m1638lite_i2_c__firmware_8h.html">TM1638liteI2C_firmware.h</a></td></tr>
+<tr class="memdesc:_t_m1638lite_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_t_m1638lite_i2_c.html" title="An I2C wrapper class for Danny Ayers&#39; TM1638lite library (https://www.arduino.cc/reference/en/librari...">TM1638liteI2C</a> firmware module. See <a class="el" href="_t_m1638lite_i2_c_8h.html" title="Arduino library for I2C-control of one or more TM1638 LED/key modules connected to another Arduino wh...">TM1638liteI2C.h</a> for details. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -116,7 +131,7 @@ Files</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

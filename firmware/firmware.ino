@@ -2,34 +2,23 @@
    @file firmware.ino
    @brief Generic firmware framework for I2C targets with modular functionality,
    built around the I2Cwrapper library
-   @section author Author
+   ## Author
    Copyright (c) 2022 juh
-   @section license License
+   ## License
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
    published by the Free Software Foundation, version 2.
-   @todo make I2C address configurable by hardware (with module?)
+   @todo <del>make I2C address configurable by hardware (with module?)</del>
    @todo return messages (results) should ideally come with an id, too, so that controller can be sure
       it's the correct result. Currently only CRC8, i.e. correct transmission is checked.
    @todo volatile variables / ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {}
-   @todo Reduce memory use to make it fit into an 8k Attiny
+   @todo Reduce memory use to make it fit into an <del>8k Attiny</del>4k ATtiny
 */
 
-/*!
-  @brief Uncomment this to enable firmware debugging output on Serial.
-*/
-//#define DEBUG
+#define DEBUG // Uncomment this to enable library debugging output on Serial
 
 #include <Arduino.h>
 #include <Wire.h>
-#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_SAMD)
-#define USE_EEPROM
-#if defined(ARDUINO_ARCH_SAMD)
-#include <FlashAsEEPROM.h>
-#else
-#include <EEPROM.h>
-#endif
-#endif
 #include <I2Cwrapper.h>
 
 
@@ -42,32 +31,27 @@
 #define MF_STAGE_loop           4
 #define MF_STAGE_processMessage 5
 #define MF_STAGE_reset          6
+#define MF_STAGE_receiveEvent   7
+#define MF_STAGE_requestEvent   8
+#define MF_STAGE_I2CstateChange 9
 
 
 /************************************************************************/
-/************* firmware configuration settings **************************/
 /************************************************************************/
 
-/*
-   I2C address
-   Change this if you want to flash the firmware with a different I2C address.
-   Alternatively, you can use setI2Caddress() from the library to change it later
-*/
-const uint8_t defaultAddress = 0x08; // default
+uint8_t i2c_address = I2CwrapperDefaultAddress;  // this target's I2C address, will later be set by module or left to this default
 
-
-/*!
-  @brief Uncomment this to enable time keeping diagnostics. You probably should disable
+/* !
+  @brief [deprecated in v0.3.0, don't use] 
+  Uncomment this to enable time keeping diagnostics. You probably should disable
   debugging, as Serial output will distort the measurements severely. Diagnostics
   take a little extra time and ressources, so you best disable it in production
   environments.
   @todo make diagnostics another module?
 */
-//#define DIAGNOSTICS
+//#define DIAGNOSTICS [deprecated in v0.3.0, don't use]
 
-/************************************************************************/
-/******* end of firmware configuration settings **************************/
-/************************************************************************/
+
 
 
 /*
@@ -76,7 +60,6 @@ const uint8_t defaultAddress = 0x08; // default
 #define MF_STAGE MF_STAGE_includes
 #include "firmware_modules.h"
 #undef MF_STAGE
-
 
 
 /*
@@ -97,20 +80,21 @@ uint32_t now, then = millis();
 bool reportNow = true;
 uint32_t lastCycles = 0; // for simple cycles/reportPeriod diagnostics
 const uint32_t reportPeriod = 2000; // ms between main loop simple diagnostics output
+// #define DEBUG_printCycles  // uncomment to print no. of cycles each reportPeriod
 #endif // DEBUG
 
 
 
 /*
-   Diagnostics stuff
+   Diagnostics stuff [deprecated in v0.3.0, don't use]
 */
 
-#if defined(DIAGNOSTICS)
-bool diagnosticsEnabled = false;
-uint32_t thenMicros;
-diagnosticsReport currentDiagnostics;
-uint32_t previousLastReceiveTime; // used to delay receive times by one receive event
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+// bool diagnosticsEnabled = false;
+// uint32_t thenMicros;
+// diagnosticsReport currentDiagnostics;
+// uint32_t previousLastReceiveTime; // used to delay receive times by one receive event
+// #endif // DIAGNOSTICS
 
 uint32_t cycles = 0; // keeps count of main loop iterations
 
@@ -123,88 +107,63 @@ SimpleBuffer* bufferIn;
 SimpleBuffer* bufferOut;
 volatile uint8_t newMessage = 0; // signals main loop that a receiveEvent with valid new data occurred
 
+// I2C state machine: takes care that we don't end up in an undefined state if things get out of order,
+// i.e. if an interrupt (receiveEvent or requestEvent) happens at an unexpected point in time
+enum I2Cstates {
+  initializing,         // setup not finished yet                               [==> readyForCommand]
+  readyForCommand,      // expecting command by receiveEvent() in main loop()   [==> processingCommand]
+  processingCommand,    // interpreting command in processMeassage() function   [==> readyForResponse *OR* readyForCommand]
+  readyForResponse,     // expecting requestEvent() in main loop()              [==> responding]
+  responding,           // sending bufferOut in writeOutputBuffer()             [==> readyForCommand]
+  // Note that state "responding" should only be relevant for ESP32 which needs to write the buffer outside of the interrupt routine.
+  // All other should be safe, as an interrupt cannot be interrupted (@todo or can it?)
+  tainted               // bufferOut data is tainted and needs to be discarded  [==> readyForCommand]
+};
+volatile I2Cstates I2Cstate = initializing;
 
-/*
-   EEPROM stuff
-*/
-
-#define EEPROM_OFFSET_I2C_ADDRESS 0 // where in eeprom is the I2C address stored, if any? [1 CRC8 + 4 marker + 1 address = 6 bytes]
-const uint32_t eepromI2CaddressMarker = 0x12C0ACCF; // arbitrary 32bit marker proving that next byte in EEPROM is in fact an I2C address
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-const uint32_t eepromUsedSize = 6; // total bytes of EEPROM used by us
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-
-
-/*!
-  @brief Read a stored I2C address from EEPROM. If there is none, use default.
-*/
-uint8_t retrieveI2C_address()
-{
-#ifdef USE_EEPROM
-  SimpleBuffer b;
-  b.init(8);
-  // read 6 bytes from eeprom: [0]=CRC8; [1-4]=marker; [5]=address
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.begin(256);
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  log("Reading from EEPROM: ");
-  for (byte i = 0; i < 6; i++) {
-    b.buffer[i] = EEPROM.read(EEPROM_OFFSET_I2C_ADDRESS + i);
-    log(b.buffer[i]); log (" ");
+void changeI2CstateTo(I2Cstates newState) {
+  I2Cstate = newState;
+#if defined(DEBUG)
+  log("   * Switched I2C state to '");
+  switch (newState) {
+    case initializing:
+      log("initializing'\n");
+      break;
+    case readyForCommand:
+      log("readyForCommand'\n");
+      break;
+    case processingCommand:
+      log("processingCommand'\n");
+      break;
+    case readyForResponse:
+      log("readyForResponse'\n");
+      break;
+    case responding:
+      log("responding'\n");
+      break;
+    case tainted:
+      log("tainted'\n");
+      break;
   }
-  log("\n");
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.end();
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  log("\n");
-  // we wrote directly to the buffer, so reader idx is still at 1
-  uint32_t markerTest; b.read(markerTest);
-  uint8_t storedAddress; b.read(storedAddress); // now idx will be at 6, so that CRC check below will work
-  if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
-    log("Stored address ");log(storedAddress);log("\n");
-    return storedAddress;
-  } else
-#endif // USE_EEPROM
-  {
-    log("No stored address\n");
-    return defaultAddress;
-  }
+#endif
+  /*
+     Inject module code for I2C state change
+  */
+#define MF_STAGE MF_STAGE_I2CstateChange
+#include "firmware_modules.h"
+#undef MF_STAGE
 }
 
 
-/*!
-  @brief Write I2C address to EEPROM
-  @note ESP eeprom.h works a bit different from AVRs: https://arduino-esp8266.readthedocs.io/en/3.0.2/libraries.html#eeprom
-*/
-void storeI2C_address(uint8_t newAddress)
-{
-#ifdef USE_EEPROM
-  SimpleBuffer b;
-  b.init(8);
-  b.write(eepromI2CaddressMarker);
-  b.write(newAddress);
-  b.setCRC8();
-  log("Writing to EEPROM: ");
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.begin(32);
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  for (byte i = 0; i < 6; i++) { // [0]=CRC8; [1-4]=marker; [5]=address
-    EEPROM.write(EEPROM_OFFSET_I2C_ADDRESS + i, b.buffer[i]);
-    //EEPROM.put(EEPROM_OFFSET_I2C_ADDRESS + i, b.buffer[i]);
-    //delay(120);
-    log(b.buffer[i]); log (" ");
-  }
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.end(); // end() will also commit()
-#elif defined(ARDUINO_ARCH_SAMD)
-  log(" commit ");log(EEPROM.isValid());
-  EEPROM.commit();
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  log("\n");
-#else // USE_EEPROM
-  log("No EEPROM for this board architecture, storeI2C_address() did nothing.\n");
-#endif // USE_EEPROM
-}
+// Forward declarations. Without them, the Arduino magic will be confused by the IRAM_ATTR stuff.
+// Not sure if the IRAM stuff needs to happen here already, but I guess it won't harm.
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
+void IRAM_ATTR receiveEvent(int howMany);
+void IRAM_ATTR requestEvent();
+#else
+void receiveEvent(int howMany);
+void requestEvent();
+#endif
 
 
 /*
@@ -212,12 +171,13 @@ void storeI2C_address(uint8_t newAddress)
    note: The interrupt pin is global, as there is only one shared by all modules
    and units. However, modules can implement them so that interrupts can be
    enabled for each unit seperately,
+   Note: these variables are initialized during setup() in initializeFirmware().
 */
 
-int8_t interruptPin = -1; // -1 for undefined
-bool interruptActiveHigh = true;
-uint8_t interruptSource = 0xF;
-uint8_t interruptReason = interruptReason_none;
+int8_t interruptPin;
+bool interruptActiveHigh;
+uint8_t interruptSource;
+uint8_t interruptReason;
 
 /*!
    @brief Interrupt controller if an interrupt pin has been set and, optionally,
@@ -254,22 +214,24 @@ void clearInterrupt()
 
 
 /*
-    Reset stuff
+    Reset/initialization stuff
 */
 
-void resetFunc()
+// Put core firmware and modules (back) to initial state. This is used by setup() and resetCmd
+void initializeFirmware()
 {
-#if defined(ARDUINO_ARCH_AVR)
-  // The watchdog method supposedly is the preferred one, however it did not make my Nano restart normally,
-  // I think maybe it got stuck in the bootloader.
-  // cli();
-  // wdt_enable(WDTO_30MS);
-  // for (;;);
-  // so let's just go for the stupid version, it should work fine for the firmware:
-  //asm volatile (" jmp 0");
-#elif defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  ESP.restart();
-#endif
+
+  // reset/initialize interrupt subsystem
+  clearInterrupt();
+  interruptPin = -1; // -1 for undefined
+  interruptActiveHigh = true;
+  interruptSource = 0xF;
+  interruptReason = interruptReason_none;
+
+  // empty buffers
+  bufferIn->reset();
+  bufferOut->reset();
+
 }
 
 
@@ -281,12 +243,32 @@ void resetFunc()
 #include "firmware_modules.h"
 #undef MF_STAGE
 
-void requestEvent(); // Forward declaration. Without it the Arduino magic will be confused by the compiler directives.
+
+// Join I2C bus as target and start the necessary ISRs.
+// This is outsourced to a function, as it is needed by setup() and reset code.
+// Must be placed here after the MF_STAGE_declarations module injection, so that
+// modules can claim I2C address definition by defining I2C_ADDRESS_DEFINED_BY_MODULE.
+void startI2C() {
+
+#ifdef I2C_ADDRESS_DEFINED_BY_MODULE // a module has defined a way to retrieve our address
+  i2c_address = I2C_ADDRESS_DEFINED_BY_MODULE ;
+#endif // otherwise leave the default address 
+
+  if ((i2c_address < 0x08) or (i2c_address > 0x77)) { // prevent invalid address, see https://learn.adafruit.com/i2c-addresses/the-list
+    i2c_address = I2CwrapperDefaultAddress;
+  }
+
+  Wire.begin(i2c_address);
+  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
+  Wire.onReceive(receiveEvent);
+  Wire.onRequest(requestEvent);
+
+}
+
 
 /**************************************************************************/
 /*!
-    @brief Setup system. Retrieve I2C address from EEPROM or default
-    and initialize I2C target.
+    @brief Setup system.
 */
 /**************************************************************************/
 void setup()
@@ -295,11 +277,14 @@ void setup()
 #if defined(DEBUG)
   Serial.begin(115200);
 
+#ifdef SerialUSB
   // all chips with "native" usb require waiting till `Serial` is true
+  // we wait at least 1500 msec, then go ahead anyway
   unsigned int begin_time = millis();
   while (! Serial && millis() - begin_time < 1500) {
-    delay(10);  // but at most 1 sec if not plugged in to usb
+    delay(10);  // but at most 1.5 sec if not plugged in to usb
   }
+#endif # SerialUSB
 #endif // DEBUG
 
   log("\n\n\n=== I2Cwrapper firmware v");
@@ -326,20 +311,18 @@ void setup()
 #undef MF_STAGE
 
 
-  uint8_t i2c_address = retrieveI2C_address();
-  setup_wire(i2c_address);
-
   bufferIn = new SimpleBuffer; bufferIn->init(I2CmaxBuf);
   bufferOut = new SimpleBuffer; bufferOut->init(I2CmaxBuf);
 
+  startI2C();
+
+  initializeFirmware();
+
+  changeI2CstateTo(readyForCommand);
+
 }
 
-void setup_wire(uint8_t i2c_address) {
-  Wire.begin(i2c_address);
-  log("I2C started, listening to address "); log(i2c_address); log("\n\n");
-  Wire.onReceive(receiveEvent);
-  Wire.onRequest(requestEvent);
-}
+
 /**************************************************************************/
 /*!
     @brief Main loop. By default, it doesn't do a lot apart from debugging: It
@@ -355,7 +338,9 @@ void loop()
   now = millis();
   if (now > then) { // report cycles/reportPeriod statistics
     reportNow = true;
+#if defined(DEBUG_printCycles)
     log("\n    > Cycles/s = "); log((cycles - lastCycles) * 1000 / reportPeriod); log("\n");
+#endif // defined(DEBUG_printCycles)
     lastCycles = cycles;
     then = now + reportPeriod;
   }
@@ -370,16 +355,18 @@ void loop()
 
 #if defined(DEBUG)
   if (reportNow) {
-    log("\n\n");
+    log("\n");
     reportNow = false;
   }
 #endif
 
   // Check for new incoming messages from I2C interrupt
-  if (newMessage > 0) {
+  //if (newMessage > 0) {
+  if (I2Cstate == processingCommand) {
     processMessage(newMessage);
-    newMessage = 0;
   }
+
+
 
 #if defined(DEBUG)
   if (sentOnRequest > 0) { // check if a requestEvent() happened and data was sent
@@ -398,39 +385,9 @@ void loop()
 
 
 
-/**************************************************************************/
-/*!
-  @ brief Handle I2C receive event. Just read the message and inform main loop.
-*/
-/**************************************************************************/
-#if defined(ARDUINO_ARCH_ESP8266)
-ICACHE_RAM_ATTR
-#endif
-void receiveEvent(int howMany)
-{
-  //log("[Int with "); log(howMany); log(newMessage == 0 ? ", ready]\n" : ", NOT ready]\n");
-#if defined(DIAGNOSTICS)
-  thenMicros = micros();
-#endif // DIAGNOSTICS
-  if (newMessage == 0) { // Only accept message if an earlier one is fully processed.
-    bufferIn->reset();
-    for (uint8_t i = 0; i < howMany; i++) {
-      bufferIn->buffer[i] = Wire.read();
-    }
-    bufferIn->idx = howMany;
-    newMessage = howMany; // tell main loop that new data has arrived
-  }
-
-#if defined(DIAGNOSTICS)
-  // delay storing the executing time for one cycle, else diagnostics() would always return
-  // its own receive time, not the one of the previous command
-  currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
-  previousLastReceiveTime = micros() - thenMicros;
-#endif // DIAGNOSTICS
-
-}
-
-
+// ================================================================================
+// =========================== processMessage() ===================================
+// ================================================================================
 
 /**************************************************************************/
 /*!
@@ -448,9 +405,9 @@ void receiveEvent(int howMany)
 void processMessage(uint8_t len)
 {
 
-#if defined(DIAGNOSTICS)
-  uint32_t thenMicrosP = micros();
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   uint32_t thenMicrosP = micros();
+// #endif // DIAGNOSTICS
 
   log("New message with "); log(len); log(" bytes. ");
   for (int j = 0; j < len; j++)  { // I expect the compiler will optimize this away if debugging is off
@@ -485,34 +442,32 @@ void processMessage(uint8_t len)
 
       case resetCmd: {
           if (i == 0) { // no parameters
-            log("\n\n---> Resetting\n\n");
-            // Inject modules' reset code
+            log("\n\n---> Resetting firmware and modules to initial state\n\n");
+            changeI2CstateTo(initializing); // ignore interrupts during reset
+
+            // Inject modules' reset code first
 #define MF_STAGE MF_STAGE_reset
 #include "firmware_modules.h"
 #undef MF_STAGE
-          }
-#if defined(DEBUG)
-          Serial.flush();
+
+            initializeFirmware(); // then reset firmware to initial state
+
+            // restart Wire and reread our current I2C address
+#ifndef WIRE_HAS_END
+#error "Sorry, the Wire library of your platform has no Wire.end() implementation"
 #endif
-          resetFunc();
-        }
-        break;
+            Wire.end();
+            startI2C(); // will use updated I2C address, if it has been changed
 
-
-      case changeI2CaddressCmd: {
-          if (i == 1) { // 1 uint8_t
-            uint8_t newAddress; bufferIn->read(newAddress);
-            log("Storing new Address "); log(newAddress); log("\n");
-            storeI2C_address(newAddress);
-
-            // most platforms support .end, so can do live update of listening address
-            #ifdef WIRE_HAS_END
-            Wire.end(); //
-            setup_wire( newAddress );
-            #endif
+#if defined(DEBUG)
+            Serial.flush();
+#endif
+            // changeI2CstateTo(readyForCommand); // ready again // no, will be changed at the end of processMessage()
           }
         }
         break;
+
+      // case changeI2CaddressCmd: { // now outsourced to _addressFromFlash_firmware.h
 
       case setInterruptPinCmd: {
           if (i == 2) {
@@ -541,6 +496,18 @@ void processMessage(uint8_t len)
         }
         break;
 
+      case pingBackCmd: { // has variable amount of parameter bytes
+          if (i >= 1) { // 1 uint8_t (testLength)
+            uint8_t testLength; bufferIn->read(testLength);
+            // test for i == 1 + testLength here?
+            uint8_t receivedData;
+            for (int i = 0; i < testLength; i++) {
+              bufferIn->read(receivedData);
+              bufferOut->write(receivedData);
+            }
+          }
+        }
+        break;
 
       default:
         log("No matching command found");
@@ -564,19 +531,127 @@ void processMessage(uint8_t len)
     // ### what exactly is the role of slaveWrite() vs. Write(), here?
     // ### slaveWrite() is only for ESP32, not for it's poorer cousins ESP32-S2 and ESP32-C3. Need to fine tune the compiler directive, here?
     // log("   ESP32 buffer prefill  ");
+    changeI2CstateTo(responding);
     writeOutputBuffer();
+    changeI2CstateTo(readyForCommand);
 #endif  // ESP32
 
   } // if (bufferIn->checkCRC8())
   log("\n");
+  newMessage = 0;
 
 
-#if defined(DIAGNOSTICS)
-  currentDiagnostics.lastProcessTime = micros() - thenMicrosP;
-#endif // DIAGNOSTICS
+  // determine new state
+  if (I2Cstate != tainted) {
+    if (bufferOut->idx > 1) {  // a reply is waiting to be requested; @todo buffer class needs a method to tell us if it's filled, this way is prone to error
+      changeI2CstateTo(readyForResponse);
+    } else { // we have no reply to give, so expect next command
+      changeI2CstateTo(readyForCommand);
+    }
+  } else { // some unexpected interrupt made a mess, discard output and start again
+    bufferOut->reset();  // discard output buffer
+    changeI2CstateTo(readyForCommand);
+  }
+
+
+// #if defined(DIAGNOSTICS)
+//   currentDiagnostics.lastProcessTime = micros() - thenMicrosP;
+// #endif // DIAGNOSTICS
 
 }
 
+
+// ================================================================================
+// ============================ receiveEvent() ====================================
+// ================================================================================
+
+/**************************************************************************/
+/*!
+  @ brief Handle I2C receive event. Just read the message and inform main loop.
+*/
+/**************************************************************************/
+
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) // both platforms now use "IRAM_ATTR"
+void IRAM_ATTR receiveEvent(int howMany)
+#else
+void receiveEvent(int howMany)
+#endif
+{
+
+// #if defined(DIAGNOSTICS)
+//   thenMicros = micros();
+// #endif // DIAGNOSTICS
+
+
+  /*
+     Inject module receiveEvent() code
+  */
+#define MF_STAGE MF_STAGE_receiveEvent
+#include "firmware_modules.h"
+#undef MF_STAGE
+
+  switch (I2Cstate) {
+
+
+    case readyForResponse: { // not to be expected here (this is why we should move it to the back, but it needs to be here up front for the fallthrough)
+        /* An outputBuffer is ready for response, but the controller is sending another command instead of requesting
+           its contents, making the buffer useless. So discard it right away, switch to readyForCommand state and
+           fall through to receiving it. */
+        bufferOut->reset();
+        changeI2CstateTo(readyForCommand); // not really needed for fall through, but feels cleaner
+      }
+      [[fallthrough]];
+
+
+    case readyForCommand:  { // this is the expected state when a receiveEvent happens
+
+        //log("[Int with "); log(howMany); log(newMessage == 0 ? ", ready]\n" : ", NOT ready]\n");
+
+        // if (newMessage == 0) { // Only accept message if an earlier one is fully processed. // this check obsolete with I2Cstate machine
+        bufferIn->reset();
+        for (uint8_t i = 0; i < howMany; i++) {
+          bufferIn->buffer[i] = Wire.read();
+        }
+        bufferIn->idx = howMany;
+        newMessage = howMany; // tell main loop that and how much data has arrived
+        changeI2CstateTo(processingCommand);  // and move on to next state
+        // }
+
+      } // case readyForCommand
+      break;
+
+
+    case processingCommand: { // not to be expected here
+        /* An earlier command is still beeing processed, so the outputBuffer is possibly being filled right now,
+          but the controller is already sending another command, making the buffer useless.
+          We cannot terminate the processMessage() function from here, so signal it that it should discard the
+          buffer at the end of processing and switch to readyForCommand state after. */
+        changeI2CstateTo(tainted);
+      }
+      break;
+
+
+    case initializing:
+    case responding:
+    case tainted:
+      break; // do nothing, ignore receiveEvent and stay in the respective state
+
+  } // switch (I2Cstate)
+
+// #if defined(DIAGNOSTICS)
+  // delay storing the executing time for one cycle, else diagnostics() would always return
+  // its own receive time, not the one of the previous command
+//   currentDiagnostics.lastReceiveTime = previousLastReceiveTime;
+//   previousLastReceiveTime = micros() - thenMicros;
+// #endif // DIAGNOSTICS
+
+}
+
+
+
+// ================================================================================
+// ========================== writeOutputBuffer() =================================
+// ================================================================================
 
 // If there is anything in the output buffer, write it out to I2C.
 // This is outsourced to a function, as, depending on the architecture,
@@ -611,34 +686,75 @@ void writeOutputBuffer()
 }
 
 
+// ================================================================================
+// ============================ requestEvent() ====================================
+// ================================================================================
 /*!
   @brief Handle I2C request event. Will send results or information requested
     by the last command, as defined by the contents of the outputBuffer.
   @todo <del>Find sth. meaningful to report from requestEvent() if no message is
   pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)
+
 */
 
-#if defined(ESP8266) || defined(ESP32)
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
 void IRAM_ATTR requestEvent()
 #else
 void requestEvent()
 #endif
 {
 
-#if defined(DIAGNOSTICS)
-  thenMicros = micros();
-#endif // DIAGNOSTICS
+// #if defined(DIAGNOSTICS)
+//   thenMicros = micros();
+// #endif // DIAGNOSTICS
+
+
+  /*
+     Inject module receiveEvent() code
+  */
+#define MF_STAGE MF_STAGE_requestEvent
+#include "firmware_modules.h"
+#undef MF_STAGE
+
+  switch (I2Cstate) {
+
+
+    case readyForResponse: {
+
+        changeI2CstateTo(responding);
 
 #if !defined(ARDUINO_ARCH_ESP32) // ESP32 has (hopefully) already written the buffer in the main loop
-  writeOutputBuffer();
+        writeOutputBuffer();
 #endif // not ESP32
 
 #if defined(DEBUG)
-  sentOnRequest = writtenToBuffer; // signal main loop that we sent buffer contents
+        sentOnRequest = writtenToBuffer; // signal main loop that we sent buffer contents
 #endif // DEBUG
 
-#if defined(DIAGNOSTICS)
-  currentDiagnostics.lastRequestTime = micros() - thenMicros;
-#endif // DIAGNOSTICS
+        changeI2CstateTo(readyForCommand);
+
+      } // case readyForResponse
+      break;
+
+    case processingCommand: {
+        /* A command is still beeing processed and the outputBuffer is not ready yet, the Controller is
+          probably too eager to want its reply. Unfortunately, an incomplete buffer is useless.
+          We cannot terminate the processMessage() function from here, so signal it that it should discard the
+          buffer at the end of processing and switch to readyForCommand state after. */
+        changeI2CstateTo(tainted);
+      }
+      break;
+
+    case readyForCommand:
+    case initializing:
+    case responding:
+    case tainted:
+      break; // do nothing, ignore requestEvent and stay in the respective state
+
+  } // switch (I2Cstate)
+
+// #if defined(DIAGNOSTICS)
+//   currentDiagnostics.lastRequestTime = micros() - thenMicros;
+// #endif // DIAGNOSTICS
 
 }

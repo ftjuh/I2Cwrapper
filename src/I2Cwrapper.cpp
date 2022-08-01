@@ -1,9 +1,9 @@
 /*!
  *  @file I2Cwrapper.cpp
  *  @brief Part of the I2Cwrapper firmware/library
- *  @section author Author
+ *  ## Author
  *  Copyright (c) 2022 juh
- *  @section license License
+ *  ## License
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation, version 2.
@@ -22,14 +22,16 @@ I2Cwrapper::I2Cwrapper(uint8_t i2c_address, uint8_t maxBuf)
 }
 
 
-// Jan's little sister: wait I2Cdelay, adjusted by the time already spent
+// Jan's little sister: 
+// wait I2Cdelay, adjusted by the time already spent since last transmission
+// i.e. won't wait if pause was long enough already
 void I2Cwrapper::doDelay()
 {
-  unsigned long del = I2Cdelay - (millis() - lastI2Ctransmission);
-  if (del <= I2Cdelay) { // don't wait if overflow = delay has already passed
+  unsigned long del = I2Cdelay - (millis() - lastI2Ctransmission); // ulong will overflow if I2Cdelay has already been passed
+  if (del <= I2Cdelay) { // don't wait if overflow
     delay(del);
   }
-  lastI2Ctransmission = millis();
+  // lastI2Ctransmission = millis(); // this has been an awfully wrong place to take that time. It's now moved closer to the actual transmissions, making the I2C delay much more efficient.
 }
 
 // reset buffer and write header bytes...
@@ -60,6 +62,7 @@ bool I2Cwrapper::sendCommand()
   log("\n");
 #endif
   sentOK = (Wire.endTransmission() == 0);
+  lastI2Ctransmission = millis();
   if (!sentOK) {
     sentErrorsCount++;
   }
@@ -82,6 +85,7 @@ bool I2Cwrapper::readResult(uint8_t numBytes)
       log(buf.buffer[i - 1], HEX);
       log(" ");
     }
+    lastI2Ctransmission = millis();
     buf.idx = i;
     resultOK = buf.checkCRC8();
     log((i <= numBytes) ? " -- buffer out of space!  " : "");
@@ -104,10 +108,11 @@ bool I2Cwrapper::ping()
   return Wire.endTransmission() == 0;
 }
 
-void I2Cwrapper::reset()
+void I2Cwrapper::reset(unsigned long resetDelay)
 {
   prepareCommand(resetCmd);
   sendCommand();
+  delay(resetDelay);
 }
 
 void I2Cwrapper::changeI2Caddress(uint8_t newAddress)
@@ -124,8 +129,58 @@ unsigned long I2Cwrapper::setI2Cdelay(unsigned long delay)
   return d;
 }
 
-void I2Cwrapper::setInterruptPin(int8_t pin,
-                                 bool activeHigh)
+unsigned long I2Cwrapper::getI2Cdelay() {
+  return I2Cdelay;
+}
+
+bool I2Cwrapper::pingBack(uint8_t testData, uint8_t testLength) {  
+  const uint8_t testDataIncConst = 73; // am arbitrary prime number to generate some variety in the test data
+  // first step: send some test data
+  prepareCommand(pingBackCmd);
+  testLength = (testLength < 1) ? 1 : testLength;
+  testLength = (testLength > I2CmaxBuf - 3 - 1) ? I2CmaxBuf - 3 - 1 : testLength; // minus 3 header bytes minus 1 byte already used for transmitting testLength
+  buf.write(testLength);
+  uint8_t sentData = testData;
+  for (int i = 0; i < testLength; i++) {
+    buf.write(sentData);
+    sentData = sentData + testDataIncConst; // increment so that it more closely resembles real data, overflow intended
+  }  
+  // second step: receive data back and check if it's correct
+  bool res = false;  
+  if (sendCommand() and readResult(testLength)) { // not a constant as usual but number of repetetions
+    uint8_t receivedData = 0;
+    uint8_t expectedData = testData;
+    res = true; // for the moment
+    for (int i = 0; i < testLength; i++) { // read back data
+      buf.read(receivedData);
+      res = res and (receivedData == expectedData); // check if correct
+      expectedData = expectedData + testDataIncConst;
+    }
+  }
+  return res;  
+}
+
+uint8_t I2Cwrapper::autoAdjustI2Cdelay(uint8_t maxLength, uint8_t safetyMargin, uint8_t startWith) {
+  uint8_t testI2Cdelay = startWith;
+  uint8_t numErrors;
+  log("autoAdjustI2Cdelay\n");
+  do {
+    setI2Cdelay(testI2Cdelay--);  // start with default
+    log("I2Cdelay = "); log(testI2Cdelay); log(": ");
+    numErrors = 0;
+    for (uint8_t j = 0; j < autoAdjustDefaultReps; j++) { // do for a number of repetitions
+      numErrors += pingBack(
+        j + testI2Cdelay,   // just to get a little different data for each run
+        maxLength) ? 0 : 1; // inc by 1 for every error
+    }
+    log(numErrors); log(" errors\n");    
+  } while ((numErrors == 0) and (testI2Cdelay > 0));
+  setI2Cdelay(testI2Cdelay + 1 + safetyMargin);
+  return getI2Cdelay();
+}
+
+
+void I2Cwrapper::setInterruptPin(int8_t pin, bool activeHigh)
 {
   prepareCommand(setInterruptPinCmd);
   buf.write(pin);
@@ -157,6 +212,7 @@ bool I2Cwrapper::checkVersion(uint32_t controllerVersion)
 {
   return controllerVersion == getVersion();
 }
+
 
 uint16_t I2Cwrapper::sentErrors()
 {

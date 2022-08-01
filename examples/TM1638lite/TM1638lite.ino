@@ -43,8 +43,8 @@ const uint8_t dataPin   = 8;
 
 
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
-TM1638liteI2C tm(&wrapper); // ...that the pin interface needs to communicate with the target
-q 
+TM1638liteI2C tm(&wrapper); // ...that the TM1638 object needs to communicate with the controller
+ 
 // this section from demo.ino commented out, see attach() function call in setup()
 // I/O pins on the Arduino connected to strobe, clock, data
 // (power should go to 3.3v and GND)
@@ -63,7 +63,6 @@ void setup() {
     Serial.println("Target found as expected. Proceeding.\n");
   }
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
   
   /*
    *    You'll notice a tiny delay in execution vs. the original demo, e.g.

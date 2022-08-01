@@ -16,7 +16,7 @@
 uint8_t i2cAddress = 0x08;
 
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
-AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the target
+AccelStepperI2C stepper(&wrapper); // ...that the stepper uses to communicate with the controller
 
 void setup()
 {
@@ -30,7 +30,6 @@ void setup()
   }
 
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   stepper.attach(); // Defaults to AccelStepper::FULL4WIRE (4 pins) on 2, 3, 4, 5
   // attach() replaces the AccelStepper constructor, so it could also be called like this: 

@@ -105,7 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a736d4d25614153edfbcb6f239337464d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_accel_stepper_i2_c.html#a736d4d25614153edfbcb6f239337464d">More...</a><br /></td></tr>
 <tr class="separator:a736d4d25614153edfbcb6f239337464d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeae5d3e79ead4f7298300b98e7b85786"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786">attach</a> (uint8_t interface=AccelStepper::FULL4WIRE, uint8_t pin1=2, uint8_t pin2=3, uint8_t pin3=4, uint8_t pin4=5, bool enable=true)</td></tr>
-<tr class="memdesc:aeae5d3e79ead4f7298300b98e7b85786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper object on the target's side and make it ready for use.  <a href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786">More...</a><br /></td></tr>
+<tr class="memdesc:aeae5d3e79ead4f7298300b98e7b85786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper object on the target's side and make it ready for use. Does not return an success/error result. Instead check <a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">myNum</a> &gt;= 0 to see if the target successfully added the stepper. If not, it's -1.  <a href="class_accel_stepper_i2_c.html#aeae5d3e79ead4f7298300b98e7b85786">More...</a><br /></td></tr>
 <tr class="separator:aeae5d3e79ead4f7298300b98e7b85786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06ee86271f675746386c4cb86b6c6182"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182">moveTo</a> (long absolute)</td></tr>
 <tr class="separator:a06ee86271f675746386c4cb86b6c6182"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,12 +160,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5f233077007853c4c25e7d6d9aee0118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d61e5c0ac971764de463e1d958a517d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a5d61e5c0ac971764de463e1d958a517d">isRunning</a> ()</td></tr>
 <tr class="separator:a5d61e5c0ac971764de463e1d958a517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5da3133b470ee9cdc1f5f3bcc960da4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a5da3133b470ee9cdc1f5f3bcc960da4f">enableDiagnostics</a> (bool enable)</td></tr>
-<tr class="memdesc:a5da3133b470ee9cdc1f5f3bcc960da4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn on/off diagnostic speed logging. Needs diagnostics enabled and a target which was compiled with the DIAGNOSTICS compiler directive enabled.  <a href="class_accel_stepper_i2_c.html#a5da3133b470ee9cdc1f5f3bcc960da4f">More...</a><br /></td></tr>
-<tr class="separator:a5da3133b470ee9cdc1f5f3bcc960da4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67423203e72c69f1fae869c63d3e545f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f">diagnostics</a> (<a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *report)</td></tr>
-<tr class="memdesc:a67423203e72c69f1fae869c63d3e545f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get most recent diagnostics data. Needs diagnostics enabled and a target which was compiled with the DIAGNOSTICS compiler directive enabled.  <a href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f">More...</a><br /></td></tr>
-<tr class="separator:a67423203e72c69f1fae869c63d3e545f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0015e762b6a5ab8a545574e1642358ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">enableInterrupts</a> (bool enable=true)</td></tr>
 <tr class="memdesc:a0015e762b6a5ab8a545574e1642358ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start or stop sending interrupts to controller for this stepper. An interrupt will be sent whenever a state machine change occured which was not triggered by the controller. At the moment, this could either be a target reached condition in <a class="el" href="class_accel_stepper_i2_c.html#a934c71dc0f3b534bc859f40e785066b6" title="Will poll run(), i.e. run to the target with acceleration and stop the state machine upon reaching it...">runState()</a> or <a class="el" href="class_accel_stepper_i2_c.html#a935522089c48b23c0e9f17b242d7d94f" title="Will poll runSpeedToPosition(), i.e. run at constant speed until target has been reached.">runSpeedToPositionState()</a>, or an endstop reached condition.  <a href="class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef">More...</a><br /></td></tr>
 <tr class="separator:a0015e762b6a5ab8a545574e1642358ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -281,7 +275,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper object on the target's side and make it ready for use. </p>
+<p>Replaces the AccelStepper constructor and takes the same arguments. Will allocate an AccelStepper object on the target's side and make it ready for use. Does not return an success/error result. Instead check <a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">myNum</a> &gt;= 0 to see if the target successfully added the stepper. If not, it's -1. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">interface</td><td>Only AccelStepper::DRIVER is tested at the moment, but AccelStepper::FULL2WIRE, AccelStepper::FULL3WIRE, AccelStepper::FULL4WIRE, AccelStepper::HALF3WIRE, and AccelStepper::HALF4WIRE should work as well, AccelStepper::FUNCTION of course not </td></tr>
@@ -289,7 +283,6 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Check <a class="el" href="class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342">myNum</a> &gt;= 0 to see if the target successfully added the stepper. If not, it's -1. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The target's platform pin names might not be known to the controller's platform, if both are different. So it is safer to use integer equivalents as defined in the respective platform's <code>pins_arduino.h</code>, e.g. for ESP8266:<ul>
 <li>static const uint8_t D0 = 16;</li>
 <li>static const uint8_t D1 = 5;</li>
@@ -330,33 +323,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a67423203e72c69f1fae869c63d3e545f" name="a67423203e72c69f1fae869c63d3e545f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67423203e72c69f1fae869c63d3e545f">&#9670;&nbsp;</a></span>diagnostics()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AccelStepperI2C::diagnostics </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a> *&#160;</td>
-          <td class="paramname"><em>report</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get most recent diagnostics data. Needs diagnostics enabled and a target which was compiled with the DIAGNOSTICS compiler directive enabled. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">report</td><td>where to put the data, preallocated struct of type <a class="el" href="structdiagnostics_report.html" title="Used to transmit diagnostic info with AccelStepperI2C::diagnostics().">diagnosticsReport</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a5da3133b470ee9cdc1f5f3bcc960da4f" title="Turn on/off diagnostic speed logging. Needs diagnostics enabled and a target which was compiled with ...">enableDiagnostics()</a> </dd></dl>
-
-</div>
-</div>
 <a id="a6b82da76eca7957814189cd67608aaf0" name="a6b82da76eca7957814189cd67608aaf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b82da76eca7957814189cd67608aaf0">&#9670;&nbsp;</a></span>disableOutputs()</h2>
 
@@ -391,33 +357,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5da3133b470ee9cdc1f5f3bcc960da4f" name="a5da3133b470ee9cdc1f5f3bcc960da4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5da3133b470ee9cdc1f5f3bcc960da4f">&#9670;&nbsp;</a></span>enableDiagnostics()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AccelStepperI2C::enableDiagnostics </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>enable</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Turn on/off diagnostic speed logging. Needs diagnostics enabled and a target which was compiled with the DIAGNOSTICS compiler directive enabled. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">enable</td><td>true for enable, false for disable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data. Needs diagnostics enabled and a target which was compiled with the ...">diagnostics()</a> </dd></dl>
-
-</div>
-</div>
 <a id="ab0392ba30b4854704bd08b588db17401" name="ab0392ba30b4854704bd08b588db17401"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab0392ba30b4854704bd08b588db17401">&#9670;&nbsp;</a></span>enableEndstops()</h2>
 
@@ -436,7 +375,7 @@ Public Attributes</h2></td></tr>
 
 <p>Tell the state machine to check the endstops regularly. If any of the (one or two) stepper's endstops is hit, the state machine will revert to state_stopped. To prevent overshoot, also the stepper's speed is set to 0 and its target to the current position. </p>
 <p >An interrupt will be triggered, if interrupts are enabled, in that case <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge to target that interrupt has been received, so that the target can clear the interupt con...">I2Cwrapper::clearInterrupt()</a> will then inform about the interrupt's cause. Independent of an interrupt, the controller can use <a class="el" href="class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c" title="Read current raw, i.e. not debounced state of endstops. It&#39;s basically one or two digitalReads() comb...">endstops()</a> to find out if an endstop was hit and which one it was.</p>
-<p >A "hit" condition is defined as an end stop switch becoming active. Nothing happens if it stays active or becomes inactive. A simple debouncing mechanism is in place. After a new flank (switch becoming active <em>or</em> inactive), it will ignore any further flanks for a set interval of 5 milliseconds, which should suffice for most switches to get into a stable state. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone. </dd></dl>
+<p >A "hit" condition is defined as an end stop switch becoming active. Nothing happens if it stays active or becomes inactive. A simple debouncing mechanism is in place. After a new flank (switch becoming active <em>or</em> inactive), it will ignore any further flanks for a set interval of 5 milliseconds, which should suffice for most switches to get into a stable state. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd><del>Find solution for moving a stepper out of an endstop's zone.</del> implemented debounce and active-flank detection so that there's no danger of repeated interrupts being triggered while in an endstop's active zone. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td>true (default) to enable, false to disable. </td></tr>
@@ -1115,7 +1054,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

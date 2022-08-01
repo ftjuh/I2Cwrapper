@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('firmware_8ino.html',''); initResizable
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">firmware.ino File Reference</div></div>
@@ -97,19 +98,21 @@ $(document).ready(function(){initNavTree('firmware_8ino.html',''); initResizable
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Generic firmware framework for I2C targets with modular functionality, built around the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library. </p>
-<h1><a class="anchor" id="author"></a>
-Author</h1>
+<h2><a class="anchor" id="autotoc_md12"></a>
+Author</h2>
 <p >Copyright (c) 2022 juh </p>
-<h1><a class="anchor" id="license"></a>
-License</h1>
-<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd><p class="startdd">make I2C address configurable by hardware (with module?) </p>
+<h2><a class="anchor" id="autotoc_md13"></a>
+License</h2>
+<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd"><del>make I2C address configurable by hardware (with module?)</del> </p>
 <p class="interdd">return messages (results) should ideally come with an id, too, so that controller can be sure it's the correct result. Currently only CRC8, i.e. correct transmission is checked. </p>
 <p class="interdd">volatile variables / ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {} </p>
-<p class="enddd">Reduce memory use to make it fit into an 8k Attiny </p>
+<p class="enddd">Reduce memory use to make it fit into an <del>8k Attiny</del>4k ATtiny </p>
 </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ad72dbcf6d0153db1b8d8a58001feed83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a></td></tr>
+<tr class="separator:ad72dbcf6d0153db1b8d8a58001feed83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a896bf85b60dac55dcacd7c5091baeb2a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a896bf85b60dac55dcacd7c5091baeb2a">MF_STAGE_includes</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a896bf85b60dac55dcacd7c5091baeb2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93d88b00f1ad9a279e28690d5f26360e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a93d88b00f1ad9a279e28690d5f26360e">MF_STAGE_declarations</a>&#160;&#160;&#160;2</td></tr>
@@ -122,55 +125,71 @@ Macros</h2></td></tr>
 <tr class="separator:a691e9051b923e4047c0c60a2a03dcb0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15c2b0539284cc4454cde158bd7f60f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a15c2b0539284cc4454cde158bd7f60f7">MF_STAGE_reset</a>&#160;&#160;&#160;6</td></tr>
 <tr class="separator:a15c2b0539284cc4454cde158bd7f60f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b2a75603cd542e296b689e265e182f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8b2a75603cd542e296b689e265e182f1">MF_STAGE_receiveEvent</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a8b2a75603cd542e296b689e265e182f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07f64187675c9231ee2b969011945161"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a07f64187675c9231ee2b969011945161">MF_STAGE_requestEvent</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a07f64187675c9231ee2b969011945161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48b41eab07667bb7fa30dc00e3099709"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a48b41eab07667bb7fa30dc00e3099709">MF_STAGE_I2CstateChange</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:a48b41eab07667bb7fa30dc00e3099709"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a896bf85b60dac55dcacd7c5091baeb2a">MF_STAGE_includes</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)</td></tr>
+<tr class="memitem:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3">log</a>(...)&#160;&#160;&#160;Serial.print(__VA_ARGS__)</td></tr>
 <tr class="separator:a66726e5f1a55e7253ddd5aeec06f19c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cad4e2514f451585f15da3b8ee3cd2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a1cad4e2514f451585f15da3b8ee3cd2f">EEPROM_OFFSET_I2C_ADDRESS</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:a1cad4e2514f451585f15da3b8ee3cd2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a48b41eab07667bb7fa30dc00e3099709">MF_STAGE_I2CstateChange</a></td></tr>
+<tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a93d88b00f1ad9a279e28690d5f26360e">MF_STAGE_declarations</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#af6947169b907d913e36c8ca994514d66">MF_STAGE_setup</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#aaa7c7cb4c233d24cc72015628493b54f">MF_STAGE_loop</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a691e9051b923e4047c0c60a2a03dcb0d">MF_STAGE_processMessage</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a15c2b0539284cc4454cde158bd7f60f7">MF_STAGE_reset</a></td></tr>
-<tr class="memdesc:a8608260843d368ebb41a63afd0ca3a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments.  <a href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">More...</a><br /></td></tr>
 <tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a8b2a75603cd542e296b689e265e182f1">MF_STAGE_receiveEvent</a></td></tr>
+<tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8608260843d368ebb41a63afd0ca3a91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91">MF_STAGE</a>&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a07f64187675c9231ee2b969011945161">MF_STAGE_requestEvent</a></td></tr>
+<tr class="separator:a8608260843d368ebb41a63afd0ca3a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aecb3d9794cb3b0214f1c90af1607a6e8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8">I2Cstates</a> { <br />
+&#160;&#160;<a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8aa02bce8815397c4015aa0b352c85c639">initializing</a>
+, <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a43ce9a22773e474b09b5061a0c2026de">readyForCommand</a>
+, <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a84e9d163f3082b90ec9386d3917c1568">processingCommand</a>
+, <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a7f540b6504ff500e2431746d91c35e91">readyForResponse</a>
+, <br />
+&#160;&#160;<a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a9e1775709eadd0003f2e72568cf59c6f">responding</a>
+, <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a92c1c393e6796d9330f5510d76077274">tainted</a>
+<br />
+ }</td></tr>
+<tr class="separator:aecb3d9794cb3b0214f1c90af1607a6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7">retrieveI2C_address</a> ()</td></tr>
-<tr class="memdesc:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a stored I2C address from EEPROM. If there is none, use default.  <a href="firmware_8ino.html#a9d641c48e9eaae758eb0ea69cdbfa9c7">More...</a><br /></td></tr>
-<tr class="separator:a9d641c48e9eaae758eb0ea69cdbfa9c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04dab60aa1102ee6bfabfc6a039849ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee">storeI2C_address</a> (uint8_t <a class="el" href="_change__address_8ino.html#a53811bf61b46bdfb67602aeafbb0b739">newAddress</a>)</td></tr>
-<tr class="memdesc:a04dab60aa1102ee6bfabfc6a039849ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write I2C address to EEPROM.  <a href="firmware_8ino.html#a04dab60aa1102ee6bfabfc6a039849ee">More...</a><br /></td></tr>
-<tr class="separator:a04dab60aa1102ee6bfabfc6a039849ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e6fb94a3ed8d18ebc8e982e14b3f8ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a6e6fb94a3ed8d18ebc8e982e14b3f8ee">changeI2CstateTo</a> (<a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8">I2Cstates</a> newState)</td></tr>
+<tr class="separator:a6e6fb94a3ed8d18ebc8e982e14b3f8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a52aa0319b0d3bea95eff4528baee98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a> (int howMany)</td></tr>
+<tr class="separator:a9a52aa0319b0d3bea95eff4528baee98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a> ()</td></tr>
+<tr class="memdesc:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer.  <a href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">More...</a><br /></td></tr>
+<tr class="separator:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f3ec17f4d90ce7c4b1714e8e5931452"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4f3ec17f4d90ce7c4b1714e8e5931452">triggerInterrupt</a> (uint8_t source, uint8_t reason)</td></tr>
 <tr class="memdesc:a4f3ec17f4d90ce7c4b1714e8e5931452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt controller if an interrupt pin has been set and, optionally, define a source and reason having caused the interrupt that the controller can learn about by calling the <a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac" title="Acknowledge to target that interrupt has been received, so that the target can clear the interupt con...">I2Cwrapper::clearInterrupt()</a> function.  <a href="firmware_8ino.html#a4f3ec17f4d90ce7c4b1714e8e5931452">More...</a><br /></td></tr>
 <tr class="separator:a4f3ec17f4d90ce7c4b1714e8e5931452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adebb2a389a701d95bb721df60053bf6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#adebb2a389a701d95bb721df60053bf6c">clearInterrupt</a> ()</td></tr>
 <tr class="separator:adebb2a389a701d95bb721df60053bf6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab45a881cd27fd11dbc87571c6a9cba34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ab45a881cd27fd11dbc87571c6a9cba34">resetFunc</a> ()</td></tr>
-<tr class="separator:ab45a881cd27fd11dbc87571c6a9cba34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">requestEvent</a> ()</td></tr>
-<tr class="memdesc:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer.  <a href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33">More...</a><br /></td></tr>
-<tr class="separator:ac10b80b8aaeaf66cecbf0bb5eff5ae33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1c25023501d661763119bfb0cafea32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ac1c25023501d661763119bfb0cafea32">initializeFirmware</a> ()</td></tr>
+<tr class="separator:ac1c25023501d661763119bfb0cafea32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b9c6ba970caacbe89fd0040b74d42c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a5b9c6ba970caacbe89fd0040b74d42c8">startI2C</a> ()</td></tr>
+<tr class="separator:a5b9c6ba970caacbe89fd0040b74d42c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
-<tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup system. Retrieve I2C address from EEPROM or default and initialize I2C target.  <a href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">More...</a><br /></td></tr>
+<tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup system.  <a href="firmware_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">More...</a><br /></td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
 <tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop. By default, it doesn't do a lot apart from debugging: It just checks if an ISR signaled that a new message has arrived and calls <a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad" title="Process the message stored in bufferIn with lenght len which was received via I2C....">processMessage()</a> accordingly.  <a href="firmware_8ino.html#afe461d27b9c48d5921c00d521181f12f">More...</a><br /></td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a52aa0319b0d3bea95eff4528baee98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9a52aa0319b0d3bea95eff4528baee98">receiveEvent</a> (int howMany)</td></tr>
-<tr class="separator:a9a52aa0319b0d3bea95eff4528baee98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4906408a38ad9d4f1bca763aa75422ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">processMessage</a> (uint8_t len)</td></tr>
 <tr class="memdesc:a4906408a38ad9d4f1bca763aa75422ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the message stored in bufferIn with lenght len which was received via I2C. Messages consist of at least three bytes: [0] CRC8 checksum [1] Command. Most commands correspond to a module's function, some are specific for <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core functions. Unknown commands are ignored. [2] Number of the unit (stepper, servo, ...) that is to receive the command. Not all modules use units and ignore this value accordingly. [3..maxBuffer] Optional parameter bytes. Each command that comes with too many or too few parameter bytes is ignored.  <a href="firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad">More...</a><br /></td></tr>
 <tr class="separator:a4906408a38ad9d4f1bca763aa75422ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,8 +198,22 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a2003b6239df3eaf89667542a178aee22"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a2003b6239df3eaf89667542a178aee22">defaultAddress</a> = 0x08</td></tr>
-<tr class="separator:a2003b6239df3eaf89667542a178aee22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd5dbf719bae2b1ea9260a55e7c289cf"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#afd5dbf719bae2b1ea9260a55e7c289cf">i2c_address</a> = <a class="el" href="_i2_cwrapper_8h.html#ab8efb5d71bb5b924fb0d07d292aafebc">I2CwrapperDefaultAddress</a></td></tr>
+<tr class="separator:afd5dbf719bae2b1ea9260a55e7c289cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2458d18375b44e68abd4672fe965562"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ab2458d18375b44e68abd4672fe965562">writtenToBuffer</a> = 0</td></tr>
+<tr class="separator:ab2458d18375b44e68abd4672fe965562"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc3807e20039643a86ced45c531aa952"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#adc3807e20039643a86ced45c531aa952">sentOnRequest</a> = 0</td></tr>
+<tr class="separator:adc3807e20039643a86ced45c531aa952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a5acb9b13b943cac9ef0b8c8370100"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ad2a5acb9b13b943cac9ef0b8c8370100">now</a></td></tr>
+<tr class="separator:ad2a5acb9b13b943cac9ef0b8c8370100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a570420b17131e93d2c3ff7665f121800"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a570420b17131e93d2c3ff7665f121800">then</a> = millis()</td></tr>
+<tr class="separator:a570420b17131e93d2c3ff7665f121800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e882aeffdf111848ef1647b42fe1dde"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a4e882aeffdf111848ef1647b42fe1dde">reportNow</a> = true</td></tr>
+<tr class="separator:a4e882aeffdf111848ef1647b42fe1dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acee4f8c66bd06079db7157d155550ede"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#acee4f8c66bd06079db7157d155550ede">lastCycles</a> = 0</td></tr>
+<tr class="separator:acee4f8c66bd06079db7157d155550ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab25d82c1087f38c24fedd257e192278"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#aab25d82c1087f38c24fedd257e192278">reportPeriod</a> = 2000</td></tr>
+<tr class="separator:aab25d82c1087f38c24fedd257e192278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9405df89f8c78a1f50085b10911ca37"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#af9405df89f8c78a1f50085b10911ca37">cycles</a> = 0</td></tr>
 <tr class="separator:af9405df89f8c78a1f50085b10911ca37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eca28b463b5850006c7d00aa43a2498"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_buffer.html">SimpleBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a9eca28b463b5850006c7d00aa43a2498">bufferIn</a></td></tr>
@@ -189,26 +222,26 @@ Variables</h2></td></tr>
 <tr class="separator:a4d39df1bc00243ef2abb1ad3cc1acf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd9824af02dde7126d00d43a74c0081"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#affd9824af02dde7126d00d43a74c0081">newMessage</a> = 0</td></tr>
 <tr class="separator:affd9824af02dde7126d00d43a74c0081"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8633d2064ee1822248523a0c402920e3"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a8633d2064ee1822248523a0c402920e3">eepromI2CaddressMarker</a> = 0x12C0ACCF</td></tr>
-<tr class="separator:a8633d2064ee1822248523a0c402920e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89786b8678479bcf2338a522d43b9381"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a89786b8678479bcf2338a522d43b9381">interruptPin</a> = -1</td></tr>
+<tr class="memitem:a30bf8d43be96fc283b7e4074cbcb4fed"><td class="memItemLeft" align="right" valign="top">volatile <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8">I2Cstates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a30bf8d43be96fc283b7e4074cbcb4fed">I2Cstate</a> = <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8aa02bce8815397c4015aa0b352c85c639">initializing</a></td></tr>
+<tr class="separator:a30bf8d43be96fc283b7e4074cbcb4fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89786b8678479bcf2338a522d43b9381"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a89786b8678479bcf2338a522d43b9381">interruptPin</a></td></tr>
 <tr class="separator:a89786b8678479bcf2338a522d43b9381"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1764b48f3cc3657deeb69208ad55cb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ab1764b48f3cc3657deeb69208ad55cb1">interruptActiveHigh</a> = true</td></tr>
+<tr class="memitem:ab1764b48f3cc3657deeb69208ad55cb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#ab1764b48f3cc3657deeb69208ad55cb1">interruptActiveHigh</a></td></tr>
 <tr class="separator:ab1764b48f3cc3657deeb69208ad55cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dc3b1bfb8fa250b49a70c77e11e87c2"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a3dc3b1bfb8fa250b49a70c77e11e87c2">interruptSource</a> = 0xF</td></tr>
+<tr class="memitem:a3dc3b1bfb8fa250b49a70c77e11e87c2"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a3dc3b1bfb8fa250b49a70c77e11e87c2">interruptSource</a></td></tr>
 <tr class="separator:a3dc3b1bfb8fa250b49a70c77e11e87c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2451a9b021bbbd6931ff9832f662af13"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a2451a9b021bbbd6931ff9832f662af13">interruptReason</a> = <a class="el" href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">interruptReason_none</a></td></tr>
+<tr class="memitem:a2451a9b021bbbd6931ff9832f662af13"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="firmware_8ino.html#a2451a9b021bbbd6931ff9832f662af13">interruptReason</a></td></tr>
 <tr class="separator:a2451a9b021bbbd6931ff9832f662af13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a1cad4e2514f451585f15da3b8ee3cd2f" name="a1cad4e2514f451585f15da3b8ee3cd2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cad4e2514f451585f15da3b8ee3cd2f">&#9670;&nbsp;</a></span>EEPROM_OFFSET_I2C_ADDRESS</h2>
+<a id="ad72dbcf6d0153db1b8d8a58001feed83" name="ad72dbcf6d0153db1b8d8a58001feed83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad72dbcf6d0153db1b8d8a58001feed83">&#9670;&nbsp;</a></span>DEBUG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define EEPROM_OFFSET_I2C_ADDRESS&#160;&#160;&#160;0</td>
+          <td class="memname">#define DEBUG</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -226,7 +259,7 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;Serial.print(__VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -234,7 +267,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -245,14 +278,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-<p >Uncomment this to enable firmware debugging output on Serial. </p>
+</div>
+</div>
+<a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MF_STAGE&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a48b41eab07667bb7fa30dc00e3099709">MF_STAGE_I2CstateChange</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[3/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,14 +306,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-<p >Uncomment this to enable firmware debugging output on Serial. </p>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[4/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,14 +320,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-<p >Uncomment this to enable firmware debugging output on Serial. </p>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[5/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -299,14 +334,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-<p >Uncomment this to enable firmware debugging output on Serial. </p>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[6/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,14 +348,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-<p >Uncomment this to enable firmware debugging output on Serial. </p>
-
 </div>
 </div>
 <a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[7/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,9 +362,33 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uncomment this to enable time keeping diagnostics. You probably should disable debugging, as Serial output will distort the measurements severely. Diagnostics take a little extra time and ressources, so you best disable it in production environments. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>make diagnostics another module? </dd></dl>
-<p >Uncomment this to enable firmware debugging output on Serial. </p>
+</div>
+</div>
+<a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MF_STAGE&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a8b2a75603cd542e296b689e265e182f1">MF_STAGE_receiveEvent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8608260843d368ebb41a63afd0ca3a91" name="a8608260843d368ebb41a63afd0ca3a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8608260843d368ebb41a63afd0ca3a91">&#9670;&nbsp;</a></span>MF_STAGE <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MF_STAGE&#160;&#160;&#160;<a class="el" href="firmware_8ino.html#a07f64187675c9231ee2b969011945161">MF_STAGE_requestEvent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -349,6 +400,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MF_STAGE_declarations&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48b41eab07667bb7fa30dc00e3099709" name="a48b41eab07667bb7fa30dc00e3099709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48b41eab07667bb7fa30dc00e3099709">&#9670;&nbsp;</a></span>MF_STAGE_I2CstateChange</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MF_STAGE_I2CstateChange&#160;&#160;&#160;9</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -397,6 +462,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a8b2a75603cd542e296b689e265e182f1" name="a8b2a75603cd542e296b689e265e182f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b2a75603cd542e296b689e265e182f1">&#9670;&nbsp;</a></span>MF_STAGE_receiveEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MF_STAGE_receiveEvent&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07f64187675c9231ee2b969011945161" name="a07f64187675c9231ee2b969011945161"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07f64187675c9231ee2b969011945161">&#9670;&nbsp;</a></span>MF_STAGE_requestEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MF_STAGE_requestEvent&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a15c2b0539284cc4454cde158bd7f60f7" name="a15c2b0539284cc4454cde158bd7f60f7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15c2b0539284cc4454cde158bd7f60f7">&#9670;&nbsp;</a></span>MF_STAGE_reset</h2>
 
@@ -425,7 +518,48 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aecb3d9794cb3b0214f1c90af1607a6e8" name="aecb3d9794cb3b0214f1c90af1607a6e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb3d9794cb3b0214f1c90af1607a6e8">&#9670;&nbsp;</a></span>I2Cstates</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8">I2Cstates</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aecb3d9794cb3b0214f1c90af1607a6e8aa02bce8815397c4015aa0b352c85c639" name="aecb3d9794cb3b0214f1c90af1607a6e8aa02bce8815397c4015aa0b352c85c639"></a>initializing&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aecb3d9794cb3b0214f1c90af1607a6e8a43ce9a22773e474b09b5061a0c2026de" name="aecb3d9794cb3b0214f1c90af1607a6e8a43ce9a22773e474b09b5061a0c2026de"></a>readyForCommand&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aecb3d9794cb3b0214f1c90af1607a6e8a84e9d163f3082b90ec9386d3917c1568" name="aecb3d9794cb3b0214f1c90af1607a6e8a84e9d163f3082b90ec9386d3917c1568"></a>processingCommand&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aecb3d9794cb3b0214f1c90af1607a6e8a7f540b6504ff500e2431746d91c35e91" name="aecb3d9794cb3b0214f1c90af1607a6e8a7f540b6504ff500e2431746d91c35e91"></a>readyForResponse&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aecb3d9794cb3b0214f1c90af1607a6e8a9e1775709eadd0003f2e72568cf59c6f" name="aecb3d9794cb3b0214f1c90af1607a6e8a9e1775709eadd0003f2e72568cf59c6f"></a>responding&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aecb3d9794cb3b0214f1c90af1607a6e8a92c1c393e6796d9330f5510d76077274" name="aecb3d9794cb3b0214f1c90af1607a6e8a92c1c393e6796d9330f5510d76077274"></a>tainted&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a6e6fb94a3ed8d18ebc8e982e14b3f8ee" name="a6e6fb94a3ed8d18ebc8e982e14b3f8ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e6fb94a3ed8d18ebc8e982e14b3f8ee">&#9670;&nbsp;</a></span>changeI2CstateTo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void changeI2CstateTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8">I2Cstates</a>&#160;</td>
+          <td class="paramname"><em>newState</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adebb2a389a701d95bb721df60053bf6c" name="adebb2a389a701d95bb721df60053bf6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adebb2a389a701d95bb721df60053bf6c">&#9670;&nbsp;</a></span>clearInterrupt()</h2>
 
@@ -434,6 +568,23 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void clearInterrupt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac1c25023501d661763119bfb0cafea32" name="ac1c25023501d661763119bfb0cafea32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1c25023501d661763119bfb0cafea32">&#9670;&nbsp;</a></span>initializeFirmware()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initializeFirmware </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -517,43 +668,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handle I2C request event. Will send results or information requested by the last command, as defined by the contents of the outputBuffer. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh) </dd></dl>
-
-</div>
-</div>
-<a id="ab45a881cd27fd11dbc87571c6a9cba34" name="ab45a881cd27fd11dbc87571c6a9cba34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab45a881cd27fd11dbc87571c6a9cba34">&#9670;&nbsp;</a></span>resetFunc()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void resetFunc </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9d641c48e9eaae758eb0ea69cdbfa9c7" name="a9d641c48e9eaae758eb0ea69cdbfa9c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d641c48e9eaae758eb0ea69cdbfa9c7">&#9670;&nbsp;</a></span>retrieveI2C_address()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t retrieveI2C_address </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a stored I2C address from EEPROM. If there is none, use default. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd><del>Find sth. meaningful to report from <a class="el" href="firmware_8ino.html#ac10b80b8aaeaf66cecbf0bb5eff5ae33" title="Handle I2C request event. Will send results or information requested by the last command,...">requestEvent()</a> if no message is pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)</dd></dl>
 
 </div>
 </div>
@@ -572,28 +687,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Setup system. Retrieve I2C address from EEPROM or default and initialize I2C target. </p>
+<p>Setup system. </p>
 
 </div>
 </div>
-<a id="a04dab60aa1102ee6bfabfc6a039849ee" name="a04dab60aa1102ee6bfabfc6a039849ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04dab60aa1102ee6bfabfc6a039849ee">&#9670;&nbsp;</a></span>storeI2C_address()</h2>
+<a id="a5b9c6ba970caacbe89fd0040b74d42c8" name="a5b9c6ba970caacbe89fd0040b74d42c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b9c6ba970caacbe89fd0040b74d42c8">&#9670;&nbsp;</a></span>startI2C()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void storeI2C_address </td>
+          <td class="memname">void startI2C </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>newAddress</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Write I2C address to EEPROM. </p>
-<dl class="section note"><dt>Note</dt><dd>ESP eeprom.h works a bit different from AVRs: <a href="https://arduino-esp8266.readthedocs.io/en/3.0.2/libraries.html#eeprom">https://arduino-esp8266.readthedocs.io/en/3.0.2/libraries.html#eeprom</a> </dd></dl>
 
 </div>
 </div>
@@ -694,28 +805,28 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2003b6239df3eaf89667542a178aee22" name="a2003b6239df3eaf89667542a178aee22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2003b6239df3eaf89667542a178aee22">&#9670;&nbsp;</a></span>defaultAddress</h2>
+<a id="afd5dbf719bae2b1ea9260a55e7c289cf" name="afd5dbf719bae2b1ea9260a55e7c289cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd5dbf719bae2b1ea9260a55e7c289cf">&#9670;&nbsp;</a></span>i2c_address</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t defaultAddress = 0x08</td>
+          <td class="memname">uint8_t i2c_address = <a class="el" href="_i2_cwrapper_8h.html#ab8efb5d71bb5b924fb0d07d292aafebc">I2CwrapperDefaultAddress</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a8633d2064ee1822248523a0c402920e3" name="a8633d2064ee1822248523a0c402920e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8633d2064ee1822248523a0c402920e3">&#9670;&nbsp;</a></span>eepromI2CaddressMarker</h2>
+<a id="a30bf8d43be96fc283b7e4074cbcb4fed" name="a30bf8d43be96fc283b7e4074cbcb4fed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30bf8d43be96fc283b7e4074cbcb4fed">&#9670;&nbsp;</a></span>I2Cstate</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint32_t eepromI2CaddressMarker = 0x12C0ACCF</td>
+          <td class="memname">volatile <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8">I2Cstates</a> I2Cstate = <a class="el" href="firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8aa02bce8815397c4015aa0b352c85c639">initializing</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -729,7 +840,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool interruptActiveHigh = true</td>
+          <td class="memname">bool interruptActiveHigh</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -743,7 +854,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int8_t interruptPin = -1</td>
+          <td class="memname">int8_t interruptPin</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -757,7 +868,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t interruptReason = <a class="el" href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">interruptReason_none</a></td>
+          <td class="memname">uint8_t interruptReason</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -771,7 +882,21 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t interruptSource = 0xF</td>
+          <td class="memname">uint8_t interruptSource</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acee4f8c66bd06079db7157d155550ede" name="acee4f8c66bd06079db7157d155550ede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acee4f8c66bd06079db7157d155550ede">&#9670;&nbsp;</a></span>lastCycles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t lastCycles = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -792,13 +917,97 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ad2a5acb9b13b943cac9ef0b8c8370100" name="ad2a5acb9b13b943cac9ef0b8c8370100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2a5acb9b13b943cac9ef0b8c8370100">&#9670;&nbsp;</a></span>now</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t now</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e882aeffdf111848ef1647b42fe1dde" name="a4e882aeffdf111848ef1647b42fe1dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e882aeffdf111848ef1647b42fe1dde">&#9670;&nbsp;</a></span>reportNow</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool reportNow = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab25d82c1087f38c24fedd257e192278" name="aab25d82c1087f38c24fedd257e192278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab25d82c1087f38c24fedd257e192278">&#9670;&nbsp;</a></span>reportPeriod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t reportPeriod = 2000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc3807e20039643a86ced45c531aa952" name="adc3807e20039643a86ced45c531aa952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc3807e20039643a86ced45c531aa952">&#9670;&nbsp;</a></span>sentOnRequest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t sentOnRequest = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a570420b17131e93d2c3ff7665f121800" name="a570420b17131e93d2c3ff7665f121800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a570420b17131e93d2c3ff7665f121800">&#9670;&nbsp;</a></span>then</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t then = millis()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2458d18375b44e68abd4672fe965562" name="ab2458d18375b44e68abd4672fe965562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2458d18375b44e68abd4672fe965562">&#9670;&nbsp;</a></span>writtenToBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t writtenToBuffer = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="firmware_8ino.html">firmware.ino</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

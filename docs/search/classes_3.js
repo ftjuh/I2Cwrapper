@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['i2cwrapper_0',['I2Cwrapper',['../class_i2_cwrapper.html',1,'']]]
+  ['pini2c_0',['PinI2C',['../class_pin_i2_c.html',1,'']]]
 ];

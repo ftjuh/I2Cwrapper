@@ -7,9 +7,9 @@
   Just as AccelStepperI2C, ServoI2C mimicks the interface of the original
   Arduino Servo libraries, so that it can be used with only minor adaptations
   to non-I2C code.
-  @section author Author
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.

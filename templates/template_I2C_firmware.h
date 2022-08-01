@@ -1,10 +1,13 @@
 /*!
  * @file template_I2C_firmware.h
- * @brief Use this file as a template for your own optional extension module of 
+ * @brief Template for a user firmware module for the I2Cwrapper @ref
+ * firmware.ino. "xxx" represents the name of your module, e.g. "PinI2C"
+ *
+ * Use this file as a template for your own optional extension module of 
  * the I2Cwrapper firmware. You will usually want to bundle it with a matching 
- * controller library. Don't forget to copy it into the firmware folder and 
- * activate it in the firmware_modules.h configuration file before compiling 
- * the firmware.
+ * controller library (see template_I2C.h|cpp). Don't forget to copy it (I use
+ * symlinks) into the firmware folder and activate it in the firmware_modules.h 
+ * configuration file before compiling the firmware.
  * 
  * Currently, your code can be injected between the respective 
  * "#if MF_STAGE == ...." compiler directives (leave those untouched) at the 
@@ -16,6 +19,12 @@
  * (4) loop() function
  * (5) processMessage() function ("command interpreter")
  * (6) reset event
+ * (7) (end of) receiveEvent()
+ * (8) (end of) requestEvent()
+ * (9) Change of I2C state machine's state
+ * 
+ * Many modules use only a small subset of these stages. (1), (2), (5) are
+ * probably always necessary for normal (non feature) modules.
  * 
  * See below for instructions on what code to place where. See existing modules
  * for illustration. PinI2C and ServoI2C are good and simple starting points, 
@@ -25,9 +34,9 @@
  * You can use the log() macro for debug output. It will produce no code with
  * DEBUG unset, and be extended into "Serial.print()" with DEBUG set.
  * 
- * @section author Author
+ * ## Author
  * Copyright (c) 2022 juh
- * @section license License
+ * ## License
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, version 2.
@@ -37,9 +46,9 @@
  * Note: Code injection will confuse doxygen, as withouth the including 
  * firmware.ino it looks like incomplete code. So, to prevent it from generating 
  * all kinds of gibberish documentation, the rest of this file is enclosed in 
- * @cond/@endcond tags to make doxygen ignore it. Usually, there's nothing of
+ * cond/endcond tags to make doxygen ignore it. Usually, there's nothing of
  * interest here to document for end users anyway. If you feel otherwise, just 
- * enable doxygen for the relevant parts by enclosing them in @endcond/@cond 
+ * enable doxygen for the relevant parts by enclosing them in endcond/cond 
  * tags.
  */
 
@@ -83,7 +92,7 @@ log("###template### module enabled.\n");
 
 
 /*
- * (4) loop() function
+ * (4) main loop() function
  * 
  * This code will be injected into the target's loop() function.
  * You may use triggerInterrupt() here to inform the controller about some 
@@ -155,13 +164,48 @@ log("###template### module enabled.\n");
 /*
  * (6) reset event
  * 
- * This code will be called if the target device is to perform a reset via I2C 
- * command. Use it to do any necessary cleanup, and to put the device in a 
- * defined initial state.
+ * This code will be called if the target device is to perform a (soft) reset 
+ * via I2C command. Here, the module needs to free any ressources it has allocated 
+ * and put any hardware under its rule (and only that!) in its initial state. 
  * 
+ * Note: From v0.3.0  on, no hardware reset is performed any more. So it is 
+ * essential that after calling this code, the target device presents itself as 
+ * a clean slate to the controller, just like after power up.
  */
 #if MF_STAGE == MF_STAGE_reset
 #endif // MF_STAGE_reset
+
+
+/*
+ * (7) receiveEvent()
+ * 
+ * Normal modules usually should not mess around here.
+ * 
+ */
+#if MF_STAGE == MF_STAGE_receiveEvent
+#endif // MF_STAGE_receiveEvent
+
+
+/*
+ * (8) requestEvent()
+ * 
+ * Normal modules usually should not mess around here.
+ * 
+ */
+#if MF_STAGE == MF_STAGE_requestEvent
+#endif // MF_STAGE_requestEvent
+
+
+/*
+ * (9) Change of I2C state machine's state
+ * 
+ * Normal modules usually should not mess around here.
+ * 
+ */
+
+#if MF_STAGE == MF_STAGE_I2CstateChange
+#endif // MF_STAGE_I2CstateChange
+
 
 
 

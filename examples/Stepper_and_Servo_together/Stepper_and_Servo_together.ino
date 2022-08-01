@@ -34,7 +34,6 @@ void setup()
   // Serial.begin(115200); // uncomment for debugging output (needs DEBUG set in libraries)
 
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   servo1.attach(servo1Pin);
   servo2.attach(servo2Pin);

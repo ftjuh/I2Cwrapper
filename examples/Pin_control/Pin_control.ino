@@ -15,7 +15,7 @@
 uint8_t i2cAddress = 0x08;
 
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
-PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the target
+PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with the controller
 
 /*
  * Arduino Uno/Nano example pins
@@ -52,13 +52,15 @@ const uint8_t aPinOut = 10; // 10
 void setup()
 {
   Wire.begin();
-
   Serial.begin(115200);
+
+#ifdef SerialUSB
   // native USB needs to wait
   unsigned int begin_time = millis();
   while (! Serial && millis() - begin_time < 1000) {
     delay(10);  // but at most 1 sec if not plugged in to usb
   }
+#endif
 
   // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
@@ -68,12 +70,12 @@ void setup()
     Serial.println("Target found as expected. Proceeding.\n");
   }
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   pins.pinMode(dPinIn, INPUT); // INPUT_PULLUP will also work
   pins.pinMode(dPinOut, OUTPUT);
   pins.pinMode(aPinIn, INPUT);
   pins.pinMode(aPinOut, OUTPUT);
+
 }
 
 void loop()
@@ -82,7 +84,6 @@ void loop()
   pins.analogWrite(aPinOut, pins.analogRead(aPinIn) / 4);
   Serial.print("Digital input pin = "); Serial.print(pins.digitalRead(dPinIn));
   Serial.print(" | Analog input pin = "); Serial.println(pins.analogRead(aPinIn));
-
   delay(500);
 }
 

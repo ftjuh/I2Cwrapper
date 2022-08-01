@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['hallread_0',['hallRead',['../class_e_s_p32sensors_i2_c.html#ade4ee01e8f4819d2f8da2a567c95a531',1,'ESP32sensorsI2C']]],
-  ['halt_1',['halt',['../_error__checking_8ino.html#a799d63040f9850d133b3c65efe6211b5',1,'halt(const char *m):&#160;Error_checking.ino'],['../_e_s_p32sensors_8ino.html#a799d63040f9850d133b3c65efe6211b5',1,'halt(const char *m):&#160;ESP32sensors.ino'],['../_pin__control_8ino.html#a799d63040f9850d133b3c65efe6211b5',1,'halt(const char *m):&#160;Pin_control.ino']]],
-  ['homingspeed_2',['homingSpeed',['../_error__checking_8ino.html#ac112495277aeb22acb5ce37941e266e2',1,'homingSpeed():&#160;Error_checking.ino'],['../_interrupt___endstop_8ino.html#ac112495277aeb22acb5ce37941e266e2',1,'homingSpeed():&#160;Interrupt_Endstop.ino']]]
+  ['geti2cdelay_0',['getI2Cdelay',['../class_i2_cwrapper.html#a03edf9e2b6cda53ae2c6380ad6dade08',1,'I2Cwrapper']]],
+  ['getstate_1',['getState',['../class_accel_stepper_i2_c.html#aea0a376b22b0a0065b2257ec74f7e3b3',1,'AccelStepperI2C']]],
+  ['getstatecmd_2',['getStateCmd',['../_accel_stepper_i2_c_8h.html#a0b114f5865a1a8fa4461a70a3e76ee07',1,'AccelStepperI2C.h']]],
+  ['getstateresult_3',['getStateResult',['../_accel_stepper_i2_c_8h.html#a7394a186ca05824e27570a234d52ce2b',1,'AccelStepperI2C.h']]],
+  ['getversion_4',['getVersion',['../class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c',1,'I2Cwrapper']]],
+  ['getversioncmd_5',['getVersionCmd',['../_i2_cwrapper_8h.html#a9f0a79634b5f528ad35ef71e14b7a515',1,'I2Cwrapper.h']]],
+  ['getversionresult_6',['getVersionResult',['../_i2_cwrapper_8h.html#afb98f245f43ac678f05b9749990473e1',1,'I2Cwrapper.h']]]
 ];

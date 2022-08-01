@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['accelstepperi2c_2ecpp_0',['AccelStepperI2C.cpp',['../_accel_stepper_i2_c_8cpp.html',1,'']]],
-  ['accelstepperi2c_2eh_1',['AccelStepperI2C.h',['../_accel_stepper_i2_c_8h.html',1,'']]],
-  ['accelstepperi2c_5ffirmware_2eh_2',['AccelStepperI2C_firmware.h',['../_accel_stepper_i2_c__firmware_8h.html',1,'']]]
+  ['_5faddressfixed_5ffirmware_2eh_0',['_addressFixed_firmware.h',['../__address_fixed__firmware_8h.html',1,'']]],
+  ['_5faddressfromflash_5ffirmware_2eh_1',['_addressFromFlash_firmware.h',['../__address_from_flash__firmware_8h.html',1,'']]],
+  ['_5faddressfrompins_5ffirmware_2eh_2',['_addressFromPins_firmware.h',['../__address_from_pins__firmware_8h.html',1,'']]],
+  ['_5fstatusled_5ffirmware_2eh_3',['_statusLED_firmware.h',['../__status_l_e_d__firmware_8h.html',1,'']]]
 ];

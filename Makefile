@@ -17,8 +17,8 @@ keywords.txt : $(shell find src -name '*.h')
 	ctags -x --c-kinds=egv $^ | egrep -v '^(operator |_)' | awk '{print $$1}' | sort -u | awk 'OFS="\t" {print $$1,"LITERAL1"}' >> $@
 	echo "# Methods" >> $@
 	ctags -x --c-kinds=fp $^ | egrep -v '^(operator |_)' | awk '{print $$1}' | sort -u | awk 'OFS="\t" {print $$1,"KEYWORD1"}' >> $@
-	echo "# #define" >> $@
-	ctags -x --c-kinds=d $^ | egrep -v '^(operator |_)' | awk '{print $$1}' | sort -u | awk 'OFS="\t" {print $$1,"LITERAL1"}' >> $@
+#	echo "# #define" >> $@
+#	ctags -x --c-kinds=d $^ | egrep -v '^(operator |_)' | awk '{print $$1}' | sort -u | awk 'OFS="\t" {print $$1,"LITERAL1"}' >> $@
 	echo "# members" >> $@
 	ctags -x --c-kinds=m $^ | egrep -v '^(operator |_)' | awk '{print $$1}' | sort -u | awk 'OFS="\t" {print $$1,"LITERAL2"}' >> $@
 	@# too broad? for constants

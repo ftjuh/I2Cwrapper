@@ -27,7 +27,7 @@ const uint8_t touchPin   = 4; // ESP32 GPIO number of touch input T0
 const uint8_t touchPinID = 0; // "0" for T0 (interrupt unit from clearInterrupt() is limited to 4 bit, that's why it returns the Id, not the pin number)
 
 I2Cwrapper wrapper(i2cAddress); // each target device is represented by a wrapper...
-ESP32sensorsI2C sensors(&wrapper); // ...that the pin interface needs to communicate with the target
+ESP32sensorsI2C sensors(&wrapper); // ...that the pin interface needs to communicate with the controller
 volatile bool interruptFlag = false; // volatile for interrupt
 
 // ISR
@@ -58,7 +58,6 @@ void setup()
   }
 
   wrapper.reset(); // reset the target device
-  delay(500); // and give it time to reboot
 
   // First, make the target send interrupts. The interrupt pin is shared by all target modules
   // which use interrupts, so we need the wrapper to set it up.

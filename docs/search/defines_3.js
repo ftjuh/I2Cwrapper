@@ -1,19 +1,4 @@
 var searchData=
 [
-  ['mf_5fstage_0',['MF_STAGE',['../firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91',1,'MF_STAGE():&#160;firmware.ino'],['../firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91',1,'MF_STAGE():&#160;firmware.ino'],['../firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91',1,'MF_STAGE():&#160;firmware.ino'],['../firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91',1,'MF_STAGE():&#160;firmware.ino'],['../firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91',1,'MF_STAGE():&#160;firmware.ino'],['../firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91',1,'MF_STAGE():&#160;firmware.ino']]],
-  ['mf_5fstage_5fdeclarations_1',['MF_STAGE_declarations',['../firmware_8ino.html#a93d88b00f1ad9a279e28690d5f26360e',1,'firmware.ino']]],
-  ['mf_5fstage_5fincludes_2',['MF_STAGE_includes',['../firmware_8ino.html#a896bf85b60dac55dcacd7c5091baeb2a',1,'firmware.ino']]],
-  ['mf_5fstage_5floop_3',['MF_STAGE_loop',['../firmware_8ino.html#aaa7c7cb4c233d24cc72015628493b54f',1,'firmware.ino']]],
-  ['mf_5fstage_5fprocessmessage_4',['MF_STAGE_processMessage',['../firmware_8ino.html#a691e9051b923e4047c0c60a2a03dcb0d',1,'firmware.ino']]],
-  ['mf_5fstage_5freset_5',['MF_STAGE_reset',['../firmware_8ino.html#a15c2b0539284cc4454cde158bd7f60f7',1,'firmware.ino']]],
-  ['mf_5fstage_5fsetup_6',['MF_STAGE_setup',['../firmware_8ino.html#af6947169b907d913e36c8ca994514d66',1,'firmware.ino']]],
-  ['motor_5fx_5fdir_5fpin_7',['MOTOR_X_DIR_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#ac6b44f3303074c69ce35870f0f665c70',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fx_5fenable_5fpin_8',['MOTOR_X_ENABLE_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#a32d53c62a4f75f0b835af10719501d5e',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fx_5fstep_5fpin_9',['MOTOR_X_STEP_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#a1638bbb544adf7c766b0428561535316',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fy_5fdir_5fpin_10',['MOTOR_Y_DIR_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#ae5a1112b91d01a249d68c238af5e0b0d',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fy_5fenable_5fpin_11',['MOTOR_Y_ENABLE_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#ac9051df8ca5aa542ff485899680f75c0',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fy_5fstep_5fpin_12',['MOTOR_Y_STEP_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#affd86415816317ce10552880773bebcc',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fz_5fdir_5fpin_13',['MOTOR_Z_DIR_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#ae7cd00a8ce2cd40f05a5d491968bf336',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fz_5fenable_5fpin_14',['MOTOR_Z_ENABLE_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#a289528c14c8672d1208a03b924cbb906',1,'CNCv4_Board_3_Steppers.ino']]],
-  ['motor_5fz_5fstep_5fpin_15',['MOTOR_Z_STEP_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#a393026c1effd059611b4ba0c37e4a35e',1,'CNCv4_Board_3_Steppers.ino']]]
+  ['stepstogo_0',['stepsToGo',['../_c_n_cv4___board__3___steppers_8ino.html#a06ab55ae03419d84676a6ce5a263206e',1,'CNCv4_Board_3_Steppers.ino']]]
 ];

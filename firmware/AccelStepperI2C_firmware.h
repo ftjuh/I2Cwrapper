@@ -1,28 +1,28 @@
 /*!
- *  @file AccelStepperI2C_firmware.h
- *  @brief Firmware module for the I2Cwrapper firmware.
- *  
- *  Provides control of up to eight stepper motors with up to two endstops each
- *  connected to the I2C target.
- * 
- *  @section author Author
- *  Copyright (c) 2022 juh
- *  @section license License
- *  This program is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU General Public License as
- *  published by the Free Software Foundation, version 2.
- */
+    @file AccelStepperI2C_firmware.h
+    @brief Firmware module for the I2Cwrapper firmware.
+
+    Provides control of up to eight stepper motors with up to two endstops each
+    connected to the I2C target.
+
+    ## Author
+    Copyright (c) 2022 juh
+    ## License
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation, version 2.
+*/
 
 /*
- * Note: Code injection will confuse doxygen, as withouth the including 
- * firmware.ino it looks like incomplete code. So, to prevent it from generating 
- * all kinds of gibberish documentation, the rest of this file is enclosed in 
- * @cond/@endcond tags to make doxygen ignore it. Usually, there's nothing of
- * interest to document for end users anyway.
- */
+   Note: Code injection will confuse doxygen, as withouth the including
+   firmware.ino it looks like incomplete code. So, to prevent it from generating
+   all kinds of gibberish documentation, the rest of this file is enclosed in
+   cond/endcond tags to make doxygen ignore it. Usually, there's nothing of
+   interest to document for end users anyway.
+*/
 
 /// @cond
- 
+
 /*##########################################################################################*/
 /*# MF_STAGE_includes ######################################################################*/
 /*##########################################################################################*/
@@ -154,13 +154,13 @@ log("AccelStepperI2C module enabled.\n");
 /*##########################################################################################*/
 
 /*
- * Implements the state machine. Will check for each stepper's state and do the 
- * appropriate polling (run() etc.) as needed.
- * @todo endstop polling: overhead to check if polling is needed
- * (timeToCheckTheEndstops) might cost more than it saves, so maybe just check
- * each cycle even if it might be much more often than needed.
- * 
- */
+   Implements the state machine. Will check for each stepper's state and do the
+   appropriate polling (run() etc.) as needed.
+   @todo endstop polling: overhead to check if polling is needed
+   (timeToCheckTheEndstops) might cost more than it saves, so maybe just check
+   each cycle even if it might be much more often than needed.
+
+*/
 
 #if MF_STAGE == MF_STAGE_loop
 
@@ -557,7 +557,12 @@ break;
 for (uint8_t j = 0; j < numSteppers; j++) {
   steppers[j].stepper->stop();
   steppers[j].stepper->disableOutputs();
+  for (uint8_t k = 0; k < steppers[j].numEndstops; k++) {   // reset endstops
+    pinMode(steppers[j].endstops[k].pin, INPUT); // INPUT is Arduino default
+  }
+  delete steppers[j].stepper; // destroy object allocated earlier with new(). Note: will throw a compiler warning, as AccelStepper has no virtual destructor. This is without consequence, as we're not using the class polymorphically.
 }
+numSteppers = 0;
 #endif // MF_STAGE_reset
 
 

@@ -96,12 +96,12 @@ $(document).ready(function(){initNavTree('_i2_cwrapper_8h.html',''); initResizab
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Core helper class of the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> framework. Handles target device management and I2C communication on the controller's side. </p>
-<h1><a class="anchor" id="author"></a>
-Author</h1>
+<h2><a class="anchor" id="autotoc_md56"></a>
+Author</h2>
 <p >Copyright (c) 2022 juh </p>
-<h1><a class="anchor" id="license"></a>
-License</h1>
-<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given controller-target setup. </dd></dl>
+<h2><a class="anchor" id="autotoc_md57"></a>
+License</h2>
+<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd><del>Enhance diagnostics with a self-diagnosing function to determine the optimal/minimal I2Cdelay in a given controller-target setup.</del> </dd></dl>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -111,10 +111,16 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ab8efb5d71bb5b924fb0d07d292aafebc"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#ab8efb5d71bb5b924fb0d07d292aafebc">I2CwrapperDefaultAddress</a> = 0x08</td></tr>
+<tr class="separator:ab8efb5d71bb5b924fb0d07d292aafebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad73c883bc137fdc05d0447439c740b26"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#ad73c883bc137fdc05d0447439c740b26">I2CmaxBuf</a> = 20</td></tr>
 <tr class="separator:ad73c883bc137fdc05d0447439c740b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e670dbec664a89d717caad5333aa8a4"><td class="memItemLeft" align="right" valign="top">const unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#a8e670dbec664a89d717caad5333aa8a4">I2CdefaultDelay</a> = 20</td></tr>
 <tr class="separator:a8e670dbec664a89d717caad5333aa8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d6006d51ea23f9641a437ce5326b962"><td class="memItemLeft" align="right" valign="top">const unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#a1d6006d51ea23f9641a437ce5326b962">defaultResetDelay</a> = 100</td></tr>
+<tr class="separator:a1d6006d51ea23f9641a437ce5326b962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c993006907552175b599255a89aa4b"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#aa0c993006907552175b599255a89aa4b">autoAdjustDefaultReps</a> = 3</td></tr>
+<tr class="separator:aa0c993006907552175b599255a89aa4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acec6e1426fd9aeda1f6ac91c1a0c9669"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#acec6e1426fd9aeda1f6ac91c1a0c9669">resetCmd</a> = 241</td></tr>
 <tr class="separator:acec6e1426fd9aeda1f6ac91c1a0c9669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af646fa595f938094f40752157facec6f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#af646fa595f938094f40752157facec6f">changeI2CaddressCmd</a> = 242</td></tr>
@@ -129,11 +135,27 @@ Variables</h2></td></tr>
 <tr class="separator:a9f0a79634b5f528ad35ef71e14b7a515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb98f245f43ac678f05b9749990473e1"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#afb98f245f43ac678f05b9749990473e1">getVersionResult</a> = 4</td></tr>
 <tr class="separator:afb98f245f43ac678f05b9749990473e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60573ed98feefb1d8230e781719fde09"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_cwrapper_8h.html#a60573ed98feefb1d8230e781719fde09">pingBackCmd</a> = 246</td></tr>
+<tr class="separator:a60573ed98feefb1d8230e781719fde09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f90e0f512487244a9afb99cac141660"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">interruptReason_none</a> = 0</td></tr>
 <tr class="memdesc:ga1f90e0f512487244a9afb99cac141660"><td class="mdescLeft">&#160;</td><td class="mdescRight">You should not encounter this in practice, as you don't want to be interrupted without a reason...  <a href="group___interrupt_reasons.html#ga1f90e0f512487244a9afb99cac141660">More...</a><br /></td></tr>
 <tr class="separator:ga1f90e0f512487244a9afb99cac141660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="aa0c993006907552175b599255a89aa4b" name="aa0c993006907552175b599255a89aa4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c993006907552175b599255a89aa4b">&#9670;&nbsp;</a></span>autoAdjustDefaultReps</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t autoAdjustDefaultReps = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af646fa595f938094f40752157facec6f" name="af646fa595f938094f40752157facec6f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af646fa595f938094f40752157facec6f">&#9670;&nbsp;</a></span>changeI2CaddressCmd</h2>
 
@@ -170,6 +192,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t clearInterruptResult = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d6006d51ea23f9641a437ce5326b962" name="a1d6006d51ea23f9641a437ce5326b962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d6006d51ea23f9641a437ce5326b962">&#9670;&nbsp;</a></span>defaultResetDelay</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned long defaultResetDelay = 100</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -232,6 +268,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ab8efb5d71bb5b924fb0d07d292aafebc" name="ab8efb5d71bb5b924fb0d07d292aafebc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8efb5d71bb5b924fb0d07d292aafebc">&#9670;&nbsp;</a></span>I2CwrapperDefaultAddress</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t I2CwrapperDefaultAddress = 0x08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60573ed98feefb1d8230e781719fde09" name="a60573ed98feefb1d8230e781719fde09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60573ed98feefb1d8230e781719fde09">&#9670;&nbsp;</a></span>pingBackCmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t pingBackCmd = 246</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acec6e1426fd9aeda1f6ac91c1a0c9669" name="acec6e1426fd9aeda1f6ac91c1a0c9669"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acec6e1426fd9aeda1f6ac91c1a0c9669">&#9670;&nbsp;</a></span>resetCmd</h2>
 
@@ -266,7 +330,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_i2_cwrapper_8h.html">I2Cwrapper.h</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

@@ -1,10 +1,11 @@
 /*!
   @file template_I2C.h
   @brief Template for a user module/controller library for the I2Cwrapper @ref 
-  firmware.ino. "xxx" represents the name of your module, e.g. "PinI2C"
-  @section author Author
+  firmware. "xxx" represents the name of your module, e.g. "PinI2C"
+  
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
@@ -47,8 +48,8 @@
  */
 // xxx commands
 const uint8_t xxxCmdOffset = /* choose an offset that doesn't conflict with other modules */;
-const uint8_t xxxDemo2Cmd  = xxxCmdOffset + 1; const uint8_t xxxDemo2CmdResult = 1 /* number of bytes returned for non void functions/commands */;
 const uint8_t xxxDemo1Cmd  = xxxCmdOffset + 0; // void functions/commands don't need a "const xxx...Result"
+const uint8_t xxxDemo2Cmd  = xxxCmdOffset + 1; const uint8_t xxxDemo2CmdResult = 1 /* number of bytes returned for non void functions/commands */;
 // add more commands here
 
 /*!
@@ -68,7 +69,7 @@ public:
   void xxxDemo1(uint8_t);
   uint8_t xxxDemo2(uint16_t, float, bool); // return type uint8_t needs to correspond to xxxDemo2CmdResult
   
-  int8_t myNum = -1;    // for modules that use 
+  int8_t myNum = -1;    // for modules that support units, i.e. more than one instance of the hardware represented by this class
   
 private:
   I2Cwrapper* wrapper;

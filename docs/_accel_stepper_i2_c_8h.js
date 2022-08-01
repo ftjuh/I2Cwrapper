@@ -1,6 +1,5 @@
 var _accel_stepper_i2_c_8h =
 [
-    [ "diagnosticsReport", "structdiagnostics_report.html", "structdiagnostics_report" ],
     [ "AccelStepperI2C", "class_accel_stepper_i2_c.html", "class_accel_stepper_i2_c" ],
     [ "log", "_accel_stepper_i2_c_8h.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "asCmdOffset", "_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a", null ],
@@ -8,12 +7,9 @@ var _accel_stepper_i2_c_8h =
     [ "attachResult", "_accel_stepper_i2_c_8h.html#ac4c5abdcf30f45396395d23613ffd8d3", null ],
     [ "currentPositionCmd", "_accel_stepper_i2_c_8h.html#a75da675711616279a4bbd6797d4d0342", null ],
     [ "currentPositionResult", "_accel_stepper_i2_c_8h.html#a1c0e153b531dbc4ce0c5773bcfba4140", null ],
-    [ "diagnosticsCmd", "_accel_stepper_i2_c_8h.html#ac40bdeccbbd41e5714c84a8fb682e376", null ],
-    [ "diagnosticsResult", "_accel_stepper_i2_c_8h.html#a6b607d8b9107f3a41ac7f92347b8a7d1", null ],
     [ "disableOutputsCmd", "_accel_stepper_i2_c_8h.html#a1d50a416712971c3f761558f04ce26b1", null ],
     [ "distanceToGoCmd", "_accel_stepper_i2_c_8h.html#a8533b53e7a9817dd082d33d58f095826", null ],
     [ "distanceToGoResult", "_accel_stepper_i2_c_8h.html#a1a1281ae1e98bb42db608395110bb3f3", null ],
-    [ "enableDiagnosticsCmd", "_accel_stepper_i2_c_8h.html#a1792e9b38880d917e9ef18a384f79b9b", null ],
     [ "enableEndstopsCmd", "_accel_stepper_i2_c_8h.html#a6548116a836f7410be00e096b8395ce0", null ],
     [ "enableInterruptsCmd", "_accel_stepper_i2_c_8h.html#aaac41c0c9f194788cd88d129fb950fde", null ],
     [ "enableOutputsCmd", "_accel_stepper_i2_c_8h.html#a6e2496370a11671546a817ef5b8a2aae", null ],

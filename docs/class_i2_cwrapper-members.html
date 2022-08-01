@@ -91,16 +91,18 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 
 <p>This is the complete list of members for <a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#af3b285450dd823865580c281c06bded4">buf</a></td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">changeI2Caddress</a>(uint8_t newAddress)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">checkVersion</a>(uint32_t controllerVersion)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">clearInterrupt</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#aa3dd6653d03a02c1c4efb1d7edec9140">autoAdjustI2Cdelay</a>(uint8_t maxLength=I2CmaxBuf - 3, uint8_t safetyMargin=2, uint8_t startWith=I2CdefaultDelay)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#af3b285450dd823865580c281c06bded4">buf</a></td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e">changeI2Caddress</a>(uint8_t newAddress)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d">checkVersion</a>(uint32_t controllerVersion)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac">clearInterrupt</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a03edf9e2b6cda53ae2c6380ad6dade08">getI2Cdelay</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a30d42c3ddaa5ea8c69b879a6b316038c">getVersion</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a0dfd77031c47e17a1b1cb833eceed3fa">I2Cwrapper</a>(uint8_t i2c_address, uint8_t maxBuf=I2CmaxBuf)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe">ping</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d">prepareCommand</a>(uint8_t cmd, uint8_t unit=-1)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#adfd966608c453a72646dfe37e061fee7">readResult</a>(uint8_t numBytes)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a1c634bb576b76b11a591fdf74bafcfdb">reset</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a2712bde196b501809ef5eba90e498f5c">reset</a>(unsigned long resetDelay=defaultResetDelay)</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a595582aa091af76fc27c472d081db4db">resultErrors</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_i2_cwrapper.html#abf0d76a351cee8c7ce48f87d13e27dbc">resultOK</a></td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i2_cwrapper.html#a64dc95baffdae6e8cfe07ea902fc926b">sendCommand</a>()</td><td class="entry"><a class="el" href="class_i2_cwrapper.html">I2Cwrapper</a></td><td class="entry"></td></tr>
@@ -114,7 +116,7 @@ $(document).ready(function(){initNavTree('class_i2_cwrapper.html',''); initResiz
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

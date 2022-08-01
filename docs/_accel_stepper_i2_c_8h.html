@@ -99,12 +99,12 @@ $(document).ready(function(){initNavTree('_accel_stepper_i2_c_8h.html',''); init
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Arduino library for I2C-control of stepper motors connected to another Arduino which runs the associated <a class="el" href="firmware_8ino.html">I2Cwrapper firmware</a>. <br  />
  See the <a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C class reference</a> for differences to the methods of the original AccelStepper class and for new methods of class AccelStepperI2C. </p>
-<h1><a class="anchor" id="author"></a>
-Author</h1>
+<h2><a class="anchor" id="autotoc_md48"></a>
+Author</h2>
 <p >Copyright (c) 2022 juh </p>
-<h1><a class="anchor" id="license"></a>
-License</h1>
-<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd><p class="startdd">add emergency stop/break pin for target (just use reset pin for the moment) </p>
+<h2><a class="anchor" id="autotoc_md49"></a>
+License</h2>
+<p >This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd><p class="startdd">add emergency stop/break pin for target (just use reset pin for the moment) </p>
 <p class="interdd">ATM data is not protected against updates from ISRs while it is being used in the main program (see <a href="http://gammon.com.au/interrupts">http://gammon.com.au/interrupts</a>). Check if this could be a problem in our case. </p>
 <p class="interdd">ESP32: make use of dual cores? </p>
 <p class="interdd">use interrupts for endstops instead of main loop polling (not sure how much of a difference this would make in practice, though. The main loop isn't doing much else, what really takes time are the computations.) </p>
@@ -125,9 +125,6 @@ License</h1>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdiagnostics_report.html">diagnosticsReport</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to transmit diagnostic info with <a class="el" href="class_accel_stepper_i2_c.html#a67423203e72c69f1fae869c63d3e545f" title="Get most recent diagnostics data. Needs diagnostics enabled and a target which was compiled with the ...">AccelStepperI2C::diagnostics()</a>.  <a href="structdiagnostics_report.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_accel_stepper_i2_c.html">AccelStepperI2C</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An I2C wrapper class for the <a href="https://www.airspayce.com/mikem/arduino/AccelStepper/classAccelStepper.html">AccelStepper library</a>.  <a href="class_accel_stepper_i2_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,12 +210,6 @@ Variables</h2></td></tr>
 <tr class="separator:a480ddc1e935484c95a4c5a668eff6264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c5abdcf30f45396395d23613ffd8d3"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#ac4c5abdcf30f45396395d23613ffd8d3">attachResult</a> = 1</td></tr>
 <tr class="separator:ac4c5abdcf30f45396395d23613ffd8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1792e9b38880d917e9ef18a384f79b9b"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a1792e9b38880d917e9ef18a384f79b9b">enableDiagnosticsCmd</a> = <a class="el" href="_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a">asCmdOffset</a> + 25</td></tr>
-<tr class="separator:a1792e9b38880d917e9ef18a384f79b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac40bdeccbbd41e5714c84a8fb682e376"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#ac40bdeccbbd41e5714c84a8fb682e376">diagnosticsCmd</a> = <a class="el" href="_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a">asCmdOffset</a> + 26</td></tr>
-<tr class="separator:ac40bdeccbbd41e5714c84a8fb682e376"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b607d8b9107f3a41ac7f92347b8a7d1"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a6b607d8b9107f3a41ac7f92347b8a7d1">diagnosticsResult</a> = sizeof(<a class="el" href="structdiagnostics_report.html">diagnosticsReport</a>)</td></tr>
-<tr class="separator:a6b607d8b9107f3a41ac7f92347b8a7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac41c0c9f194788cd88d129fb950fde"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#aaac41c0c9f194788cd88d129fb950fde">enableInterruptsCmd</a> = <a class="el" href="_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a">asCmdOffset</a> + 27</td></tr>
 <tr class="separator:aaac41c0c9f194788cd88d129fb950fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3db87eefb7aaa178dba1453ed1ab7b7c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c_8h.html#a3db87eefb7aaa178dba1453ed1ab7b7c">setStateCmd</a> = <a class="el" href="_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a">asCmdOffset</a> + 28</td></tr>
@@ -345,34 +336,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac40bdeccbbd41e5714c84a8fb682e376" name="ac40bdeccbbd41e5714c84a8fb682e376"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac40bdeccbbd41e5714c84a8fb682e376">&#9670;&nbsp;</a></span>diagnosticsCmd</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint8_t diagnosticsCmd = <a class="el" href="_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a">asCmdOffset</a> + 26</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6b607d8b9107f3a41ac7f92347b8a7d1" name="a6b607d8b9107f3a41ac7f92347b8a7d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b607d8b9107f3a41ac7f92347b8a7d1">&#9670;&nbsp;</a></span>diagnosticsResult</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint8_t diagnosticsResult = sizeof(<a class="el" href="structdiagnostics_report.html">diagnosticsReport</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a1d50a416712971c3f761558f04ce26b1" name="a1d50a416712971c3f761558f04ce26b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d50a416712971c3f761558f04ce26b1">&#9670;&nbsp;</a></span>disableOutputsCmd</h2>
 
@@ -409,20 +372,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t distanceToGoResult = 4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1792e9b38880d917e9ef18a384f79b9b" name="a1792e9b38880d917e9ef18a384f79b9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1792e9b38880d917e9ef18a384f79b9b">&#9670;&nbsp;</a></span>enableDiagnosticsCmd</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint8_t enableDiagnosticsCmd = <a class="el" href="_accel_stepper_i2_c_8h.html#a798c6e6d4911068488396af445888a4a">asCmdOffset</a> + 25</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1018,7 +967,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_accel_stepper_i2_c_8h.html">AccelStepperI2C.h</a></li>
-    <li class="footer">Generated on Wed Jun 15 2022 00:30:42 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['servoi2c_0',['ServoI2C',['../class_servo_i2_c.html',1,'']]],
-  ['simplebuffer_1',['SimpleBuffer',['../class_simple_buffer.html',1,'']]]
+  ['tm1638litei2c_0',['TM1638liteI2C',['../class_t_m1638lite_i2_c.html',1,'']]]
 ];

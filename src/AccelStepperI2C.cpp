@@ -1,9 +1,9 @@
 /*!
   @file AccelStepperI2C.cpp
   @brief Part of the I2Cwrapper firmware/library
-  @section author Author
+  ## Author
   Copyright (c) 2022 juh
-  @section license License
+  ## License
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License as
   published by the Free Software Foundation, version 2.
@@ -265,21 +265,21 @@ bool AccelStepperI2C::isRunning()
  *
  */
 
-void AccelStepperI2C::enableDiagnostics(bool enable)
-{
-  wrapper->prepareCommand(enableDiagnosticsCmd, myNum);
-  wrapper->buf.write(enable);
-  wrapper->sendCommand();
-}
-
-
-void AccelStepperI2C::diagnostics(diagnosticsReport* report)
-{
-  wrapper->prepareCommand(diagnosticsCmd, myNum);
-  if (wrapper->sendCommand() and wrapper->readResult(diagnosticsResult)) {
-    wrapper->buf.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
-  }
-}
+// void AccelStepperI2C::enableDiagnostics(bool enable)
+// {
+//   wrapper->prepareCommand(enableDiagnosticsCmd, myNum);
+//   wrapper->buf.write(enable);
+//   wrapper->sendCommand();
+// }
+// 
+// 
+// void AccelStepperI2C::diagnostics(diagnosticsReport* report)
+// {
+//   wrapper->prepareCommand(diagnosticsCmd, myNum);
+//   if (wrapper->sendCommand() and wrapper->readResult(diagnosticsResult)) {
+//     wrapper->buf.read(*report); // dereference. I *love* how many uses c++ found for the asterisk...
+//   }
+// }
 
 
 void AccelStepperI2C::setState(uint8_t newState)
