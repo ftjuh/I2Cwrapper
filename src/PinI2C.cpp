@@ -57,7 +57,7 @@ int PinI2C::analogRead(uint8_t pin){
 
 void PinI2C::analogReference(uint8_t mode){
   wrapper->prepareCommand(pinAnalogReferenceCmd, myNum);
-  wrapper->buf.write(static_cast<uint8_t>(mode));
+  wrapper->buf.write(mode);
   wrapper->sendCommand();
 }
 
