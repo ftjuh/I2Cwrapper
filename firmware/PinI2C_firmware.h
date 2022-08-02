@@ -121,6 +121,8 @@ case pinAnalogReferenceCmd: {
 break;
 #endif // defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD)
 
+#endif // stage
+
 
 /*
    (6) reset event
