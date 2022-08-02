@@ -319,7 +319,7 @@ The most popular SAMD based systems are SAMD21 ("MO") and SAMD51 ("M4"). They co
 
 Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the _addressFromFlash_firmware.h, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.
 
-Tested with: Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit Metro M0.
+Tested with: Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit ItsyBitsy M4, Adafruit Metro M0.
 
 # Examples
 
