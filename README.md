@@ -313,6 +313,14 @@ Depending on the specific model, ATtinys can have software only I2C, full hardwa
 
 Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
 
+### SAMD
+
+The most popular SAMD based systems are SAMD21 ("MO") and SAMD51 ("M4"). They come in lots of minor variations, but all seem to support hardware I2C, and the other usual stuff. 
+
+Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the _addressFromFlash_firmware.h, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.
+
+Tested with: Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit Metro M0.
+
 # Examples
 
 This is a simplified version of the [`Pin_control.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) example sketch for addressing a target device running the I2Cwrapper firmware with the PinI2C module enabled.
