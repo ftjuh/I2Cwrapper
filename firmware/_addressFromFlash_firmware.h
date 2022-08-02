@@ -74,9 +74,7 @@ uint8_t retrieveI2C_address()
   if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
     return storedAddress;
   } else
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-  EEPROM.begin(256);
-#endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
+#endif // USE_EEPROM
   {
     log("No stored address\n");
     return I2CwrapperDefaultAddress;
