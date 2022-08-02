@@ -114,7 +114,7 @@ case pinAnalogReferenceCmd: {
 #elif defined(ARDUINO_ARCH_AVR)
     analogReference(mode);
 #else
-      // warning: analogReference() is not supported on this architecture
+      log("Warning: analogReference() is not supported on this architecture.\n");
 #endif
   }
 }
