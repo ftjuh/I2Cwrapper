@@ -54,14 +54,6 @@ void setup()
   Wire.begin();
   Serial.begin(115200);
 
-#ifdef SerialUSB
-  // native USB needs to wait
-  unsigned int begin_time = millis();
-  while (! Serial && millis() - begin_time < 1000) {
-    delay(10);  // but at most 1 sec if not plugged in to usb
-  }
-#endif
-
   // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
   if (!wrapper.ping()) {

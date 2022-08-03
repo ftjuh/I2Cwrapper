@@ -277,14 +277,13 @@ void setup()
 #if defined(DEBUG)
   Serial.begin(115200);
 
-#ifdef SerialUSB
   // all chips with "native" usb require waiting till `Serial` is true
-  // we wait at least 1500 msec, then go ahead anyway
+  // non-native systems are true immediately
+  // we wait up to 1500 msec, then go ahead anyway
   unsigned int begin_time = millis();
   while (! Serial && millis() - begin_time < 1500) {
     delay(10);  // but at most 1.5 sec if not plugged in to usb
   }
-#endif // SerialUSB
 #endif // DEBUG
 
   log("\n\n\n=== I2Cwrapper firmware v");
