@@ -313,13 +313,13 @@ Depending on the specific model, ATtinys can have software only I2C, full hardwa
 
 Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
 
-### SAMD
+### SAMD21, SAMD51
 
-The most popular SAMD based systems are SAMD21 ("MO") and SAMD51 ("M4"). They come in lots of minor variations, but all seem to support hardware I2C, and the other usual stuff. 
+Arduino compatible SAMD21 and SAMD51 boards come in many variations: there are whole familities of the chips themselves, and many physical boards. Arduino made the original Zero, Adafruit sells a variety using the "Express" label ("M0" and "M4"), and many other manufacturers make them. The spec sheets say that all SAMD21 and SAMD51 chips have hardware I2C.
 
 Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the _addressFromFlash_firmware.h, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.
 
-Tested with: Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit ItsyBitsy M4, Adafruit Metro M0.
+I2Cwrapper has been succesfully tested with on Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit ItsyBitsy M4, and Adafruit Metro M0.
 
 # Examples
 
