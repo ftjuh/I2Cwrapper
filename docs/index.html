@@ -27,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">I2Cwrapper<span id="projectnumber">&#160;v0.3.0</span>
+   <div id="projectname">I2Cwrapper<span id="projectnumber">&#160;v0.4.0</span>
    </div>
    <div id="projectbrief">Generic framework for Arduino I2C target devices</div>
   </td>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Introduction </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b><sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see <a class="el" href="index.html#supported-platforms">supported platforms</a>). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is a generic modular framework for <b>Arduino I2C target devices</b><sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, SAMD, and ATtiny platforms (see <a class="el" href="index.html#supported-platforms">supported platforms</a>). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to <b>integrate peripherals without dedicated I2C interface</b> in an I2C-bus environment.</p>
 <p >The <b><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core</b> consists of an easily extensible firmware framework and a controller library. Together, they <b>take care of the overhead</b> necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific <b>modules</b>.</p>
 <p >This is a possible example setup:</p>
 <p ><img src="docs/images/example%20setup.png" alt="example setup" class="inline"/></p>
@@ -165,9 +165,9 @@ Limitations</h1>
 Usage</h1>
 <h2><a class="anchor" id="autotoc_md27"></a>
 Installation</h2>
-<p ><strike>Install <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> from the Arduino library manager (not available yet).</strike> Until <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> is picked up by the Arduino library manager, you'll have to <a href="https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries#manual-installation">install it manually</a> by copying the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> folder to your Arduino library folder and (re)starting the Arduino software. You'll find an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> examples folder in the usual menu after successful installation.</p>
+<p >Install <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> from the Arduino library manager. You'll find an <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> examples folder in the usual menu after successful installation.</p>
 <p >If you haven't done so yet, you'll also have to install the <b>libraries needed by the modules</b> you want to use, e.g. AccelSteppper, TM1638lite, etc. the usual way from the Arduino library manager.</p>
-<p >If you've used the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> library before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.</p>
+<p >If you've used the <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a> <em>library</em> (not the module) before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.</p>
 <h2><a class="anchor" id="autotoc_md28"></a>
 Configuring and uploading the firmware</h2>
 <ul>
@@ -309,10 +309,11 @@ How to add your own modules</h1>
 <ul>
 <li>[0] <b>CRC8 checksum</b></li>
 <li>[1] <b>command code</b>: Modules and the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> core use their own unique command code ranges (see <a class="el" href="index.html#limitations-for-end-users">Limitations for end users</a>, though), so that the command code will decide which module or if the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> library itself will interpret the command.</li>
-<li>[3] <b>unit addressed</b>: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the <code><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></code> module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission. <a class="anchor" id="supported-platforms"></a> <h3>Module reset code</h3>
+<li>[3] <b>unit addressed</b>: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the <code><a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a></code> module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission. <h3>Module reset code</h3>
 </li>
 </ul>
 <p >Since v0.3.0 dropped the hardware reset (it's considered bad practice), each module now needs to provide proper <b>cleanup code</b> in the (6) reset event section. This code needs to free all allocated resources and reset all hardware used by the module. The goal is to put all resources used by the module, and only(!) those, into the state they were after bootup, so that a controller can make sure it finds a clean slate when it starts to use the target by sending a reset command.</p>
+<p ><a class="anchor" id="supported-platforms"></a></p>
 <h1><a class="anchor" id="autotoc_md38"></a>
 Supported platforms</h1>
 <p >The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:</p>
@@ -325,6 +326,11 @@ Supported platforms</h1>
 <h3>ATtiny</h3>
 <p >Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic <a href="https://github.com/SpenceKonde/ATTinyCore">ATTinyCore</a> comes with <a href="https://github.com/SpenceKonde/ATTinyCore#i2c-support">fully transparent I2C support</a> which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of <a href="https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47">USI implementations</a> (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> commands to 13.</p>
 <p >Using ATTinyCore, <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and <a class="el" href="class_t_m1638lite_i2_c.html" title="An I2C wrapper class for Danny Ayers&#39; TM1638lite library (https://www.arduino.cc/reference/en/librari...">TM1638liteI2C</a> will run without changes. See the respective comment sections in the <a href="https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino">Pin_Control.ino</a> and <a href="https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino">TM1638lite.ino</a> examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled it's 54%.</p>
+<p ><a class="anchor" id="samd21-samd51"></a></p>
+<h3>SAMD21, SAMD51</h3>
+<p >Arduino compatible SAMD21 and SAMD51 boards come in many variations: there are whole familities of the chips themselves, and many physical boards. Arduino made the original Zero, Adafruit sells a variety using the "Express" label ("M0" and "M4"), and many other manufacturers make them. The spec sheets say that all SAMD21 and SAMD51 chips have hardware I2C.</p>
+<p >Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the <a class="el" href="__address_from_flash__firmware_8h.html" title="Feature module. Read target&#39;s own I2C address from non volatile memory (EEPROM, flash memory) and sto...">_addressFromFlash_firmware.h</a>, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.</p>
+<p ><a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> has been succesfully tested with on Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit ItsyBitsy M4, and Adafruit Metro M0.</p>
 <h1><a class="anchor" id="autotoc_md39"></a>
 Examples</h1>
 <p >This is a simplified version of the <a href="https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino"><code>Pin_control.ino</code></a> example sketch for addressing a target device running the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware with the <a class="el" href="class_pin_i2_c.html" title="An I2C wrapper class for remote analog and digital pin control.">PinI2C</a> module enabled.</p>
@@ -467,10 +473,15 @@ Planned improvements</h1>
 <li><strike>Attiny support (memory will be an issue, though)</strike></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md42"></a>
-Author</h1>
-<p >Apart from its predecessor <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is nor in programming, but in 3D printing, you can find me on <a href="https://www.prusaprinters.org/social/202816-juh/about">prusaprinters</a>, <a href="https://www.thingiverse.com/juh/designs">thingiverse</a>, and <a href="https://www.youmagine.com/juh3d/designs">youmagine</a>. This library first saw the light of day as part of my <a href="https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll">StepFish project</a> (<a href="https://forum.ftcommunity.de/viewtopic.php?t=5341">also here</a>).</p>
+Authors</h1>
+<p >Apart from its predecessor <a class="el" href="class_accel_stepper_i2_c.html" title="An I2C wrapper class for the AccelStepper library.">AccelStepperI2C</a>, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is nor in programming, but in 3D printing, you can find <u>me</u> on <a href="https://www.prusaprinters.org/social/202816-juh/about">prusaprinters</a>, <a href="https://www.thingiverse.com/juh/designs">thingiverse</a>, and <a href="https://www.youmagine.com/juh3d/designs">youmagine</a>. This library first saw the light of day as part of my <a href="https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll">StepFish project</a> (<a href="https://forum.ftcommunity.de/viewtopic.php?t=5341">also here</a>).</p>
 <p >Contact me at <a href="#" onclick="location.href='mai'+'lto:'+'ftj'+'uh'+'@po'+'st'+'eo.'+'ne'+'t'; return false;">ftjuh<span class="obfuscator">.nosp@m.</span>@pos<span class="obfuscator">.nosp@m.</span>teo.n<span class="obfuscator">.nosp@m.</span>et</a>.</p>
 <p >Jan (juh)</p>
+<h3>Contributors</h3>
+<ul>
+<li><a href="https://github.com/ftjuh/I2Cwrapper/blob/main/examples/CNCv4_Board_3_Steppers/CNCv4_Board_3_Steppers.ino">CNCv4 example</a> by <a href="https://github.com/The-Online-Developer">WhizzBizz The-Online-Developer</a></li>
+<li><a class="el" href="index.html#samd21-samd51">SAMD support</a> by <a href="https://github.com/awgrover">awgrover</a></li>
+</ul>
 <h1><a class="anchor" id="autotoc_md43"></a>
 Copyright</h1>
 <p >This software is Copyright (C) 2022 juh (<a href="#" onclick="location.href='mai'+'lto:'+'ftj'+'uh'+'@po'+'st'+'eo.'+'ne'+'t'; return false;">ftjuh<span class="obfuscator">.nosp@m.</span>@pos<span class="obfuscator">.nosp@m.</span>teo.n<span class="obfuscator">.nosp@m.</span>et</a>)</p>
@@ -487,7 +498,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jul 10 2022 11:28:54 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sat Aug 13 2022 00:00:03 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

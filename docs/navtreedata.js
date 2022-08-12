@@ -47,7 +47,7 @@ var NAVTREE =
       [ "Examples", "index.html#autotoc_md39", null ],
       [ "Documentation", "index.html#autotoc_md40", null ],
       [ "Planned improvements", "index.html#autotoc_md41", null ],
-      [ "Author", "index.html#autotoc_md42", null ],
+      [ "Authors", "index.html#autotoc_md42", null ],
       [ "Copyright", "index.html#autotoc_md43", null ],
       [ "License", "index.html#autotoc_md44", null ],
       [ "History", "index.html#autotoc_md45", null ]
