@@ -105,17 +105,23 @@ case pinAnalogWriteCmd: {
 }
 break;
 
-#if defined(ARDUINO_ARCH_AVR) // ESPs don't have analogReference()
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD) // ESPs don't have analogReference()
 case pinAnalogReferenceCmd: {
   if (i == 1) { //1 uint8_t
     uint8_t mode; bufferIn->read(mode);
+#ifdef ARDUINO_ARCH_SAMD
+    analogReference(static_cast<eAnalogReference>(mode));
+#elif defined(ARDUINO_ARCH_AVR)
     analogReference(mode);
+#else
+      log("Warning: analogReference() is not supported on this architecture.\n");
+#endif
   }
 }
 break;
-#endif // defined(ARDUINO_ARCH_AVR)
+#endif // defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD)
 
-#endif
+#endif // stage
 
 
 /*

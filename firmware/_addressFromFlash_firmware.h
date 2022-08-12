@@ -20,7 +20,14 @@
 */
 
 #if MF_STAGE == MF_STAGE_includes
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_SAMD)
+#define USE_EEPROM
+#if defined(ARDUINO_ARCH_SAMD)
+#include <FlashAsEEPROM.h>
+#else
 #include <EEPROM.h>
+#endif // SAMD
+#endif // AVR ... SAMD
 #endif // MF_STAGE_includes
 
 
@@ -45,6 +52,7 @@ const uint32_t eepromUsedSize = 6; // total bytes of EEPROM used by us
 */
 uint8_t retrieveI2C_address()
 {
+#ifdef USE_EEPROM
   SimpleBuffer b;
   b.init(8);
   // read 6 bytes from eeprom: [0]=CRC8; [1-4]=marker; [5]=address
@@ -65,7 +73,10 @@ uint8_t retrieveI2C_address()
   uint8_t storedAddress; b.read(storedAddress); // now idx will be at 6, so that CRC check below will work
   if (b.checkCRC8() and (markerTest == eepromI2CaddressMarker)) {
     return storedAddress;
-  } else {
+  } else
+#endif // USE_EEPROM
+  {
+    log("No stored address\n");
     return I2CwrapperDefaultAddress;
   }
 }
@@ -76,6 +87,7 @@ uint8_t retrieveI2C_address()
 */
 void storeI2C_address(uint8_t newAddress)
 {
+#ifdef USE_EEPROM
   SimpleBuffer b;
   b.init(8);
   b.write(eepromI2CaddressMarker);
@@ -95,6 +107,9 @@ void storeI2C_address(uint8_t newAddress)
   EEPROM.end(); // end() will also commit()
 #endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   log("\n");
+#else // USE_EEPROM
+  log("No EEPROM for this board architecture, storeI2C_address() did nothing.\n");
+#endif // USE_EEPROM
 }
 
 // claim and define address retrieval for this module

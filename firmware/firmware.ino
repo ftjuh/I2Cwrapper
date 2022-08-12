@@ -276,7 +276,16 @@ void setup()
 
 #if defined(DEBUG)
   Serial.begin(115200);
-#endif
+
+  // all chips with "native" usb require waiting till `Serial` is true
+  // non-native systems are true immediately
+  // we wait up to 1500 msec, then go ahead anyway
+  unsigned int begin_time = millis();
+  while (! Serial && millis() - begin_time < 1500) {
+    delay(10);  // but at most 1.5 sec if not plugged in to usb
+  }
+#endif // DEBUG
+
   log("\n\n\n=== I2Cwrapper firmware v");
   log(I2Cw_VersionMajor); log("."); log(I2Cw_VersionMinor); log("."); log(I2Cw_VersionPatch); log(" ===\n");
   log("Running on architecture ");
@@ -286,6 +295,8 @@ void setup()
   log("ARDUINO_ARCH_ESP8266\n");
 #elif defined(ARDUINO_ARCH_ESP32)
   log("ARDUINO_ARCH_ESP32\n");
+#elif defined(ARDUINO_ARCH_SAMD)
+  log("ARDUINO_ARCH_SAMD\n");
 #else
   log("unknown\n");
 #endif
