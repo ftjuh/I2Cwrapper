@@ -1,6 +1,6 @@
 # Introduction
 
-I2Cwrapper is a generic modular framework for **Arduino I2C target devices**<sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to **integrate peripherals without dedicated I2C interface** in an I2C-bus environment.
+I2Cwrapper is a generic modular framework for **Arduino I2C target devices**<sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, SAMD, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to **integrate peripherals without dedicated I2C interface** in an I2C-bus environment.
 
 The **I2Cwrapper core** consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific **modules**.
 
@@ -286,10 +286,11 @@ All transmissions to the target device have a **three byte header** followed by 
 - [0] **CRC8 checksum**
 - [1] **command code**: Modules and the I2Cwrapper core use their own unique command code ranges (see [Limitations for end users](#limitations-for-end-users), though), so that the command code will decide which module or if the I2Cwrapper library itself will interpret the command.
 - [3] **unit addressed**: If a target module enables I2C access to more than one instance of some hardware, e.g. multiple stepper or servo motors, the unit can be used to differentiate them. It is up to each module to decide if and how the unit is interpreted. Modules which don't need them because there is only one instance of their respective hardware (like e.g. the `PinI2C` module), can just ignore the unit and will have to live with the one byte wasted bandwidth per transmission.
-<a id="supported-platforms"></a>
 ### Module reset code
 
 Since v0.3.0 dropped the hardware reset (it's considered bad practice), each module now needs to provide proper **cleanup code** in the (6) reset event section. This code needs to free all allocated resources and reset all hardware used by the module. The goal is to put all resources used by the module, and only(!) those,  into the state they were after bootup, so that a controller can make sure it finds a clean slate when it starts to use the target by sending a reset command.
+
+<a id="supported-platforms"></a>
 
 # Supported platforms
 
@@ -312,6 +313,8 @@ The ESP 32 has no I2C  hardware. I2C is stable at the default 240MHz, but offici
 Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 13.
 
 Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
+
+<a id="samd21-samd51"></a>
 
 ### SAMD21, SAMD51
 
@@ -466,13 +469,18 @@ void loopClassic()
 - ~~Move I2C-address options (fixed, EEPROM, hardware pins) to modules~~
 - ~~Attiny support (memory will be an issue, though)~~ 
 
-# Author
+# Authors
 
-Apart from its predecessor AccelStepperI2C, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is nor in programming, but in 3D printing, you can find me on [prusaprinters](https://www.prusaprinters.org/social/202816-juh/about), [thingiverse](https://www.thingiverse.com/juh/designs), and [youmagine](https://www.youmagine.com/juh3d/designs). This library first saw the light of day as part of my [StepFish project](https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll) ([also here](https://forum.ftcommunity.de/viewtopic.php?t=5341)).
+Apart from its predecessor AccelStepperI2C, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is nor in programming, but in 3D printing, you can find <u>me</u> on [prusaprinters](https://www.prusaprinters.org/social/202816-juh/about), [thingiverse](https://www.thingiverse.com/juh/designs), and [youmagine](https://www.youmagine.com/juh3d/designs). This library first saw the light of day as part of my [StepFish project](https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll) ([also here](https://forum.ftcommunity.de/viewtopic.php?t=5341)).
 
 Contact me at ftjuh@posteo.net.
 
 Jan (juh)
+
+### Contributors
+
+*  [CNCv4 example](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/CNCv4_Board_3_Steppers/CNCv4_Board_3_Steppers.ino) by [WhizzBizz The-Online-Developer](https://github.com/The-Online-Developer)
+* [SAMD support](#samd21-samd51) by [awgrover](https://github.com/awgrover)
 
 # Copyright
 
