@@ -281,7 +281,7 @@ Due to these timing restrictions, it is advisable to select a fast device as you
 
 ## Feature modules
 
-Feature modules, introduced in v0.5.0, extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").
+Feature modules, introduced in v0.3.0, extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").
 
 ### Status LED
 
