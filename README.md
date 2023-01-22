@@ -247,7 +247,9 @@ The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus in
 
 ## UcglibI2C
 
-This module, introduced in v0.5.0, supports all TFT and other displays supported by [Ucglib](https://github.com/olikraus/ucglib). The display type and the pins it is connected to have to be specified in `UcglibI2C_firmware.h` at compile time, as well as the fonts that will be available on the target. See the documentation at the head of `UcglibI2C_firmware.h` .
+This module, introduced in v0.5.0, supports all TFT and other displays supported by [Ucglib](https://github.com/olikraus/ucglib). The display type and the pins it is connected to have to be specified in `UcglibI2C_firmware.h` at compile time, as well as the fonts that will be available on the target. See the documentation at the head of `UcglibI2C_firmware.h` . 
+
+Three of the original Ucglib examples are included as demonstration. Note that the extra delays used there might need or allow for adjustment in your own setup (see below).
 
 ### UcglibI2C restrictions
 
@@ -260,11 +262,11 @@ This module, introduced in v0.5.0, supports all TFT and other displays supported
 
 Some Ucglib function calls may take (much) longer than 20 ms to execute, which cannot be adequately addressed by adjusting the [I2Cdelay](#adjusting-the-i2c-delay). So extra delays might be needed after calls to these functions to avoid that subsequent function calls are skipped or the I2C bus might become congested. So when you find that the display stops updating, or function calls are visibly skipped (as can be demonstrated in the `Ucglib_Box3D.ino` example), watch out in particular for these functions:
 
-* `UcglibI2C::begin()`  (ca. 71 ms on an LGT8F328 Atmega328 clone running at 32MHz)
-* `UcglibI2C::clearScreen()` (ca. 111 ms)
-* function calls which manipulate many pixels in one call, e.g. filling large boxes,  triangles, or circles etc. `clearScreen()` actually draws a full screen box, so its execution time probably can serve as an upper limit here.
+* `UcglibI2C::begin()`  (ca. 71 ms)
+* `UcglibI2C::clearScreen()` (ca. 111 ms; note that this will be longer for larger displays)
+* function calls which manipulate many pixels in one call, e.g. filling large boxes,  triangles, or circles etc. `clearScreen()` actually draws a full screen box, so its execution time probably can serve as an estimate of the upper limit here.
 
-These times will be heavily dependent on the target platform used and the speed it can communicate with the display (e.g. SPI speed). If timing is critical, I suggest running direct timing tests without I2Cwrapper on the target platform like these:
+These times will be heavily dependent on the target platform used, the speed it can communicate with the display (e.g. SPI speed), and often also the size of the display. The given times were measured on an LGT8F328 Atmega328 clone running at 32MHz and a 160x128 1,77inch TFT. If timing is critical, I suggest running direct timing tests without I2Cwrapper on the target platform like these:
 
 ```cpp
 unsigned long then = millis();
