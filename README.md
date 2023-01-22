@@ -1,8 +1,8 @@
 # Introduction
 
-I2Cwrapper is a generic modular framework for **Arduino I2C target devices**<sup>(1)</sup> which runs on standard Arduinos, ESP8266, ESP32, SAMD, and ATtiny platforms (see [supported platforms](#supported-platforms)). It allows you to easily control devices attached to the target or the target's own hardware via I2C. Typically, you can use it to **integrate peripherals without dedicated I2C interface** in an I2C-bus environment.
+I2Cwrapper enables you to **connect peripherals without dedicated I2C interface** like stepper motor drivers, TFT-displays, sensors, etc. to an I2C-bus. It uses an Arduino-compatible device which acts as **I2C target device**<sup>(1)</sup> and "translates" between the I2C-bus and the non-I2C peripheral (see [supported platforms](#supported-platforms)). To do so, the IC2wrapper framework "wraps" library function calls and return values and transmits them between I2C-controller and I2C-target. From the controller's perspective, using the device over I2C is very similar to directly using it, so that existing code can be adapted with little effort.
 
-The **I2Cwrapper core** consists of an easily extensible firmware framework and a controller library. Together, they **take care of the overhead** necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific **modules**.
+The **I2Cwrapper core** consists of an easily extensible **firmware framework** and the  `I2Cwrapper.h` **controller library**. Together, they take care of the overhead necessary for implementing an I2C target device, while the actual target functionality is delegated to device-specific **modules**.
 
 This is a possible example setup:
 
@@ -24,11 +24,12 @@ Currently, the following modules come shipped with I2Cwrapper in the [firmware s
 * **ServoI2C**: Control servo motors via I2C just like the plain Arduino [Servo library](https://www.arduino.cc/reference/en/libraries/servo).
 * **PinI2C**: Control the digital and analog in- and output pins of the target device via I2C, similar to an IO-expander. Works just like the plain Arduino pinMode(), digitalRead(), etc. commands.
 * **ESP32sensorsI2C**: Read an ESP32's [touch sensors](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/touch_pad.html), hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press.
-* **TM1638lite**: Read buttons from and control the single and seven-segment LEDs of up to four [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) modules like the ubiquitous [LED&Key module](https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/) via I2C. Uses Danny Ayers' [TM1638lite library](https://www.arduino.cc/reference/en/libraries/tm1638lite/).
+* **TM1638liteI2C**: Read buttons from and control the single and seven-segment LEDs of up to four [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) modules like the ubiquitous [LED&Key module](https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/) via I2C. Uses Danny Ayers' [TM1638lite library](https://www.arduino.cc/reference/en/libraries/tm1638lite/).
+* **UcglibI2C** (new in v0.5.0): Control TFT and other displays with ST7735, ILI9341, PCF8833, SSD1351, LD50T6160, ILI9163 driver chips supported by Oli Kraus' [Ucglib library](https://github.com/olikraus/ucglib) over I2C.
 
 While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is **very similar**, so that adapting existing code for I2C remote control is pretty straightforward.
 
-If there are no intrinsic resource conflicts, modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](https://github.com/ftjuh/I2Cwrapper/tree/main/templates)**.
+If there are no intrinsic resource conflicts, one or more modules can be selected in **any combination** at compile time for a specific target (see below for details). It is easy to **[add new modules](#how-to-add-new-modules)** with help of the provided **[templates](https://github.com/ftjuh/I2Cwrapper/tree/main/templates)**.
 
 v0.3.0 introduced additional **[feature modules](#feature-modules)**. They don't act as interfaces to some peripheral, but can be used to add functionality to the target, such as an I2C-status LED, or implementing different methods of retrieving the target's own I2C address, e.g. from hardware pins or flash memory/EEPROM.
 
@@ -50,7 +51,7 @@ The I2Cwrapper framework consists of **four basic components.** The first two dr
    - A module's main job is to **interpret and react to commands** passed to them from the controller through the firmware framework.
    - Modules can "inject" their code at different places in the firmware (e.g. setup, main loop, command interpreter), so that there is a **high degree of flexibility**.
 
-The other two basic components are for the **I2C controller's side**:
+The other two basic components are for the **I2C controller's** side:
 
 3. The [**I2Cwrapper class**](https://ftjuh.github.io/I2Cwrapper/class_i2_cwrapper.html), provided by the `I2Cwrapper.h` library.
    - Controller sketches use an object of type I2Cwrapper to **represent the target device** which handles all low level communication tasks like CRC8 checksums, error handling etc.
@@ -67,7 +68,7 @@ The other two basic components are for the **I2C controller's side**:
 ### Limitations for end users
 
    - Arduinos aren't perfect I2C target devices. Not all Arduino hardware platforms have dedicated I2C hardware, which entails possible performance issues (see [Supported platforms](#supported-platforms)).
-   - The Arduino's Wire library doesn't support [clock stretching](https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html) in a way which allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the **target is not flooded** with commands or requests with too little time to handle them. I2Cwrapper provides an [adjustable minimum delay](#adjusting-the-i2c-delay) between transmissions to handle that problem.
+   - The Arduino's Wire library doesn't support [clock stretching](https://onlinedocs.microchip.com/pr/GUID-CA6B1F8F-E09D-4780-A52A-CBBF61902464-en-US-2/GUID-5CCAB0DB-28BD-4095-B2E2-2F3CF0FC6966.html) in a way which allows the target to finish reacting to the previous command if it hasn't done so yet before the transmission occurred. That's why it's important to make sure that the **target is not flooded** with commands or requests with too little time to handle them. I2Cwrapper provides an [adjustable minimum delay](#adjusting-the-i2c-delay) between transmissions which can help with that problem.
 
 <a id="limitations-for-module-authors"></a>
 
@@ -93,7 +94,7 @@ If you've used the AccelStepperI2C *library* (not the module) before, please uni
 ## Configuring and uploading the firmware
 
 * **Open firmware.ino**  from the examples menu of the Arduino editor, you'll find it in the the I2Cwrapper submenu. It will open multiple tabs, among them one for each available module in the firmware subfolder.
-* Go to  the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware.
+* Go to  the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware. Don't bother about the other tabs, only selected modules will be included in the compiled firmware, even if all of them are opened.
 * You can **save a local copy** of the firmware. Don't forget, though, that your local copy won't be updated in future releases which might result in conflicts after a library upgrade.
 * **Compile and upload** to your target device.
 
@@ -152,7 +153,7 @@ See the example [Interrupt_Endstop](https://github.com/ftjuh/I2Cwrapper/blob/mai
 
 ### Adjusting the I2C delay
 
-If a controller **sends commands too quickly** or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again, yet particularly when serial debugging is enabled for the target it can take substantially longer. 
+If a controller **sends commands too quickly** or requests a target device's response too quickly after having sent a command, the target might not have finished processing the previous command and will not be ready to react appropriately. Usually, it should not take more than very few microseconds for the target to be ready again (see the [UcglibI2C module](#UcglibI2C)  for an exception), yet particularly when serial debugging is enabled for the target it can take substantially longer. 
 
 That's why I2Cwrapper makes sure that a **specified minimum delay** is kept between each transmission to the target, be it a new command or a request for a reply. The default minimum delay of 20 ms is chosen deliberately conservative to have all bases covered and for many not time-critical applications there is no need to lower it. However, depending on debugging, target device speed, target task execution time, bus speed, and the length of commands sent, the default can be adjusted manually to be considerably lower with the `I2Cwrapper::setI2Cdelay()` function. Typically, 4 to 6 ms are easily on the safe side.
 
@@ -183,7 +184,7 @@ wrapper.autoAdjustI2Cdelay();
 
 # Available modules
 
-To chose which modules are supported by an I2C target device, edit the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) file accordingly.
+To chose which modules are supported by an I2C target device, edit the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) file accordingly. Modules not selected will have no impact on memory or execution speed, they are completely ignored.
 
 ## AccelStepperI2C
 
@@ -230,7 +231,7 @@ Steppers can exert **damaging forces**, even if they are moving slow. If in doub
 
 ## ServoI2C
 
-Controls servo motors via I2C. Works literally just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library. See [`Servo_Sweep.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Servo_Sweep/Servo_Sweep.ino) example.
+Controls servo motors via I2C. Works literally just like the plain Arduino [`Servo`](https://www.arduino.cc/reference/en/libraries/servo) library. See [`Servo_Sweep.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Servo_Sweep/Servo_Sweep.ino) example. As there are dedicated I2C servo driver chips like the [PCA9685](https://www.adafruit.com/product/815) available, this module mostly makes sense as an add-on to other modules.
 
 ## PinI2C
 
@@ -244,13 +245,43 @@ Read an ESP32's touch sensors, hall sensor, and (if it works) temperature sensor
 
 The [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) chip uses an SPI bus interface to control matrices of buttons and LEDs. If you want to unify your bus environment in a given project or need to save pins, it can be useful to be able to control it via I2C. To implement an I2Cwrapper module, I chose Danny Ayers' [TM1638lite library](https://github.com/danja/TM1638lite) as it came with the most straightforward and burden-free implementation in comparison with the more popular choices. Apart from the setup, it can be used just like the original. Interrupt mechanism support for key presses is planned but not implemented yet. See the [`TM1638lite.ino`](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) example for more details.
 
+## UcglibI2C
+
+This module, introduced in v0.5.0, supports all TFT and other displays supported by [Ucglib](https://github.com/olikraus/ucglib). The display type and the pins it is connected to have to be specified in `UcglibI2C_firmware.h` at compile time, as well as the fonts that will be available on the target. See the documentation at the head of `UcglibI2C_firmware.h` .
+
+### UcglibI2C restrictions
+
+1. Available fonts will be limited by the target platform's memory. Larger fonts need (much) more memory. Together with the firmware, the six fonts used by the `Ucglib_GraphicsTest.ino` example will barely fit into an ATmega328 based Arduino's 32kB.
+2. On the controller's side, [Ucglib font names](https://github.com/olikraus/ucglib/wiki/fontsize) need to be preceded by `I2C_`, e.g. `I2C_ucg_font_helvB08_hr`
+3. Extra delays may be needed after some Ucglib function calls (see below).
+4. `UcglibI2C::drawString()` and `UcglibI2C::getStrWidth()` are limited by the length of the I2Cbuffer. Due to communication overhead, with a default buffer length of 20 bytes (see `I2CmaxBuf` in `I2Cwrapper.h`) they can only accept strings of up to 10 (`drawString()`) and 14 ( `getStrWidth()`) characters. A mechanism to define buffer size during runtime is planned for a [future release](#planned-improvements).
+
+### Timing and extra delays
+
+Some Ucglib function calls may take (much) longer than 20 ms to execute, which cannot be adequately addressed by adjusting the [I2Cdelay](#adjusting-the-i2c-delay). So extra delays might be needed after calls to these functions to avoid that subsequent function calls are skipped or the I2C bus might become congested. So when you find that the display stops updating, or function calls are visibly skipped (as can be demonstrated in the `Ucglib_Box3D.ino` example), watch out in particular for these functions:
+
+* `UcglibI2C::begin()`  (ca. 71 ms on an LGT8F328 Atmega328 clone running at 32MHz)
+* `UcglibI2C::clearScreen()` (ca. 111 ms)
+* function calls which manipulate many pixels in one call, e.g. filling large boxes,  triangles, or circles etc. `clearScreen()` actually draws a full screen box, so its execution time probably can serve as an upper limit here.
+
+These times will be heavily dependent on the target platform used and the speed it can communicate with the display (e.g. SPI speed). If timing is critical, I suggest running direct timing tests without I2Cwrapper on the target platform like these:
+
+```cpp
+unsigned long then = millis();
+ucg.begin();
+unsigned long now = millis();
+Serial.print("ucg.begin() - "); Serial.println(now - then);
+```
+
+Add these times as extra `delay()` after the respective function calls. Of course, running the display over I2C will be slower, but with well adjusted delays this might be largely unnoticeable in low to medium load cases with little animation and not too frequent display updates.
+
+Due to these timing restrictions, it is advisable to select a fast device as your target platform. In other words, don't try this on an Attiny85.
+
 <a id="feature-modules"></a>
 
 ## Feature modules
 
-(new in v0.3.0)
-
-Feature modules extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").
+Feature modules, introduced in v0.5.0, extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").
 
 ### Status LED
 
@@ -294,11 +325,11 @@ Since v0.3.0 dropped the hardware reset (it's considered bad practice), each mod
 
 # Supported platforms
 
-The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons:
+The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons, note also that some modules will not run on all platforms:
 
 ### Arduino AVRs (Uno, Nano etc.)
 
-ATmega328 based Arduinos come with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed not recommended for high performance situations.
+ATmega328 based Arduinos come with I2C hardware support which should make communication most reliable and allows driving the I2C bus at higher frequencies. With only 16MHz CPU speed they are not recommended for high performance situations. The Chinese LGT8F328 clone of the Atmega328 was successfully tested at 32MHz.
 
 ### ESP8266
 
@@ -320,7 +351,7 @@ Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (
 
 Arduino compatible SAMD21 and SAMD51 boards come in many variations: there are whole familities of the chips themselves, and many physical boards. Arduino made the original Zero, Adafruit sells a variety using the "Express" label ("M0" and "M4"), and many other manufacturers make them. The spec sheets say that all SAMD21 and SAMD51 chips have hardware I2C.
 
-Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the _addressFromFlash_firmware.h, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.
+Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the `_addressFromFlash_firmware.h`, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.
 
 I2Cwrapper has been succesfully tested with on Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit ItsyBitsy M4, and Adafruit Metro M0.
 
@@ -449,29 +480,33 @@ void loopClassic()
 }
 ```
 
-# Documentation
+# Library documentation
 
 [Find the I2Cwrapper library documentation here](https://ftjuh.github.io/I2Cwrapper/).
 
+<a id="planned-improvements"></a>
+
 # Planned improvements
 
-- Improve I2C buffer size handling, which is currently fixed. Either let the user decide on both sides (with parameter in I2Cwrapper constructor - already implemented - and command to target for changing the buffer size), or let the source decide on its own by using the preprocessor to determine the maximum value needed given the used modules (not sure if this will work).
+- Improve I2C buffer size handling, which is currently fixed. Either let the user decide on both sides (with parameter in I2Cwrapper constructor - already implemented - and command to target for changing the buffer size)~~, or let the source decide on its own by using the preprocessor to determine the maximum value needed given the used modules (not sure if this will work)~~ (makes no sense if functions pass strings of arbitrary lenght, e.g. Ucglib::getStrWidth().
 - reintroduce diagnostics as a standalone feature module
 - Interrupt mechanism support for TM1638liteI2C and PinI2Cmodule
+- Interrupt mechanism support for Ucglib, as a means to tell the controller reliably when the target is finished with more time consuming function calls.
 - enable debugging for the firmware by feature module, instead of macro (completely eliminate the need to edit `firmware.ino`)
+- I2Cwrapper currently only works with Wire.h, on the target's and the controller's side alike. As [suggested by bperrybap](https://forum.arduino.cc/t/i2cwrapper-library-for-easy-implementation-of-i2c-target-devices/1011213/5), it would be more flexible to make it work with other wire/I2C libraries. I'll give this more thought after implementing some other planned improvements, and/or if actual I2Cwrapper users report a need.
 - New modules:
   - SonarI2C  module  with support for 1 to n ultrasonic distance sensors
   - InfraredI2C  module with support for 1 to n infrared remote receivers
-  - TFT_I2C module based on (a subset of) Ucglib or Adafruit's GFX lib for SPI bus color TFTs
   - DC motor control module
+  - ~~TFT_I2C module based on (a subset of) Ucglib or Adafruit's GFX lib for SPI bus color TFTs~~
 - ~~Self-adjusting I2C-delay~~
 - ~~Determine I2C-address from hardware pins~~
 - ~~Move I2C-address options (fixed, EEPROM, hardware pins) to modules~~
 - ~~Attiny support (memory will be an issue, though)~~ 
 
-# Authors
+# Author
 
-Apart from its predecessor AccelStepperI2C, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is nor in programming, but in 3D printing, you can find <u>me</u> on [prusaprinters](https://www.prusaprinters.org/social/202816-juh/about), [thingiverse](https://www.thingiverse.com/juh/designs), and [youmagine](https://www.youmagine.com/juh3d/designs). This library first saw the light of day as part of my [StepFish project](https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll) ([also here](https://forum.ftcommunity.de/viewtopic.php?t=5341)).
+Apart from its predecessor AccelStepperI2C, this is my first "serious" piece of software published on github. Although I've some background in programming, mostly in the Wirth-tradition languages, I'm far from being a competent or even avid c++ programmer. At the same time I have a tendency to over-engineer (not a good combination), so be warned and use this at your own risk. My current main interest is not in programming, but in 3D printing, you can find <u>me</u> on [prusaprinters](https://www.prusaprinters.org/social/202816-juh/about), [thingiverse](https://www.thingiverse.com/juh/designs), and [youmagine](https://www.youmagine.com/juh3d/designs). This library first saw the light of day as part of my [StepFish project](https://www.prusaprinters.org/prints/115049-stepfish-fischertechnik-i2c-stepper-motor-controll) ([also here](https://forum.ftcommunity.de/viewtopic.php?t=5341)).
 
 Contact me at ftjuh@posteo.net.
 

@@ -7,5 +7,6 @@ var annotated_dup =
     [ "ServoI2C", "class_servo_i2_c.html", "class_servo_i2_c" ],
     [ "SimpleBuffer", "class_simple_buffer.html", "class_simple_buffer" ],
     [ "TM1638liteI2C", "class_t_m1638lite_i2_c.html", "class_t_m1638lite_i2_c" ],
+    [ "UcglibI2C", "class_ucglib_i2_c.html", "class_ucglib_i2_c" ],
     [ "xxxI2C", "classxxx_i2_c.html", "classxxx_i2_c" ]
 ];

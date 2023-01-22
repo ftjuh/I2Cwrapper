@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['findendstops_0',['findEndstops',['../_interrupt___endstop_8ino.html#af0c26f4d73cccd6b550219b3fc1978cd',1,'Interrupt_Endstop.ino']]],
-  ['for_1',['for',['../_e_s_p32sensors_i2_c__firmware_8h.html#a94af1e93b0e0de94a6c689630a6e0f1a',1,'for(uint8_t i=0;i&lt; SOC_TOUCH_SENSOR_NUM;i++):&#160;ESP32sensorsI2C_firmware.h'],['../_pin_i2_c__firmware_8h.html#a58844088bb192e39c5d3853f706d9614',1,'for(uint8_t i=0;i&lt; numUsedPins;i++):&#160;PinI2C_firmware.h'],['../_servo_i2_c__firmware_8h.html#ae789bf1c8c624ef187f4ef9130d7f8fe',1,'for(uint8_t i=0;i&lt; numServos;i++):&#160;ServoI2C_firmware.h']]]
+  ['enableendstops_0',['enableEndstops',['../class_accel_stepper_i2_c.html#ab0392ba30b4854704bd08b588db17401',1,'AccelStepperI2C']]],
+  ['enableinterrupts_1',['enableInterrupts',['../class_accel_stepper_i2_c.html#a0015e762b6a5ab8a545574e1642358ef',1,'AccelStepperI2C::enableInterrupts()'],['../class_e_s_p32sensors_i2_c.html#a41ebae30537f63dfe2f7161875f3be08',1,'ESP32sensorsI2C::enableInterrupts()']]],
+  ['enableoutputs_2',['enableOutputs',['../class_accel_stepper_i2_c.html#ab5478613beb1c45de7c8ee35b216a918',1,'AccelStepperI2C']]],
+  ['endstops_3',['endstops',['../class_accel_stepper_i2_c.html#af27f8157184e75d824faa9634113c67c',1,'AccelStepperI2C']]],
+  ['esp32sensorsi2c_4',['ESP32sensorsI2C',['../class_e_s_p32sensors_i2_c.html#a4d07e9553a26e62038e8ed567d4246e2',1,'ESP32sensorsI2C']]]
 ];

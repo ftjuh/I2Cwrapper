@@ -28,6 +28,16 @@
 const int8_t maxTM1638s = 4;
 TM1638lite* TM1638s[maxTM1638s];
 int8_t numTM1638s = 0; // number of initialised devices.
+/* 
+ * If you want to configure your target with fixed pins instead of using the
+ * TM1638lite::attach() command, add one of these lines for each TM1638 device
+ * with your respective pins, and omit the attach() function from the controller's
+ * code:
+ * 
+ * TM1638s[numTM1638s++] = new TM1638lite(strobe, clock, data);
+ * 
+ */
+
 
 bool validTM1638(int8_t s)
 {

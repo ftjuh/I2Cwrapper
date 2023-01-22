@@ -21,7 +21,7 @@
 //#include "PinI2C_firmware.h"            // should work on any platform, 
 //#include "ServoI2C_firmware.h"          // will not compile on Attinys
 //#include "TM1638liteI2C_firmware.h"     // should work on any platform
-
+#include "UcglibI2C_firmware.h"
 
 /*
   Feature modules

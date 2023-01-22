@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['ping_0',['ping',['../class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe',1,'I2Cwrapper']]],
-  ['pini2c_1',['PinI2C',['../class_pin_i2_c.html#af2c80902d0ec15934d638ab728cb52eb',1,'PinI2C']]],
-  ['pinmode_2',['pinMode',['../class_pin_i2_c.html#a0e686831f7e95004f88ad51a4f7aad3d',1,'PinI2C::pinMode()'],['../_pin_i2_c__firmware_8h.html#ac7f5b7d2759eda4979330dd102b8976c',1,'pinMode():&#160;PinI2C_firmware.h']]],
-  ['preparecommand_3',['prepareCommand',['../class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d',1,'I2Cwrapper']]],
-  ['printversions_4',['printVersions',['../_error__checking_8ino.html#a4d655f7999db948bc1242bd10b60d482',1,'Error_checking.ino']]],
-  ['processmessage_5',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
+  ['maxspeed_0',['maxSpeed',['../class_accel_stepper_i2_c.html#a36a283a6b78480ce5ab8e17329588135',1,'AccelStepperI2C']]],
+  ['move_1',['move',['../class_accel_stepper_i2_c.html#af9c59ca7c83e9e2452cdc6b3a3b50ed9',1,'AccelStepperI2C']]],
+  ['moveto_2',['moveTo',['../class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182',1,'AccelStepperI2C']]]
 ];

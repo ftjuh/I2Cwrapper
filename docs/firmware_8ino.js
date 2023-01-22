@@ -1,6 +1,5 @@
 var firmware_8ino =
 [
-    [ "DEBUG", "firmware_8ino.html#ad72dbcf6d0153db1b8d8a58001feed83", null ],
     [ "log", "firmware_8ino.html#a66726e5f1a55e7253ddd5aeec06f19c3", null ],
     [ "MF_STAGE", "firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91", null ],
     [ "MF_STAGE", "firmware_8ino.html#a8608260843d368ebb41a63afd0ca3a91", null ],
@@ -48,12 +47,5 @@ var firmware_8ino =
     [ "interruptPin", "firmware_8ino.html#a89786b8678479bcf2338a522d43b9381", null ],
     [ "interruptReason", "firmware_8ino.html#a2451a9b021bbbd6931ff9832f662af13", null ],
     [ "interruptSource", "firmware_8ino.html#a3dc3b1bfb8fa250b49a70c77e11e87c2", null ],
-    [ "lastCycles", "firmware_8ino.html#acee4f8c66bd06079db7157d155550ede", null ],
-    [ "newMessage", "firmware_8ino.html#affd9824af02dde7126d00d43a74c0081", null ],
-    [ "now", "firmware_8ino.html#ad2a5acb9b13b943cac9ef0b8c8370100", null ],
-    [ "reportNow", "firmware_8ino.html#a4e882aeffdf111848ef1647b42fe1dde", null ],
-    [ "reportPeriod", "firmware_8ino.html#aab25d82c1087f38c24fedd257e192278", null ],
-    [ "sentOnRequest", "firmware_8ino.html#adc3807e20039643a86ced45c531aa952", null ],
-    [ "then", "firmware_8ino.html#a570420b17131e93d2c3ff7665f121800", null ],
-    [ "writtenToBuffer", "firmware_8ino.html#ab2458d18375b44e68abd4672fe965562", null ]
+    [ "newMessage", "firmware_8ino.html#affd9824af02dde7126d00d43a74c0081", null ]
 ];

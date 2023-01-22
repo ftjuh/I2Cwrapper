@@ -12,5 +12,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "ServoI2C.cpp", "_servo_i2_c_8cpp.html", null ],
     [ "ServoI2C.h", "_servo_i2_c_8h.html", "_servo_i2_c_8h" ],
     [ "TM1638liteI2C.cpp", "_t_m1638lite_i2_c_8cpp.html", null ],
-    [ "TM1638liteI2C.h", "_t_m1638lite_i2_c_8h.html", "_t_m1638lite_i2_c_8h" ]
+    [ "TM1638liteI2C.h", "_t_m1638lite_i2_c_8h.html", "_t_m1638lite_i2_c_8h" ],
+    [ "UcglibI2C.cpp", "_ucglib_i2_c_8cpp.html", "_ucglib_i2_c_8cpp" ],
+    [ "UcglibI2C.h", "_ucglib_i2_c_8h.html", "_ucglib_i2_c_8h" ]
 ];

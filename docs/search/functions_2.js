@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['detach_0',['detach',['../class_servo_i2_c.html#a63a62761eaf9961c9012025b5d011962',1,'ServoI2C']]],
-  ['digitalread_1',['digitalRead',['../class_pin_i2_c.html#a054660019573d7159adac8f5f53a2e97',1,'PinI2C']]],
-  ['digitalwrite_2',['digitalWrite',['../class_pin_i2_c.html#a4b3b94bff69840b5851ff00f5a778640',1,'PinI2C::digitalWrite()'],['../_pin_i2_c__firmware_8h.html#ae4237867798c215750e46405a9065e3e',1,'digitalWrite():&#160;PinI2C_firmware.h']]],
-  ['disableoutputs_3',['disableOutputs',['../class_accel_stepper_i2_c.html#a6b82da76eca7957814189cd67608aaf0',1,'AccelStepperI2C']]],
-  ['displayascii_4',['displayASCII',['../class_t_m1638lite_i2_c.html#aa14661a54f95f55da53a60db9f552898',1,'TM1638liteI2C']]],
-  ['displayhex_5',['displayHex',['../class_t_m1638lite_i2_c.html#a6280daabb3ed1c1641311dcedeee97b2',1,'TM1638liteI2C']]],
-  ['displayss_6',['displaySS',['../class_t_m1638lite_i2_c.html#adc31a03b626be1c0f018ddd88b48ae5c',1,'TM1638liteI2C']]],
-  ['displaytext_7',['displayText',['../class_t_m1638lite_i2_c.html#aa81b476defe97eebc889dfe9200b7900',1,'TM1638liteI2C']]],
-  ['distancetogo_8',['distanceToGo',['../class_accel_stepper_i2_c.html#a26e27bf5d72113dc43694c87ed4a75f4',1,'AccelStepperI2C']]],
-  ['doleds_9',['doLEDs',['../_t_m1638lite_8ino.html#abc7db9ad365a4b033f0d6f58039627f8',1,'TM1638lite.ino']]]
+  ['changei2caddress_0',['changeI2Caddress',['../class_i2_cwrapper.html#ab8084b9fc49113a5a6d2214e1878457e',1,'I2Cwrapper']]],
+  ['changei2cstateto_1',['changeI2CstateTo',['../firmware_8ino.html#a6e6fb94a3ed8d18ebc8e982e14b3f8ee',1,'firmware.ino']]],
+  ['checkcrc8_2',['checkCRC8',['../class_simple_buffer.html#a1c32cae8a445215aa333609cef8b7b11',1,'SimpleBuffer']]],
+  ['checkversion_3',['checkVersion',['../class_i2_cwrapper.html#ab8e7b0b5ff8c1252676b9ff1bbdbe24d',1,'I2Cwrapper']]],
+  ['clearinterrupt_4',['clearInterrupt',['../class_i2_cwrapper.html#a1365ca44e217ce79bcfc3fe0c2ee7cac',1,'I2Cwrapper::clearInterrupt()'],['../firmware_8ino.html#adebb2a389a701d95bb721df60053bf6c',1,'clearInterrupt():&#160;firmware.ino']]],
+  ['clearscreen_5',['clearScreen',['../class_ucglib_i2_c.html#a98db00e35ac9c64d65b41fe39d23f1b8',1,'UcglibI2C']]],
+  ['clip_6',['clip',['../_ucglib___graphics_test_8ino.html#aa95a85cedf9d54d35a368ff622c5ac8e',1,'Ucglib_GraphicsTest.ino']]],
+  ['color_5ftest_7',['color_test',['../_ucglib___graphics_test_8ino.html#a0de256e6151caa665883804e6491477f',1,'Ucglib_GraphicsTest.ino']]],
+  ['cross_8',['cross',['../_ucglib___graphics_test_8ino.html#aacd20c344bb183e4e75dad51cec4b6c4',1,'Ucglib_GraphicsTest.ino']]],
+  ['currentposition_9',['currentPosition',['../class_accel_stepper_i2_c.html#ac3a25dd2091e8b7a2aaa415150957b7e',1,'AccelStepperI2C']]]
 ];

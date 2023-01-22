@@ -8,7 +8,7 @@ var searchData=
   ['pincmdoffset_5',['pinCmdOffset',['../_pin_i2_c_8h.html#ada302315731eb29975057c7d04ef84a1',1,'PinI2C.h']]],
   ['pindigitalreadcmd_6',['pinDigitalReadCmd',['../_pin_i2_c__firmware_8h.html#a7daf680ff2b562761885093ced986416',1,'pinDigitalReadCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a084ac0c4e83170e397b31881374479e9',1,'pinDigitalReadCmd():&#160;PinI2C.h']]],
   ['pindigitalreadresult_7',['pinDigitalReadResult',['../_pin_i2_c_8h.html#a0961198cb28e498a7e69e2067f7ae178',1,'PinI2C.h']]],
-  ['pindigitalwritecmd_8',['pinDigitalWriteCmd',['../_pin_i2_c__firmware_8h.html#ad994000f692b85378af36e7b20f60696',1,'pinDigitalWriteCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a131cc945510add41ca5b162278a731fc',1,'pinDigitalWriteCmd():&#160;PinI2C.h']]],
+  ['pindigitalwritecmd_8',['pinDigitalWriteCmd',['../_pin_i2_c_8h.html#a131cc945510add41ca5b162278a731fc',1,'pinDigitalWriteCmd():&#160;PinI2C.h'],['../_pin_i2_c__firmware_8h.html#ad994000f692b85378af36e7b20f60696',1,'pinDigitalWriteCmd():&#160;PinI2C_firmware.h']]],
   ['ping_9',['ping',['../class_i2_cwrapper.html#a8efa3b87ade5a202bd57255fcf6a5bbe',1,'I2Cwrapper']]],
   ['pingbackcmd_10',['pingBackCmd',['../_i2_cwrapper_8h.html#a60573ed98feefb1d8230e781719fde09',1,'I2Cwrapper.h']]],
   ['pini2c_11',['PinI2C',['../class_pin_i2_c.html#af2c80902d0ec15934d638ab728cb52eb',1,'PinI2C::PinI2C()'],['../class_pin_i2_c.html',1,'PinI2C']]],
@@ -17,9 +17,12 @@ var searchData=
   ['pini2c_5ffirmware_2eh_14',['PinI2C_firmware.h',['../_pin_i2_c__firmware_8h.html',1,'']]],
   ['pinmode_15',['pinMode',['../class_pin_i2_c.html#a0e686831f7e95004f88ad51a4f7aad3d',1,'PinI2C::pinMode()'],['../_pin_i2_c__firmware_8h.html#ac7f5b7d2759eda4979330dd102b8976c',1,'pinMode(pin, mode):&#160;PinI2C_firmware.h']]],
   ['pinpinmodecmd_16',['pinPinModeCmd',['../_pin_i2_c__firmware_8h.html#aedbf1482a7ca1a20ce49effb27cdb4df',1,'pinPinModeCmd():&#160;PinI2C_firmware.h'],['../_pin_i2_c_8h.html#a9e526d90c799038dd692278685b2a955',1,'pinPinModeCmd():&#160;PinI2C.h']]],
-  ['pos_17',['pos',['../_servo___sweep_8ino.html#a1910d262855b71da353ed0d07a6c7823',1,'Servo_Sweep.ino']]],
-  ['preparecommand_18',['prepareCommand',['../class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d',1,'I2Cwrapper']]],
-  ['printversions_19',['printVersions',['../_error__checking_8ino.html#a4d655f7999db948bc1242bd10b60d482',1,'Error_checking.ino']]],
-  ['processingcommand_20',['processingCommand',['../firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a84e9d163f3082b90ec9386d3917c1568',1,'firmware.ino']]],
-  ['processmessage_21',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
+  ['pixel_5fand_5flines_17',['pixel_and_lines',['../_ucglib___graphics_test_8ino.html#ad7fceda1e02ba40db57e4142b0187093',1,'Ucglib_GraphicsTest.ino']]],
+  ['pos_18',['pos',['../_servo___sweep_8ino.html#a1910d262855b71da353ed0d07a6c7823',1,'Servo_Sweep.ino']]],
+  ['powerdown_19',['powerDown',['../class_ucglib_i2_c.html#af7428f5cf2ec148558d0d9494502909a',1,'UcglibI2C']]],
+  ['powerup_20',['powerUp',['../class_ucglib_i2_c.html#a1146ccd9acea60f121d5f75d1f9b6b22',1,'UcglibI2C']]],
+  ['preparecommand_21',['prepareCommand',['../class_i2_cwrapper.html#a7f424cf28f8044a69b8ae94bb3d7292d',1,'I2Cwrapper']]],
+  ['printversions_22',['printVersions',['../_error__checking_8ino.html#a4d655f7999db948bc1242bd10b60d482',1,'Error_checking.ino']]],
+  ['processingcommand_23',['processingCommand',['../firmware_8ino.html#aecb3d9794cb3b0214f1c90af1607a6e8a84e9d163f3082b90ec9386d3917c1568',1,'firmware.ino']]],
+  ['processmessage_24',['processMessage',['../firmware_8ino.html#a4906408a38ad9d4f1bca763aa75422ad',1,'firmware.ino']]]
 ];

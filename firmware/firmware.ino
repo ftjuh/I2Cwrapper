@@ -15,7 +15,7 @@
    @todo Reduce memory use to make it fit into an <del>8k Attiny</del>4k ATtiny
 */
 
-#define DEBUG // Uncomment this to enable library debugging output on Serial
+//#define DEBUG // Uncomment this to enable library debugging output on Serial
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -601,12 +601,9 @@ void receiveEvent(int howMany)
       }
       [[fallthrough]];
 
-
+    case processingCommand:
     case readyForCommand:  { // this is the expected state when a receiveEvent happens
 
-        //log("[Int with "); log(howMany); log(newMessage == 0 ? ", ready]\n" : ", NOT ready]\n");
-
-        // if (newMessage == 0) { // Only accept message if an earlier one is fully processed. // this check obsolete with I2Cstate machine
         bufferIn->reset();
         for (uint8_t i = 0; i < howMany; i++) {
           bufferIn->buffer[i] = Wire.read();
@@ -614,20 +611,26 @@ void receiveEvent(int howMany)
         bufferIn->idx = howMany;
         newMessage = howMany; // tell main loop that and how much data has arrived
         changeI2CstateTo(processingCommand);  // and move on to next state
-        // }
 
       } // case readyForCommand
       break;
 
 
-    case processingCommand: { // not to be expected here
-        /* An earlier command is still beeing processed, so the outputBuffer is possibly being filled right now,
-          but the controller is already sending another command, making the buffer useless.
-          We cannot terminate the processMessage() function from here, so signal it that it should discard the
-          buffer at the end of processing and switch to readyForCommand state after. */
-        changeI2CstateTo(tainted);
-      }
-      break;
+// sth is wrong with this. It will lead to lockdown if controller events come in too fast, while treating this case
+// just like readyForCommand seems to work even with very short I2Cdelay. Needs further investigation, for the 
+// moment will consider this a quick fix for target lockdowns.
+//    case processingCommand: { // not to be expected here
+//        /* An earlier command is still beeing processed, but the controller is already sending another command.
+//         * We (a) cannot accept this message, as it might overwrite info in the buffer that is still being processed
+//         * and (b) need to dispose of the outpuf buffer, if it is in the process of beeing filled as, clearly, the
+//         * controller is not expecting its results anymore. So we need to signal processMessage() that it should 
+//         * discard the buffer at the end of processing and switch to readyForCommand state after. */
+//        for (uint8_t i = 0; i < howMany; i++) { // dump the incoming command, otherwise it seems the bus will hang
+//          char x = Wire.read();
+//        }
+//        changeI2CstateTo(tainted);
+//      }
+//      break;
 
 
     case initializing:
@@ -691,9 +694,6 @@ void writeOutputBuffer()
 /*!
   @brief Handle I2C request event. Will send results or information requested
     by the last command, as defined by the contents of the outputBuffer.
-  @todo <del>Find sth. meaningful to report from requestEvent() if no message is
-  pending, e.g. current position etc.</del> not implemented, ESP32 can't do that (doh)
-
 */
 
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
@@ -755,5 +755,4 @@ void requestEvent()
 // #if defined(DIAGNOSTICS)
 //   currentDiagnostics.lastRequestTime = micros() - thenMicros;
 // #endif // DIAGNOSTICS
-
 }

@@ -7,6 +7,7 @@ PinI2C	KEYWORD1
 ServoI2C	KEYWORD1
 SimpleBuffer	KEYWORD1
 TM1638liteI2C	KEYWORD1
+UcglibI2C	KEYWORD1
 # Structs
 # Typedefs
 # Enums
