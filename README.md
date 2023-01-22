@@ -534,4 +534,4 @@ see [releases page](https://github.com/ftjuh/I2Cwrapper/releases)
 Historical note: I2Cwrapper evolved from the [AccelStepperI2C project](https://github.com/ftjuh/AccelStepperI2C). The latter is still available in the Arduino library manager even if its use is discouraged. I2Cwrapper is functionally fully equivalent to AccelSteperI2C if you simply select only the AccelSteperI2C and ServoI2C modules for compilation and ignore the other modules.
 
 
-
+![](https://visitor-badge.laobi.icu/badge?page_id=ftjuh.I2Cwrapper)
