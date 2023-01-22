@@ -280,6 +280,7 @@ TM1638liteI2C</h2>
 <h2><a class="anchor" id="autotoc_md38"></a>
 UcglibI2C</h2>
 <p >This module, introduced in v0.5.0, supports all TFT and other displays supported by <a href="https://github.com/olikraus/ucglib">Ucglib</a>. The display type and the pins it is connected to have to be specified in <code><a class="el" href="_ucglib_i2_c__firmware_8h.html" title="I2Cwrapper module for adressing TFT and other displays supported by Ucglib over I2C.">UcglibI2C_firmware.h</a></code> at compile time, as well as the fonts that will be available on the target. See the documentation at the head of <code><a class="el" href="_ucglib_i2_c__firmware_8h.html" title="I2Cwrapper module for adressing TFT and other displays supported by Ucglib over I2C.">UcglibI2C_firmware.h</a></code> .</p>
+<p >Three of the original Ucglib examples are included as demonstration. Note that the extra delays used there might need or allow for adjustment in your own setup (see below).</p>
 <h3><a class="el" href="class_ucglib_i2_c.html" title="An I2C wrapper class for Ucglib.">UcglibI2C</a> restrictions</h3>
 <ol type="1">
 <li>Available fonts will be limited by the target platform's memory. Larger fonts need (much) more memory. Together with the firmware, the six fonts used by the <code><a class="el" href="_ucglib___graphics_test_8ino.html">Ucglib_GraphicsTest.ino</a></code> example will barely fit into an ATmega328 based Arduino's 32kB.</li>
@@ -290,11 +291,11 @@ UcglibI2C</h2>
 <h3>Timing and extra delays</h3>
 <p >Some Ucglib function calls may take (much) longer than 20 ms to execute, which cannot be adequately addressed by adjusting the <a class="el" href="index.html#adjusting-the-i2c-delay">I2Cdelay</a>. So extra delays might be needed after calls to these functions to avoid that subsequent function calls are skipped or the I2C bus might become congested. So when you find that the display stops updating, or function calls are visibly skipped (as can be demonstrated in the <code><a class="el" href="_ucglib___box3_d_8ino.html">Ucglib_Box3D.ino</a></code> example), watch out in particular for these functions:</p>
 <ul>
-<li><code><a class="el" href="class_ucglib_i2_c.html#adcd889e7f40432145778e95b2247cbbe">UcglibI2C::begin()</a></code> (ca. 71 ms on an LGT8F328 Atmega328 clone running at 32MHz)</li>
-<li><code><a class="el" href="class_ucglib_i2_c.html#a98db00e35ac9c64d65b41fe39d23f1b8">UcglibI2C::clearScreen()</a></code> (ca. 111 ms)</li>
-<li>function calls which manipulate many pixels in one call, e.g. filling large boxes, triangles, or circles etc. <code>clearScreen()</code> actually draws a full screen box, so its execution time probably can serve as an upper limit here.</li>
+<li><code><a class="el" href="class_ucglib_i2_c.html#adcd889e7f40432145778e95b2247cbbe">UcglibI2C::begin()</a></code> (ca. 71 ms)</li>
+<li><code><a class="el" href="class_ucglib_i2_c.html#a98db00e35ac9c64d65b41fe39d23f1b8">UcglibI2C::clearScreen()</a></code> (ca. 111 ms; note that this will be longer for larger displays)</li>
+<li>function calls which manipulate many pixels in one call, e.g. filling large boxes, triangles, or circles etc. <code>clearScreen()</code> actually draws a full screen box, so its execution time probably can serve as an estimate of the upper limit here.</li>
 </ul>
-<p >These times will be heavily dependent on the target platform used and the speed it can communicate with the display (e.g. SPI speed). If timing is critical, I suggest running direct timing tests without <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> on the target platform like these:</p>
+<p >These times will be heavily dependent on the target platform used, the speed it can communicate with the display (e.g. SPI speed), and often also the size of the display. The given times were measured on an LGT8F328 Atmega328 clone running at 32MHz and a 160x128 1,77inch TFT. If timing is critical, I suggest running direct timing tests without <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> on the target platform like these:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code hl_variable" href="_e_s_p32sensors_8ino.html#aa6e6e17fe4bd050544508ba0f8ae1eb2">then</a> = millis();</div>
 <div class="line">ucg.begin();</div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> now = millis();</div>
@@ -305,7 +306,7 @@ UcglibI2C</h2>
 <p ><a class="anchor" id="feature-modules"></a></p>
 <h2><a class="anchor" id="autotoc_md39"></a>
 Feature modules</h2>
-<p >Feature modules, introduced in v0.5.0, extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").</p>
+<p >Feature modules, introduced in v0.3.0, extend or modify the firmware with additional features. As they don't act as interfaces to some peripheral, as the normal modules do, they do not necessarily include a matching controller library. To set them apart from normal modules, their filename starts with an underscore character ("`_xxx_firmware.h`").</p>
 <h3>Status LED</h3>
 <p >Including the <code><a class="el" href="__status_l_e_d__firmware_8h.html" title="Feature module. Makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent)....">_statusLED_firmware.h</a></code> in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>will make the target's built in LED (<code>LED_BUILTIN</code>) <b>flash briefly</b> when an external interrupt (receiveEvent or requestEvent) is coming in. Alternatively, it can be modified to flash each time the I2C state machine changes its state (see <a class="el" href="index.html#error-handling">Error handling</a>). Meant for diagnostic purposes to see if the target device is still alive and active. Doesn't need a controller library, just comment it out in <code><a class="el" href="firmware__modules_8h.html" title="This file determines which modules will be included in the target firmware. Add other modules or (un)...">firmware_modules.h</a></code>to disable it. It could easily be extended to have more than one status LED for a more differentiated status display.</p>
 <h3>I2C address modules</h3>
@@ -526,7 +527,7 @@ History</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jan 22 2023 12:41:13 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Jan 22 2023 13:43:41 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>
