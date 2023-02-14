@@ -79,7 +79,7 @@ log("ServoI2C module enabled.\n");
 
 case servoAttach1Cmd: {
   if ((numServos < maxServos) and (i == 2)) { // 1 int
-    int p; bufferIn->read(p);
+    int16_t p; bufferIn->read(p);
     servos[numServos].attach(p);
     bufferOut->write(numServos++);
     log(numServos);
@@ -89,9 +89,9 @@ break;
 
 case servoAttach2Cmd: {
   if ((numServos < maxServos) and (i == 6)) { // 3 int
-    int p; bufferIn->read(p);
-    int min; bufferIn->read(min);
-    int max; bufferIn->read(max);
+    int16_t  p; bufferIn->read(p);
+    int16_t  min; bufferIn->read(min);
+    int16_t  max; bufferIn->read(max);
     servos[numServos].attach(p, min, max);
     bufferOut->write(numServos++);
   }
@@ -107,7 +107,7 @@ break;
 
 case servoWriteCmd: {
   if (validServo(unit) and (i == 2)) { // 1 int
-    int value; bufferIn->read(value);
+    int16_t  value; bufferIn->read(value);
     servos[unit].write(value);
   }
 }
@@ -115,7 +115,7 @@ break;
 
 case servoWriteMicrosecondsCmd: {
   if (validServo(unit) and (i == 2)) { // 1 int
-    int value; bufferIn->read(value);
+    int16_t value; bufferIn->read(value);
     servos[unit].writeMicroseconds(value);
   }
 }
@@ -123,21 +123,21 @@ break;
 
 case servoReadCmd: {
   if (validServo(unit) and (i == 0)) { // no parameters
-    bufferOut->write(servos[unit].read());
+    bufferOut->write((int16_t)servos[unit].read());
   }
 }
 break;
 
 case servoReadMicrosecondsCmd: {
   if (validServo(unit) and (i == 0)) { // no parameters
-    bufferOut->write(servos[unit].readMicroseconds());
+    bufferOut->write((int16_t)servos[unit].readMicroseconds());
   }
 }
 break;
 
 case servoAttachedCmd: {
   if (validServo(unit) and (i == 0)) { // no parameters
-    bufferOut->write(servos[unit].attached());
+    bufferOut->write(uint8_t(servos[unit].attached()));
   }
 }
 break;

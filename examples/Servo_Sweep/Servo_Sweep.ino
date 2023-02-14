@@ -22,12 +22,17 @@ int pos = 0;    // variable to store the servo position
 void setup()
 {
   Wire.begin();
-  // Serial.begin(115200); // uncomment for debugging output (needs DEBUG set in firmware/libraries)
+  Serial.begin(115200);
   // Wire.setClock(10000); // uncomment for ESP8266 targets, to be on the safe side
 
+  if (!wrapper.ping()) {
+    halt("Target not found! Check connections and restart.");
+  } else {
+    Serial.println("Target found as expected. Proceeding.\n");
+  }
   wrapper.reset(); // reset the target device
-
-  myservo.attach(9); // attaches the servo on _the target's_ pin 9 to the servo object
+  
+  myservo.attach(9); // attaches the servo on _the target's_ pin "9" to the servo object
 
 }
 
@@ -41,5 +46,13 @@ void loop()
   for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
+  }
+}
+
+void halt(const char* m) {
+  Serial.println(m);
+  Serial.println("\n\nHalting.\n");
+  while (true) {
+    yield(); // prevent ESPs from watchdog reset
   }
 }
