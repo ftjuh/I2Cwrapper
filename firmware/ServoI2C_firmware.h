@@ -22,11 +22,12 @@
 */
 
 #if MF_STAGE == MF_STAGE_includes
-#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_SAMD)
-#include <Servo.h>
-#elif defined(ARDUINO_ARCH_ESP32)
+
+#if defined(ARDUINO_ARCH_ESP32)
 #include <ESP32Servo.h> // ESP32 doesn't come with a native Servo.h
-#endif // defined(ARDUINO_ARCH_AVR)
+#else
+#include <Servo.h>
+#endif // defined(ARDUINO_ARCH_ESP32)
 #include <ServoI2C.h>
 #endif // MF_STAGE_includes
 
