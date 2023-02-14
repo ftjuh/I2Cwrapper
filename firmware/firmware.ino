@@ -297,6 +297,8 @@ void setup()
   log("ARDUINO_ARCH_ESP32\n");
 #elif defined(ARDUINO_ARCH_SAMD)
   log("ARDUINO_ARCH_SAMD\n");
+#elif defined(ARDUINO_ARCH_STM32)
+  log("ARDUINO_ARCH_STM32\n");
 #else
   log("unknown\n");
 #endif
