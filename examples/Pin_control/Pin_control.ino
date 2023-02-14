@@ -5,6 +5,10 @@
    Reads a digital and an analog input pin and mirrors their values on a
    digital and a PWM-capable output pin.
    Needs PinI2C.h module enabled in the target's firmware_modules.h.
+   
+   Warning: If you want to use LED_BUILTIN as one of the pins, don't enable 
+   the feature module "_statusLED_firmware.h" at the same time, it uses the 
+   same pin and will conflict.
 
 */
 
@@ -22,7 +26,7 @@ PinI2C pins(&wrapper); // ...that the pin interface needs to communicate with th
  */
 
 const uint8_t dPinIn  = 12; // any pin; connect switch against GND and +V (or use only GND and INPUT_PULLUP below)
-const uint8_t dPinOut = 13; // any pin; connect LED with resistor or just use 13 = LED_BUILTIN on Uno/Nano
+const uint8_t dPinOut = 13; // any pin; connect LED with resistor or just use 13 = LED_BUILTIN on Uno/Nano (but disable "_statusLED_firmware.h" which also uses LED_BUILTIN)
 const uint8_t aPinIn  = 14; // needs analog pin; 14 = A0 on Uno/Nano; connect potentiometer against GND and +V
 const uint8_t aPinOut = 6;  // needs PWM pin; 6 is PWM-capable on Uno/Nano; connect LED with resistor, or multimeter
 
