@@ -54,10 +54,10 @@ void AccelStepperI2C::move(long relative)
 
 
 // don't use this, use state machine instead
-boolean AccelStepperI2C::run()
+bool AccelStepperI2C::run()
 {
   wrapper->prepareCommand(runCmd, myNum);
-  boolean res = false; // will be returned on transmission error
+  bool res = false; // will be returned on transmission error
   if (wrapper->sendCommand() and wrapper->readResult(runResult)) {
     wrapper->buf.read(res); // else return result of function call
   }
@@ -66,10 +66,10 @@ boolean AccelStepperI2C::run()
 
 
 // don't use this, use state machine instead
-boolean AccelStepperI2C::runSpeed()
+bool AccelStepperI2C::runSpeed()
 {
   wrapper->prepareCommand(runSpeedCmd, myNum);
-  boolean res = false; // will be returned on transmission error
+  bool res = false; // will be returned on transmission error
   if (wrapper->sendCommand() and wrapper->readResult(runSpeedResult)) {
     wrapper->buf.read(res); // else return result of function call
   }
@@ -78,10 +78,10 @@ boolean AccelStepperI2C::runSpeed()
 
 
 // don't use this, use state machine instead
-boolean AccelStepperI2C::runSpeedToPosition()
+bool AccelStepperI2C::runSpeedToPosition()
 {
   wrapper->prepareCommand(runSpeedToPositionCmd, myNum);
-  boolean res = false; // will be returned on transmission error
+  bool res = false; // will be returned on transmission error
   if (wrapper->sendCommand() and wrapper->readResult(runSpeedToPositionResult)) {
     wrapper->buf.read(res); // else return result of function call
   }

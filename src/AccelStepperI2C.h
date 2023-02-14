@@ -215,13 +215,13 @@ public:
    * @brief Don't use this, use state machine instead with runState().
    * @result If you use it for whatever reason, check sentOK and resultOK to be sure that things are alright and the return value can be trusted.
    */
-  boolean run();
+  bool run();
 
   /*!
    * @brief Don't use this, use state machine instead with runSpeedState().
    * @result If you use it for whatever reason, check sentOK and resultOK to be sure that things are alright and the return value can be trusted.
    */
-  boolean runSpeed();
+  bool runSpeed();
 
   void    setMaxSpeed(float speed);
   float   maxSpeed();
@@ -255,7 +255,7 @@ public:
    * @brief Don't use this, use state machine instead with runSpeedToPositionState().
    * @result If you use it for whatever reason, check sentOK and resultOK to be sure that things are alright and the return value can be trusted.
    */
-  boolean runSpeedToPosition();
+  bool runSpeedToPosition();
 
 
   void    stop();
