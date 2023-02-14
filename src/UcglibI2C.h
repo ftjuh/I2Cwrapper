@@ -11,7 +11,7 @@
   published by the Free Software Foundation, version 2.
 */
 
-
+#ifndef ARDUINO_ARCH_STM32 // it seems Ucglib is not compatible with stm32duino
 #ifndef UcglibI2C_h
 #define UcglibI2C_h
 
@@ -1452,5 +1452,5 @@ enum UcglibI2C_Font : uint16_t { // we need to define the data type to allow for
   I2C_ucg_font_unifont_tr
 };
 
-#endif
-
+#endif // UcglibI2C_h
+#endif // ARDUINO_ARCH_STM32

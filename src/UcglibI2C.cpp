@@ -10,6 +10,7 @@
   published by the Free Software Foundation, version 2.
 */
 
+#ifndef ARDUINO_ARCH_STM32 // it seems Ucglib is not compatible with stm32duino
 
 #include <UcglibI2C.h>
 
@@ -336,3 +337,4 @@ void UcglibI2C::drawTetragon(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int
   wrapper->sendCommand();
 }
 
+#endif // ARDUINO_ARCH_STM32
