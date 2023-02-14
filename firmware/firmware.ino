@@ -291,7 +291,7 @@ void setup()
   log("Running on architecture ");
 #if defined(ARDUINO_ARCH_AVR)
   log("ARDUINO_ARCH_AVR\n");
-#elif defined(ARDUINO_ARCbH_ESP8266)
+#elif defined(ARDUINO_ARCH_ESP8266)
   log("ARDUINO_ARCH_ESP8266\n");
 #elif defined(ARDUINO_ARCH_ESP32)
   log("ARDUINO_ARCH_ESP32\n");
@@ -452,10 +452,11 @@ void processMessage(uint8_t len)
             initializeFirmware(); // then reset firmware to initial state
 
             // restart Wire and reread our current I2C address
-#ifndef WIRE_HAS_END
-#error "Sorry, the Wire library of your platform has no Wire.end() implementation"
-#endif
+#ifdef WIRE_HAS_END
             Wire.end();
+#else
+#warning "The Wire library of your platform has no Wire.end() implementation. Software reset of the I2C interface might not work as it should."
+#endif
             startI2C(); // will use updated I2C address, if it has been changed
 
 #if defined(DEBUG)
@@ -748,7 +749,7 @@ void requestEvent()
     case initializing:
     case responding:
     case tainted:
-      break; // do nothing, ignore requestEvent and stay in the respective state
+      break; // do nothing, ignore requestEvent and stay in the respective state ### send dummy byte to clear request?
 
   } // switch (I2Cstate)
 
