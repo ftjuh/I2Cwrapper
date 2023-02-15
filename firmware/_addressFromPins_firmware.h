@@ -5,12 +5,8 @@
    Makes the target retrieve its own address from the input state of one or
    more pins at startup, so that the end user can change it e.g. with solder
    bridges or DIP switches.
-   To adapt for your specific needs, you'll have to change the following values below:
-    - I2CaddressOffset - base address when all pins are inactive
-    - I2CaddressPins - array of 1 to 7 pins, LSB pin first
-    - I2CaddressPinsActiveLow - true for HIGH = 0, LOW = 1
-    - I2CaddressPinsPullup - true to use internal pullups for address pins.
-      Important: Without internal pullups, you must not leave pins floating, or you'll get a random address!
+   To adapt for your specific needs, you'll have to change the values in the 
+   config section below, see documentation there.
 
    ## Author
    Copyright (c) 2022 juh
@@ -29,12 +25,20 @@
 
 // =========== config ===========
 
-// see above for documentation
+// base address when all pins are inactive
+const uint8_t I2CaddressOffset = 8; 
 
-const uint8_t I2CaddressOffset = 8;
-const uint8_t I2CaddressPins[] = {10 /* bit 0 */ , 11 /* bit 1 */ , 12 /* bit 2 */}; // analog pins will just work the same
-const bool I2CaddressPinsActiveLow = true;
-const bool I2CaddressPinsPullup = true;
+// array of 1 to 7 pins, LSB pin first; analog pins will just work, too
+const uint8_t I2CaddressPins[] = {10 /* bit 0 */ , 11 /* bit 1 */ , 12 /* bit 2 */}; 
+
+// true for HIGH = 0, LOW = 1
+const bool I2CaddressPinsActiveLow = true; 
+
+// true if you want to use the internal pullups for the address pins; otherwise,
+// use hardware pullups/-downs, as you'll get a random address if you leave 
+// the pins floating.
+const bool I2CaddressPinsPullup = true; 
+
 
 // =========== end of config ===========
 
@@ -54,7 +58,7 @@ uint8_t readAddressFromPins() {
 #ifndef I2C_ADDRESS_DEFINED_BY_MODULE
 #define I2C_ADDRESS_DEFINED_BY_MODULE readAddressFromPins()
 #else
-#error More than one address defining feature module enabled in firmware_modules.h. Plaese deactivate all but one.
+#error More than one address defining feature module enabled in firmware_modules.h. Please deactivate all but one.
 #endif
 
 
