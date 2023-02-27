@@ -61,10 +61,10 @@ uint8_t xxxI2C::xxxDemo2(uint16_t arg1, float arg2, bool arg3) {
   wrapper->buf.write(arg3); // and will write sizeof(type) bytes to the buffer
   
   // non void functions need to request the target's reply after sending the command
-  uint8_t res; // adapt to the return type of this function
+  uint8_t res = 0; // adapt to the return type of this function, set default value to "error"
   if (wrapper->sendCommand() and wrapper->readResult(xxxDemo2CmdResult)) { // reply is checked for correct length
     wrapper->buf.read(res); // read the result from the buffer
   }
-  return res; // and return it to the caller
+  return res; // and return it (or the default, in case of error) to the caller
   
 }
