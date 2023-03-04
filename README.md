@@ -18,7 +18,7 @@ See [Usage](#usage) for a quick start.
 
 ## Ready to use modules
 
-Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](https://github.com/ftjuh/I2Cwrapper/tree/main/firmware) (see [Available modules](#available-modules) for more detailed information):
+Currently, the following modules come shipped with I2Cwrapper in the [firmware subfolder](https://github.com/ftjuh/I2Cwrapper/tree/main/firmware). Note that not all modules will run on all platforms. See [Available modules](#available-modules) for more detailed information.
 
 * **AccelStepperI2C**: Control up to eight stepper motors with acceleration control via Mike McCauley's [AccelStepper](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html) library, and up to two end stops per stepper. Uses a state machine and an optional controller interrupt line to prevent I2C bus clogging.
 * **ServoI2C**: Control servo motors via I2C just like the plain Arduino [Servo library](https://www.arduino.cc/reference/en/libraries/servo).
@@ -87,14 +87,14 @@ See the [How to add new modules](#how-to-add-new-modules) section if you are int
 
 Install I2Cwrapper from the Arduino library manager.  You'll find an I2Cwrapper examples folder in the usual menu after successful installation.
 
-If you haven't done so yet, you'll also have to install the **libraries needed by the modules** you want to use, e.g. AccelSteppper, TM1638lite, etc. the usual way from the Arduino library manager.
+If you haven't done so yet, you'll also have to install the **libraries needed by the modules** you want to use, e.g. AccelSteppper, TM1638lite, etc.
 
-If you've used the AccelStepperI2C *library* (not the module) before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.
+If you've used the older AccelStepperI2C *library* (not the module) before, please uninstall it (i.e. delete it from the Arduino library folder) or else you'll end up with include conflicts.
 
 ## Configuring and uploading the firmware
 
 * **Open firmware.ino**  from the examples menu of the Arduino editor, you'll find it in the the I2Cwrapper submenu. It will open multiple tabs, among them one for each available module in the firmware subfolder.
-* Go to  the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) tab and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware. Don't bother about the other tabs, only selected modules will be included in the compiled firmware, even if all of them are opened.
+* Go to  the [`firmware_modules.h`](https://github.com/ftjuh/I2Cwrapper/blob/main/firmware/firmware_modules.h) tab (it might be hidden in the dropdown menu at the far right) and **select the modules** you want by (un)commenting them. For a first test, start with the PinI2C module, it is the simplest and doesn't need any extra hardware. Don't bother about the other tabs, only selected modules will be included in the compiled firmware, even if all of them are opened.
 * You can **save a local copy** of the firmware. Don't forget, though, that your local copy won't be updated in future releases which might result in conflicts after a library upgrade.
 * **Compile and upload** to your target device.
 
@@ -114,9 +114,11 @@ Have a look at the [examples](https://github.com/ftjuh/I2Cwrapper/tree/main/exam
 
 Simply include the **controller libraries** for the module(s) you compiled into your target firmware (e.g. `ServoI2C.h`) and use them as shown in the documentation and example sketches of the respective modules.
 
+<a id="addressing-target-pins"></a>
+
 ### Addressing target pins
 
-Many functions take target pin numbers as an argument, e.g. when you define an interrupt pin with `I2Cwrapper::setInterruptPin()`. If controller and target devices run on **different hardware platforms** (e.g. ESP8266 and ATtiny85), you'll have to be careful that the controller addresses the target's side pins correctly. Pin constants like `A0`, `D1`, `LED_BUILTIN` etc. might not be known at the controller's side or, even worse, might represent a different pin number. In this case it is recommended to use the raw pin numbers. They are defined in the respective platform's `pins_arduino.h` file, or can easily be found out by running `Serial.println(A0);` etc. on the target platform.
+Many functions take target pin numbers as an argument, e.g. when you define an interrupt pin with `I2Cwrapper::setInterruptPin()`. If controller and target devices run on **different hardware platforms** (e.g. ESP8266 and ATtiny85), you'll have to be careful that the controller addresses the target's side pins correctly. Pin constants or macros like `A0`, `D1`, `LED_BUILTIN` etc. might not be known at the controller's side or, even worse, might represent a different internal pin number. In this case it is recommended to use the raw pin numbers. They are defined in the respective platform's `pins_arduino.h` file, or can easily be found out by running `Serial.println(A0);` etc. on the target platform.
 
 <a id="error-handling"></a>
 
@@ -327,7 +329,7 @@ Since v0.3.0 dropped the hardware reset (it's considered bad practice), each mod
 
 # Supported platforms
 
-The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons, note also that some modules will not run on all platforms:
+The following platforms will run the target firmware and have been (more or less) tested. Unfortunately, they all have their pros and cons, note also that [some modules will not run on all platforms](#compatibility-matrix):
 
 ### Arduino AVRs (Uno, Nano etc.)
 
@@ -356,6 +358,49 @@ Arduino compatible SAMD21 and SAMD51 boards come in many variations: there are w
 Note that these do NOT have flash for storing the I2C address, but do have EEPROM. You can store the I2C address using the `_addressFromFlash_firmware.h`, and it is persistent across reset and power loss. But, that address will be erased every time you upload new code.
 
 I2Cwrapper has been succesfully tested with on Adafruit Feather M4, Adafruit ItsyBitsy M0, Adafruit ItsyBitsy M4, and Adafruit Metro M0.
+
+### STM32
+
+STM32's are cheap, have hardware I2C (with a couple of [known problems](https://mecrisp-stellaris-folkdoc.sourceforge.io/rants.html#some-stm32f103-problems), though, it seems) and a good set of ressources, which together would make them ideal I2Cwrapper targets. Unfortunately, it is a pain to use them inside the Arduino IDE.
+
+STM32 compability was tested with a [Chinese "bluepill" clone](https://stm32duinoforum.com/forum/wiki_subdomain/index_title_Blue_Pill.html) (LED on PC13) with a STM32F103C8 chip and the current [stm32duino core](https://github.com/stm32duino/Arduino_Core_STM32). Regarding the pin naming issue (see [Addressing target pins](#addressing-target-pins)), I found it near impossible to find out the internal pin numbers from looking at the myriad of obfuscated include files, so I used the `Serial.print(PC13);` etc. trick.
+
+Note that the (still experimental) `autoAdjustI2Cdelay()` seems to be incompatible with STM32, it'll lock up the target, so for the moment best avoid it on this platform.
+
+<a id="compatibility-matrix"></a>
+
+### Compatibility matrix
+
+The below matrix shows for which combinations of platform and module the **target firmware** ...
+
+* was successfully compiled and tested with the actual hardware ("&#x2714;"), 
+* was successfully compiled, but not yet tested with the hardware ("c"), 
+* doesn't compile, but might be made to work ("-"),
+* cannot work ("---"), or 
+* is still to be tested (empty cell).
+
+The respective **controller** side's libraries should compile on any platform if they have a compatible `Wire.h` library.
+
+|                         | Arduino/avr | ESP8266  |  ESP32   |      ATtiny      |   SAMD   |      STM32       |
+| ----------------------- | :---------: | :------: | :------: | :--------------: | :------: | :--------------: |
+| AccelStepperI2C         |  &#x2714;   |    c     |    c     | - <sup>(2)</sup> | &#x2714; |        c         |
+| ServoI2C                |  &#x2714;   |    c     |    c     | - <sup>(3)</sup> | &#x2714; |     &#x2714;     |
+| PinI2C                  |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| ESP32sensorsI2C         |     ---     |   ---    | &#x2714; |       ---        |   ---    |       ---        |
+| TM1638liteI2C           |  &#x2714;   |    c     |    c     |     &#x2714;     |          |        c         |
+| UcglibI2C<sup>(1)</sup> |  &#x2714;   |    c     |    c     |        -         |          | - <sup>(4)</sup> |
+| _statusLED              |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFixed           |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFromPins        |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFromFlash       |  &#x2714;   |    c     |    c     |        c         |    c     |     &#x2714;     |
+
+<sup>(1)</sup> Remember to configure this module for your hardware setup by editing Ucglib_firmware.h
+
+<sup>(2)</sup> Currently needs more than 8K flash, but could probably be optimized
+
+<sup>(3)</sup> Does not work out of the box on ATtiny85, but might work on other ATtiny devices, see [this issue](https://github.com/SpenceKonde/ATTinyCore/issues/85)
+
+<sup>(4)</sup> Needs a small fix in Ucglib.cpp to compile, see [this pull request](https://github.com/olikraus/ucglib/pull/149/files).
 
 # Examples
 
