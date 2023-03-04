@@ -98,13 +98,19 @@ Files</h2></td></tr>
 <tr class="memdesc:__address_from_flash__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Read target's own I2C address from non volatile memory (EEPROM, flash memory) and store a new changed address upon the controller's command. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__address_from_pins__firmware_8h.html">_addressFromPins_firmware.h</a></td></tr>
-<tr class="memdesc:__address_from_pins__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Makes the target retrieve its own address from the input state of one or more pins at startup, so that the end user can change it e.g. with solder bridges or DIP switches. To adapt for your specific needs, you'll have to change the following values below: <br /></td></tr>
+<tr class="memdesc:__address_from_pins__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Makes the target retrieve its own address from the input state of one or more pins at startup, so that the end user can change it e.g. with solder bridges or DIP switches. To adapt for your specific needs, you'll have to change the values in the config section below, see documentation there. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__status_l_e_d__firmware_8h.html">_statusLED_firmware.h</a></td></tr>
 <tr class="memdesc:__status_l_e_d__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feature module. Makes the LED_BUILTIN flash on incoming interrupts (receiveEvent and requestEvent). Meant mainly as a still-alive monitor. To make it flash on I2C state machine state changes, (un)comment the respective lines below in secitions (7), (8) and (9) If your board has no LED_BUILTIN, make sure to edit the proper pin number in the declaration stage below.. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_accel_stepper_i2_c__firmware_8h.html">AccelStepperI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_accel_stepper_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmware. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_adafruit___g_f_x___i2_c__firmware_8h.html">Adafruit_GFX_I2C_firmware.h</a></td></tr>
+<tr class="memdesc:_adafruit___g_f_x___i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config: <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_arduino___g_f_x___i2_c__firmware_8h.html">Arduino_GFX_I2C_firmware.h</a></td></tr>
+<tr class="memdesc:_arduino___g_f_x___i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template for a user firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> <a class="el" href="firmware_8ino.html">firmware.ino</a>. "xxx" represents the name of your module, e.g. "PinI2C". <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32sensors_i2_c__firmware_8h.html">ESP32sensorsI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_e_s_p32sensors_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
@@ -117,6 +123,8 @@ Files</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pin_i2_c__firmware_8h.html">PinI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_pin_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_rotary_encoder_i2_c__firmware_8h.html">RotaryEncoderI2C_firmware.h</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_servo_i2_c__firmware_8h.html">ServoI2C_firmware.h</a></td></tr>
 <tr class="memdesc:_servo_i2_c__firmware_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Firmware module for the <a class="el" href="class_i2_cwrapper.html" title="A helper class for the AccelStepperI2C and related libraries.">I2Cwrapper</a> firmare. <br /></td></tr>
@@ -134,7 +142,7 @@ Files</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li>
-    <li class="footer">Generated on Sun Jan 22 2023 13:43:41 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Sun Mar 5 2023 00:28:22 for I2Cwrapper by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

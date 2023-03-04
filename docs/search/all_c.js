@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['max_0',['max',['../_servo_i2_c__firmware_8h.html#ae1e1dde676c120fa6d10f3bb2c14059e',1,'ServoI2C_firmware.h']]],
+  ['max_0',['max',['../_servo_i2_c__firmware_8h.html#a43a190f55cab9276eb1d6b6a4f453ccf',1,'ServoI2C_firmware.h']]],
   ['maxlen_1',['maxLen',['../class_simple_buffer.html#aa2da43b97247f120799a49c2099849cd',1,'SimpleBuffer']]],
   ['maxrunspeed_2',['maxRunSpeed',['../_interrupt___endstop_8ino.html#ab3db5699e5f1e5673ad51f3705aa772b',1,'maxRunSpeed():&#160;Interrupt_Endstop.ino'],['../_error__checking_8ino.html#ab3db5699e5f1e5673ad51f3705aa772b',1,'maxRunSpeed():&#160;Error_checking.ino']]],
   ['maxservos_3',['maxServos',['../_servo_i2_c__firmware_8h.html#a0f9813196df1c36828566b98fb497cd7',1,'ServoI2C_firmware.h']]],
@@ -19,7 +19,7 @@ var searchData=
   ['mf_5fstage_5freset_16',['MF_STAGE_reset',['../firmware_8ino.html#a15c2b0539284cc4454cde158bd7f60f7',1,'firmware.ino']]],
   ['mf_5fstage_5fsetup_17',['MF_STAGE_setup',['../firmware_8ino.html#af6947169b907d913e36c8ca994514d66',1,'firmware.ino']]],
   ['middlepos_18',['middlePos',['../_interrupt___endstop_8ino.html#afbb07523196a51f7f89f9b12fc1cbb37',1,'Interrupt_Endstop.ino']]],
-  ['min_19',['min',['../_servo_i2_c__firmware_8h.html#a3e202b201e6255d975cd6d3aff1f5a4d',1,'ServoI2C_firmware.h']]],
+  ['min_19',['min',['../_servo_i2_c__firmware_8h.html#a29dc67311876da954d1fb5911f161fed',1,'ServoI2C_firmware.h']]],
   ['mode_20',['mode',['../_pin_i2_c__firmware_8h.html#a37e90f5e3bd99fac2021fb3a326607d4',1,'PinI2C_firmware.h']]],
   ['motor_5fx_5fdir_5fpin_21',['MOTOR_X_DIR_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#ac6b44f3303074c69ce35870f0f665c70',1,'CNCv4_Board_3_Steppers.ino']]],
   ['motor_5fx_5fenable_5fpin_22',['MOTOR_X_ENABLE_PIN',['../_c_n_cv4___board__3___steppers_8ino.html#a32d53c62a4f75f0b835af10719501d5e',1,'CNCv4_Board_3_Steppers.ino']]],
@@ -34,5 +34,5 @@ var searchData=
   ['movecmd_31',['moveCmd',['../_accel_stepper_i2_c_8h.html#a5bc0135fc6c2b403837faaef6ab7c638',1,'AccelStepperI2C.h']]],
   ['moveto_32',['moveTo',['../class_accel_stepper_i2_c.html#a06ee86271f675746386c4cb86b6c6182',1,'AccelStepperI2C']]],
   ['movetocmd_33',['moveToCmd',['../_accel_stepper_i2_c_8h.html#a84c7d8262a16efd1f7619fd8978bc89f',1,'AccelStepperI2C.h']]],
-  ['mynum_34',['myNum',['../_e_s_p32sensors_i2_c_8cpp.html#a42dfd3ad7784dacb07d1347643920af2',1,'myNum():&#160;ESP32sensorsI2C.cpp'],['../_pin_i2_c_8cpp.html#a42dfd3ad7784dacb07d1347643920af2',1,'myNum():&#160;PinI2C.cpp'],['../classxxx_i2_c.html#a178297d7660a4414a4b1691d85e85d19',1,'xxxI2C::myNum()'],['../_ucglib_i2_c_8cpp.html#a42dfd3ad7784dacb07d1347643920af2',1,'myNum():&#160;UcglibI2C.cpp'],['../class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342',1,'AccelStepperI2C::myNum()'],['../class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb',1,'ServoI2C::myNum()'],['../class_t_m1638lite_i2_c.html#a0602b1eb49d4205042c78bee0b99224b',1,'TM1638liteI2C::myNum()']]]
+  ['mynum_34',['myNum',['../_e_s_p32sensors_i2_c_8cpp.html#a42dfd3ad7784dacb07d1347643920af2',1,'myNum():&#160;ESP32sensorsI2C.cpp'],['../_pin_i2_c_8cpp.html#a42dfd3ad7784dacb07d1347643920af2',1,'myNum():&#160;PinI2C.cpp'],['../classxxx_i2_c.html#a178297d7660a4414a4b1691d85e85d19',1,'xxxI2C::myNum()'],['../_ucglib_i2_c_8cpp.html#a42dfd3ad7784dacb07d1347643920af2',1,'myNum():&#160;UcglibI2C.cpp'],['../class_accel_stepper_i2_c.html#ab2061a523791b946581b41d97a5e4342',1,'AccelStepperI2C::myNum()'],['../class_adafruit___g_f_x___i2_c.html#ad6572435924d294e99a8cd162e1c6001',1,'Adafruit_GFX_I2C::myNum()'],['../class_rotary_encoder_i2_c.html#a7755cbb8fc9ed56ca02a9eebab0f9c1e',1,'RotaryEncoderI2C::myNum()'],['../class_servo_i2_c.html#a2daa1ad970794b78e08c52922ad275bb',1,'ServoI2C::myNum()'],['../class_t_m1638lite_i2_c.html#a0602b1eb49d4205042c78bee0b99224b',1,'TM1638liteI2C::myNum()']]]
 ];

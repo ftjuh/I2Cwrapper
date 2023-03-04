@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['stepstogo_0',['stepsToGo',['../_c_n_cv4___board__3___steppers_8ino.html#a06ab55ae03419d84676a6ce5a263206e',1,'CNCv4_Board_3_Steppers.ino']]]
+  ['pin_5fin1_0',['PIN_IN1',['../_rotary___encoder_8ino.html#aeb29bc0b5a53166a4ab878b2e55b5566',1,'Rotary_Encoder.ino']]],
+  ['pin_5fin2_1',['PIN_IN2',['../_rotary___encoder_8ino.html#a3117fa814a1a2fb62655a6efdf6b3dc1',1,'Rotary_Encoder.ino']]]
 ];

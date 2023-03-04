@@ -30,7 +30,7 @@ var searchData=
   ['drawgradientline_27',['drawGradientLine',['../class_ucglib_i2_c.html#ae4ddc5c3ca596a1555ede6565982476f',1,'UcglibI2C']]],
   ['drawhline_28',['drawHLine',['../class_ucglib_i2_c.html#a4c4d201ffe2051371b12efba962248df',1,'UcglibI2C']]],
   ['drawline_29',['drawLine',['../class_ucglib_i2_c.html#ad998630d7305f7784f58e9f6790890d9',1,'UcglibI2C']]],
-  ['drawpixel_30',['drawPixel',['../class_ucglib_i2_c.html#acb026c68d13b4b7049d99e24af0b6439',1,'UcglibI2C']]],
+  ['drawpixel_30',['drawPixel',['../class_adafruit___g_f_x___i2_c.html#af276d1e69e259c087695bfb198da9d6b',1,'Adafruit_GFX_I2C::drawPixel()'],['../class_ucglib_i2_c.html#acb026c68d13b4b7049d99e24af0b6439',1,'UcglibI2C::drawPixel(ucg_int_t x, ucg_int_t y)']]],
   ['drawrbox_31',['drawRBox',['../class_ucglib_i2_c.html#a77d5616081b4f18f001acc163b181ce9',1,'UcglibI2C']]],
   ['drawrframe_32',['drawRFrame',['../class_ucglib_i2_c.html#afb2c3b6c292c2972815a76c75bd59b27',1,'UcglibI2C']]],
   ['drawstring_33',['drawString',['../class_ucglib_i2_c.html#a02a30cc768c5af9d416d41e4a3246b64',1,'UcglibI2C']]],

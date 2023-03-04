@@ -281,6 +281,14 @@ Add these times as extra `delay()` after the respective function calls. Of cours
 
 Due to these timing restrictions, it is advisable to select a fast device as your target platform. In other words, don't try this on an Attiny85.
 
+## RotaryEncoderI2C
+
+Allows you to read up to eight (ATtiny85: two) quadrature encoders attached to your I2C target, to be used for speed and distance measurement. One encoder equals two light barriers, Hall sensor, or other kinds of switches which are triggered by a segmented disc, magnets, or other mechanisms in a way that generate a [quadrature signal pattern](https://en.wikipedia.org/wiki/Incremental_encoder#Quadrature_outputs).
+
+Uses the [RotaryEncoder library](https://github.com/mathertel/RotaryEncoder) by [Matthias Hertel](http://www.mathertel.de) and offers nearly the identical interface. In addition the the RotaryEncoder library functions, two functions have been added for diagnosing the quadrature signal over I2C,  `startDiagnosticsMode()` and `getDiagnostics()`. See the [module's controller library documentation here](https://ftjuh.github.io/I2Cwrapper/class_rotary_encoder_i2_c.html).
+
+See `RotaryEncoder.ino` example in the example folder for further illustration.
+
 <a id="feature-modules"></a>
 
 ## Feature modules
@@ -381,18 +389,18 @@ The below matrix shows for which combinations of platform and module the **targe
 
 The respective **controller** side's libraries should compile on any platform if they have a compatible `Wire.h` library.
 
-|                         | Arduino/avr | ESP8266  |  ESP32   |      ATtiny      |   SAMD   |      STM32       |
-| ----------------------- | :---------: | :------: | :------: | :--------------: | :------: | :--------------: |
-| AccelStepperI2C         |  &#x2714;   |    c     |    c     | - <sup>(2)</sup> | &#x2714; |        c         |
-| ServoI2C                |  &#x2714;   |    c     |    c     | - <sup>(3)</sup> | &#x2714; |     &#x2714;     |
-| PinI2C                  |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| ESP32sensorsI2C         |     ---     |   ---    | &#x2714; |       ---        |   ---    |       ---        |
-| TM1638liteI2C           |  &#x2714;   |    c     |    c     |     &#x2714;     |          |        c         |
-| UcglibI2C<sup>(1)</sup> |  &#x2714;   |    c     |    c     |        -         |          | - <sup>(4)</sup> |
-| _statusLED              |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| _addressFixed           |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| _addressFromPins        |  &#x2714;   | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| _addressFromFlash       |  &#x2714;   |    c     |    c     |        c         |    c     |     &#x2714;     |
+|                         |     Arduino/avr      | ESP8266  |  ESP32   |      ATtiny      |   SAMD   |      STM32       |
+| ----------------------- | :------------------: | :------: | :------: | :--------------: | :------: | :--------------: |
+| AccelStepperI2C         | &#x2714; (>8K flash) |    c     |    c     | - <sup>(2)</sup> | &#x2714; |        c         |
+| ServoI2C                |       &#x2714;       |    c     |    c     | - <sup>(3)</sup> | &#x2714; |     &#x2714;     |
+| PinI2C                  |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| ESP32sensorsI2C         |         ---          |   ---    | &#x2714; |       ---        |   ---    |       ---        |
+| TM1638liteI2C           |       &#x2714;       |    c     |    c     |     &#x2714;     |          |        c         |
+| UcglibI2C<sup>(1)</sup> |       &#x2714;       |    c     |    c     |        -         |          | - <sup>(4)</sup> |
+| _statusLED              |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFixed           |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFromPins        |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFromFlash       |       &#x2714;       |    c     |    c     |        c         |    c     |     &#x2714;     |
 
 <sup>(1)</sup> Remember to configure this module for your hardware setup by editing Ucglib_firmware.h
 

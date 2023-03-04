@@ -1,5 +1,6 @@
 var _servo___sweep_8ino =
 [
+    [ "halt", "_servo___sweep_8ino.html#a799d63040f9850d133b3c65efe6211b5", null ],
     [ "loop", "_servo___sweep_8ino.html#afe461d27b9c48d5921c00d521181f12f", null ],
     [ "setup", "_servo___sweep_8ino.html#a4fc01d736fe50cf5b977f755b675f11d", null ],
     [ "i2cAddress", "_servo___sweep_8ino.html#af9af55d36115b44e1997c518d666cbf9", null ],
