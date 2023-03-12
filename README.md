@@ -283,11 +283,11 @@ Due to these timing restrictions, it is advisable to select a fast device as you
 
 ## RotaryEncoderI2C
 
-Allows you to read up to eight (ATtiny85: two) quadrature encoders attached to your I2C target, to be used for speed and distance measurement. One encoder equals two light barriers, Hall sensor, or other kinds of switches which are triggered by a segmented disc, magnets, or other mechanisms in a way that generate a [quadrature signal pattern](https://en.wikipedia.org/wiki/Incremental_encoder#Quadrature_outputs).
+This module allows you to read up to eight (ATtiny85: two) quadrature encoders attached to your I2C target, to be used for speed and distance measurement. One encoder equals two light barriers, Hall sensor, or other kinds of switches which are triggered by a segmented disc, magnets, or other mechanisms in a way that generate a [quadrature signal pattern](https://en.wikipedia.org/wiki/Incremental_encoder#Quadrature_outputs).
 
-Uses the [RotaryEncoder library](https://github.com/mathertel/RotaryEncoder) by [Matthias Hertel](http://www.mathertel.de) and offers nearly the identical interface. In addition the the RotaryEncoder library functions, two functions have been added for diagnosing the quadrature signal over I2C,  `startDiagnosticsMode()` and `getDiagnostics()`. See the [module's controller library documentation here](https://ftjuh.github.io/I2Cwrapper/class_rotary_encoder_i2_c.html).
+Uses the [RotaryEncoder library](https://github.com/mathertel/RotaryEncoder) by [Matthias Hertel](http://www.mathertel.de) and offers nearly the identical interface. The firmware module's main loop does nothing but polling the attached encoder(s) with RotaryEncoder's `tick()` function.  So if you want to combine this module with other modules or enable serial debugging on the target, you need to make sure that they don't stall main loop() execution for longer than half of the minimum time between to encoder pin changes, which happens four times for each encoder phase. So, say your encoder has 64 phases per rotation and your maximum speed is 100 turns per second, the main loop needs to execute at least every 1/100/64/4/2 seconds or it will run risk of skipping counts.
 
-See `RotaryEncoder.ino` example in the example folder for further illustration.
+In addition to the RotaryEncoder library functions, two functions have been added for diagnosing the quadrature signal over I2C,  `startDiagnosticsMode()` and `getDiagnostics()`. See the [module's controller library documentation here](https://ftjuh.github.io/I2Cwrapper/class_rotary_encoder_i2_c.html).  See `RotaryEncoder.ino` example in the example folder for further illustration.
 
 <a id="feature-modules"></a>
 
@@ -355,7 +355,7 @@ The ESP 32 has no I2C  hardware. I2C is stable at the default 240MHz, but offici
 
 Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 13.
 
-Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live*) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C and TM1638liteI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
+Using ATTinyCore, I2Cwrapper firmware has been successfully tested on ATtiny85 (Digispark) and ATtiny88 (MH-ET-live; see warning  below) boards. Mileage with the available firmware modules may vary, though. Currently, only Pinl2C,  TM1638liteI2C, and RotaryEncoderI2C will run without changes. See the respective comment sections in the [Pin_Control.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/Pin_control/Pin_control.ino) and [TM1638lite.ino](https://github.com/ftjuh/I2Cwrapper/blob/main/examples/TM1638lite/TM1638lite.ino) examples for testing purposes. Of course, ATtinys are relatively slow and have limited memory. The firmware alone, without any modules enabled, currently uses 44% of a Digispark's usable 6586 bytes of flash memory, with the PinI2C module enabled it's 54%.
 
 *My Arduino MH-ET platform package came with an age old g++ version 4.8.1. which e.g. will not compile RotaryEncoder.h. So better use ATTinyCore for MH-ET Live Tiny88 boards.
 
@@ -391,18 +391,19 @@ The below matrix shows for which combinations of platform and module the **targe
 
 The respective **controller** side's libraries should compile on any platform if they have a compatible `Wire.h` library.
 
-|                         |     Arduino/avr      | ESP8266  |  ESP32   |      ATtiny      |   SAMD   |      STM32       |
-| ----------------------- | :------------------: | :------: | :------: | :--------------: | :------: | :--------------: |
-| AccelStepperI2C         | &#x2714; (>8K flash) |    c     |    c     | - <sup>(2)</sup> | &#x2714; |        c         |
-| ServoI2C                |       &#x2714;       |    c     |    c     | - <sup>(3)</sup> | &#x2714; |     &#x2714;     |
-| PinI2C                  |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| ESP32sensorsI2C         |         ---          |   ---    | &#x2714; |       ---        |   ---    |       ---        |
-| TM1638liteI2C           |       &#x2714;       |    c     |    c     |     &#x2714;     |          |        c         |
-| UcglibI2C<sup>(1)</sup> |       &#x2714;       |    c     |    c     |        -         |          | - <sup>(4)</sup> |
-| _statusLED              |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| _addressFixed           |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| _addressFromPins        |       &#x2714;       | &#x2714; | &#x2714; |     &#x2714;     | &#x2714; |     &#x2714;     |
-| _addressFromFlash       |       &#x2714;       |    c     |    c     |        c         |    c     |     &#x2714;     |
+|                         |     Arduino/avr      | ESP8266  |     ESP32      |      ATtiny      |   SAMD   |      STM32       |
+| ----------------------- | :------------------: | :------: | :------------: | :--------------: | :------: | :--------------: |
+| AccelStepperI2C         | &#x2714; (>8K flash) |    c     |       c        | - <sup>(2)</sup> | &#x2714; |        c         |
+| ServoI2C                |       &#x2714;       |    c     |       c        | - <sup>(3)</sup> | &#x2714; |     &#x2714;     |
+| PinI2C                  |       &#x2714;       | &#x2714; |    &#x2714;    |     &#x2714;     | &#x2714; |     &#x2714;     |
+| ESP32sensorsI2C         |         ---          |   ---    |    &#x2714;    |       ---        |   ---    |       ---        |
+| TM1638liteI2C           |       &#x2714;       |    c     |       c        |     &#x2714;     |          |        c         |
+| UcglibI2C<sup>(1)</sup> |       &#x2714;       |    c     |       c        |        -         |          | - <sup>(4)</sup> |
+| RotaryEncoderI2C        |       &#x2714;       |          | <sup>(5)</sup> |     &#x2714;     |          |  <sup>(5)</sup>  |
+| _statusLED              |       &#x2714;       | &#x2714; |    &#x2714;    |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFixed           |       &#x2714;       | &#x2714; |    &#x2714;    |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFromPins        |       &#x2714;       | &#x2714; |    &#x2714;    |     &#x2714;     | &#x2714; |     &#x2714;     |
+| _addressFromFlash       |       &#x2714;       |    c     |       c        |        c         |    c     |     &#x2714;     |
 
 <sup>(1)</sup> Remember to configure this module for your hardware setup by editing Ucglib_firmware.h
 
@@ -411,6 +412,8 @@ The respective **controller** side's libraries should compile on any platform if
 <sup>(3)</sup> Does not work out of the box on ATtiny85, but might work on other ATtiny devices, see [this issue](https://github.com/SpenceKonde/ATTinyCore/issues/85)
 
 <sup>(4)</sup> Needs a small fix in Ucglib.cpp to compile, see [this pull request](https://github.com/olikraus/ucglib/pull/149/files).
+
+<sup>(5)</sup> These devices have hardware quadrature encoders, which are currently not used by RotaryEncoderI2C.
 
 # Examples
 
