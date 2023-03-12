@@ -351,6 +351,8 @@ The ESP8266 has no I2C  hardware. The software I2C may not work stable at the de
 
 The ESP 32 has no I2C  hardware. I2C is stable at the default 240MHz, but officially cannot run faster than 100kHz. Also, the target implementation is awkward. It might be more susceptible for I2C transmission errors, so [timing is critical](#adjusting-the-i2c-delay). Apart from that, expect a performance increase of ca. 15-20x vs. plain Arduinos due to higher CPU clock speed and better hardware support for math calculations.
 
+The **newer ESP32 devices** have not been tested systematically yet, particularly not as *targets*. As *controllers*, tests with an ESP32 C3 worked as expected, but I encountered  problems with an ESP32 S3 and had to reduce the bus speed to `Wire.setClock(20000);` for a reliable connection to a ATtiny85 target. So be warned that these platforms might not perform just like the plain old ESP32.
+
 ### ATtiny
 
 Depending on the specific model, ATtinys can have software only I2C, full hardware I2C, or something in between. SpenceKonde's fantastic [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) comes with [fully transparent I2C support](https://github.com/SpenceKonde/ATTinyCore#i2c-support) which chooses the appropriate Wire library variant automatically. Note, though, that these might bring restrictions with them like a smaller I2C buffer size of 16 in the case of [USI implementations](https://github.com/SpenceKonde/ATTinyCore/blob/e62aa5bbd5fc53c89e8300a5b23080593a558f52/avr/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.h#L47) (e.g. ATtiny85), which will decrease the maximum number of parameter bytes of I2Cwrapper commands to 13.
