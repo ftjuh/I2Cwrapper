@@ -26,6 +26,7 @@ Currently, the following modules come shipped with I2Cwrapper in the [firmware s
 * **ESP32sensorsI2C**: Read an ESP32's [touch sensors](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/touch_pad.html), hall sensor, and (if available) temperature sensor via I2C. Uses the optional controller interrupt line to inform the controller about a touch button press.
 * **TM1638liteI2C**: Read buttons from and control the single and seven-segment LEDs of up to four [TM1638](https://duckduckgo.com/?q=TM1638+datasheet) modules like the ubiquitous [LED&Key module](https://handsontec.com/index.php/product/tm1638-7-segment-display-keypadled-module/) via I2C. Uses Danny Ayers' [TM1638lite library](https://www.arduino.cc/reference/en/libraries/tm1638lite/).
 * **UcglibI2C** (new in v0.5.0): Control TFT and other displays with ST7735, ILI9341, PCF8833, SSD1351, LD50T6160, ILI9163 driver chips supported by Oli Kraus' [Ucglib library](https://github.com/olikraus/ucglib) over I2C.
+* **RotaryEncoderI2C** (new in v0.6.0): Read up to eight quadrature rotary encoders attached to the target. Uses Matthias Hertel's [RotaryEncoder library](https://github.com/mathertel/RotaryEncoder).
 
 While the setup for these modules differs from their respective non-I2C counterparts, usage after setup is **very similar**, so that adapting existing code for I2C remote control is pretty straightforward.
 
