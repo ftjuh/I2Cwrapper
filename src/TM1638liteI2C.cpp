@@ -44,7 +44,7 @@ void TM1638liteI2C::reset() {
 
 uint8_t TM1638liteI2C::readButtons() {
   wrapper->prepareCommand(TM1638liteReadButtonsCmd, myNum);
-  uint8_t res;
+  uint8_t res = 0;
   if (wrapper->sendCommand() and wrapper->readResult(TM1638liteReadButtonsResult)) {
     wrapper->buf.read(res);
   }
