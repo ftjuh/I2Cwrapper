@@ -20,7 +20,7 @@
 */
 
 #if MF_STAGE == MF_STAGE_includes
-#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_SAMD)
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_STM32)
 #define USE_EEPROM
 #if defined(ARDUINO_ARCH_SAMD)
 #include <FlashAsEEPROM.h>
@@ -56,13 +56,13 @@ uint8_t retrieveI2C_address()
   SimpleBuffer b;
   b.init(8);
   // read 6 bytes from eeprom: [0]=CRC8; [1-4]=marker; [5]=address
-  //log("Reading from EEPROM: ");
+  log("Reading I2C address from EEPROM: ");
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   EEPROM.begin(256);
 #endif // defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   for (byte i = 0; i < 6; i++) {
     b.buffer[i] = EEPROM.read(EEPROM_OFFSET_I2C_ADDRESS + i);
-    // log(b.buffer[i]); log (" ");
+    log(b.buffer[i]); log (" ");
   }
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
   EEPROM.end();
@@ -76,7 +76,7 @@ uint8_t retrieveI2C_address()
   } else
 #endif // USE_EEPROM
   {
-    log("No stored address\n");
+    log("No stored address found, using default\n");
     return I2CwrapperDefaultAddress;
   }
 }
