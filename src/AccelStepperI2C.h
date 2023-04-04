@@ -289,12 +289,13 @@ public:
 
   /*!
    * @brief Start or stop sending interrupts to controller for this stepper. An
-   * interrupt will be sent
-   * whenever a state machine change occured which was not triggered by the controller.
-   * At the moment, this could either be a target reached condition in runState()
-   * or runSpeedToPositionState(), or an endstop reached condition.
+   * interrupt will be sent whenever a state machine change occured which was not 
+   * triggered by the controller. At the moment, this could either be a target 
+   * reached condition in runState() or runSpeedToPositionState(), or an endstop 
+   * reached condition. Before you can use this, you need to define an interrupt
+   * pin on you target device with I2Cwrapper::setInterruptPin().
    * @param enable true (default) to enable, false to disable.
-   * @sa setInterruptPin()
+   * @sa I2Cwrapper::setInterruptPin()
    */
   void enableInterrupts(bool enable = true);
 
