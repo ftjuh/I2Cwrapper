@@ -10,7 +10,7 @@ This is a possible example setup:
 
 See I2Cwrapper (with AccelStepperI2C, RotaryEncoderI2C and UcglibI2C modules) in action:
 
-[![Watch the video](docs/images/maxresdefault.jpg)](https://www.youtube.com/watch?v=TWZMlv5OPLY)
+<a href="https://www.youtube.com/watch?v=TWZMlv5OPLY" target="_blank">![I2Cwrapper demo video](docs/images/maxresdefault.jpg)</a>
 
 <sup>(1)</sup>I2Cwrapper uses the [current I2C terminology](https://www.nxp.com/docs/en/user-guide/UM10204.pdf) which replaced *master* with *controller*, and *slave* with *target*.
 
